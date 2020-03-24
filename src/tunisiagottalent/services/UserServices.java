@@ -28,6 +28,7 @@ public class UserServices {
     public UserServices() {
     }
     
+    //Verify entered password with the hashed password inside the database
     public boolean checkPassword(String passwordText, String DbHash) {
     boolean password_verified = false;
     if (null == DbHash || !DbHash.startsWith("$2a$")) {
@@ -37,6 +38,7 @@ public class UserServices {
     return (password_verified);
  }
     
+    //login
     public boolean login(String user,String pwd){
         String pass="";
         
@@ -71,6 +73,7 @@ public class UserServices {
         return false;
     }
     
+    //signup
     public boolean signup(String user,String pwd){
         String username="";
         cnx = DataSource.getInstance().getCnx();
