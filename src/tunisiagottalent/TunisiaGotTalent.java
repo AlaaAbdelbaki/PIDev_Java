@@ -20,8 +20,9 @@ public class TunisiaGotTalent {
     public static void main(String[] args) {
         // TODO code application logic here
         
-//        UserServices x = new UserServices();
-//        x.login("alaa", "alaa");
+        UserServices x = new UserServices();
+//        x.login("memeguy", "alaa");
+        x.signup("xdxd","alaa");
     }
     
 }
