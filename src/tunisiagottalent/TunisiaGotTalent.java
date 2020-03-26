@@ -6,6 +6,9 @@
 package tunisiagottalent;
 
 import tunisiagottalent.util.DataSource;
+import tunisiagottalentEntities.Complaint;
+import tunisiagottalentServices.ComplaintService;
+import tunisiagottalentServices.ReviewService;
 
 /**
  *
@@ -21,6 +24,30 @@ public class TunisiaGotTalent {
         
         DataSource ds1 = DataSource.getInstance();
         System.out.println(ds1);
+        Complaint c= new Complaint("connexion","lente");
+    ComplaintService cs= new ComplaintService();
+    //cs.insertComplaintPST(c);
+    //Review rev= new Review(3,"events","coronna");
+    ReviewService rs= new ReviewService();
+    //rs.insertReviewPST(rev);
+    //cs.getAll().forEach(System.out::println);
+    //cs.deleteComplaint(19);
+    //System.out.println("Suppresion en cours");
+    //cs.getAll().forEach(System.out::println);
+    //cs.SearchSubject("bad design");
+    //System.out.println("-------------------");
+    //cs.EditComplaint(11, "hello","world");
+     //cs.getAll().forEach(System.out::println);
+   rs.getAll().forEach(System.out::println);
+      System.out.println("-------------------");
+     rs.EditReview(28,"orders",4,"perfect");
+    //rs.deleteReview(23);
+    rs.getAll().forEach(System.out::println);
+    // rs.SearchRating(3);
+    //rs.SearchRates(3).forEach(System.out::println);
+      System.out.println("-------------------");
+   // rs.SearchCategory("orders").forEach(System.out::println);
+        
     }
     
 }
