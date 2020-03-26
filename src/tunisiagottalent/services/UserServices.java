@@ -10,10 +10,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import tunisiagottalent.util.DataSource;
+import tunisiagottalent.entity.User;
+import java.util.List;
 import org.mindrot.jbcrypt.BCrypt;
+
 
 /**
  *
@@ -58,7 +62,7 @@ public class UserServices {
         } catch (SQLException ex) {
             Logger.getLogger(UserServices.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(pass!=""){
+        if(!pass.equals("")){
             if(checkPassword(pwd, pass)){
             System.out.println("Passwords Match !");
             return true;
@@ -74,11 +78,12 @@ public class UserServices {
     }
     
     //signup
-    public boolean signup(String user,String pwd){
+    public boolean signup(User u){
         String username="";
+        String pwd = u.getPassword();
         cnx = DataSource.getInstance().getCnx();
         
-        String find = "select username from user where user.username ='"+user+"'";
+        String find = "select username from user where user.username ='"+u.getUsername()+"'";
         try {
             ste= cnx.createStatement();
             rs = ste.executeQuery(find);
@@ -91,7 +96,7 @@ public class UserServices {
         }
         
         System.out.println(username);
-        if(username.equals(user)){
+        if(username.equals(u.getUsername())){
             System.out.println("Username taken !");
             return false;
         }
@@ -99,8 +104,9 @@ public class UserServices {
             pwd = BCrypt.hashpw(pwd, BCrypt.gensalt(13));
             pwd = pwd.substring(3);
             pwd = "$2y"+pwd;
+            u.setPassword(pwd);
             //System.out.println(pwd);
-            String req = "insert into user(username,password,username_canonical,email,email_canonical,enabled,roles) values('"+user+"','"+pwd+"','"+user+"','"+user+"','"+user+"',1,'a:0:{}')";
+            String req = "insert into user(username,password,username_canonical,email,email_canonical,enabled,roles) values('"+u.getUsername()+"','"+u.getPassword()+"','"+u.getUsername()+"','"+u.getEmail()+"','"+u.getEmail()+"',1,'a:0:{}')";
             try {
                 ste = cnx.createStatement();
                 ste.executeUpdate(req);
@@ -114,5 +120,27 @@ public class UserServices {
         
         
         return false;
+    }
+    
+    public boolean delete(User u){
+        return false;
+    }
+    
+    public List<User> getAll(){
+        String req = "select * from user";
+        List<User> list = new ArrayList<>();
+        
+        try {
+            ste = cnx.createStatement();
+            rs = ste.executeQuery(req);
+            while(rs.next()){
+                list.add(new User(rs.getString("username"),rs.getString("email"),rs.getString("sexe"),rs.getString("adresse"),rs.getString("name"),rs.getString("first_name"),rs.getString("telephone_number")));
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return list;
     }
 }

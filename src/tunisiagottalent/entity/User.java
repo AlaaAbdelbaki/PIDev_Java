@@ -18,7 +18,7 @@ public class User {
     String name;
     String lastName;
     String bio;
-    int phone_number;
+    String phone_number;
 
     public User(String username, String email, String password, String name, String lastName) {
         this.username = username;
@@ -27,6 +27,22 @@ public class User {
         this.name = name;
         this.lastName = lastName;
     }
+
+    public User(String username, String email, String gender, String address, String name, String lastName, String phone_number) {
+        this.username = username;
+        this.email = email;
+        this.gender = gender;
+        this.address = address;
+        this.name = name;
+        this.lastName = lastName;
+        this.phone_number = phone_number;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "username=" + username + ", email=" + email + ", gender=" + gender + ", address=" + address + ", name=" + name + ", lastName=" + lastName + ", bio=" + bio + ", phone_number=" + phone_number + '}';
+    }
+    
 
     public String getUsername() {
         return username;
@@ -60,7 +76,7 @@ public class User {
         return bio;
     }
 
-    public int getPhone_number() {
+    public String getPhone_number() {
         return phone_number;
     }
 
@@ -96,7 +112,7 @@ public class User {
         this.bio = bio;
     }
 
-    public void setPhone_number(int phone_number) {
+    public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
     }
     
