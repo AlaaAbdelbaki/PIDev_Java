@@ -54,6 +54,7 @@ public class TunisiaGotTalent extends Application {
         
         stage.setTitle("FXML Welcome");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
     public static void main(String[] args) {
