@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package tunisiagottalent.ui;
 
 import java.io.File;
@@ -25,8 +30,12 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class HomepageController {
-
+/**
+ * FXML Controller class
+ *
+ * @author alaa
+ */
+public class DashboardController {
 
     @FXML
     private AnchorPane rootPane;
@@ -50,7 +59,7 @@ public class HomepageController {
     private ImageView profilePicture;
 
     @FXML
-    private ImageView dashboard_icon;
+    private ImageView videos_icon;
 
     @FXML
     private ImageView comp_icon;
@@ -71,7 +80,10 @@ public class HomepageController {
     private ImageView rate_icon;
 
     @FXML
-    private Label dashboard_label;
+    private ImageView home_icon;
+
+    @FXML
+    private Label videos_label;
 
     @FXML
     private Label comp_label;
@@ -92,6 +104,9 @@ public class HomepageController {
     private Label rate_label;
 
     @FXML
+    private Label home_label;
+
+    @FXML
     private ImageView logout_icon;
 
     @FXML
@@ -100,11 +115,10 @@ public class HomepageController {
     @FXML
     void initialize() {
 
-        
         rootPane.setOpacity(0);
         fadein();
         loadInfo();
-        System.out.println("Homepage loaded ! ");
+        System.out.println("Dashboard loaded ! ");
 
     }
 
@@ -118,8 +132,6 @@ public class HomepageController {
     }
 
     void loadInfo() {
-        dashboard_icon.setVisible(false);
-        dashboard_label.setVisible(false);
 
 //        Image img=new Image("D:/Programming/Web/htdocs/annee_2019_2020/PIDev/web/assets/img/pics/unknown.jpg"); 
         Image img = new Image("tunisiagottalent/ui/img/unknown.jpg");
@@ -133,13 +145,6 @@ public class HomepageController {
 //                System.out.println(data);
                 String user = data.substring(0, data.indexOf(":"));
                 username.setText(user);
-//                System.out.println(user.length());
-                String previlege = data.substring(data.indexOf(":") + 4, data.indexOf(":") + 5);
-//                System.out.println(previlege);
-                if (previlege.equals("1")) {
-                    dashboard_icon.setVisible(true);
-                    dashboard_label.setVisible(true);
-                }
 
             }
         } catch (FileNotFoundException ex) {
@@ -167,14 +172,14 @@ public class HomepageController {
     }
 
     @FXML
-    void dashboard(MouseEvent event){
+    void home(MouseEvent event) {
         try {
-            fadeTransition("dashboard");
+            fadeTransition("homepage");
         } catch (IOException ex) {
             Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-            
+
     void fadeTransition(String scene) throws IOException {
 
         FadeTransition ft = new FadeTransition();
@@ -195,16 +200,13 @@ public class HomepageController {
                     Scene s = new Scene(second);
                     Stage current = (Stage) rootPane.getScene().getWindow();
                     current.setScene(s);
-                    
                 } catch (IOException ex) {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
-
         ft.play();
 
     }
-    
 
 }

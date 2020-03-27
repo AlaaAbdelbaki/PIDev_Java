@@ -9,7 +9,6 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.ui.HomepageController">
     <stylesheets>
         <URL value="@homepage.css" />
@@ -24,7 +23,7 @@
       <AnchorPane prefHeight="720.0" prefWidth="312.0">
          <children>
             <ImageView fx:id="profilePicture" fitHeight="48.0" fitWidth="48.0" layoutX="7.0" layoutY="22.0" onMouseClicked="#profile" pickOnBounds="true" preserveRatio="true" styleClass="pp" />
-            <ImageView fx:id="dashboard_icon" fitHeight="48.0" fitWidth="48.0" layoutX="7.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true" styleClass="pp">
+            <ImageView fx:id="dashboard_icon" fitHeight="48.0" fitWidth="48.0" layoutX="7.0" layoutY="143.0" onMouseClicked="#dashboard" pickOnBounds="true" preserveRatio="true" styleClass="pp">
                <image>
                   <Image url="@img/dashboard.png" />
                </image>
@@ -59,19 +58,19 @@
                   <Image url="@img/star%20(1).png" />
                </image>
             </ImageView>
-            <Label fx:id="dashboard_label" layoutX="90.0" layoutY="148.0" styleClass="sections" text="Dashboard" />
+            <Label fx:id="dashboard_label" layoutX="90.0" layoutY="148.0" onMouseClicked="#dashboard" styleClass="sections" text="Dashboard" />
             <Label fx:id="comp_label" layoutX="90.0" layoutY="213.0" styleClass="sections" text="Competitions" />
             <Label fx:id="event_label" layoutX="90.0" layoutY="279.0" styleClass="sections" text="Events" />
             <Label fx:id="shop_label" layoutX="90.0" layoutY="336.0" styleClass="sections" text="Shop" />
             <Label fx:id="blog_label" layoutX="90.0" layoutY="401.0" styleClass="sections" text="Blog" />
             <Label fx:id="news_label" layoutX="90.0" layoutY="467.0" styleClass="sections" text="News" />
             <Label fx:id="rate_label" layoutX="90.0" layoutY="534.0" styleClass="sections" text="Rate us" />
-            <ImageView fx:id="logout_icon" fitHeight="24.0" fitWidth="24.0" layoutX="68.0" layoutY="74.0" onMouseClicked="#disconnect" pickOnBounds="true" preserveRatio="true" styleClass="logout">
+            <ImageView fx:id="logout_icon" fitHeight="24.0" fitWidth="24.0" layoutX="68.0" layoutY="86.0" onMouseClicked="#disconnect" pickOnBounds="true" preserveRatio="true" styleClass="logout">
                <image>
                   <Image url="@img/logout%20(1).png" />
                </image>
             </ImageView>
-            <Label fx:id="logout_label" layoutX="105.0" layoutY="77.0" onMouseClicked="#disconnect" styleClass="logout" text="Log out" textFill="#f3f6f6">
+            <Label fx:id="logout_label" layoutX="105.0" layoutY="89.0" onMouseClicked="#disconnect" styleClass="logout" text="Log out" textFill="#f3f6f6">
                <font>
                   <Font name="Roboto Bold" size="14.0" />
                </font>

@@ -105,6 +105,13 @@ public class ProfileController {
 
     @FXML
     private Label logout_label;
+    
+    @FXML 
+    private AnchorPane profile_container;
+    
+    @FXML 
+    private ImageView profilePic;
+    
 
     @FXML
     void initialize() {
@@ -112,6 +119,7 @@ public class ProfileController {
         rootPane.setOpacity(0);
         fadein();
         loadInfo();
+        System.out.println("Profile loaded ! ");
 
     }
 
@@ -163,6 +171,22 @@ public class ProfileController {
         }
         
     }
+    @FXML
+    void dashboard(MouseEvent event){
+        try {
+            fadeTransition("dashboard");
+        } catch (IOException ex) {
+            Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    @FXML
+    void profile(MouseEvent event) {
+        try {
+            fadeTransition("profile");
+        } catch (IOException ex) {
+            Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     void fadeTransition(String scene) throws IOException {
 
         FadeTransition ft = new FadeTransition();
@@ -175,7 +199,11 @@ public class ProfileController {
             public void handle(ActionEvent event) {
                 try {
                     Parent second;
-                    second = (StackPane) FXMLLoader.load(getClass().getResource("/tunisiagottalent/ui/" + scene + ".fxml"));
+                    if (scene.equals("login")) {
+                        second = (StackPane) FXMLLoader.load(getClass().getResource("/tunisiagottalent/ui/" + scene + ".fxml"));
+                    } else {
+                        second = (AnchorPane) FXMLLoader.load(getClass().getResource("/tunisiagottalent/ui/" + scene + ".fxml"));
+                    }
                     Scene s = new Scene(second);
                     Stage current = (Stage) rootPane.getScene().getWindow();
                     current.setScene(s);
@@ -187,5 +215,5 @@ public class ProfileController {
         ft.play();
 
     }
-    
+       
 }
