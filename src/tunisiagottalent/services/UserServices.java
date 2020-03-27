@@ -43,7 +43,7 @@ public class UserServices {
  }
     
     //login
-    public boolean login(String user,String pwd){
+    public int login(String user,String pwd){
         String pass="";
         
         cnx = DataSource.getInstance().getCnx();
@@ -65,16 +65,16 @@ public class UserServices {
         if(!pass.equals("")){
             if(checkPassword(pwd, pass)){
             System.out.println("Passwords Match !");
-            return true;
+            return 1;
         }
             
         }
         else{
                 System.out.println("User not found !");
-                return false;
+                return -1;
             }
         System.out.println("Passwords Mismatch !!");
-        return false;
+        return 0;
     }
     
     //signup
@@ -142,5 +142,22 @@ public class UserServices {
         }
         
         return list;
+    }
+    
+    public String getRole(String username){
+        cnx = DataSource.getInstance().getCnx();
+        String ch="";
+        String req="Select roles from user where username='"+username+"' ";
+        try {
+            ste = cnx.createStatement();
+            rs = ste.executeQuery(req);
+            while(rs.next()){
+                ch=rs.getString("roles");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return ch;
     }
 }

@@ -5,6 +5,7 @@
  */
 package tunisiagottalent;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -32,6 +34,10 @@ public class TunisiaGotTalent extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Font.loadFont(TunisiaGotTalent.class.getResource("/tunisiagottalent/ui/fonts/Roboto-Bold.ttf").toExternalForm(), 10);
+        stage.getIcons().add(new Image("/tunisiagottalent/ui/img/icon.png"));
+        stage.setTitle("Tunisia Got Talnet");
+        
+//        Parent root = FXMLLoader.load(getClass().getResource("/tunisiagottalent/ui/homepage.fxml"));
         Parent root = FXMLLoader.load(getClass().getResource("/tunisiagottalent/ui/login.fxml"));
         
         Scene scene = new Scene(root, 1280, 720);
@@ -52,22 +58,25 @@ public class TunisiaGotTalent extends Application {
             }
         }); 
         
-        stage.setTitle("FXML Welcome");
+        
         stage.setScene(scene);
-        stage.setResizable(false);
+//        stage.setResizable(false);
         stage.show();
     }
     public static void main(String[] args) {
         // TODO code application logic here
 //        User u = new User("lololol", "faress@f.f", "male", "ariana", "fares", "amir", "45698521");
 //        System.out.println(u.getPhone_number());
-//        UserServices x = new UserServices();
+        UserServices x = new UserServices();
 //        x.login("memeguy", "alaa");
 //        x.signup(u);
 //
 //        x.getAll().forEach(System.out::println);
         
         Application.launch(args);
+//        User u = new User("alaa","alaa","alaa");
+        
+//        System.out.println(x.getRole(u));
     }
     
 }
