@@ -5,7 +5,7 @@
  */
 package tunisiagottalent.services;
 
-import tunisiagottalent.entity.Article;
+import tunisiagottalent.entity.Updates;
 import tunisiagottalent.util.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,20 +17,20 @@ import java.util.List;
 
 /**
  *
- * @author ASUS
+ * @author 
  */
-public class ServiceArticle implements IService<Article>{
+public class ServiceUpdates implements IService<Updates>{
     
     Connection cnx = DataSource.getInstance().getCnx();
     
         @Override
-    public void ajouter(Article a) {
+    public void ajouter(Updates a) {
         try {
            
             Statement stm = cnx.createStatement();
-            String query = "INSERT INTO article (id,title,img,content) VALUES (NULL, '"+a.getTitle()+"', '"+a.getImg()+"', '"+a.getContent()+"')";
+            String query = "INSERT INTO updates (id,title,img,content,category,publish_date) VALUES (NULL, '"+a.getTitle()+"', '"+a.getImg()+"', '"+a.getContent()+"','"+a.getCategory()+"','"+a.getPublish_date()+"')";
             stm.executeUpdate(query);
-            System.out.println("article ajouté !");
+            System.out.println("updates ajouté !");
 
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -39,13 +39,13 @@ public class ServiceArticle implements IService<Article>{
     }
 
     @Override
-    public void supprimer(Article t) {
+    public void supprimer(Updates t) {
         try {
-            String requete = "DELETE FROM article WHERE id=?";
+            String requete = "DELETE FROM updates WHERE id=?";
             PreparedStatement pst = cnx.prepareStatement(requete);
             pst.setInt(1,t.getId());
             pst.executeUpdate();
-            System.out.println("article supprimé !");
+            System.out.println("updates supprimé !");
 
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -53,18 +53,20 @@ public class ServiceArticle implements IService<Article>{
     }
 
     @Override
-    public void modifier(Article t) {
+    public void modifier(Updates t) {
         
             try {
-            String requete = "UPDATE article SET Title=?,content=?,img=? WHERE id=?";
+            String requete = "UPDATE updates SET Title=?,content=?,img=?,category=?,publish_date=? WHERE id=?";
                    
             PreparedStatement pst = cnx.prepareStatement(requete);   
-            pst.setString(1, t.getTitleArticle());
-            pst.setString(2, t.getContentArticle());
-            pst.setString(3, t.getImgArticle());
-            pst.setInt(4, t.getId());
+            pst.setString(1, t.getTitle());
+            pst.setString(2, t.getContent());
+            pst.setString(3, t.getImg());
+            pst.setString(4, t.getCategory());
+            pst.setDate(5,t.getPublish_date());
+            pst.setInt(6,t.getId());
             pst.executeUpdate();
-            System.out.println("Article modifié !");
+            System.out.println("Updates modifié !");
 
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -72,15 +74,15 @@ public class ServiceArticle implements IService<Article>{
     }
 
     @Override
-    public List<Article> afficher() {
+    public List<Updates> afficher() {
         
-        List<Article> list = new  ArrayList<>();
-        String req = "select * from article";
+        List<Updates> list = new  ArrayList<>();
+        String req = "select * from updates";
         try {
             PreparedStatement pst = cnx.prepareStatement(req);
             ResultSet rs =  pst.executeQuery();
             while(rs.next()){
-                Article a = new Article(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
+                Updates  a = new Updates(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),rs.getDate(5),rs.getString(6));
                 list.add(a);
             }
         } catch (SQLException ex){
@@ -89,15 +91,7 @@ public class ServiceArticle implements IService<Article>{
         return list;
     }    
 
-    public void ajouter(ServiceArticle a) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     
-    
-
-
-
 }
 
 

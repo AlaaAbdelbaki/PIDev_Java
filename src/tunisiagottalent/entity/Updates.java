@@ -9,7 +9,7 @@ import java.sql.Date;
 
 /**
  *
- * @author ghassen
+ * @author 
  */
 
 
@@ -27,7 +27,17 @@ public class Updates {
     public Updates() {
     }
 
-    public Updates(int id, String title, String content, String img, String, String category, Date publish_date ) {
+    public Updates(String title, String img, String content, String category, Date publish_date) {
+        this.title = title;
+        this.img = img;
+        this.content = content;
+        this.category = category;
+        this.publish_date = publish_date;
+    }
+    
+    
+
+    public Updates (int id, String title, String content, String img, Date publish_date,String category ) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -35,7 +45,8 @@ public class Updates {
         this.category= category;
         this.publish_date= publish_date;
     }
-    
+
+ 
 
     public int getId() {
         return id;
@@ -53,6 +64,14 @@ public class Updates {
         this.title = title;
     }
 
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
     public String getContent() {
         return content;
     }
@@ -61,23 +80,15 @@ public class Updates {
         this.content = content;
     }
 
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
-    
-     public String getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(String categoryy) {
+    public void setCategory(String category) {
         this.category = category;
     }
-    
-     public Date getDate() {
+
+    public Date getPublish_date() {
         return publish_date;
     }
 
@@ -89,7 +100,9 @@ public class Updates {
     public String toString() {
         return "Updates{" + "id=" + id + ", title=" + title + ", img=" + img + ", content=" + content + ", category=" + category + ", publish_date=" + publish_date + '}';
     }
-    
-    
-    
+
+
 }
+
+
+

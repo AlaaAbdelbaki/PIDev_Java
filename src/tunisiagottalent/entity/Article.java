@@ -66,15 +66,15 @@ public class Article {
     }
 
     public String getTitleArticle() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return title;
     }
 
     public String getContentArticle() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return content;
     }
 
     public String getImgArticle() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return img;
     }
     
     
