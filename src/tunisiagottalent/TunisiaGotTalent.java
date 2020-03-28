@@ -5,7 +5,6 @@
  */
 package tunisiagottalent;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,18 +30,19 @@ public class TunisiaGotTalent extends Application {
 
     private double xOffset = 0;
     private double yOffset = 0;
+
     @Override
     public void start(Stage stage) throws Exception {
         Font.loadFont(TunisiaGotTalent.class.getResource("/tunisiagottalent/ui/fonts/Roboto-Bold.ttf").toExternalForm(), 10);
         stage.getIcons().add(new Image("/tunisiagottalent/ui/img/icon.png"));
         stage.setTitle("Tunisia Got Talent");
-        
+
 //        Parent root = FXMLLoader.load(getClass().getResource("/tunisiagottalent/ui/homepage.fxml"));
         Parent root = FXMLLoader.load(getClass().getResource("/tunisiagottalent/ui/login.fxml"));
-        
+
         Scene scene = new Scene(root, 1280, 720);
         stage.initStyle(StageStyle.UNDECORATED);
-        
+
         root.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -56,13 +56,13 @@ public class TunisiaGotTalent extends Application {
                 stage.setX(event.getScreenX() - xOffset);
                 stage.setY(event.getScreenY() - yOffset);
             }
-        }); 
-        
-        
+        });
+
         stage.setScene(scene);
 //        stage.setResizable(false);
         stage.show();
     }
+
     public static void main(String[] args) {
         // TODO code application logic here
 //        User u = new User("lololol", "faress@f.f", "male", "ariana", "fares", "amir", "45698521");
@@ -72,11 +72,11 @@ public class TunisiaGotTalent extends Application {
 //        x.signup(u);
 //
 //        x.getAll().forEach(System.out::println);
-        
+
         Application.launch(args);
 //        User u = new User("alaa","alaa","alaa");
-        
+
 //        System.out.println(x.getRole(u));
     }
-    
+
 }

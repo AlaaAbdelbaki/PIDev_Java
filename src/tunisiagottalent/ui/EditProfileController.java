@@ -205,6 +205,9 @@ public class EditProfileController {
                 if (us.getUser(user).getAddress() != null) {
                     addressInput.setText(us.getUser(user).getAddress());
                 }
+                if(us.getUser(user).getBirthday() != null){
+                    birthdayInput.setValue(us.getUser(user).getBirthday().toLocalDate());
+                }
 
             }
         } catch (FileNotFoundException ex) {
@@ -245,6 +248,7 @@ public class EditProfileController {
         String username = usernameInput.getText();
         String email = emailInput.getText();
         String password = passwordInput.getText();
+        System.out.println(password);
         String gender;
         if (genderInput.getValue() != null) {
             gender = genderInput.getValue();

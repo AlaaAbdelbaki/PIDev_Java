@@ -41,7 +41,7 @@ public class UserServices {
         password_verified = BCrypt.checkpw(passwordText, DbHash);
         return (password_verified);
     }
-
+    //Encrypt entered password to the required value in the database
     public String encryptPassword(String pwd) {
         String pwd2 = BCrypt.hashpw(pwd, BCrypt.gensalt(13));
         pwd2 = pwd2.substring(3);
@@ -187,6 +187,8 @@ public class UserServices {
                 u.setPhone_number(rs.getString("telephone_number"));
                 u.setName(rs.getString("first_name"));
                 u.setLastName(rs.getString("name"));
+                u.setBirthday(rs.getDate("Birthday"));
+                u.setPassword(rs.getString("password"));
                 return u;
             }
         } catch (SQLException ex) {
@@ -212,8 +214,8 @@ public class UserServices {
                 pst.setString(1, u.getEmail());
                 pst.setString(2, u.getEmail());
             }
-            if (u.getPassword() == null) {
-                pst.setString(3, encryptPassword(us.getUser(u.getUsername()).getPassword()));
+            if (u.getPassword().equals("")) {
+                pst.setString(3, us.getUser(u.getUsername()).getPassword());
             } else {
                 pst.setString(3, encryptPassword(u.getPassword()));
             }
@@ -222,32 +224,32 @@ public class UserServices {
             } else {
                 pst.setDate(4, u.getBirthday());
             }
-            if (u.getGender() == null) {
+            if (u.getGender().equals("")) {
                 pst.setString(5, us.getUser(u.getUsername()).getGender().substring(0, 1).toLowerCase() + us.getUser(u.getUsername()).getGender().substring(1));
             } else {
                 pst.setString(5, u.getGender().substring(0, 1).toLowerCase() + u.getGender().substring(1));
             }
-            if (u.getPhone_number() == null) {
+            if (u.getPhone_number().equals("")) {
                 pst.setString(6, us.getUser(u.getUsername()).getPhone_number());
             } else {
                 pst.setString(6, u.getPhone_number());
             }
-            if (u.getAddress() == null) {
+            if (u.getAddress().equals("")) {
                 pst.setString(7, us.getUser(u.getUsername()).getAddress());
             } else {
                 pst.setString(7, u.getAddress());
             }
-            if (u.getLastName() == null) {
+            if (u.getLastName().equals("")) {
                 pst.setString(8, us.getUser(u.getUsername()).getLastName());
             } else {
                 pst.setString(8, u.getLastName());
             }
-            if (u.getName() == null) {
+            if (u.getName().equals("")) {
                 pst.setString(9, us.getUser(u.getUsername()).getName());
             } else {
                 pst.setString(9, u.getName());
             }
-            if (u.getBio() == null) {
+            if (u.getBio().equals("")) {
                 pst.setString(10, us.getUser(u.getUsername()).getBio());
             } else {
                 pst.setString(10, u.getBio());
