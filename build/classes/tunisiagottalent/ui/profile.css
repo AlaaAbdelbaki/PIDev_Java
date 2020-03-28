@@ -33,3 +33,35 @@
 .logout{
     -fx-cursor:hand;
 }
+
+.userinfo{
+    /*-fx-text-fill:#6356e5;*/
+    -fx-text-fill:black;
+    -fx-font-size:24px;
+    -fx-font-family: "Roboto Bold";
+}
+
+.bio{
+    /*-fx-text-fill:#6356e5;*/
+    -fx-text-fill:black;
+    -fx-font-size:12px;
+    -fx-font-family: "Roboto Bold";
+}
+
+.button{
+    -fx-font-family: "Roboto Bold";
+    -fx-background-color: #6356e5;
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-cursor:hand;
+}
+
+.button:pressed{
+    -fx-font-family: "Roboto Bold";
+    -fx-background-color: #4d43b5;
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-cursor:hand;
+}

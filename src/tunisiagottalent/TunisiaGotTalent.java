@@ -35,7 +35,7 @@ public class TunisiaGotTalent extends Application {
     public void start(Stage stage) throws Exception {
         Font.loadFont(TunisiaGotTalent.class.getResource("/tunisiagottalent/ui/fonts/Roboto-Bold.ttf").toExternalForm(), 10);
         stage.getIcons().add(new Image("/tunisiagottalent/ui/img/icon.png"));
-        stage.setTitle("Tunisia Got Talnet");
+        stage.setTitle("Tunisia Got Talent");
         
 //        Parent root = FXMLLoader.load(getClass().getResource("/tunisiagottalent/ui/homepage.fxml"));
         Parent root = FXMLLoader.load(getClass().getResource("/tunisiagottalent/ui/login.fxml"));
@@ -67,7 +67,7 @@ public class TunisiaGotTalent extends Application {
         // TODO code application logic here
 //        User u = new User("lololol", "faress@f.f", "male", "ariana", "fares", "amir", "45698521");
 //        System.out.println(u.getPhone_number());
-        UserServices x = new UserServices();
+//        UserServices x = new UserServices();
 //        x.login("memeguy", "alaa");
 //        x.signup(u);
 //

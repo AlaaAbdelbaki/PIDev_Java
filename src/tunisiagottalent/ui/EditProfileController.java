@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tunisiagottalent.ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -20,8 +16,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -33,12 +34,7 @@ import javafx.util.Duration;
 import tunisiagottalent.entity.User;
 import tunisiagottalent.services.UserServices;
 
-/**
- * FXML Controller class
- *
- * @author alaa
- */
-public class ProfileController {
+public class EditProfileController {
 
     @FXML
     private AnchorPane rootPane;
@@ -108,27 +104,36 @@ public class ProfileController {
 
     @FXML
     private Label logout_label;
-    
-    @FXML 
-    private AnchorPane profile_container;
-    
+
     @FXML
-    private ImageView profilePic;
-    
+    private TextField usernameInput;
+
     @FXML
-    private Label username_profile;
-    
+    private TextField firstNameInput;
+
     @FXML
-    private Label nameLastName;
-    
+    private TextField lastNameInput;
+
     @FXML
-    private Label bio;
-    
+    private TextField phoneNumberInput;
+
     @FXML
-    private Button edit;
-    
-    
-    
+    private TextArea bioInput;
+
+    @FXML
+    private TextField emailInput;
+
+    @FXML
+    private PasswordField passwordInput;
+
+    @FXML
+    private TextField addressInput;
+
+    @FXML
+    private ChoiceBox<String> genderInput;
+
+    @FXML
+    private DatePicker birthdayInput;
 
     @FXML
     void initialize() {
@@ -136,7 +141,10 @@ public class ProfileController {
         rootPane.setOpacity(0);
         fadein();
         loadInfo();
-        System.out.println("Profile loaded ! ");
+        System.out.println("Edit Profile loaded ! ");
+        genderInput.getItems().add("Male");
+        genderInput.getItems().add("Female");
+        usernameInput.setDisable(true);
 
     }
 
@@ -165,6 +173,7 @@ public class ProfileController {
 //                System.out.println(data);
                 String user = data.substring(0, data.indexOf(":"));
                 username.setText(user);
+                usernameInput.setText(user);
 //                System.out.println(user.length());
                 String previlege = data.substring(data.indexOf(":") + 4, data.indexOf(":") + 5);
 //                System.out.println(previlege);
@@ -173,15 +182,29 @@ public class ProfileController {
                     dashboard_label.setVisible(true);
                 }
                 UserServices us = new UserServices();
-                
-                username_profile.setText(user);
-                profilePic.setImage(img);
-                if (us.getUser(user).getName() == null || us.getUser(user).getLastName() == null) {
-                    nameLastName.setText("Complete your profile !!");
-                } else {
-                    nameLastName.setText(us.getUser(user).getName() + " " + us.getUser(user).getLastName());
+                if (us.getUser(user).getName() != null) {
+                    firstNameInput.setText(us.getUser(user).getName());
                 }
-                bio.setText(us.getUser(user).getBio());
+                if (us.getUser(user).getLastName() != null) {
+                    lastNameInput.setText(us.getUser(user).getLastName());
+                }
+                if (us.getUser(user).getPhone_number() != null) {
+                    phoneNumberInput.setText(us.getUser(user).getPhone_number());
+                }
+                if (us.getUser(user).getGender() != null) {
+                    //System.out.println(us.getUser(user).getGender());
+                    genderInput.setValue(us.getUser(user).getGender().substring(0, 1).toUpperCase() + us.getUser(user).getGender().substring(1));
+                }
+                if (us.getUser(user).getBio() != null) {
+
+                    bioInput.setText(us.getUser(user).getBio());
+                }
+                if (us.getUser(user).getEmail() != null) {
+                    emailInput.setText(us.getUser(user).getEmail());
+                }
+                if (us.getUser(user).getAddress() != null) {
+                    addressInput.setText(us.getUser(user).getAddress());
+                }
 
             }
         } catch (FileNotFoundException ex) {
@@ -190,22 +213,15 @@ public class ProfileController {
     }
 
     @FXML
-    void disconnect(MouseEvent event){
+    void disconnect(MouseEvent event) {
         try {
             fadeTransition("login");
         } catch (IOException ex) {
             Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    @FXML
-    void dashboard(MouseEvent event){
-        try {
-            fadeTransition("dashboard");
-        } catch (IOException ex) {
-            Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+
     @FXML
     void profile(MouseEvent event) {
         try {
@@ -214,16 +230,85 @@ public class ProfileController {
             Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @FXML
-    void editProfile(ActionEvent event){
+    void dashboard(MouseEvent event) {
         try {
-            fadeTransition("editProfile");
+            fadeTransition("dashboard");
         } catch (IOException ex) {
-            Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-            
+
+    @FXML
+    void submit(ActionEvent event) {
+        String username = usernameInput.getText();
+        String email = emailInput.getText();
+        String password = passwordInput.getText();
+        String gender;
+        if (genderInput.getValue() != null) {
+            gender = genderInput.getValue();
+        } else {
+            gender = null;
+        }
+        String name = firstNameInput.getText();
+        String lastName = lastNameInput.getText();
+        String bio = bioInput.getText();
+        String phone_number = phoneNumberInput.getText();
+//        System.out.println(phone_number);
+        Date birthday;
+        if (birthdayInput.getValue() != null) {
+            birthday = Date.valueOf(birthdayInput.getValue());
+        } else {
+            birthday = null;
+        }
+
+        String address = addressInput.getText();
+
+        User user = new User(username, email, password, gender, address, name, lastName, bio, phone_number, birthday);
+        UserServices us = new UserServices();
+
+        if (us.updateUser(user)) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText(null);
+            alert.setContentText("Information updated successfully !");
+            Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(new Image("/tunisiagottalent/ui/img/icon.png"));
+
+//                    stage.initStyle(StageStyle.UNDECORATED);
+            alert.showAndWait();
+            try {
+                fadeTransition("profile");
+            } catch (IOException ex) {
+                Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Error processing the request try again later !");
+            Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(new Image("/tunisiagottalent/ui/img/icon.png"));
+            //                    stage.initStyle(StageStyle.UNDECORATED);
+            alert.showAndWait();
+            try {
+                fadeTransition("profile");
+            } catch (IOException ex) {
+                Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    @FXML
+    void cancel(ActionEvent event) {
+        try {
+            fadeTransition("profile");
+        } catch (IOException ex) {
+            Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     void fadeTransition(String scene) throws IOException {
 
         FadeTransition ft = new FadeTransition();
@@ -244,13 +329,15 @@ public class ProfileController {
                     Scene s = new Scene(second);
                     Stage current = (Stage) rootPane.getScene().getWindow();
                     current.setScene(s);
+
                 } catch (IOException ex) {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
+
         ft.play();
 
     }
-       
+
 }

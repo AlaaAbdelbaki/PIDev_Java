@@ -5,11 +5,14 @@
  */
 package tunisiagottalent.entity;
 
+import java.sql.Date;
+
 /**
  *
  * @author alaa
  */
 public class User {
+
     String username;
     String email;
     String password;
@@ -19,6 +22,35 @@ public class User {
     String lastName;
     String bio;
     String phone_number;
+    String profilePic;
+    Date birthday;
+
+    public User() {
+    }
+
+    public User(String username, String email, String password, String address, String name, String lastName, String bio, String phone_number) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.address = address;
+        this.name = name;
+        this.lastName = lastName;
+        this.bio = bio;
+        this.phone_number = phone_number;
+    }
+
+    public User(String username, String email, String password, String gender, String address, String name, String lastName, String bio, String phone_number, Date birthday) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.gender = gender;
+        this.address = address;
+        this.name = name;
+        this.lastName = lastName;
+        this.bio = bio;
+        this.phone_number = phone_number;
+        this.birthday = birthday;
+    }
 
     public User(String username) {
         this.username = username;
@@ -52,7 +84,6 @@ public class User {
     public String toString() {
         return "User{" + "username=" + username + ", email=" + email + ", gender=" + gender + ", address=" + address + ", name=" + name + ", lastName=" + lastName + ", bio=" + bio + ", phone_number=" + phone_number + '}';
     }
-    
 
     public String getUsername() {
         return username;
@@ -90,6 +121,14 @@ public class User {
         return phone_number;
     }
 
+    public String getProfilePic() {
+        return profilePic;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -125,6 +164,13 @@ public class User {
     public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
     }
-    
-    
+
+    public void setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
 }
