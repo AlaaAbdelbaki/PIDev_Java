@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -17,6 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -205,7 +207,7 @@ public class EditProfileController {
                 if (us.getUser(user).getAddress() != null) {
                     addressInput.setText(us.getUser(user).getAddress());
                 }
-                if(us.getUser(user).getBirthday() != null){
+                if (us.getUser(user).getBirthday() != null) {
                     birthdayInput.setValue(us.getUser(user).getBirthday().toLocalDate());
                 }
 
@@ -311,6 +313,56 @@ public class EditProfileController {
         } catch (IOException ex) {
             Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+    void delete(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Warning");
+        alert.setHeaderText(null);
+        alert.setContentText("This action once done is irriversible are you sure you want to proceed ?");
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image("/tunisiagottalent/ui/img/icon.png"));
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            String username = usernameInput.getText();
+            UserServices us = new UserServices();
+            if (us.delete(username)) {
+                Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+                alert2.setTitle("Success !");
+                alert2.setHeaderText(null);
+                alert2.setContentText("Account deleted successfully !");
+                Stage stage2 = (Stage) alert2.getDialogPane().getScene().getWindow();
+                stage2.getIcons().add(new Image("/tunisiagottalent/ui/img/icon.png"));
+                alert2.showAndWait();
+                try {
+                    fadeTransition("login");
+                } catch (IOException ex) {
+                    Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                Alert alert2 = new Alert(Alert.AlertType.ERROR);
+                alert2.setTitle("Error");
+                alert2.setHeaderText(null);
+                alert2.setContentText("An error occured please try again later");
+                Stage stage2 = (Stage) alert2.getDialogPane().getScene().getWindow();
+                stage2.getIcons().add(new Image("/tunisiagottalent/ui/img/icon.png"));
+                alert2.showAndWait();
+                try {
+                    fadeTransition("login");
+                } catch (IOException ex) {
+                    Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+        }else{
+            try {
+                fadeTransition("profile");
+            } catch (IOException ex) {
+                Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
     }
 
     void fadeTransition(String scene) throws IOException {

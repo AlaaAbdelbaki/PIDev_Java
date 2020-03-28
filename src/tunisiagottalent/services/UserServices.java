@@ -41,6 +41,7 @@ public class UserServices {
         password_verified = BCrypt.checkpw(passwordText, DbHash);
         return (password_verified);
     }
+
     //Encrypt entered password to the required value in the database
     public String encryptPassword(String pwd) {
         String pwd2 = BCrypt.hashpw(pwd, BCrypt.gensalt(13));
@@ -126,7 +127,19 @@ public class UserServices {
     }
 
     //Delete user
-    public boolean delete(User u) {
+    public boolean delete(String username) {
+
+        cnx = DataSource.getInstance().getCnx();
+
+        String req = "delete from user where username='" + username + "'";
+
+        try {
+            cnx.createStatement().executeUpdate(req);
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return false;
     }
 
@@ -224,8 +237,13 @@ public class UserServices {
             } else {
                 pst.setDate(4, u.getBirthday());
             }
-            if (u.getGender().equals("")) {
-                pst.setString(5, us.getUser(u.getUsername()).getGender().substring(0, 1).toLowerCase() + us.getUser(u.getUsername()).getGender().substring(1));
+            if (u.getGender() == null) {
+                if (us.getUser(u.getUsername()).getGender() == null) {
+                    pst.setString(5, null);
+                } else {
+
+                    pst.setString(5, us.getUser(u.getUsername()).getGender().substring(0, 1).toLowerCase() + us.getUser(u.getUsername()).getGender().substring(1));
+                }
             } else {
                 pst.setString(5, u.getGender().substring(0, 1).toLowerCase() + u.getGender().substring(1));
             }
