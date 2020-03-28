@@ -27,7 +27,7 @@ public class Updates {
     public Updates() {
     }
 
-    public Updates(String title, String img, String content, String category, Date publish_date) {
+    public Updates(String title, String img, String category, Date publish_date, String content) {
         this.title = title;
         this.img = img;
         this.content = content;
@@ -45,6 +45,8 @@ public class Updates {
         this.category= category;
         this.publish_date= publish_date;
     }
+
+    
 
  
 
