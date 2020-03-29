@@ -3,13 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ghassen/Documents/GitHub/PIDev_Java/src/tunisiagottalent/services/ServiceUpdates.java</file>
-            <file>file:/C:/Users/ghassen/Documents/GitHub/PIDev_Java/src/tunisiagottalent/TunisiaGotTalent.java</file>
-            <file>file:/C:/Users/ghassen/Documents/GitHub/PIDev_Java/src/tunisiagottalent/services/ServiceArticle.java</file>
-            <file>file:/C:/Users/ghassen/Documents/GitHub/PIDev_Java/src/tunisiagottalent/entity/Article.java</file>
-            <file>file:/C:/Users/ghassen/Documents/GitHub/PIDev_Java/src/tunisiagottalent/entity/Updates.java</file>
-            <file>file:/C:/Users/ghassen/Documents/GitHub/PIDev_Java/src/tunisiagottalent/util/DataSource.java</file>
-            <file>file:/C:/Users/ghassen/Documents/GitHub/PIDev_Java/src/tunisiagottalent/services/IService.java</file>
+            <file>file:/C:/Users/ghassen/Documents/GitHub/PIDev_Java/src/tunisiagottalent/ui/DashboardController.java</file>
+            <file>file:/C:/Users/ghassen/Documents/GitHub/PIDev_Java/src/tunisiagottalent/ui/homepage.css</file>
+            <file>file:/C:/Users/ghassen/Documents/GitHub/PIDev_Java/src/tunisiagottalent/ui/dashboard.css</file>
+            <file>file:/C:/Users/ghassen/Documents/GitHub/PIDev_Java/src/tunisiagottalent/ui/UpdatesController.java</file>
+            <file>file:/C:/Users/ghassen/Documents/GitHub/PIDev_Java/src/tunisiagottalent/ui/HomepageController.java</file>
         </group>
     </open-files>
 </project-private>

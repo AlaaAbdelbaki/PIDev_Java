@@ -1,0 +1,35 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+
+.navbar{
+    -fx-fill:#6356e5 ;
+}
+.bg{
+    -fx-fill:#f3f6f6 ;
+}
+
+.sections{
+    -fx-text-fill:#f3f6f6;
+    -fx-font-size:32px;
+    -fx-font-family: "Roboto Bold";
+    -fx-cursor:hand;
+}
+
+.welcome{
+    -fx-text-fill:#f3f6f6;
+}
+
+.pp{
+    -fx-pref-height:200px;
+    -fx-pref-width:200px;
+    -fx-cursor:hand;
+}
+
+.logout{
+    -fx-cursor:hand;
+}
