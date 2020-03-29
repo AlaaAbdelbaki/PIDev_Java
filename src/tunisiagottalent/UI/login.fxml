@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="parentContainer" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.Login">
+    <children>
+        <AnchorPane id="AnchorPane" fx:id="anchorRoot" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass">
+            <stylesheets>
+                <URL value="@login.css" />
+            </stylesheets>
+            <children>
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f3f6f6" height="720.0" layoutX="400.0" stroke="TRANSPARENT" strokeType="INSIDE" width="880.0">
+                    <effect>
+                        <DropShadow />
+                    </effect>
+                </Rectangle>
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6356e5" height="720.0" stroke="TRANSPARENT" strokeType="INSIDE" width="400.0">
+                    <effect>
+                        <DropShadow />
+                    </effect>
+                </Rectangle>
+                <Label layoutX="23.0" layoutY="159.0" text="Welcome back !" textAlignment="CENTER" textFill="#f3f6f6">
+                    <font>
+                        <Font name="Roboto Bold" size="50.0" />
+                    </font>
+                </Label>
+                <Label layoutX="50.0" layoutY="219.0" prefHeight="72.0" prefWidth="304.0" text="Login and start sharing with the world" textAlignment="CENTER" textFill="#f3f6f6" wrapText="true">
+                    <font>
+                        <Font name="Roboto Bold" size="27.0" />
+                    </font>
+                </Label>
+                <Label layoutX="23.0" layoutY="470.0" prefHeight="83.0" prefWidth="355.0" text="Don't have an account ?" textAlignment="CENTER" textFill="#f3f6f6">
+                    <font>
+                        <Font name="Roboto Bold" size="33.0" />
+                    </font>
+                </Label>
+                <Button fx:id="signup" layoutX="143.0" layoutY="553.0" mnemonicParsing="false" onAction="#signup" prefHeight="53.0" prefWidth="118.0" styleClass="signup" stylesheets="@login.css" text="Signup">
+                    <font>
+                        <Font name="Roboto Bold" size="22.0" />
+                    </font>
+                    <effect>
+                        <DropShadow color="#0000009c" offsetY="1.0" />
+                    </effect>
+                </Button>
+                <Button fx:id="login" layoutX="803.0" layoutY="553.0" mnemonicParsing="false" onAction="#login" prefHeight="53.0" prefWidth="118.0" styleClass="login" stylesheets="@login.css" text="Login">
+                    <font>
+                        <Font name="Roboto Bold" size="22.0" />
+                    </font>
+                    <effect>
+                        <DropShadow color="#0000009c" offsetY="1.0" />
+                    </effect>
+                </Button>
+                <TextField fx:id="username" layoutX="615.0" layoutY="360.0" prefHeight="53.0" prefWidth="493.0" promptText="Username">
+                    <font>
+                        <Font name="Roboto Bold" size="22.0" />
+                    </font>
+                </TextField>
+                <PasswordField fx:id="password" layoutX="615.0" layoutY="429.0" prefHeight="53.0" prefWidth="493.0" promptText="Password">
+                    <font>
+                        <Font name="Roboto Bold" size="22.0" />
+                    </font>
+                </PasswordField>
+                <ImageView fitHeight="261.0" fitWidth="573.0" layoutX="575.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@img/050b8e8c2f748fdd7584fc74ceae6e84.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+    </children>
+</StackPane>
+

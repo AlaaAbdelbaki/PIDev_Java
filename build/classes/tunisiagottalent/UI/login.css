@@ -1,0 +1,53 @@
+
+
+    /*
+     * Empty Stylesheet file.
+     */
+
+
+.mainFxmlClass {
+
+}
+
+
+
+.login{
+    -fx-background-color: #6356e5;
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-cursor:hand;
+
+
+
+}
+
+.login:pressed{
+    -fx-background-color: #4d43b5;
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-cursor:hand;
+
+
+}
+
+.signup{
+    -fx-background-color: #f3f6f6;
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: #6356e5;
+    -fx-cursor:hand;
+
+
+}
+
+.signup:pressed{
+    -fx-background-color: #d9dede;
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: #6356e5;
+    -fx-cursor:hand;
+
+}
+
