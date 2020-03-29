@@ -7,6 +7,7 @@ package tunisiagottalent.ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -155,6 +156,9 @@ public class DashboardController {
     @FXML
     void disconnect(MouseEvent event) {
         try {
+            FileWriter f = new FileWriter("info.dat");
+            f.write("");
+            f.close();
             fadeTransition("login");
         } catch (IOException ex) {
             Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
@@ -177,6 +181,15 @@ public class DashboardController {
             fadeTransition("homepage");
         } catch (IOException ex) {
             Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    @FXML 
+    void users(ActionEvent event) {
+        try {
+            fadeTransition("dashboardUsers");
+        } catch (IOException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -1,7 +1,8 @@
-package tunisiagottalent.ui;
+ package tunisiagottalent.ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -220,6 +221,9 @@ public class EditProfileController {
     @FXML
     void disconnect(MouseEvent event) {
         try {
+            FileWriter f = new FileWriter("info.dat");
+            f.write("");
+            f.close();
             fadeTransition("login");
         } catch (IOException ex) {
             Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
@@ -340,7 +344,7 @@ public class EditProfileController {
                 } catch (IOException ex) {
                     Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }else{
+            } else {
                 Alert alert2 = new Alert(Alert.AlertType.ERROR);
                 alert2.setTitle("Error");
                 alert2.setHeaderText(null);
@@ -354,8 +358,8 @@ public class EditProfileController {
                     Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            
-        }else{
+
+        } else {
             try {
                 fadeTransition("profile");
             } catch (IOException ex) {
@@ -385,13 +389,11 @@ public class EditProfileController {
                     Scene s = new Scene(second);
                     Stage current = (Stage) rootPane.getScene().getWindow();
                     current.setScene(s);
-
                 } catch (IOException ex) {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
-
         ft.play();
 
     }

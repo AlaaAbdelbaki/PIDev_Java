@@ -13,6 +13,7 @@ import java.sql.Date;
  */
 public class User {
 
+    int id;
     String username;
     String email;
     String password;
@@ -27,6 +28,18 @@ public class User {
 
     public User() {
     }
+
+    public User(int id, String username, String email, String gender, String name, String lastName, String phone_number, Date birthday) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.gender = gender;
+        this.name = name;
+        this.lastName = lastName;
+        this.phone_number = phone_number;
+        this.birthday = birthday;
+    }
+
 
     public User(String username, String email, String password, String address, String name, String lastName, String bio, String phone_number) {
         this.username = username;
@@ -82,7 +95,13 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "username=" + username + ", email=" + email + ", gender=" + gender + ", address=" + address + ", name=" + name + ", lastName=" + lastName + ", bio=" + bio + ", phone_number=" + phone_number + '}';
+        return "User{" + "id=" + id + ", username=" + username + ", email=" + email + ", password=" + password + ", gender=" + gender + ", address=" + address + ", name=" + name + ", lastName=" + lastName + ", bio=" + bio + ", phone_number=" + phone_number + ", profilePic=" + profilePic + ", birthday=" + birthday + '}';
+    }
+
+
+
+    public int getId() {
+        return id;
     }
 
     public String getUsername() {
@@ -127,6 +146,10 @@ public class User {
 
     public Date getBirthday() {
         return birthday;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setUsername(String username) {

@@ -10,19 +10,26 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -39,25 +46,16 @@ import tunisiagottalent.services.UserServices;
  *
  * @author alaa
  */
-public class ProfileController {
+public class DashboardUsersController {
 
     @FXML
     private AnchorPane rootPane;
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private Rectangle navbar1;
 
     @FXML
     private Rectangle navbar;
-
-    @FXML
-    private Label username;
 
     @FXML
     private ImageView profilePicture;
@@ -109,35 +107,61 @@ public class ProfileController {
 
     @FXML
     private Label logout_label;
-    
-    @FXML 
-    private AnchorPane profile_container;
-    
-    @FXML
-    private ImageView profilePic;
-    
-    @FXML
-    private Label username_profile;
-    
-    @FXML
-    private Label nameLastName;
-    
-    @FXML
-    private Label bio;
-    
-    @FXML
-    private Button edit;
-    
-    
-    
 
+    @FXML
+    private Label username2;
+
+    @FXML
+    private ImageView home_icon;
+
+    @FXML
+    private Label home_label;
+    
+    @FXML
+    private TableView <User> usersInfo = new TableView<User>();
+    
+    @FXML
+    private TableColumn <User,Integer> userId;
+    
+    @FXML
+    private TableColumn <User,String> userUsername;
+    
+    @FXML
+    private TableColumn <User,String> userLastName;
+    
+    @FXML
+    private TableColumn <User,String> userFirstName;
+    
+    @FXML
+    private TableColumn <User,Date> userBirthday;
+    
+    @FXML
+    private TableColumn <User,String> userEmail;
+    
+    @FXML
+    private TableColumn <User,String> userPhoneNumber;
+    
+    @FXML
+    private TableColumn <User,String> userGender;
+    
+    @FXML
+    private TableColumn videos;
+    
+    @FXML
+    private TableColumn delete;
+    
+    private ObservableList<User> usersList;
+    
+    
+    
     @FXML
     void initialize() {
 
         rootPane.setOpacity(0);
         fadein();
         loadInfo();
-        System.out.println("Profile loaded ! ");
+        loadTreeView();
+        System.out.println("Dashboard users loaded ! ");
 
     }
 
@@ -151,8 +175,6 @@ public class ProfileController {
     }
 
     void loadInfo() {
-        dashboard_icon.setVisible(false);
-        dashboard_label.setVisible(false);
 
 //        Image img=new Image("D:/Programming/Web/htdocs/annee_2019_2020/PIDev/web/assets/img/pics/unknown.jpg"); 
         Image img = new Image("tunisiagottalent/ui/img/unknown.jpg");
@@ -165,24 +187,7 @@ public class ProfileController {
                 String data = s.nextLine();
 //                System.out.println(data);
                 String user = data.substring(0, data.indexOf(":"));
-                username.setText(user);
-//                System.out.println(user.length());
-                String previlege = data.substring(data.indexOf(":") + 4, data.indexOf(":") + 5);
-//                System.out.println(previlege);
-                if (previlege.equals("1")) {
-                    dashboard_icon.setVisible(true);
-                    dashboard_label.setVisible(true);
-                }
-                UserServices us = new UserServices();
-                
-                username_profile.setText(user);
-                profilePic.setImage(img);
-                if (us.getUser(user).getName() == null || us.getUser(user).getLastName() == null) {
-                    nameLastName.setText("Complete your profile !!");
-                } else {
-                    nameLastName.setText(us.getUser(user).getName() + " " + us.getUser(user).getLastName());
-                }
-                bio.setText(us.getUser(user).getBio());
+                username2.setText(user);
 
             }
         } catch (FileNotFoundException ex) {
@@ -191,7 +196,7 @@ public class ProfileController {
     }
 
     @FXML
-    void disconnect(MouseEvent event){
+    void disconnect(MouseEvent event) {
         try {
             FileWriter f = new FileWriter("info.dat");
             f.write("");
@@ -200,16 +205,9 @@ public class ProfileController {
         } catch (IOException ex) {
             Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    @FXML
-    void dashboard(MouseEvent event){
-        try {
-            fadeTransition("dashboard");
-        } catch (IOException ex) {
-            Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+
     @FXML
     void profile(MouseEvent event) {
         try {
@@ -218,16 +216,51 @@ public class ProfileController {
             Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @FXML
-    void editProfile(ActionEvent event){
+    void home(MouseEvent event) {
         try {
-            fadeTransition("editProfile");
+            fadeTransition("homepage");
         } catch (IOException ex) {
-            Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-            
+    
+    @FXML
+    void dashboard(MouseEvent event) {
+        try {
+            fadeTransition("dashboard");
+        } catch (IOException ex) {
+            Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    void loadTreeView(){
+        UserServices us = new UserServices();
+        
+        usersList = FXCollections.observableArrayList(us.getAll());
+        
+//        usersList.forEach(System.out::println);
+        
+        userId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        userUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
+        userEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        userGender.setCellValueFactory(new PropertyValueFactory<>("gender"));
+        userLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        userFirstName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        userPhoneNumber.setCellValueFactory(new PropertyValueFactory<>("phone_number"));
+        userBirthday.setCellValueFactory(new PropertyValueFactory<>("birthday"));
+        
+        userId.setSortType(TableColumn.SortType.ASCENDING);
+        userId.setSortable(true);
+        
+        
+        usersInfo.setItems(usersList);
+        
+        
+        
+        
+    }
     void fadeTransition(String scene) throws IOException {
 
         FadeTransition ft = new FadeTransition();
@@ -256,5 +289,5 @@ public class ProfileController {
         ft.play();
 
     }
-       
+
 }

@@ -33,3 +33,23 @@
 .logout{
     -fx-cursor:hand;
 }
+
+.button{
+    -fx-font-family: "Roboto Bold";
+    -fx-background-color: #6356e5;
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-font-size:24px;
+    -fx-cursor:hand;
+}
+
+.button:pressed{
+    -fx-font-family: "Roboto Bold";
+    -fx-background-color: #4d43b5;
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-font-size:24px;
+    -fx-cursor:hand;
+}

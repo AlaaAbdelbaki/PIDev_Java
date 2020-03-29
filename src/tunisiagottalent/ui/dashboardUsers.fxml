@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -10,9 +12,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.ui.DashboardController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.ui.DashboardUsersController">
     <stylesheets>
-        <URL value="@dashboard.css" />
+        <URL value="@dashboardusers.css" />
     </stylesheets>
    <children>
       <Rectangle fx:id="navbar1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="720.0" layoutX="400.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="bg" width="880.0" />
@@ -24,7 +26,7 @@
       <AnchorPane prefHeight="720.0" prefWidth="312.0">
          <children>
             <ImageView fx:id="profilePicture" fitHeight="48.0" fitWidth="48.0" layoutX="7.0" layoutY="22.0" onMouseClicked="#profile" pickOnBounds="true" preserveRatio="true" styleClass="pp" />
-            <ImageView fx:id="dashboard_icon" fitHeight="48.0" fitWidth="48.0" layoutX="7.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true" styleClass="pp">
+            <ImageView fx:id="dashboard_icon" fitHeight="48.0" fitWidth="48.0" layoutX="7.0" layoutY="143.0" onContextMenuRequested="#dashboard" pickOnBounds="true" preserveRatio="true" styleClass="pp">
                <image>
                   <Image url="@img/dashboard.png" />
                </image>
@@ -59,7 +61,7 @@
                   <Image url="@img/star%20(1).png" />
                </image>
             </ImageView>
-            <Label fx:id="dashboard_label" layoutX="90.0" layoutY="148.0" styleClass="sections" text="Dashboard" />
+            <Label fx:id="dashboard_label" layoutX="90.0" layoutY="148.0" onMouseClicked="#dashboard" styleClass="sections" text="Dashboard" />
             <Label fx:id="comp_label" layoutX="90.0" layoutY="213.0" styleClass="sections" text="Competitions" />
             <Label fx:id="event_label" layoutX="90.0" layoutY="279.0" styleClass="sections" text="Events" />
             <Label fx:id="shop_label" layoutX="90.0" layoutY="336.0" styleClass="sections" text="Shop" />
@@ -81,7 +83,7 @@
                   <Font name="Roboto Bold" size="21.0" />
                </font>
             </Label>
-            <Label fx:id="username" layoutX="68.0" layoutY="32.0" onMouseClicked="#profile" prefHeight="54.0" prefWidth="312.0" styleClass="welcome" text="username">
+            <Label fx:id="username2" layoutX="68.0" layoutY="32.0" onMouseClicked="#profile" prefHeight="54.0" prefWidth="312.0" styleClass="welcome" text="username">
                <font>
                   <Font name="Roboto Bold" size="21.0" />
                </font>
@@ -96,14 +98,30 @@
       </AnchorPane>
       <AnchorPane layoutX="400.0" prefHeight="720.0" prefWidth="880.0">
          <children>
-            <Button layoutX="150.0" layoutY="56.0" mnemonicParsing="false" onAction="#users" prefHeight="92.0" prefWidth="182.0" text="User profiles" />
-            <Button layoutX="150.0" layoutY="204.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="182.0" text="Blog" />
-            <Button layoutX="150.0" layoutY="360.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="182.0" text="Events" />
-            <Button layoutX="150.0" layoutY="513.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="182.0" text="Complaints" />
-            <Button layoutX="539.0" layoutY="513.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="182.0" text="Ratings" />
-            <Button layoutX="539.0" layoutY="360.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="182.0" text="News" />
-            <Button layoutX="539.0" layoutY="204.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="182.0" text="Competitions" />
-            <Button layoutX="539.0" layoutY="56.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="182.0" text="Shop" />
+            <TextField fx:id="username" layoutX="204.0" layoutY="96.0" prefHeight="42.0" prefWidth="475.0" promptText="Username">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </TextField>
+            <Label layoutX="318.0" layoutY="49.0" text="Search for a user">
+               <font>
+                  <Font name="Roboto Bold" size="32.0" />
+               </font>
+            </Label>
+            <TableView fx:id="usersInfo" layoutX="1.0" layoutY="170.0" prefHeight="550.0" prefWidth="880.0">
+              <columns>
+                <TableColumn fx:id="userId" prefWidth="36.0" text="ID" />
+                <TableColumn fx:id="userUsername" prefWidth="75.0" text="Username" />
+                  <TableColumn fx:id="userLastName" prefWidth="75.0" text="Last name" />
+                  <TableColumn fx:id="userFirstName" prefWidth="75.0" text="First Name" />
+                  <TableColumn fx:id="userBirthday" prefWidth="103.0" text="Birthday" />
+                  <TableColumn fx:id="userEmail" prefWidth="146.0" text="Email" />
+                  <TableColumn fx:id="userPhoneNumber" prefWidth="104.0" text="Phone number" />
+                  <TableColumn fx:id="userGender" prefWidth="66.0" text="Gender" />
+                  <TableColumn fx:id="videos" minWidth="0.0" prefWidth="99.0" text="Videos" />
+                  <TableColumn fx:id="delete" prefWidth="100.0" text="Delete" />
+              </columns>
+            </TableView>
          </children>
       </AnchorPane>
    </children>

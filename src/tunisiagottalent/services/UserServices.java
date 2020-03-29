@@ -30,6 +30,7 @@ public class UserServices {
     private ResultSet rs;
 
     public UserServices() {
+        cnx = DataSource.getInstance().getCnx();
     }
 
     //Verify entered password with the hashed password inside the database
@@ -145,14 +146,16 @@ public class UserServices {
 
     //Returns list of all users
     public List<User> getAll() {
+
         String req = "select * from user";
+
         List<User> list = new ArrayList<>();
 
         try {
             ste = cnx.createStatement();
             rs = ste.executeQuery(req);
             while (rs.next()) {
-                list.add(new User(rs.getString("username"), rs.getString("email"), rs.getString("sexe"), rs.getString("adresse"), rs.getString("name"), rs.getString("first_name"), rs.getString("telephone_number")));
+                list.add(new User(rs.getInt("id"), rs.getString("username"), rs.getString("email"), rs.getString("sexe"), rs.getString("first_name"), rs.getString("name"), rs.getString("telephone_number"), rs.getDate("Birthday")));
             }
 
         } catch (SQLException ex) {

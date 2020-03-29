@@ -43,19 +43,13 @@ public class TunisiaGotTalent extends Application {
         Scene scene = new Scene(root, 1280, 720);
         stage.initStyle(StageStyle.UNDECORATED);
 
-        root.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                xOffset = event.getSceneX();
-                yOffset = event.getSceneY();
-            }
+        root.setOnMousePressed((MouseEvent event) -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
         });
-        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                stage.setX(event.getScreenX() - xOffset);
-                stage.setY(event.getScreenY() - yOffset);
-            }
+        root.setOnMouseDragged((MouseEvent event) -> {
+            stage.setX(event.getScreenX() - xOffset);
+            stage.setY(event.getScreenY() - yOffset);
         });
 
         stage.setScene(scene);
@@ -68,7 +62,7 @@ public class TunisiaGotTalent extends Application {
 //        User u = new User("lololol", "faress@f.f", "male", "ariana", "fares", "amir", "45698521");
 //        System.out.println(u.getPhone_number());
 //        UserServices x = new UserServices();
-//        x.login("memeguy", "alaa");
+//        x.login("alaa", "alaa");
 //        x.signup(u);
 //
 //        x.getAll().forEach(System.out::println);
