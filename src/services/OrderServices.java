@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import util.DataSource;
 
 /**
@@ -32,9 +34,10 @@ public class OrderServices {
             cnx=DataSource.getInstance().getCnx();
         }
         
-        public List<Order> getAll(){
+        public ObservableList<Order> getAll(){
         String req= "select * from orders ;";
-        List<Order> list = new ArrayList<>();
+        ObservableList<Order> list;
+        list=FXCollections.observableArrayList();
         
             try {
                 ste=cnx.createStatement();
@@ -97,6 +100,8 @@ public class OrderServices {
         String req="delete from orders where id='"+id+"' ;";
         
             try {
+                pset=cnx.prepareStatement("SET FOREIGN_KEY_CHECKS=0;");
+                pset.executeQuery();
                 ste=cnx.createStatement();
                 ste.executeUpdate(req);
             } catch (SQLException ex) {
@@ -106,12 +111,13 @@ public class OrderServices {
     }
         
         public void modifyOrder(Order o1,int id){
-        String req="update orders set total=?,address=? where id='"+id+"' ;";
+        String req="update orders set order_date=?,total=?,address=? where id='"+id+"' ;";
         
             try {
                 pset=cnx.prepareStatement(req);
-                pset.setDouble(1, o1.getTotal());
-                pset.setString(2, o1.getAddress());
+                pset.setDate(1, o1.getOrder_date());
+                pset.setDouble(2, o1.getTotal());
+                pset.setString(3, o1.getAddress());
                 pset.executeUpdate();
             } catch (SQLException ex) {
                 Logger.getLogger(OrderServices.class.getName()).log(Level.SEVERE, null, ex);

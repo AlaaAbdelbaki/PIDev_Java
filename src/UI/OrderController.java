@@ -5,35 +5,28 @@
  */
 package UI;
 
+import Entity.Order;
 import Entity.Product;
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import javax.swing.plaf.RootPaneUI;
 import services.OrderServices;
 import services.ProductServices;
 
@@ -42,49 +35,40 @@ import services.ProductServices;
  *
  * @author paspo
  */
-public class ShopController implements Initializable {
-    
+public class OrderController implements Initializable {
+
     @FXML
-    private TableView<Product> tableProduct;
+    private TableView<Order> tableOrder;
     @FXML
-    private TableColumn<Product, Integer> table_id;
+    private TableColumn<Order,Integer> table_id;
     @FXML
-    private TableColumn<Product, String> table_productname;
+    private TableColumn<Order,Date> table_orderdate;
     @FXML
-    private TableColumn<Product, String> table_image;
+    private TableColumn<Order,Double> table_total;
     @FXML
-    private TableColumn<Product, Integer> table_stock;
-    @FXML
-    private TableColumn<Product, Double> table_price;
+    private TableColumn<Order,String> table_address;
     @FXML
     private TableColumn table_edit;
     @FXML
     private TableColumn table_delete;
-    @FXML
-    private Button gotoorder;
     
-    private ObservableList<Product> product_list;
-    
-    @FXML
-    private AnchorPane rootPane;
-
+    private ObservableList<Order> order_list;
     
     
-    
-    public void afficherProductsTableView() {
+        public void afficherOrdersTableView() {
         
-        ProductServices ps = new ProductServices();
+        OrderServices os = new OrderServices();
         
-        product_list = FXCollections.observableArrayList(ps.getAll());
+        order_list = FXCollections.observableArrayList(os.getAll());
         
         table_id.setCellValueFactory(new PropertyValueFactory<>("Id"));
-        table_productname.setCellValueFactory(new PropertyValueFactory<>("Product_name"));
-        table_image.setCellValueFactory(new PropertyValueFactory<>("Img"));
-        table_stock.setCellValueFactory(new PropertyValueFactory<>("Stock"));
-        table_price.setCellValueFactory(new PropertyValueFactory<>("Price"));
+        table_orderdate.setCellValueFactory(new PropertyValueFactory<>("Order_date"));
+        table_total.setCellValueFactory(new PropertyValueFactory<>("Total"));
+        table_address.setCellValueFactory(new PropertyValueFactory<>("Address"));
         
-        Callback<TableColumn<Product, String>, TableCell<Product, String>> cellFactory = (param) -> {
-            final TableCell<Product, String> cell = new TableCell<Product, String>() {
+        
+        Callback<TableColumn<Order, String>, TableCell<Order, String>> cellFactory = (param) -> {
+            final TableCell<Order, String> cell = new TableCell<Order, String>() {
                 @Override
                 public void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);
@@ -95,10 +79,10 @@ public class ShopController implements Initializable {
                     } else {
                         final Button deletebutton = new Button("Delete");
                         deletebutton.setOnAction(event -> {
-                            Product p = getTableView().getItems().get(getIndex());
-                            ProductServices ps = new ProductServices();
-                            product_list.remove(p);
-                            ps.deleteProduct(p.getId());
+                            Order o = getTableView().getItems().get(getIndex());
+                            OrderServices os = new OrderServices();
+                            order_list.remove(o);
+                            os.deleteOrder(o.getId());
                         });
 
                         
@@ -113,9 +97,8 @@ public class ShopController implements Initializable {
             
             return cell; //To change body of generated lambdas, choose Tools | Templates.
         };
-        
-        Callback<TableColumn<Product, String>, TableCell<Product, String>> cellFactory1 = (param) -> {
-            final TableCell<Product, String> cell = new TableCell<Product, String>() {
+        Callback<TableColumn<Order, String>, TableCell<Order, String>> cellFactory1 = (param) -> {
+            final TableCell<Order, String> cell = new TableCell<Order, String>() {
                 @Override
                 public void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);
@@ -126,23 +109,24 @@ public class ShopController implements Initializable {
                     } else {
                         final Button editbutton = new Button("Edit");
                         editbutton.setOnAction(event ->{
-                            Product pa = getTableView().getItems().get(getIndex());
+                            Order oa = getTableView().getItems().get(getIndex());
                             try {
-                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/EditProduct.fxml"));
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/EditOrder.fxml"));
                                 Parent second = loader.load();
                                 
-                                EditProductController secondcontroller = loader.getController();
-                                secondcontroller.modifiyproductbutton(pa);
+                                EditOrderController secondcontroller = loader.getController();
+                                secondcontroller.modifyorderbutton(oa);
                                 
                                 Scene s = new Scene(second);
                                 Stage stageedit = new Stage();
-                                stageedit.setTitle("Edit Product n° : "+pa.getId());
+                                stageedit.setTitle("Edit Order n° : "+oa.getId());
                                 stageedit.setScene(s);
                                 
                                 stageedit.show();
                                 
-                            } catch (IOException ex) {
-                                Logger.getLogger(ShopController.class.getName()).log(Level.SEVERE, null, ex);
+                                
+                           } catch (IOException ex) {
+                               Logger.getLogger(ShopController.class.getName()).log(Level.SEVERE, null, ex);
                             }
                              
                         });
@@ -159,39 +143,27 @@ public class ShopController implements Initializable {
             return cell; //To change body of generated lambdas, choose Tools | Templates.
         };
         
+        
+        
         table_delete.setCellFactory(cellFactory);
         table_edit.setCellFactory(cellFactory1);
         
         
-        tableProduct.setItems(product_list);
+        tableOrder.setItems(order_list);
         
     }
     
-    public void afficheraddproduct(){
-        
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/AddProduct.fxml"));
-            Parent third = loader.load();
-            Scene s = new Scene(third);
-            Stage stageadd = new Stage();
-            stageadd.setTitle("Add Product");
-            stageadd.setScene(s);
-                                
-        stageadd.show();
-        } catch (IOException ex) {
-            Logger.getLogger(ShopController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
     
-    public void gotoorderlist() throws IOException{
-            AnchorPane pane=FXMLLoader.load(getClass().getResource("/UI/Order.fxml"));
-            rootPane.getChildren().setAll(pane);
-    }
+    
+    
+    
+    
+    
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        afficherProductsTableView();
+       afficherOrdersTableView();
     }    
     
 }

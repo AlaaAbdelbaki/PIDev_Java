@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="pane" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.OrderController">
+    <stylesheets>
+        <URL value="@order.css" />
+    </stylesheets>
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6356e5" height="720.0" stroke="TRANSPARENT" strokeType="INSIDE" width="400.0">
+         <effect>
+            <DropShadow />
+         </effect>
+      </Rectangle>
+      <TableView fx:id="tableOrder" layoutX="427.0" layoutY="103.0" prefHeight="484.0" prefWidth="843.0">
+        <columns>
+          <TableColumn fx:id="table_id" prefWidth="105.0" text="Id" />
+          <TableColumn fx:id="table_orderdate" prefWidth="179.0" text="Order Date" />
+            <TableColumn fx:id="table_total" prefWidth="105.0" text="Total" />
+            <TableColumn fx:id="table_address" prefWidth="239.0" text="Address" />
+            <TableColumn fx:id="table_edit" prefWidth="105.0" text="Edit" />
+            <TableColumn fx:id="table_delete" prefWidth="109.0" text="Delete" />
+        </columns>
+      </TableView>
+      <Label fx:id="order_label" layoutX="749.0" layoutY="39.0" prefHeight="64.0" prefWidth="221.0" text="Orders List" textAlignment="CENTER" textFill="#55b3f3">
+         <font>
+            <Font name="System Bold" size="34.0" />
+         </font>
+      </Label>
+      <Button layoutX="774.0" layoutY="607.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="171.0" styleClass="button-add" text="Add Order">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
