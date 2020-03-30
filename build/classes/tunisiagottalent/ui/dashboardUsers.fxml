@@ -83,7 +83,7 @@
                   <Font name="Roboto Bold" size="21.0" />
                </font>
             </Label>
-            <Label fx:id="username2" layoutX="68.0" layoutY="32.0" onMouseClicked="#profile" prefHeight="54.0" prefWidth="312.0" styleClass="welcome" text="username">
+            <Label fx:id="username" layoutX="68.0" layoutY="32.0" onMouseClicked="#profile" prefHeight="54.0" prefWidth="312.0" styleClass="welcome" text="username">
                <font>
                   <Font name="Roboto Bold" size="21.0" />
                </font>
@@ -98,7 +98,7 @@
       </AnchorPane>
       <AnchorPane layoutX="400.0" prefHeight="720.0" prefWidth="880.0">
          <children>
-            <TextField fx:id="username" layoutX="204.0" layoutY="96.0" prefHeight="42.0" prefWidth="475.0" promptText="Username">
+            <TextField fx:id="usernameInput" layoutX="204.0" layoutY="96.0" onKeyReleased="#searchUser" prefHeight="42.0" prefWidth="475.0" promptText="Username">
                <font>
                   <Font size="19.0" />
                </font>

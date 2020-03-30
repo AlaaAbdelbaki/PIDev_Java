@@ -165,6 +165,31 @@ public class UserServices {
         return list;
     }
 
+    public List<User> getAll(String q) {
+        String req;
+        if (q.equals("")) {
+            req = "select * from user ";
+        } else {
+
+            req = "select * from user where username like '" + q + "%'";
+        }
+
+        List<User> list = new ArrayList<>();
+
+        try {
+            ste = cnx.createStatement();
+            rs = ste.executeQuery(req);
+            while (rs.next()) {
+                list.add(new User(rs.getInt("id"), rs.getString("username"), rs.getString("email"), rs.getString("sexe"), rs.getString("first_name"), rs.getString("name"), rs.getString("telephone_number"), rs.getDate("Birthday")));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return list;
+    }
+
     //Returns user role
     public String getRole(String username) {
         cnx = DataSource.getInstance().getCnx();

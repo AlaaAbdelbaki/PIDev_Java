@@ -29,9 +29,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -109,51 +112,52 @@ public class DashboardUsersController {
     private Label logout_label;
 
     @FXML
-    private Label username2;
+    private Label username;
+
+    @FXML
+    private TextField usernameInput;
 
     @FXML
     private ImageView home_icon;
 
     @FXML
     private Label home_label;
-    
+
     @FXML
-    private TableView <User> usersInfo = new TableView<User>();
-    
+    private TableView<User> usersInfo;
+
     @FXML
-    private TableColumn <User,Integer> userId;
-    
+    private TableColumn<User, Integer> userId;
+
     @FXML
-    private TableColumn <User,String> userUsername;
-    
+    private TableColumn<User, String> userUsername;
+
     @FXML
-    private TableColumn <User,String> userLastName;
-    
+    private TableColumn<User, String> userLastName;
+
     @FXML
-    private TableColumn <User,String> userFirstName;
-    
+    private TableColumn<User, String> userFirstName;
+
     @FXML
-    private TableColumn <User,Date> userBirthday;
-    
+    private TableColumn<User, Date> userBirthday;
+
     @FXML
-    private TableColumn <User,String> userEmail;
-    
+    private TableColumn<User, String> userEmail;
+
     @FXML
-    private TableColumn <User,String> userPhoneNumber;
-    
+    private TableColumn<User, String> userPhoneNumber;
+
     @FXML
-    private TableColumn <User,String> userGender;
-    
+    private TableColumn<User, String> userGender;
+
     @FXML
     private TableColumn videos;
-    
+
     @FXML
     private TableColumn delete;
-    
+
     private ObservableList<User> usersList;
-    
-    
-    
+
     @FXML
     void initialize() {
 
@@ -187,7 +191,7 @@ public class DashboardUsersController {
                 String data = s.nextLine();
 //                System.out.println(data);
                 String user = data.substring(0, data.indexOf(":"));
-                username2.setText(user);
+                username.setText(user);
 
             }
         } catch (FileNotFoundException ex) {
@@ -225,7 +229,7 @@ public class DashboardUsersController {
             Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @FXML
     void dashboard(MouseEvent event) {
         try {
@@ -235,13 +239,18 @@ public class DashboardUsersController {
         }
     }
 
-    void loadTreeView(){
+    @FXML
+    void searchUser(KeyEvent event) {
+        String query = usernameInput.getText();
+        loadTreeView(query);
+    }
+
+    void loadTreeView() {
         UserServices us = new UserServices();
-        
+
         usersList = FXCollections.observableArrayList(us.getAll());
-        
+
 //        usersList.forEach(System.out::println);
-        
         userId.setCellValueFactory(new PropertyValueFactory<>("id"));
         userUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
         userEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -250,17 +259,36 @@ public class DashboardUsersController {
         userFirstName.setCellValueFactory(new PropertyValueFactory<>("name"));
         userPhoneNumber.setCellValueFactory(new PropertyValueFactory<>("phone_number"));
         userBirthday.setCellValueFactory(new PropertyValueFactory<>("birthday"));
-        
+
         userId.setSortType(TableColumn.SortType.ASCENDING);
         userId.setSortable(true);
-        
-        
+
         usersInfo.setItems(usersList);
-        
-        
-        
-        
+
     }
+
+    void loadTreeView(String q) {
+        UserServices us = new UserServices();
+
+        usersList = FXCollections.observableArrayList(us.getAll(q));
+
+//        usersList.forEach(System.out::println);
+        userId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        userUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
+        userEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        userGender.setCellValueFactory(new PropertyValueFactory<>("gender"));
+        userLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        userFirstName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        userPhoneNumber.setCellValueFactory(new PropertyValueFactory<>("phone_number"));
+        userBirthday.setCellValueFactory(new PropertyValueFactory<>("birthday"));
+
+        userId.setSortType(TableColumn.SortType.ASCENDING);
+        userId.setSortable(true);
+
+        usersInfo.setItems(usersList);
+
+    }
+
     void fadeTransition(String scene) throws IOException {
 
         FadeTransition ft = new FadeTransition();
