@@ -5,10 +5,11 @@
  */
 package tunisiagottalent.ui;
 
+import java.awt.Image;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.sql.SQLException;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -19,63 +20,62 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import tunisiagottalent.entity.Updates;
-import tunisiagottalent.services.ServiceUpdates;
+import org.controlsfx.control.Notifications;
+import tunisiagottalent.entity.Article;
+import tunisiagottalent.services.ServiceArticle;
+//import javafx.util.Duration:
 
 /**
  * FXML Controller class
  *
  * @author ghassen
  */
-public class UpdatesListController implements Initializable {
+public class ArticleListController implements Initializable {
 
     @FXML
-    private TableColumn<Updates, String> colTitle;
+    private TableColumn<Article, String> colTitle;
     @FXML
-    private TableColumn<Updates, String> colimg;
+    private TableColumn<Article, String> colimg;
     @FXML
-    private TableColumn<Updates, String> colcategory;
-    @FXML
-    private TableColumn<Updates, Date> coldate;
-    @FXML
-    private TableColumn<Updates, String> colContent;
+    private TableColumn<Article, String> colContent;
     @FXML
     private Button RetourAction;
-    
-    List listp = new ArrayList();
-    Updates u = new Updates();
-    ServiceUpdates sp = new ServiceUpdates();
+
+      List listp = new ArrayList();
+    Article a ;
+    ServiceArticle sp = new ServiceArticle();
     @FXML
-    private TableView<Updates> ListUp;
+    private TableView<Article> ListArticle;
     @FXML
     private AnchorPane ContentPane;
+    @FXML
+    private Button supprimer;
 
     public void views() throws SQLException {  
       
         listp = sp.afficher();
-        ObservableList<Updates> l = FXCollections.observableArrayList(listp);  
+        ObservableList<Article> l = FXCollections.observableArrayList(listp);  
         colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         colimg.setCellValueFactory(new PropertyValueFactory<>("img"));
-        colcategory.setCellValueFactory(new PropertyValueFactory<>("category"));
-        coldate.setCellValueFactory(new PropertyValueFactory<>("publish_date"));
         colContent.setCellValueFactory(new PropertyValueFactory<>("content"));
         
         System.out.println("Perfect Saw !");
-        ListUp.setEditable(true);
-        ListUp.setItems(l);
+       ListArticle.setEditable(true);
+        ListArticle.setItems(l);
   }
-    
     /**
      * Initializes the controller class.
      */
-    @Override
+     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
            views();
@@ -87,11 +87,13 @@ public class UpdatesListController implements Initializable {
 
     @FXML
     private void btnRetourAction(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/tunisiagottalent/ui/Updates.fxml"));
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/tunisiagottalent/ui/Article.fxml"));
         ContentPane.getChildren().setAll(pane);
     }
+
+    @FXML
     private void btnSuppAction(ActionEvent event) throws SQLException {
-       Updates a = ListUp.getSelectionModel().getSelectedItem();
+       Article a = ListArticle.getSelectionModel().getSelectedItem();
         
         if (a == null) { 
            
@@ -110,16 +112,16 @@ public class UpdatesListController implements Initializable {
                                   n.show(); */
                                 }
         else{
-                ServiceUpdates Sp = new ServiceUpdates();
-                Updates t = new Updates(a.getId());
+                ServiceArticle Sp = new ServiceArticle();
+                Article t = new Article(a.getId());
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                               alert.setTitle("Confirmation ");
                               alert.setHeaderText(null);
-                              alert.setContentText("Vous voulez vraiment supprimer cet updates ");
+                              alert.setContentText("Vous voulez vraiment supprimer cet article ");
                               Optional<ButtonType> action = alert.showAndWait();
                               if (action.get() == ButtonType.OK) {
                                     Sp.supprimer(t);
                                    views();}
     } }}
-    
 
+    

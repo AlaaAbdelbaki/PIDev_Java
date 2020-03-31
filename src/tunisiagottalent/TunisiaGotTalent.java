@@ -22,12 +22,20 @@ public class TunisiaGotTalent extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/tunisiagottalent/ui/Updates.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/tunisiagottalent/ui/article.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
 
         primaryStage.show();
     }
+    
+    /* public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/tunisiagottalent/ui/Article.fxml"));
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+
+        primaryStage.show();
+    } */
     
      /**
      * @param args the command line arguments

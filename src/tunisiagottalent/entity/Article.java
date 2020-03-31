@@ -22,12 +22,24 @@ public class Article {
     public Article() {
     }
 
+    public Article(int id) {
+        this.id = id;
+    }
+
     public Article(int id, String title, String content, String img) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.img = img;
     }
+
+    public Article(String title, String img, String content) {
+        this.title = title;
+        this.img = img;
+        this.content = content;
+    }
+
+   
 
     public int getId() {
         return id;

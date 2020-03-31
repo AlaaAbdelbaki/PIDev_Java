@@ -46,6 +46,11 @@ public class Updates {
         this.publish_date= publish_date;
     }
 
+    public Updates(int id) {
+        this.id = id;
+    }
+
+    
     
 
  

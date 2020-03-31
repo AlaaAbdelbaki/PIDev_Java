@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="ContentPane" maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.ui.ArticleListController">
+   <children>
+      <TableView fx:id="ListArticle" layoutX="454.0" layoutY="171.0" prefHeight="200.0" prefWidth="305.0">
+        <columns>
+          <TableColumn fx:id="colTitle" prefWidth="75.0" text="Title" />
+          <TableColumn fx:id="colimg" prefWidth="75.0" text="Image" />
+            <TableColumn fx:id="colContent" prefWidth="75.0" text="Content" />
+        </columns>
+      </TableView>
+      <Button fx:id="RetourAction" layoutX="527.0" layoutY="456.0" mnemonicParsing="false" onAction="#btnRetourAction" prefHeight="31.0" prefWidth="89.0" text="Retour" />
+      <Button fx:id="supprimer" layoutX="670.0" layoutY="456.0" mnemonicParsing="false" onAction="#btnSuppAction" text="Supprimer" />
+   </children>
+</AnchorPane>

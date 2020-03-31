@@ -5,6 +5,9 @@
  */
 package tunisiagottalent.ui;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.Initializable;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -21,30 +24,31 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import tunisiagottalent.entity.Updates;
-import tunisiagottalent.services.ServiceUpdates;
+import tunisiagottalent.entity.Article;
+
+import tunisiagottalent.services.ServiceArticle;
+
 
 /**
  * FXML Controller class
  *
- * @author 
+ * @author ghassen
  */
-public class UpdatesController implements Initializable {
-
+public class ArticleController implements Initializable {
     @FXML
-    private AnchorPane ContentPane;
+    private AnchorPane articlePane;
     @FXML
     private TextField title;
     @FXML
     private TextField img;
     @FXML
-    private ComboBox<String> category;
-    @FXML
     private TextField content;
     @FXML
-    private DatePicker datepub;
-    @FXML
     private Button ValiderAction;
+    @FXML
+    private Button RetourAction;
+    @FXML
+    private Button affichage;
 
     /**
      * Initializes the controller class.
@@ -56,8 +60,8 @@ public class UpdatesController implements Initializable {
 
     @FXML
     private void btnValiderAction(ActionEvent event) throws IOException {
-         
-        Date publish_date = new Date(datepub.getValue().getYear()-1900, datepub.getValue().getMonthValue()-1, datepub.getValue().getDayOfMonth());
+          
+   
         boolean test = false;
         
         if (title.getText().equals("")) {
@@ -89,29 +93,27 @@ public class UpdatesController implements Initializable {
         
         
         else{
-         /*   
-        ObservableList<String> options = 
-        FXCollections.observableArrayList(
-        "Music",
-        "Sport");
-        final ComboBox comboBox = new ComboBox(options); 
-        category.setItems(options);
-*/
-        //Updates u = new Updates(title.getText(),img.getText(),category.getSelectionModel().getSelectedItem(),publish_date,content.getText());
-        Updates u = new Updates(title.getText(),img.getText(),category.getSelectionModel().getSelectedItem(),publish_date,content.getText());
-        ServiceUpdates p = new ServiceUpdates();
-        p.ajouter(u);
+        
+       Article a = new Article(title.getText(),img.getText(),content.getText());
+        ServiceArticle p = new ServiceArticle();
+        p.ajouter(a);
         System.out.println("*************DONE**************");
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Done ");
-        alert.setHeaderText("Updates bien ajouté  ");
+        alert.setHeaderText("Article bien ajouté  ");
         alert.showAndWait();
         test = false;
         
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/tunisiagottalent/ui/UpdatesList.fxml"));
-        ContentPane.getChildren().setAll(pane);
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/tunisiagottalent/ui/ArticleList.fxml"));
+        articlePane.getChildren().setAll(pane);
         }
         
+    }
+
+    @FXML
+    private void btnAffichageAction(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/tunisiagottalent/ui/ArticleList.fxml"));
+        articlePane.getChildren().setAll(pane);
     }
     
 }

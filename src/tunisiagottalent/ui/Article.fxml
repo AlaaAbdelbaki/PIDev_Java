@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="articlePane" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.ui.ArticleController">
+   <children>
+      <TextField fx:id="title" layoutX="665.0" layoutY="157.0" />
+      <TextField fx:id="img" layoutX="665.0" layoutY="222.0" />
+      <TextField fx:id="content" layoutX="665.0" layoutY="298.0" />
+      <Button fx:id="ValiderAction" layoutX="681.0" layoutY="420.0" mnemonicParsing="false" onAction="#btnValiderAction" text="valider" />
+      <Text layoutX="557.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" wrappingWidth="95.0517578125" />
+      <Text layoutX="551.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image" />
+      <Text layoutX="557.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Content" />
+      <Button fx:id="RetourAction" layoutX="820.0" layoutY="420.0" mnemonicParsing="false" text="retour" />
+      <Button fx:id="affichage" layoutX="759.0" layoutY="475.0" mnemonicParsing="false" onAction="#btnAffichageAction" text="affichage" />
+   </children>
+</AnchorPane>
