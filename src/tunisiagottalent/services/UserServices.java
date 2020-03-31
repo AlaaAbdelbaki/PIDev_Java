@@ -155,7 +155,7 @@ public class UserServices {
             ste = cnx.createStatement();
             rs = ste.executeQuery(req);
             while (rs.next()) {
-                list.add(new User(rs.getInt("id"), rs.getString("username"), rs.getString("email"), rs.getString("sexe"), rs.getString("first_name"), rs.getString("name"), rs.getString("telephone_number"), rs.getDate("Birthday")));
+                list.add(new User(rs.getInt("id"),rs.getString("username"),rs.getString("email"),rs.getString("password"),rs.getString("sexe"),rs.getString("adresse"),rs.getString("first_name"),rs.getString("name"),rs.getString("bio"),rs.getString("telephone_number"),rs.getString("profile_pic"),rs.getDate("Birthday")));
             }
 
         } catch (SQLException ex) {
@@ -180,7 +180,7 @@ public class UserServices {
             ste = cnx.createStatement();
             rs = ste.executeQuery(req);
             while (rs.next()) {
-                list.add(new User(rs.getInt("id"), rs.getString("username"), rs.getString("email"), rs.getString("sexe"), rs.getString("first_name"), rs.getString("name"), rs.getString("telephone_number"), rs.getDate("Birthday")));
+                list.add(new User(rs.getInt("id"),rs.getString("username"),rs.getString("email"),rs.getString("password"),rs.getString("sexe"),rs.getString("adresse"),rs.getString("first_name"),rs.getString("name"),rs.getString("bio"),rs.getString("telephone_number"),rs.getString("profile_pic"),rs.getDate("Birthday")));
             }
 
         } catch (SQLException ex) {
@@ -218,6 +218,7 @@ public class UserServices {
             rs = ste.executeQuery(req);
 
             while (rs.next()) {
+                u.setId(rs.getInt("id"));
                 u.setUsername(rs.getString("username"));
                 u.setName(rs.getString("first_name"));
                 u.setLastName(rs.getString("name"));

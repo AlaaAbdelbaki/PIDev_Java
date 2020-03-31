@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -25,7 +26,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -40,6 +45,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import javafx.util.Duration;
 import tunisiagottalent.entity.User;
 import tunisiagottalent.services.UserServices;
@@ -260,9 +266,49 @@ public class DashboardUsersController {
         userPhoneNumber.setCellValueFactory(new PropertyValueFactory<>("phone_number"));
         userBirthday.setCellValueFactory(new PropertyValueFactory<>("birthday"));
 
+        Callback<TableColumn<User, String>, TableCell<User, String>> cellFactory = (param) -> {
+            final TableCell<User, String> cell = new TableCell<User, String>() {
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+                    } else {
+                        final Button deletebutton = new Button("Delete");
+                        deletebutton.getStyleClass().add("delete");
+                        deletebutton.setOnAction(event -> {
+                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                            alert.setTitle("Warning");
+                            alert.setHeaderText(null);
+                            alert.setContentText("This action once done is irriversible are you sure you want to proceed ?");
+                            Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+                            stage.getIcons().add(new Image("/tunisiagottalent/ui/img/icon.png"));
+                            Optional<ButtonType> result = alert.showAndWait();
+                            if (result.get() == ButtonType.OK){
+                                User u = getTableView().getItems().get(getIndex());
+                                usersList.remove(u);
+                                us.delete(u.getUsername());
+                            }
+                        });
+
+                        setGraphic(deletebutton);
+                        setText(null);
+
+                    }
+
+                }
+            ;
+
+            };
+            
+            return cell; //To change body of generated lambdas, choose Tools | Templates.
+        };
+
         userId.setSortType(TableColumn.SortType.ASCENDING);
         userId.setSortable(true);
-
+        delete.setCellFactory(cellFactory);
         usersInfo.setItems(usersList);
 
     }
@@ -282,8 +328,39 @@ public class DashboardUsersController {
         userPhoneNumber.setCellValueFactory(new PropertyValueFactory<>("phone_number"));
         userBirthday.setCellValueFactory(new PropertyValueFactory<>("birthday"));
 
+        Callback<TableColumn<User, String>, TableCell<User, String>> cellFactory = (param) -> {
+            final TableCell<User, String> cell = new TableCell<User, String>() {
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+                    } else {
+                        final Button deletebutton = new Button("Delete");
+                        deletebutton.getStyleClass().add("delete");
+                        deletebutton.setOnAction(event -> {
+                            User u = getTableView().getItems().get(getIndex());
+                            usersList.remove(u);
+                            us.delete(u.getUsername());
+                        });
+
+                        setGraphic(deletebutton);
+                        setText(null);
+
+                    }
+
+                }
+            ;
+
+            };
+            
+            return cell;
+        };
         userId.setSortType(TableColumn.SortType.ASCENDING);
         userId.setSortable(true);
+        delete.setCellFactory(cellFactory);
 
         usersInfo.setItems(usersList);
 

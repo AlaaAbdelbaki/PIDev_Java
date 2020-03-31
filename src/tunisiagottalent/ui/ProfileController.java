@@ -10,6 +10,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -23,16 +25,21 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import tunisiagottalent.entity.User;
+import tunisiagottalent.entity.Video;
 import tunisiagottalent.services.UserServices;
+import tunisiagottalent.services.VideoServices;
 
 /**
  * FXML Controller class
@@ -128,6 +135,10 @@ public class ProfileController {
     @FXML
     private Button edit;
     
+    @FXML
+    private ScrollPane videos_Container;
+    
+    
     
     
 
@@ -137,6 +148,7 @@ public class ProfileController {
         rootPane.setOpacity(0);
         fadein();
         loadInfo();
+        loadVideos();
         System.out.println("Profile loaded ! ");
 
     }
@@ -227,6 +239,35 @@ public class ProfileController {
             Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+            
+    
+    
+    void loadVideos(){
+        
+        VideoServices vs = new VideoServices();
+        UserServices us = new UserServices();
+        List<Video> videos;
+        System.out.println("entered here");
+//        System.out.println(us.getUser(username_profile.getText()).getId());
+        videos = vs.getVideos(us.getUser(username_profile.getText()).getId());
+//        System.out.println(videos.size());
+        VBox root = new VBox();
+        videos.forEach((v)->{
+//            System.out.println(v);
+            Label title = new Label();
+            title.getStyleClass().add("video_title");
+            title.setText(v.getTitle());
+            WebView video = new WebView();
+            video.setPrefHeight(380);
+            video.setPrefWidth(680);
+            video.getEngine().loadContent("<iframe width=\"640\" height=\"360\" src=\""+v.getUrl()+"\\ frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>");
+            
+            root.getChildren().addAll(title,video);
+            videos_Container.setContent(root);
+        });
+    }
+            
+            
             
     void fadeTransition(String scene) throws IOException {
 

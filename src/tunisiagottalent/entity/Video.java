@@ -12,17 +12,24 @@ import java.sql.Date;
  * @author alaa
  */
 public class Video {
-    
+
+    private int id;
     private String url;
     private String title;
     private Date date;
     private int userId;
 
-    public Video(String url, String title, Date date, int userId) {
+    public Video(int id, String url, String title, Date date, int userId) {
+        
+        this.id = id;
         this.url = url;
         this.title = title;
         this.date = date;
         this.userId = userId;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getUrl() {
@@ -57,12 +64,13 @@ public class Video {
         this.userId = userId;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Video{" + "url=" + url + ", title=" + title + ", date=" + date + ", userId=" + userId + '}';
     }
-    
-    
-    
-    
+
 }

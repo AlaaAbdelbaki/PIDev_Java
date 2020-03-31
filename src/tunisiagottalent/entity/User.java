@@ -29,29 +29,28 @@ public class User {
     public User() {
     }
 
-    public User(int id, String username, String email, String gender, String name, String lastName, String phone_number, Date birthday) {
+    public User(int id, String username, String email, String password, String gender, String address, String name, String lastName, String bio, String phone_number, String profilePic, Date birthday) {
         this.id = id;
         this.username = username;
         this.email = email;
-        this.gender = gender;
-        this.name = name;
-        this.lastName = lastName;
-        this.phone_number = phone_number;
-        this.birthday = birthday;
-    }
-
-
-    public User(String username, String email, String password, String address, String name, String lastName, String bio, String phone_number) {
-        this.username = username;
-        this.email = email;
         this.password = password;
+        this.gender = gender;
         this.address = address;
         this.name = name;
         this.lastName = lastName;
         this.bio = bio;
         this.phone_number = phone_number;
+        this.profilePic = profilePic;
+        this.birthday = birthday;
     }
 
+    //for Signup
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+    //for edit profile
     public User(String username, String email, String password, String gender, String address, String name, String lastName, String bio, String phone_number, Date birthday) {
         this.username = username;
         this.email = email;
@@ -65,33 +64,7 @@ public class User {
         this.birthday = birthday;
     }
 
-    public User(String username) {
-        this.username = username;
-    }
-
-    public User(String username, String email, String password) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
-
-    public User(String username, String email, String password, String name, String lastName) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.name = name;
-        this.lastName = lastName;
-    }
-
-    public User(String username, String email, String gender, String address, String name, String lastName, String phone_number) {
-        this.username = username;
-        this.email = email;
-        this.gender = gender;
-        this.address = address;
-        this.name = name;
-        this.lastName = lastName;
-        this.phone_number = phone_number;
-    }
+    
 
     @Override
     public String toString() {

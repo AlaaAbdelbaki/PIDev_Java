@@ -65,3 +65,11 @@
     -fx-text-fill: white;
     -fx-cursor:hand;
 }
+
+.video_title{
+    -fx-text-fill:black;
+    -fx-font-size:24px;
+    -fx-font-family: "Roboto Bold";
+}
+
+

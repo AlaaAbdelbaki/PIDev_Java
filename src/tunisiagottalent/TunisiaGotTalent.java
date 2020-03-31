@@ -19,7 +19,9 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import tunisiagottalent.entity.User;
+import tunisiagottalent.entity.Video;
 import tunisiagottalent.services.UserServices;
+import tunisiagottalent.services.VideoServices;
 import tunisiagottalent.util.DataSource;
 
 /**
@@ -38,7 +40,7 @@ public class TunisiaGotTalent extends Application {
         stage.setTitle("Tunisia Got Talent");
 
 //        Parent root = FXMLLoader.load(getClass().getResource("/tunisiagottalent/ui/homepage.fxml"));
-        Parent root = FXMLLoader.load(getClass().getResource("/tunisiagottalent/ui/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/tunisiagottalent/ui/homepage.fxml"));
 
         Scene scene = new Scene(root, 1280, 720);
         stage.initStyle(StageStyle.UNDECORATED);
@@ -66,7 +68,12 @@ public class TunisiaGotTalent extends Application {
 //        x.signup(u);
 //
 //        x.getAll().forEach(System.out::println);
-
+//        VideoServices vs = new VideoServices();
+//        List<Video> video = new ArrayList<>();
+//        video = vs.getVideos(1);
+//        vs.getVideos(1).forEach(System.out::println);
+//        
+//        System.out.println(video.size());
         Application.launch(args);
 //        User u = new User("alaa","alaa","alaa");
 

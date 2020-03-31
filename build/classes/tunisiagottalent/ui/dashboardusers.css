@@ -34,3 +34,21 @@
     -fx-cursor:hand;
 }
 
+.delete{
+    -fx-font-family: "Roboto Bold";
+    -fx-background-color: #ca3435;
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-cursor:hand;
+}
+
+.delete:pressed{
+    -fx-font-family: "Roboto Bold";
+    -fx-background-color: #a82a2b;
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-cursor:hand;
+}
+
