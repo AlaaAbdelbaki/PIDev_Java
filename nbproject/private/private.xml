@@ -3,10 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/paspo/Desktop/PIDev_java/PIDev_Java/src/UI/OrderController.java</file>
-            <file>file:/C:/Users/paspo/Desktop/PIDev_java/PIDev_Java/src/UI/EditProductController.java</file>
-            <file>file:/C:/Users/paspo/Desktop/PIDev_java/PIDev_Java/src/UI/EditOrderController.java</file>
-            <file>file:/C:/Users/paspo/Desktop/PIDev_java/PIDev_Java/src/services/OrderServices.java</file>
+            <file>file:/C:/Users/paspo/Desktop/PIDev_java/PIDev_Java/src/UI/ShoppingCartController.java</file>
+            <file>file:/C:/Users/paspo/Desktop/PIDev_java/PIDev_Java/src/UI/ViewItemDetailsController.java</file>
+            <file>file:/C:/Users/paspo/Desktop/PIDev_java/PIDev_Java/src/UI/ShopController.java</file>
+            <file>file:/C:/Users/paspo/Desktop/PIDev_java/PIDev_Java/src/tunisiansgottalent/TunisiansGotTalent.java</file>
+            <file>file:/C:/Users/paspo/Desktop/PIDev_java/PIDev_Java/src/UI/ShopViewController.java</file>
+            <file>file:/C:/Users/paspo/Desktop/PIDev_java/PIDev_Java/src/Entity/ShoppingCart.java</file>
         </group>
     </open-files>
 </project-private>

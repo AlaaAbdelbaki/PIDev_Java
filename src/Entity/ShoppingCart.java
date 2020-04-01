@@ -7,18 +7,20 @@ package Entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 /**
  *
  * @author paspo
  */
 public class ShoppingCart implements Serializable{
-    private ArrayList<Product> items;
+    private ObservableList<Product> items;
     
     public ShoppingCart(){
-        items = new ArrayList<Product>();
+        items = FXCollections.observableArrayList();
     }
     
-    public ArrayList<Product> getItems(){
+    public ObservableList<Product> getItems(){
         return items;
     }
     

@@ -5,6 +5,8 @@
  */
 package Entity;
 
+import javafx.scene.image.ImageView;
+
 /**
  *
  * @author paspo

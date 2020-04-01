@@ -67,7 +67,8 @@ public class ShopController implements Initializable {
     
     @FXML
     private AnchorPane rootPane;
-
+    @FXML
+    private Button home_shop;
     
     
     
@@ -186,6 +187,11 @@ public class ShopController implements Initializable {
     
     public void gotoorderlist() throws IOException{
             AnchorPane pane=FXMLLoader.load(getClass().getResource("/UI/Order.fxml"));
+            rootPane.getChildren().setAll(pane);
+    }
+    
+    public void gotohomeshop() throws IOException{
+            AnchorPane pane=FXMLLoader.load(getClass().getResource("/UI/ShopView.fxml"));
             rootPane.getChildren().setAll(pane);
     }
     

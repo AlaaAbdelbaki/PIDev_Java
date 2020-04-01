@@ -38,5 +38,6 @@
          </font>
       </Button>
       <Button fx:id="gotoorder" layoutX="1141.0" layoutY="43.0" mnemonicParsing="false" onAction="#gotoorderlist" styleClass="button-add" text="Orders" />
+      <Button fx:id="home_shop" layoutX="464.0" layoutY="43.0" mnemonicParsing="false" onAction="#gotohomeshop" text="Shop Home" />
    </children>
 </AnchorPane>
