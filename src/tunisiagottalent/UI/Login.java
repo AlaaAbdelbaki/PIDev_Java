@@ -137,13 +137,12 @@
                 case 1: {
 
                     UserServices us = new UserServices();
-                    UserSession session=new UserSession(us.getByUsername(user));
-                    System.out.println(session);
-                    FileWriter f = new FileWriter("info.dat");
-                    String role = us.getRole(user);
-                    f.write(user + "::" + role);
-                    f.close();
-                    fadeTransition("Admin_Competitions");
+                    UserSession.getInstance(us.getByUsername(user));
+                    System.out.println(us.getByUsername(user));
+                   
+                   // fadeTransition("Admin_Competitions");
+                    fadeTransition("User_Competitions");
+
                     //Sessions using usersessions class
                     //UserSession.getInstace(user,roles.add(us.getRole(user))));
 

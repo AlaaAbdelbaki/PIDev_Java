@@ -4,9 +4,15 @@ import tunisiagottalent.Entity.User;
 
 public final class UserSession {
 
-    private static UserSession instance;
+    public static UserSession instance;
 
     private User u;
+
+    public User getU() {
+        return u;
+    }
+
+   
 
     @Override
     public String toString() {
@@ -27,7 +33,7 @@ public final class UserSession {
         return instance;
     }
 
-
+    
 
     public void cleanUserSession() {
         instance=null;

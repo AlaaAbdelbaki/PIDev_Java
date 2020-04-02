@@ -1,5 +1,10 @@
 package tunisiagottalent.Entity;
 public class User {
+    int id;
+
+    public int getId() {
+        return id;
+    }
     String username;
     String email;
     String password;
@@ -9,6 +14,15 @@ public class User {
     String lastName;
     String bio;
     String phone_number;
+    String Role;
+
+    public String getRole() {
+        return Role;
+    }
+
+    public void setRole(String Role) {
+        this.Role = Role;
+    }
 
     public User(String username, String email, String password, String name, String lastName) {
         this.username = username;
@@ -18,7 +32,7 @@ public class User {
         this.lastName = lastName;
     }
 
-    public User(String username, String email, String gender, String address, String name, String lastName, String phone_number) {
+    public User(String username, String email, String gender, String address, String name, String lastName, String phone_number,String Role) {
         this.username = username;
         this.email = email;
         this.gender = gender;
@@ -26,13 +40,15 @@ public class User {
         this.name = name;
         this.lastName = lastName;
         this.phone_number = phone_number;
+        this.Role=Role;
     }
 
     @Override
     public String toString() {
-        return "User{" + "username=" + username + ", email=" + email + ", gender=" + gender + ", address=" + address + ", name=" + name + ", lastName=" + lastName + ", bio=" + bio + ", phone_number=" + phone_number + '}';
+        return "User{" + "id=" + id + ", username=" + username + ", email=" + email + ", password=" + password + ", gender=" + gender + ", address=" + address + ", name=" + name + ", lastName=" + lastName + ", bio=" + bio + ", phone_number=" + phone_number + ", Role=" + Role + '}';
     }
 
+    
 
     public String getUsername() {
         return username;
