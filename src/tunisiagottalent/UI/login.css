@@ -3,7 +3,13 @@
     /*
      * Empty Stylesheet file.
      */
-
+    
+    .main{
+        -fx-background-color:white;
+        -fx-effect:dropshadow(gaussian,red,2,0,0,0);
+        -fx-background-insets:2;
+    }
+/*
 
 .mainFxmlClass {
 
@@ -50,4 +56,4 @@
     -fx-cursor:hand;
 
 }
-
+*/

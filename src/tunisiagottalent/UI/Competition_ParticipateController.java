@@ -58,7 +58,7 @@ public class Competition_ParticipateController {
     
         @FXML
     void previewVideo(MouseEvent event) {
-    //   preview.getEngine().loadContent("<iframe src=\"https://player.vimeo.com/video/"+url.getText().substring(18)+"\" width=\"640\" height=\"360\" frameborder=\"0\" allow=\"autoplay; fullscreen\" allowfullscreen></iframe>");
+       preview.getEngine().load(url.getText());
         
             
     }

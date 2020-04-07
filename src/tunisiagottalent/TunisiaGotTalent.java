@@ -37,33 +37,16 @@ public class TunisiaGotTalent extends Application {
     private double yOffset = 0;
     @Override
     public void start(Stage stage) throws Exception {
-        Font.loadFont(TunisiaGotTalent.class.getResource("/tunisiagottalent/UI/fonts/Roboto-Bold.ttf").toExternalForm(), 10);
         stage.getIcons().add(new Image("/tunisiagottalent/UI/img/icon.png"));
-        stage.setTitle("Tunisia Got Talnet");
+        stage.setTitle("Tunisia Got Talent");
 
-        Parent root = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/main.fxml"));
 
         Scene scene = new Scene(root, 1280, 720);
-        stage.initStyle(StageStyle.UNDECORATED);
-
-        root.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                xOffset = event.getSceneX();
-                yOffset = event.getSceneY();
-            }
-        });
-        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                stage.setX(event.getScreenX() - xOffset);
-                stage.setY(event.getScreenY() - yOffset);
-            }
-        });
-
+        //stage.initStyle(StageStyle.UNDECORATED);
 
         stage.setScene(scene);
-//        stage.setResizable(false);
+       stage.setResizable(false);
         stage.show();
     }
 }

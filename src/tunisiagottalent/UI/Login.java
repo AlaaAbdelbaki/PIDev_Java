@@ -1,6 +1,9 @@
 
         package tunisiagottalent.UI;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.JFXHamburger;
         import java.io.FileWriter;
         import java.io.IOException;
         import java.net.URL;
@@ -26,6 +29,7 @@
         import javafx.scene.control.PasswordField;
         import javafx.scene.control.TextField;
         import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
         import javafx.scene.layout.AnchorPane;
         import javafx.scene.layout.StackPane;
         import javafx.stage.Stage;
@@ -59,8 +63,15 @@
     private StackPane parentContainer;
 
     @FXML
-    private AnchorPane anchorRoot;
-
+    private AnchorPane login_anchor;
+    @FXML
+    private JFXButton btn_close;
+    @FXML
+    void close(ActionEvent event){
+        Stage stage=(Stage) login_anchor.getScene().getWindow();
+        stage.close();
+    }
+/*
     @FXML
     void signup(ActionEvent event) throws IOException {
 
@@ -111,7 +122,7 @@
         ft.play();
 
     }
-
+*/
     @FXML
     void login(ActionEvent event) throws IOException {
 
@@ -137,15 +148,30 @@
                 case 1: {
 
                     UserServices us = new UserServices();
-                    UserSession.getInstance(us.getByUsername(user));
-                    System.out.println(us.getByUsername(user));
+                   UserSession z= UserSession.getInstance(us.getByUsername(user));
+                    
                    
-                   // fadeTransition("Admin_Competitions");
-                    fadeTransition("User_Competitions");
-
-                    //Sessions using usersessions class
-                    //UserSession.getInstace(user,roles.add(us.getRole(user))));
-
+                    Stage stage=(Stage) login_anchor.getScene().getWindow();
+                    
+                    Scene s=stage.getOwner().getScene();
+                    System.out.println(s);
+                    JFXButton l=(JFXButton)s.lookup("#btn_login");
+                    JFXButton b=(JFXButton)s.lookup("#btn_signup");
+                    JFXButton b2=(JFXButton)s.lookup("#btn_logout");
+                    JFXButton d=(JFXButton)s.lookup("#btn_dashboard");
+                    JFXHamburger j= (JFXHamburger)s.lookup("#hamburger");
+                    JFXDrawer e=(JFXDrawer)s.lookup("#drawer");
+                    e.open();
+                    
+                    j.setDisable(false);
+                    
+                    b.setVisible(false);
+                    b2.setVisible(true);
+                    l.setVisible(false);
+                    if (z.getU().getRole().contains("ROLE_ADMIN")){
+                        d.setVisible(true);
+                    }
+                    stage.close();
                     break;
                 }
                 //Username not found
@@ -182,10 +208,7 @@
 
     @FXML
     void initialize() {
-        assert signup != null : "fx:id=\"signup\" was not injected: check your FXML file 'login.fxml'.";
-        assert login != null : "fx:id=\"login\" was not injected: check your FXML file 'login.fxml'.";
-        assert username != null : "fx:id=\"username\" was not injected: check your FXML file 'login.fxml'.";
-        assert password != null : "fx:id=\"password\" was not injected: check your FXML file 'login.fxml'.";
+       
 
     }
 }
