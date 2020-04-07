@@ -37,7 +37,7 @@ public class Updates {
     
     
 
-    public Updates (int id, String title, String content, String img, Date publish_date,String category ) {
+    public Updates (int id, String title, String img, String category , Date publish_date,String content ) {
         this.id = id;
         this.title = title;
         this.content = content;

@@ -26,11 +26,12 @@ public class Article {
         this.id = id;
     }
 
-    public Article(int id, String title, String content, String img) {
+    public Article(int id, String title, String img, String content) {
         this.id = id;
         this.title = title;
+         this.img = img;
         this.content = content;
-        this.img = img;
+       
     }
 
     public Article(String title, String img, String content) {
@@ -72,10 +73,13 @@ public class Article {
     public void setImg(String img) {
         this.img = img;
     }
+
     @Override
     public String toString() {
-        return "Article{" + "id=" + id + ", title=" + title + ", content=" + content + ", img=" + img + '}';
+        return "Article{" + "id=" + id + ", title=" + title + ", img=" + img + ", content=" + content + '}';
     }
+    
+    
 
     public String getTitleArticle() {
         return title;

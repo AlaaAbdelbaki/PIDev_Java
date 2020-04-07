@@ -99,8 +99,8 @@ public class UpdatesController implements Initializable {
 */
         //Updates u = new Updates(title.getText(),img.getText(),category.getSelectionModel().getSelectedItem(),publish_date,content.getText());
         Updates u = new Updates(title.getText(),img.getText(),category.getSelectionModel().getSelectedItem(),publish_date,content.getText());
-        ServiceUpdates p = new ServiceUpdates();
-        p.ajouter(u);
+        ServiceUpdates sp = new ServiceUpdates();
+        sp.ajouter(u);
         System.out.println("*************DONE**************");
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Done ");

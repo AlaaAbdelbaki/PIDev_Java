@@ -14,8 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,12 +29,24 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import org.controlsfx.control.Notifications;
 import tunisiagottalent.entity.Article;
 import tunisiagottalent.services.ServiceArticle;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.event.Event;
+
+
 //import javafx.util.Duration:
 
 /**
@@ -51,15 +66,29 @@ public class ArticleListController implements Initializable {
     private Button RetourAction;
 
       List listp = new ArrayList();
-    Article a ;
+    Article u = new Article();
     ServiceArticle sp = new ServiceArticle();
+ 
+    public ObservableList<Article> list = FXCollections.observableArrayList(sp.afficher());
+    
     @FXML
     private TableView<Article> ListArticle;
     @FXML
     private AnchorPane ContentPane;
     @FXML
     private Button supprimer;
-
+    @FXML
+    private TextField UpTitle;
+    @FXML
+    private TextField UpImg;
+    @FXML
+    private TextField UpContent;
+    @FXML
+    private Button modifier;
+    private int current_id;
+    @FXML
+    private TextField search;
+    
     public void views() throws SQLException {  
       
         listp = sp.afficher();
@@ -68,7 +97,7 @@ public class ArticleListController implements Initializable {
         colimg.setCellValueFactory(new PropertyValueFactory<>("img"));
         colContent.setCellValueFactory(new PropertyValueFactory<>("content"));
         
-        System.out.println("Perfect Saw !");
+        System.out.println("Perfect!");
        ListArticle.setEditable(true);
         ListArticle.setItems(l);
   }
@@ -82,7 +111,46 @@ public class ArticleListController implements Initializable {
         
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
-        } 
+     } 
+        FilteredList<Article> filteredData = new FilteredList<>(list, u -> true);
+        search.setOnKeyReleased(u -> {
+            search.textProperty().addListener((ObservableValue, oldValue, newValue) -> {
+                filteredData.setPredicate((Predicate<? super Article>) Article -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+                    String lower = newValue.toLowerCase();
+                    if (Article.getTitle().toLowerCase().contains(lower)) {
+                        return true;
+                    }
+                    return false;
+                });
+            });
+            SortedList<Article> sortedData = new SortedList<>(filteredData);
+            sortedData.comparatorProperty().bind(ListArticle.comparatorProperty());
+            ListArticle.setItems(sortedData);
+        });
+        
+        ListArticle.setOnKeyReleased((KeyEvent e) -> {
+             if (e.getCode() == KeyCode.UP || e.getCode() == KeyCode.DOWN) {
+                 
+                 Article rowData = ListArticle.getSelectionModel().getSelectedItem();
+                 /**
+                  * fill the fields with the selected data *
+                  */
+                 //Event et = ComTitre.getSelectionModel().getSelectedItem();
+                 // LocalDate df= Updatec.getValue();
+                 
+                 
+                 UpTitle.setText(rowData.getTitle());
+                  UpImg.setText(rowData.getImg());
+                 UpContent.setText(rowData.getContent());
+                 
+                 current_id = rowData.getId();
+                 
+             }
+        });
+         
     }    
 
     @FXML
@@ -122,6 +190,24 @@ public class ArticleListController implements Initializable {
                               if (action.get() == ButtonType.OK) {
                                     Sp.supprimer(t);
                                    views();}
-    } }}
+    } }
+
+    @FXML
+     private void btnModifAction(ActionEvent event) throws IOException {
+        ServiceArticle ps = new ServiceArticle();
+           
+           Article a=new Article(current_id,UpTitle.getText(),UpImg.getText(),UpContent.getText());
+            ps.modifier(a);
+            AnchorPane redirected;
+                        redirected = FXMLLoader.load(getClass().getResource("/tunisiagottalent/ui/ArticleList.fxml")); 
+                        ContentPane.getChildren().setAll(redirected);
+            /**
+             * refreshing the table view *
+             */
+          
+            ListArticle.setItems(list);
+                        
+    }
+}
 
     

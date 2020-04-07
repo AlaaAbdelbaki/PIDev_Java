@@ -56,12 +56,12 @@ public class ServiceArticle implements IService<Article>{
     public void modifier(Article t) {
         
             try {
-            String requete = "UPDATE article SET Title=?,content=?,img=? WHERE id=?";
+            String requete = "UPDATE article SET Title=?,img=?,content=? WHERE id=?";
                    
             PreparedStatement pst = cnx.prepareStatement(requete);   
             pst.setString(1, t.getTitleArticle());
-            pst.setString(2, t.getContentArticle());
-            pst.setString(3, t.getImgArticle());
+            pst.setString(2, t.getImgArticle());
+            pst.setString(3, t.getContentArticle());
             pst.setInt(4, t.getId());
             pst.executeUpdate();
             System.out.println("Article modifié !");

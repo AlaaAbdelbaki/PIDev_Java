@@ -22,7 +22,7 @@ public class TunisiaGotTalent extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/tunisiagottalent/ui/article.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/tunisiagottalent/ui/UpdatesList.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
 

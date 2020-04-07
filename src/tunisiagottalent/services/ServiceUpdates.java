@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import tunisiagottalent.entity.Article;
 
 /**
  *
@@ -56,14 +57,14 @@ public class ServiceUpdates implements IService<Updates>{
     public void modifier(Updates t) {
         
             try {
-            String requete = "UPDATE updates SET Title=?,content=?,img=?,category=?,publish_date=? WHERE id=?";
+            String requete = "UPDATE updates SET Title=?,img=?,category=?,publish_date=?,content=? WHERE id=?";
                    
             PreparedStatement pst = cnx.prepareStatement(requete);   
             pst.setString(1, t.getTitle());
-            pst.setString(2, t.getContent());
-            pst.setString(3, t.getImg());
-            pst.setString(4, t.getCategory());
-            pst.setDate(5,t.getPublish_date());
+            pst.setString(2, t.getImg());
+            pst.setString(3, t.getCategory());
+            pst.setDate(4,t.getPublish_date());
+            pst.setString(5, t.getContent());
             pst.setInt(6,t.getId());
             pst.executeUpdate();
             System.out.println("Updates modifié !");
@@ -90,6 +91,8 @@ public class ServiceUpdates implements IService<Updates>{
         } 
         return list;
     }    
+
+    
 
     
 }
