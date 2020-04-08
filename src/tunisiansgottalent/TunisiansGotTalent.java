@@ -59,10 +59,11 @@ public class TunisiansGotTalent extends Application {
         shoppingcart.getItems().forEach(System.out::println);
         
         shoppingcart.removeItem(p2);*/
-       /* Product p3 = new Product(1000,"testjava3","C:\\Users\\paspo\\Documents\\Untitled.png3",3,3);
+        //Product p3 = new Product(1000,"testjava3","C:\\Users\\paspo\\Documents\\Untitled.png3",3,3);
         ShoppingCart shoppingcart = new ShoppingCart();
-        shoppingcart.addItem(p3);
-        shoppingcart.getItems().forEach(System.out::println);*/
+        //shoppingcart.addItem(p3);
+        //shoppingcart.getItems().forEach(System.out::println);
+        //shoppingcart.removeItem(p3);
         launch(args);
     }
 

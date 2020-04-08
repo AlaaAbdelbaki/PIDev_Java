@@ -9,12 +9,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 /**
  *
  * @author paspo
  */
 public class ShoppingCart implements Serializable{
     private ObservableList<Product> items;
+    
     
     public ShoppingCart(){
         items = FXCollections.observableArrayList();

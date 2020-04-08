@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -94,8 +97,19 @@ public class ShopViewController implements Initializable {
         shopping_cart_button.setOnAction(event -> {
             
             try {
-                AnchorPane pane=FXMLLoader.load(getClass().getResource("/UI/ShoppingCart.fxml"));
-                rootPane.getChildren().setAll(pane);;
+                
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/ShoppingCart.fxml"));
+                Parent third = loader.load();
+                ShoppingCartController shoppingcart = loader.getController();
+                shoppingcart.testsc=sc.getItems();
+                 
+                
+                Scene s = new Scene(third);
+                Stage stageedit = new Stage();
+                stageedit.setTitle("Shopping Cart");
+                stageedit.setScene(s);
+                                
+                stageedit.show();
                 
             } catch (IOException ex) {
                 Logger.getLogger(ShopViewController.class.getName()).log(Level.SEVERE, null, ex);
