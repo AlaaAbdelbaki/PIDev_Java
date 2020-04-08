@@ -1,5 +1,4 @@
-
- package tunisiagottalent.UI;
+package tunisiagottalent.UI;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
@@ -19,6 +18,8 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
@@ -29,14 +30,14 @@ import tunisiagottalent.Entity.User;
 import tunisiagottalent.util.UserSession;
 
 public class MainController {
+
     @FXML
     private JFXDrawer drawer;
-@FXML
+    @FXML
     private JFXHamburger hamburger;
     @FXML
     private AnchorPane mainAnchor;
 
-    
     @FXML
     private JFXButton btn_logout;
     @FXML
@@ -45,46 +46,43 @@ public class MainController {
     private JFXButton btn_signup;
 
     @FXML
-    public AnchorPane content;
+    public HBox content;
     @FXML
     public JFXButton btn_login;
     @FXML
     public VBox vbox;
-     
+
     @FXML
     void initialize() {
-            drawer.setSidePane(vbox);
-            drawer.setStyle("-fx-background-color:transparent;");
-        
-     
-     
-    HamburgerNextArrowBasicTransition transition=new HamburgerNextArrowBasicTransition(hamburger); 
-    transition.setRate(-1);
-    hamburger.addEventHandler(MouseEvent.MOUSE_CLICKED  , (e)->{
-        
-        transition.setRate(transition.getRate()*-1);
-        transition.play();
-        if(drawer.isShown()){
-            drawer.close();
-           }
-            else{
-        
-            drawer.open();}
-            
-    });
-    
-   if (UserSession.instance!=null){
-        btn_login.setVisible(false);
-        btn_dashboard.setVisible(true);
-        btn_logout.setVisible(true);
-        btn_signup.setVisible(false);
-   }
-   else{ 
-       hamburger.setDisable(true);
-   }
-   
-}
-    
+        drawer.setSidePane(vbox);
+        drawer.setStyle("-fx-background-color:transparent;");
+
+        HamburgerNextArrowBasicTransition transition = new HamburgerNextArrowBasicTransition(hamburger);
+        transition.setRate(-1);
+        hamburger.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+
+            transition.setRate(transition.getRate() * -1);
+            transition.play();
+            if (drawer.isShown()) {
+                drawer.close();
+            } else {
+
+                drawer.open();
+            }
+
+        });
+
+        if (UserSession.instance != null) {
+            btn_login.setVisible(false);
+            btn_dashboard.setVisible(true);
+            btn_logout.setVisible(true);
+            btn_signup.setVisible(false);
+        } else {
+            hamburger.setDisable(true);
+        }
+
+    }
+
     @FXML
     void logout(ActionEvent event) {
         UserSession.instance.cleanUserSession();
@@ -97,17 +95,25 @@ public class MainController {
         hamburger.setDisable(true);
         System.out.println(UserSession.instance);
     }
+
     @FXML
     void dash(ActionEvent event) {
+        try {
+            Stage stage = (Stage) mainAnchor.getScene().getWindow();
+            Parent p = FXMLLoader.load(getClass().getResource("AdminMain.fxml"));
+
+            stage.setScene(new Scene(p));
+        } catch (IOException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+
     @FXML
     void popup_login(ActionEvent event) {
- try { 
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
             Parent third = loader.load();
-            
             Scene s = new Scene(third);
-            
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.TRANSPARENT);
@@ -115,16 +121,37 @@ public class MainController {
             stage.setTitle("Login");
             stage.initOwner(mainAnchor.getScene().getWindow());
             stage.setScene(s);
-            
-        stage.show();
+
+            stage.show();
         } catch (IOException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
      @FXML
+    void popup_signup(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("signup.fxml"));
+            Parent third = loader.load();
+            Scene s = new Scene(third);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.setOpacity(0.8);
+            stage.setTitle("Signup");
+            stage.initOwner(mainAnchor.getScene().getWindow());
+            stage.setScene(s);
+
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    @FXML
     void competitions(ActionEvent event) {
-        
+
         try {
             AnchorPane p = FXMLLoader.load(getClass().getResource("User_Competitions.fxml"));
             content.getChildren().setAll(p);

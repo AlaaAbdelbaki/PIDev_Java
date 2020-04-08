@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="AdminMainAnchor" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #3C4858;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.AdminMainController">
+   <children>
+      <JFXHamburger fx:id="hamburger" layoutX="1095.0" layoutY="25.0" opacity="0.54" prefHeight="35.0" prefWidth="44.0" style="-fx-background-color: white;" />
+      <JFXButton fx:id="btn_logout" buttonType="RAISED" layoutX="1173.0" layoutY="27.0" onAction="#logout" ripplerFill="#eb0505" text="Logout" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Century" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <VBox layoutY="84.0" prefHeight="639.0" prefWidth="1280.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" />
+         </children>
+      </VBox>
+      <JFXDrawer fx:id="drawer" defaultDrawerSize="325.0" prefHeight="723.0" prefWidth="288.0">
+         <children>
+            <VBox fx:id="vbox" alignment="TOP_CENTER" prefHeight="721.0" prefWidth="253.0" styleClass="side" stylesheets="@AdminMain.css">
+               <children>
+                  <ImageView fx:id="logo" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#goToMain" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/050b8e8c2f748fdd7584fc74ceae6e84.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets bottom="40.0" />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <JFXButton prefHeight="52.0" prefWidth="254.0" text="Dashboard" textFill="#f8f8f8" />
+                  <JFXButton layoutX="10.0" layoutY="100.0" prefHeight="52.0" prefWidth="254.0" text="User Profiles" textFill="#f8f8f8" />
+                  <JFXButton layoutX="10.0" layoutY="100.0" prefHeight="52.0" prefWidth="254.0" text="Shop" textFill="#f8f8f8" />
+                  <JFXButton layoutX="10.0" layoutY="100.0" prefHeight="52.0" prefWidth="254.0" text="Blog" textFill="#f8f8f8" />
+                  <JFXButton fx:id="btn_competitions" layoutX="10.0" layoutY="100.0" prefHeight="52.0" prefWidth="254.0" text="Competitions" textFill="#f8f8f8" />
+                  <JFXButton layoutX="10.0" layoutY="308.0" prefHeight="52.0" prefWidth="254.0" text="Events" textFill="#f8f8f8" />
+                  <JFXButton layoutX="10.0" layoutY="360.0" prefHeight="52.0" prefWidth="254.0" text="News" textFill="#f8f8f8" />
+                  <JFXButton layoutX="10.0" layoutY="412.0" prefHeight="52.0" prefWidth="254.0" text="Complaints" textFill="#f8f8f8" />
+                  <JFXButton layoutX="10.0" layoutY="464.0" prefHeight="52.0" prefWidth="254.0" text="Ratings" textFill="#f8f8f8" />
+               </children>
+            </VBox>
+         </children>
+      </JFXDrawer>
+   </children>
+</AnchorPane>

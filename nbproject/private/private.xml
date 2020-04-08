@@ -5,16 +5,11 @@
         <group>
             <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/UI/main.css</file>
             <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/Entity/video.java</file>
-            <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/UI/Main.fxml</file>
             <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/UI/AdminCompetitions.java</file>
             <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/services/ParticipationServices.java</file>
             <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/UI/MainController.java</file>
             <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/UI/Login.java</file>
-            <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/UI/login.fxml</file>
             <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/UI/User_CompetitionsController.java</file>
-            <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/UI/login.css</file>
-            <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/UI/Competition_ParticipateController.java</file>
-            <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/TunisiaGotTalent.java</file>
         </group>
     </open-files>
 </project-private>

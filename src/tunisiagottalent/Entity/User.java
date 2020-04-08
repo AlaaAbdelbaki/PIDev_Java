@@ -24,12 +24,11 @@ public class User {
         this.Role = Role;
     }
 
-    public User(String username, String email, String password, String name, String lastName) {
+    public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.name = name;
-        this.lastName = lastName;
+       
     }
 
     public User(String username, String email, String gender, String address, String name, String lastName, String phone_number,String Role) {

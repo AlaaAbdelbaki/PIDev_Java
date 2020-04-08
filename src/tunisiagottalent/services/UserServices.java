@@ -106,7 +106,7 @@ public class UserServices {
             pwd = pwd.substring(3);
             pwd = "$2y"+pwd;
             u.setPassword(pwd);
-            //System.out.println(pwd);
+           
             String req = "insert into user(username,password,username_canonical,email,email_canonical,enabled,roles) values('"+u.getUsername()+"','"+u.getPassword()+"','"+u.getUsername()+"','"+u.getEmail()+"','"+u.getEmail()+"',1,'a:0:{}')";
             try {
                 ste = cnx.createStatement();
