@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
@@ -16,7 +17,7 @@
             <DropShadow />
          </effect>
       </Rectangle>
-      <TableView fx:id="tableProduct" layoutX="451.0" layoutY="102.0" prefHeight="529.0" prefWidth="813.0" stylesheets="@shop.css">
+      <TableView fx:id="tableProduct" layoutX="451.0" layoutY="122.0" prefHeight="529.0" prefWidth="813.0" stylesheets="@shop.css">
         <columns>
           <TableColumn fx:id="table_id" prefWidth="42.0" text="id" />
           <TableColumn fx:id="table_productname" prefWidth="208.0" text="Product Name" />
@@ -27,17 +28,19 @@
             <TableColumn fx:id="table_delete" prefWidth="95.0" text="Delete" />
         </columns>
       </TableView>
-      <Label fx:id="product_label" layoutX="737.0" layoutY="26.0" prefHeight="64.0" prefWidth="221.0" text="Products List" textAlignment="CENTER" textFill="#55b3f3">
+      <Label fx:id="product_label" layoutX="90.0" layoutY="23.0" prefHeight="64.0" prefWidth="221.0" text="Products List" textAlignment="CENTER" textFill="#55b3f3">
          <font>
             <Font name="System Bold" size="34.0" />
          </font>
       </Label>
-      <Button layoutX="811.0" layoutY="642.0" mnemonicParsing="false" onAction="#afficheraddproduct" prefHeight="47.0" prefWidth="171.0" styleClass="button-add" text="Add Product">
+      <Button layoutX="772.0" layoutY="659.0" mnemonicParsing="false" onAction="#afficheraddproduct" prefHeight="47.0" prefWidth="171.0" styleClass="button-add" text="Add Product">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="gotoorder" layoutX="1141.0" layoutY="43.0" mnemonicParsing="false" onAction="#gotoorderlist" styleClass="button-add" text="Orders" />
-      <Button fx:id="home_shop" layoutX="464.0" layoutY="43.0" mnemonicParsing="false" onAction="#gotohomeshop" text="Shop Home" />
+      <Button fx:id="gotoorder" layoutX="141.0" layoutY="207.0" mnemonicParsing="false" onAction="#gotoorderlist" prefHeight="31.0" prefWidth="99.0" styleClass="button-add" text="Orders" />
+      <Button fx:id="home_shop" layoutX="141.0" layoutY="132.0" mnemonicParsing="false" onAction="#gotohomeshop" text="Shop Home" />
+      <TextField fx:id="product_search" layoutX="734.0" layoutY="55.0" prefHeight="31.0" prefWidth="471.0" />
+      <Label layoutX="552.0" layoutY="60.0" text="Search in products list :" />
    </children>
 </AnchorPane>

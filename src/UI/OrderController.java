@@ -11,10 +11,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,6 +27,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -51,7 +55,8 @@ public class OrderController implements Initializable {
     private TableColumn table_edit;
     @FXML
     private TableColumn table_delete;
-    
+    @FXML
+    private TextField search_order;
     private ObservableList<Order> order_list;
     
     
@@ -95,7 +100,7 @@ public class OrderController implements Initializable {
                 
             };
             
-            return cell; //To change body of generated lambdas, choose Tools | Templates.
+            return cell;
         };
         Callback<TableColumn<Order, String>, TableCell<Order, String>> cellFactory1 = (param) -> {
             final TableCell<Order, String> cell = new TableCell<Order, String>() {
@@ -140,7 +145,7 @@ public class OrderController implements Initializable {
                 
             };
             
-            return cell; //To change body of generated lambdas, choose Tools | Templates.
+            return cell;
         };
         
         
@@ -148,8 +153,36 @@ public class OrderController implements Initializable {
         table_delete.setCellFactory(cellFactory);
         table_edit.setCellFactory(cellFactory1);
         
+        FilteredList<Order> filteredProduct = new FilteredList<>(order_list,b->true);
         
-        tableOrder.setItems(order_list);
+        search_order.textProperty().addListener((observable,oldValue,newValue) -> {
+            filteredProduct.setPredicate((Predicate<? super Order>) Order -> {
+            if(newValue == null || newValue.isEmpty()){
+                return true;
+            }
+            String lowerCaseFilter = newValue.toLowerCase();
+            if(String.valueOf(Order.getId()).indexOf(lowerCaseFilter) != -1){
+                return true;
+            }
+            else if(Order.getAddress().toLowerCase().indexOf(lowerCaseFilter) != -1){
+                return true;
+            }
+            else if(String.valueOf(Order.getTotal()).indexOf(lowerCaseFilter) != -1){
+                    return true;
+            }
+            else if(String.valueOf(Order.getOrder_date()).indexOf(lowerCaseFilter) != -1){
+                return true;
+            }
+            else{
+                    return false;
+            }
+            
+            });
+        });
+        SortedList<Order> sortedProduct = new SortedList<>(filteredProduct);
+        sortedProduct.comparatorProperty().bind(tableOrder.comparatorProperty());
+        
+        tableOrder.setItems(sortedProduct);
         
     }
     

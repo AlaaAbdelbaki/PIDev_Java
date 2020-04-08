@@ -10,10 +10,12 @@ import com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -36,6 +38,8 @@ import javafx.util.Callback;
 import javax.swing.plaf.RootPaneUI;
 import services.OrderServices;
 import services.ProductServices;
+import java.util.function.Predicate;
+import javafx.collections.transformation.SortedList;
 
 /**
  * FXML Controller class
@@ -62,6 +66,9 @@ public class ShopController implements Initializable {
     private TableColumn table_delete;
     @FXML
     private Button gotoorder;
+    @FXML
+    private TextField product_search;
+    
     
     private ObservableList<Product> product_list;
     
@@ -112,7 +119,7 @@ public class ShopController implements Initializable {
                 
             };
             
-            return cell; //To change body of generated lambdas, choose Tools | Templates.
+            return cell;
         };
         
         Callback<TableColumn<Product, String>, TableCell<Product, String>> cellFactory1 = (param) -> {
@@ -157,15 +164,44 @@ public class ShopController implements Initializable {
                 
             };
             
-            return cell; //To change body of generated lambdas, choose Tools | Templates.
+            return cell;
         };
         
         table_delete.setCellFactory(cellFactory);
         table_edit.setCellFactory(cellFactory1);
+        //tableProduct.setItems(product_list);
         
         
-        tableProduct.setItems(product_list);
+        FilteredList<Product> filteredProduct = new FilteredList<>(product_list,b->true);
         
+        product_search.textProperty().addListener((observable,oldValue,newValue) -> {
+            filteredProduct.setPredicate((Predicate<? super Product>) Product -> {
+            if(newValue == null || newValue.isEmpty()){
+                return true;
+            }
+            String lowerCaseFilter = newValue.toLowerCase();
+            if(String.valueOf(Product.getId()).indexOf(lowerCaseFilter) != -1){
+                return true;
+            }
+            else if(Product.getProduct_name().toLowerCase().indexOf(lowerCaseFilter) != -1){
+                return true;
+            }
+            else if(String.valueOf(Product.getPrice()).indexOf(lowerCaseFilter) != -1){
+                    return true;
+            }
+            else if (String.valueOf(Product.getStock()).indexOf(lowerCaseFilter) != -1){
+                    return true;
+            }
+            else{
+                    return false;
+            }
+            
+            });
+        });
+        SortedList<Product> sortedProduct = new SortedList<>(filteredProduct);
+        sortedProduct.comparatorProperty().bind(tableProduct.comparatorProperty());
+        
+        tableProduct.setItems(sortedProduct);
     }
     
     public void afficheraddproduct(){
