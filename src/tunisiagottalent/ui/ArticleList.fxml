@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -8,17 +14,17 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="ContentPane" maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.ui.ArticleListController">
+<AnchorPane id="AnchorPane" fx:id="ContentPane" maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.ui.ArticleListController">
    <children>
-      <TableView fx:id="ListArticle" layoutX="211.0" layoutY="160.0" prefHeight="200.0" prefWidth="305.0">
+      <TableView fx:id="ListArticle" layoutX="27.0" layoutY="102.0" prefHeight="200.0" prefWidth="305.0">
         <columns>
           <TableColumn fx:id="colTitle" prefWidth="75.0" text="Title" />
           <TableColumn fx:id="colimg" prefWidth="75.0" text="Image" />
             <TableColumn fx:id="colContent" prefWidth="154.0" text="Content" />
         </columns>
       </TableView>
-      <Button fx:id="RetourAction" layoutX="302.0" layoutY="490.0" mnemonicParsing="false" onAction="#btnRetourAction" prefHeight="31.0" prefWidth="89.0" text="Retour" />
-      <Button fx:id="supprimer" layoutX="215.0" layoutY="433.0" mnemonicParsing="false" onAction="#btnSuppAction" prefHeight="31.0" prefWidth="284.0" text="Selectionner l'article à Supprimer" />
+      <Button fx:id="RetourAction" layoutX="14.0" layoutY="668.0" mnemonicParsing="false" onAction="#btnRetourAction" prefHeight="31.0" prefWidth="89.0" text="Retour" />
+      <Button fx:id="supprimer" layoutX="38.0" layoutY="314.0" mnemonicParsing="false" onAction="#btnSuppAction" prefHeight="31.0" prefWidth="284.0" text="Selectionner l'article à Supprimer" />
       <Button fx:id="modifier" layoutX="947.0" layoutY="483.0" mnemonicParsing="false" onAction="#btnModifAction" text="modifer" />
       <TextField fx:id="UpTitle" layoutX="890.0" layoutY="184.0" />
       <TextField fx:id="UpImg" layoutX="897.0" layoutY="260.0" />
@@ -26,7 +32,8 @@
       <Text layoutX="748.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="new title" wrappingWidth="141.9869728088379" />
       <Text layoutX="739.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New image" />
       <Text layoutX="729.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Content" wrappingWidth="110.66015625" />
-      <Line endX="21.0" endY="294.0" layoutX="583.0" layoutY="219.0" startX="14.0" startY="-84.0" />
-      <TextField fx:id="search" layoutX="241.0" layoutY="548.0" promptText="search" />
+      <TextField fx:id="search" layoutX="27.0" layoutY="74.0" prefHeight="25.0" prefWidth="305.0" promptText="search" />
+      <Line endX="100.0" layoutX="720.0" layoutY="287.0" rotate="90.0" scaleX="2.0" scaleY="2.0" scaleZ="2.0" startX="-100.0" />
+      <ImageView fx:id="img" fitHeight="229.0" fitWidth="340.0" layoutX="345.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

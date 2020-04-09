@@ -35,9 +35,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import tunisiagottalent.entity.Article;
 
 
 
@@ -85,6 +88,8 @@ public class UpdatesListController implements Initializable {
     private DatePicker UpPublish_date;
     @FXML
     private Button modifer;
+    @FXML
+    private ImageView img;
     
 
 
@@ -136,6 +141,14 @@ public class UpdatesListController implements Initializable {
                  current_id = rowData.getId();
                  
              }
+             //file:/C:/Users/EZZEDINE/Desktop/PIDev_Java/src/tunisiagottalent/ui/img/blog.png
+        ListUp.setOnMouseClicked((MouseEvent x)->{
+                   int selectedIndex = ListUp.getSelectionModel().getSelectedIndex();
+                   if (selectedIndex!=-1) {                     
+                    Updates pi = (Updates) ListUp.getSelectionModel().getSelectedItem();                        
+                    img.setImage(new Image(pi.getImg()) );                 
+                         }                
+                    });
         });
          
 

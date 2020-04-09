@@ -5,6 +5,7 @@
  */
 package tunisiagottalent.ui;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
@@ -24,6 +25,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
 import tunisiagottalent.entity.Article;
 
 import tunisiagottalent.services.ServiceArticle;
@@ -49,6 +52,9 @@ public class ArticleController implements Initializable {
     private Button RetourAction;
     @FXML
     private Button affichage;
+    @FXML
+    private Button upload;
+    private String imgp;
 
     /**
      * Initializes the controller class.
@@ -114,6 +120,19 @@ public class ArticleController implements Initializable {
     private void btnAffichageAction(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/tunisiagottalent/ui/ArticleList.fxml"));
         articlePane.getChildren().setAll(pane);
+    }
+
+    @FXML
+    private void uploadAction(ActionEvent event) {
+        final FileChooser fileChooser = new FileChooser();
+
+            Window stage = null;
+            File file = fileChooser.showOpenDialog(stage);
+            if (file != null) {
+               
+                imgp=file.toURI().toString();
+                img.setText(imgp);    
+            }
     }
     
 }

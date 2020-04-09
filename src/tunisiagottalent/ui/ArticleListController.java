@@ -5,7 +5,7 @@
  */
 package tunisiagottalent.ui;
 
-import java.awt.Image;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -32,8 +32,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
+
 import javafx.scene.layout.AnchorPane;
-import org.controlsfx.control.Notifications;
+//import org.controlsfx.control.Notifications;
 import tunisiagottalent.entity.Article;
 import tunisiagottalent.services.ServiceArticle;
 import javafx.event.ActionEvent;
@@ -88,6 +90,8 @@ public class ArticleListController implements Initializable {
     private int current_id;
     @FXML
     private TextField search;
+    @FXML
+    private ImageView img;
     
     public void views() throws SQLException {  
       
@@ -150,6 +154,16 @@ public class ArticleListController implements Initializable {
                  
              }
         });
+        
+        
+        //file:/C:/Users/EZZEDINE/Desktop/PIDev_Java/src/tunisiagottalent/ui/img/blog.png
+        ListArticle.setOnMouseClicked((MouseEvent e)->{
+                   int selectedIndex = ListArticle.getSelectionModel().getSelectedIndex();
+                   if (selectedIndex!=-1) {                     
+                    Article pi = (Article) ListArticle.getSelectionModel().getSelectedItem();                        
+                    img.setImage(new Image(pi.getImgArticle()) );                 
+                         }                
+                    });
          
     }    
 

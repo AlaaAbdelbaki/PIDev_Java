@@ -5,6 +5,7 @@
  */
 package tunisiagottalent.ui;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -21,6 +22,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
 import tunisiagottalent.entity.Updates;
 import tunisiagottalent.services.ServiceUpdates;
 
@@ -45,6 +48,9 @@ public class UpdatesController implements Initializable {
     private DatePicker datepub;
     @FXML
     private Button ValiderAction;
+    @FXML
+    private Button upload;
+    private String imgp;
 
     /**
      * Initializes the controller class.
@@ -52,6 +58,7 @@ public class UpdatesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        category.getItems().addAll("Events", "Competitions","Shops");
     }    
 
     @FXML
@@ -98,6 +105,7 @@ public class UpdatesController implements Initializable {
         category.setItems(options);
 */
         //Updates u = new Updates(title.getText(),img.getText(),category.getSelectionModel().getSelectedItem(),publish_date,content.getText());
+        
         Updates u = new Updates(title.getText(),img.getText(),category.getSelectionModel().getSelectedItem(),publish_date,content.getText());
         ServiceUpdates sp = new ServiceUpdates();
         sp.ajouter(u);
@@ -112,6 +120,20 @@ public class UpdatesController implements Initializable {
         ContentPane.getChildren().setAll(pane);
         }
         
+    }
+
+    @FXML
+    private void uploadAction(ActionEvent event) {
+        final FileChooser fileChooser = new FileChooser();
+
+            Window stage = null;
+            File file = fileChooser.showOpenDialog(stage);
+            if (file != null) {
+               
+                imgp=file.toURI().toString();
+                img.setText(imgp);    
+            }
+
     }
     
 }

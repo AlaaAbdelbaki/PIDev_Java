@@ -18,5 +18,6 @@
       <Text layoutX="557.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Content" />
       <Button fx:id="RetourAction" layoutX="820.0" layoutY="420.0" mnemonicParsing="false" text="retour" />
       <Button fx:id="affichage" layoutX="759.0" layoutY="475.0" mnemonicParsing="false" onAction="#btnAffichageAction" text="affichage" />
+      <Button fx:id="upload" layoutX="819.0" layoutY="222.0" mnemonicParsing="false" onAction="#uploadAction" text="Upload" />
    </children>
 </AnchorPane>
