@@ -5,6 +5,7 @@
  */
 package tunisigottalentViews;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -16,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -80,8 +82,51 @@ public class AfficheComplaintController implements Initializable {
 
     @FXML
     private void modify(ActionEvent event) {
-        ComplaintService cs = new ComplaintService();
-        Complaint c = (Complaint) tabrec.getSelectionModel().getSelectedItem();   
+     Complaint c = tabrec.getSelectionModel().getSelectedItem();
+         
+
+if(c==null){
+        
+           System.out.println("Aucun événement séléctionné");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Erreur");
+            alert.setHeaderText(null);
+            alert.setContentText("Aucun événement séléctionné");
+
+            alert.showAndWait();
+     
+        }else {
+          try {   
+        FXMLLoader loader = new FXMLLoader
+                        (getClass()
+                         .getResource("EditComplaint.fxml"));
+        Scene scene=new Scene(loader.load());
+        
+
+       EditComplaintController ec= loader.getController();
+        Stage stageAff=new Stage();
+        stageAff.setScene(scene);
+        stageAff.show();
+        ((Node) (event.getSource())).getScene().getWindow().hide();
+        int as=tabrec.getSelectionModel().getSelectedItem().getId();
+        String sub = tabrec.getSelectionModel().getSelectedItem().getSubject();
+        
+        String content = tabrec.getSelectionModel().getSelectedItem().getContent();
+        
+       
+        
+        ec.setData(tabrec.getSelectionModel().getSelectedItem().getId(),
+                tabrec.getSelectionModel().getSelectedItem().getSubject(),
+                 tabrec.getSelectionModel().getSelectedItem().getContent()
+                 );
+                 
+                 
+       
+        } catch(IOException ex)
+    {
+     System.out.println("eer");
+}
+        }
      
           
     }

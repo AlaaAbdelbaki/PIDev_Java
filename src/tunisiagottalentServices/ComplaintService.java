@@ -87,11 +87,14 @@ public class ComplaintService {
          }
      
      }
-      public void EditComplaint(int id, String subject, String content){
-       String req ="UPDATE   complaint SET `subject`='"+subject+ "',`content`='"+content+ "' WHERE id='"+id+"' ";
+      public void EditComplaint(Complaint c){
+        String req ="UPDATE   complaint SET subject=?,content=? WHERE id=? ";
+        
          try {
-             pst=connexion.prepareStatement(req);
-             pst.executeUpdate();
+             pst=connexion.prepareStatement(req,PreparedStatement.RETURN_GENERATED_KEYS);
+             pst.setString(1, c.getSubject());
+             pst.setString(2, c.getContent());
+             pst.execute();
              System.out.println("update done!");
          } catch (SQLException ex) {
              Logger.getLogger(ComplaintService.class.getName()).log(Level.SEVERE, null, ex);

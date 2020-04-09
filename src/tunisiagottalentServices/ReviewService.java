@@ -79,10 +79,13 @@ public class ReviewService {
              Logger.getLogger(ReviewService.class.getName()).log(Level.SEVERE, null, ex);
          }
           }
- public void EditReview(int id,String category,int rating, String content){
- String req = "UPDATE   review SET `category`='"+category+ "',`rating`='"+rating+ "',`content`='"+content+ "' WHERE id='"+id+"' ";
+ public void EditReview(Review r){
+ String req = "UPDATE   review SET category=?,rating=?,content=? WHERE id=? ";
          try {
-             pst=connexion.prepareStatement(req);
+             pst=connexion.prepareStatement(req,PreparedStatement.RETURN_GENERATED_KEYS);
+             pst.setString(1, r.getCategory());
+             pst.setString(2, r.getContent());
+             pst.setInt(3, r.getRating());
              pst.executeUpdate();
              System.out.println("update done!");
          } catch (SQLException ex) {

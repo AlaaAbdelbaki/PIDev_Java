@@ -24,7 +24,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button layoutX="470.0" layoutY="323.0" mnemonicParsing="false" text="Modify" />
+      <Button fx:id="modifier" layoutX="470.0" layoutY="323.0" mnemonicParsing="false" onAction="#modifier" text="Modify" />
       <Button fx:id="refresh" layoutX="264.0" layoutY="323.0" mnemonicParsing="false" onAction="#Actualiser" text="Refresh" />
       <Button fx:id="delete" layoutX="367.0" layoutY="323.0" mnemonicParsing="false" onAction="#Suppimer" text="Delete" />
    </children>

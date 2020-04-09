@@ -8,6 +8,9 @@ package tunisigottalentViews;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,28 +41,43 @@ public class AddReviewController implements Initializable {
     @FXML
     private Button cancel;
     @FXML
-    private ChoiceBox<?> category;
+    private ChoiceBox category;
     @FXML
     private Slider rating;
     @FXML
     private TextField title;
+     ObservableList<String> options=FXCollections.observableArrayList("Event","Orders","Competitions","Blog");
+    @FXML
+    private TextField rate;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         // TODO
+        category.setItems(options);
+      
+  
+      
+          rating.valueProperty().addListener((observable, oldValue, newValue) -> {
+
+            rate.setText(Integer.toString(newValue.intValue()));
+
+
+        });
     }    
 
     @FXML
     private void AddReview(ActionEvent event) throws IOException {
       String t= title.getText();
          String con= contenu.getText();
-         String cat= category.getTypeSelector();
-         int rate= 2;
+         String cat= category.getValue().toString();
+        String note= rate.getText();
+        int n= Integer.parseInt(note);
          ReviewService rs = new ReviewService();
-         Review r = new Review(cat,rate,con);
+         Review r = new Review(cat,n,con);
          rs.insertReviewPST(r);        
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Notification");
