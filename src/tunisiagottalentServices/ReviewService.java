@@ -53,10 +53,12 @@ public class ReviewService {
              Logger.getLogger(ReviewService.class.getName()).log(Level.SEVERE, null, ex);
          }
 }
- public  void deleteReview(int id){
-         String req ="delete from review where id="+id;
+ public  void deleteReview(Review r){
+         String req ="delete from review where id= ?";
          try {
              pst=connexion.prepareStatement(req);
+             int id = r.getId();
+             pst.setInt(1,id);
              pst.executeUpdate();
          } catch (SQLException ex) {
              Logger.getLogger(ReviewService.class.getName()).log(Level.SEVERE, null, ex);

@@ -58,11 +58,13 @@ public class ComplaintService {
             Logger.getLogger(ComplaintService.class.getName()).log(Level.SEVERE, null, ex);
         }
      }   
-     public  void deleteComplaint(int id)
+     public  void deleteComplaint(Complaint c)
      {
-     String req ="delete from complaint where id="+id;
+     String req ="delete from complaint where id= ?";
          try {
              pst=connexion.prepareStatement(req);
+             int id = c.getId();
+             pst.setInt(1,id);
              pst.executeUpdate();
              
          } catch (SQLException ex) {
@@ -112,5 +114,21 @@ public class ComplaintService {
              Logger.getLogger(ComplaintService.class.getName()).log(Level.SEVERE, null, ex);
          }
 return list;
+ }
+       public List<Complaint> SearchSub(String subject) {
+ String requete = "SELECT * FROM review where subject = '"+subject ;
+ List<Complaint> liste= new ArrayList<>();
+         try {
+             ste=connexion.createStatement();
+             rs = ste.executeQuery(requete);
+             while(rs.next())
+            {
+             liste.add(new Complaint(rs.getInt("id"), rs.getString(2), rs.getString("content")));
+            }
+         } catch (SQLException ex) {
+             Logger.getLogger(ReviewService.class.getName()).log(Level.SEVERE, null, ex);
+         }
+ 
+ return liste;
  }
 }

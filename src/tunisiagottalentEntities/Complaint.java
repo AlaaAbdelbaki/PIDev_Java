@@ -5,6 +5,8 @@
  */
 package tunisiagottalentEntities;
 
+import javafx.scene.control.ChoiceBox;
+
 /**
  *
  * @author sarah
@@ -26,6 +28,14 @@ public class Complaint {
     public Complaint(String subject, String content) {
         this.subject = subject;
         this.content = content;
+    }
+
+    public Complaint(ChoiceBox Subject, String Contentc) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Complaint(int aInt, String string, int aInt0, String string0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getId() {
