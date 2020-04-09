@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import tunisiagottalent.util.DataSource;
 import tunisiagottalent.entity.User;
 import java.util.List;
+import java.util.Random;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
@@ -48,15 +49,15 @@ public class UserServices {
         String pwd2 = BCrypt.hashpw(pwd, BCrypt.gensalt(13));
         pwd2 = pwd2.substring(3);
         pwd2 = "$2y" + pwd2;
-        System.out.println(pwd2);
+//        System.out.println(pwd2);
         return pwd2;
     }
 
     //login
     public int login(String user, String pwd) {
+
         String pass = "";
 
-        cnx = DataSource.getInstance().getCnx();
         String req = "select password from user where user.username='" + user + "'";
         try {
             ste = cnx.createStatement();
@@ -75,22 +76,25 @@ public class UserServices {
         if (!pass.equals("")) {
             if (checkPassword(pwd, pass)) {
                 System.out.println("Passwords Match !");
+
                 return 1;
             }
 
         } else {
             System.out.println("User not found !");
+
             return -1;
         }
         System.out.println("Passwords Mismatch !!");
+
         return 0;
     }
 
     //signup
     public boolean signup(User u) {
+
         String username = "";
         String pwd = u.getPassword();
-        cnx = DataSource.getInstance().getCnx();
 
         String find = "select username from user where user.username ='" + u.getUsername() + "'";
         try {
@@ -99,13 +103,15 @@ public class UserServices {
             if (rs.next()) {
                 username = rs.getString("username");
             }
+
         } catch (SQLException ex) {
             Logger.getLogger(UserServices.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        System.out.println(username);
+//        System.out.println(username);
         if (username.equals(u.getUsername())) {
             System.out.println("Username taken !");
+
             return false;
         } else {
             pwd = BCrypt.hashpw(pwd, BCrypt.gensalt(13));
@@ -117,6 +123,7 @@ public class UserServices {
             try {
                 ste = cnx.createStatement();
                 ste.executeUpdate(req);
+
                 return true;
             } catch (SQLException ex) {
                 Logger.getLogger(UserServices.class.getName()).log(Level.SEVERE, null, ex);
@@ -130,18 +137,18 @@ public class UserServices {
     //Delete user
     public boolean delete(String username) {
 
-        cnx = DataSource.getInstance().getCnx();
-
         String req = "delete from user where username='" + username + "'";
 
         try {
             cnx.createStatement().executeUpdate(req);
+
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(UserServices.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return false;
+
     }
 
     //Returns list of all users
@@ -155,7 +162,7 @@ public class UserServices {
             ste = cnx.createStatement();
             rs = ste.executeQuery(req);
             while (rs.next()) {
-                list.add(new User(rs.getInt("id"),rs.getString("username"),rs.getString("email"),rs.getString("password"),rs.getString("sexe"),rs.getString("adresse"),rs.getString("first_name"),rs.getString("name"),rs.getString("bio"),rs.getString("telephone_number"),rs.getString("profile_pic"),rs.getDate("Birthday")));
+                list.add(new User(rs.getInt("id"), rs.getString("username"), rs.getString("email"), rs.getString("password"), rs.getString("sexe"), rs.getString("adresse"), rs.getString("first_name"), rs.getString("name"), rs.getString("bio"), rs.getString("telephone_number"), rs.getString("profile_pic"), rs.getDate("Birthday")));
             }
 
         } catch (SQLException ex) {
@@ -166,6 +173,7 @@ public class UserServices {
     }
 
     public List<User> getAll(String q) {
+
         String req;
         if (q.equals("")) {
             req = "select * from user ";
@@ -180,7 +188,7 @@ public class UserServices {
             ste = cnx.createStatement();
             rs = ste.executeQuery(req);
             while (rs.next()) {
-                list.add(new User(rs.getInt("id"),rs.getString("username"),rs.getString("email"),rs.getString("password"),rs.getString("sexe"),rs.getString("adresse"),rs.getString("first_name"),rs.getString("name"),rs.getString("bio"),rs.getString("telephone_number"),rs.getString("profile_pic"),rs.getDate("Birthday")));
+                list.add(new User(rs.getInt("id"), rs.getString("username"), rs.getString("email"), rs.getString("password"), rs.getString("sexe"), rs.getString("adresse"), rs.getString("first_name"), rs.getString("name"), rs.getString("bio"), rs.getString("telephone_number"), rs.getString("profile_pic"), rs.getDate("Birthday")));
             }
 
         } catch (SQLException ex) {
@@ -192,7 +200,7 @@ public class UserServices {
 
     //Returns user role
     public String getRole(String username) {
-        cnx = DataSource.getInstance().getCnx();
+
         String ch = "";
         String req = "Select roles from user where username='" + username + "' ";
         try {
@@ -211,7 +219,7 @@ public class UserServices {
     //Returns Current User
     public User getUser(String username) {
         User u = new User();
-        cnx = DataSource.getInstance().getCnx();
+
         String req = "select * from user where username='" + username + "'";
         try {
             ste = cnx.createStatement();
@@ -231,20 +239,22 @@ public class UserServices {
                 u.setLastName(rs.getString("name"));
                 u.setBirthday(rs.getDate("Birthday"));
                 u.setPassword(rs.getString("password"));
+
                 return u;
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserServices.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         return u;
     }
 
     //Updates Users
     public boolean updateUser(User u) {
-        cnx = DataSource.getInstance().getCnx();
         String req = "update user set email=? , email_canonical=? , password=? , Birthday=? , sexe=? , telephone_number=? , adresse=? , name=? , first_name=? , bio=? where username='" + u.getUsername() + "'";
         try {
             UserServices us = new UserServices();
+
             pst = cnx.prepareStatement(req);
             //if email field is empty is null
             if (u.getEmail() == null) {
@@ -301,11 +311,72 @@ public class UserServices {
             } else {
                 pst.setString(10, u.getBio());
             }
+            if (u.getUsername().equals("")) {
+                System.out.println("User not found !");
+                return false;
+            } else {
+
+                pst.executeUpdate();
+            }
+
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
+
+    public void updateToken(String username, String token) {
+        String req = "update user set passwordToken =? where username =?";
+        try {
+            pst = cnx.prepareStatement(req);
+            pst.setString(1, token);
+            pst.setString(2, username);
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public String getToken(String username) {
+        String sql = "select passwordToken from user where username = '" + username + "'";
+        String token = "";
+        try {
+            ste = cnx.createStatement();
+            rs = ste.executeQuery(sql);
+            while(rs.next()){
+                token = rs.getString("passwordToken");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return token;
+    }
+    
+    public boolean upadtePassword(String username,String pwd){
+        String req = "update user set password=? where username =?";
+        try {
+            pst = cnx.prepareStatement(req);
+            pst.setString(1,encryptPassword(pwd));
+            pst.setString(2,username);
             pst.executeUpdate();
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(UserServices.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         return false;
+    }
+
+    public String tokenGenerator() {
+        Random rnd = new Random();
+        String alphanumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        String token = "";
+        for (int i = 0; i < 5; i++) {
+            token += alphanumeric.charAt(rnd.nextInt(alphanumeric.length()));
+        }
+        System.out.println(token);
+        return token;
     }
 }

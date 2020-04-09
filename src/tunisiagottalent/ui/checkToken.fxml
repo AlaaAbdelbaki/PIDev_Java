@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" fx:id="parentContainer" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="tunisiagottalent.ui.CheckTokenController">
+    <stylesheets>
+        <URL value="@checktoken.css" />
+    </stylesheets>
+   <children>
+      <Button layoutX="275.0" layoutY="252.0" mnemonicParsing="false" onAction="#checkToken" text="Button" />
+      <TextField fx:id="tokenInput" layoutX="226.0" layoutY="211.0" />
+      <Label layoutX="240.0" layoutY="183.0" text="enter code in the email" />
+      <Label layoutX="259.0" layoutY="91.0" text="Enter username" />
+      <TextField fx:id="usernameInput" layoutX="227.0" layoutY="139.0" />
+   </children>
+</AnchorPane>

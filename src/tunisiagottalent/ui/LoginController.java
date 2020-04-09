@@ -25,6 +25,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -174,6 +175,11 @@ public class LoginController {
             }
         }
 
+    }
+    
+    @FXML
+    void forgotPassword(MouseEvent event) throws IOException{
+        fadeTransition("forgotPassword");
     }
 
     @FXML

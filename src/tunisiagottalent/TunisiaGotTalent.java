@@ -6,6 +6,7 @@
 package tunisiagottalent;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.application.Application;
@@ -39,11 +40,11 @@ public class TunisiaGotTalent extends Application {
         stage.getIcons().add(new Image("/tunisiagottalent/ui/img/icon.png"));
         stage.setTitle("Tunisia Got Talent");
 
-//        Parent root = FXMLLoader.load(getClass().getResource("/tunisiagottalent/ui/homepage.fxml"));
-        Parent root = FXMLLoader.load(getClass().getResource("/tunisiagottalent/ui/homepage.fxml"));
+//        Parent root = FXMLLoader.load(getClass().getResource("/tunisiagottalent/ui/profile.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/tunisiagottalent/ui/login.fxml"));
 
         Scene scene = new Scene(root, 1280, 720);
-        stage.initStyle(StageStyle.UNDECORATED);
+//        stage.initStyle(StageStyle.UNDECORATED);
 
         root.setOnMousePressed((MouseEvent event) -> {
             xOffset = event.getSceneX();
@@ -61,23 +62,27 @@ public class TunisiaGotTalent extends Application {
 
     public static void main(String[] args) {
         // TODO code application logic here
-//        User u = new User("lololol", "faress@f.f", "male", "ariana", "fares", "amir", "45698521");
-//        System.out.println(u.getPhone_number());
-//        UserServices x = new UserServices();
-//        x.login("alaa", "alaa");
-//        x.signup(u);
-//
-//        x.getAll().forEach(System.out::println);
-//        VideoServices vs = new VideoServices();
-//        List<Video> video = new ArrayList<>();
-//        video = vs.getVideos(1);
-//        vs.getVideos(1).forEach(System.out::println);
-//        
-//        System.out.println(video.size());
-        Application.launch(args);
-//        User u = new User("alaa","alaa","alaa");
 
-//        System.out.println(x.getRole(u));
+        Application.launch(args);
+//       
+//        Console test part
+//        User u = new User("azerty", "azerty@az.com", "azerty123");
+//        UserServices us = new UserServices();
+//        for(int i=0;i<100;i++){
+//            us.tokenGenerator();
+//        }
+//        if(us.signup(u)){
+//            System.out.println("Signup successful");
+//        }
+//        
+//        us.login("azerty", "azerty123");
+//        User u2 = new User(u.getUsername(),null, "", "male", "Adr2", "Test","user", "Test user bio", "123456789",Date.valueOf("2019-05-02"));
+//        if(us.updateUser(u2)){
+//            System.out.println("User updated !");
+//        }
+//        
+//        us.delete("azerty");
+
     }
 
 }

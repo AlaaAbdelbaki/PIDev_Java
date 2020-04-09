@@ -40,6 +40,7 @@ import tunisiagottalent.entity.User;
 import tunisiagottalent.entity.Video;
 import tunisiagottalent.services.UserServices;
 import tunisiagottalent.services.VideoServices;
+import tunisiagottalent.util.sendEmailSMTP;
 
 /**
  * FXML Controller class
@@ -234,10 +235,11 @@ public class ProfileController {
     @FXML
     void editProfile(ActionEvent event){
         try {
+            
             fadeTransition("editProfile");
         } catch (IOException ex) {
             Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
     }
             
     

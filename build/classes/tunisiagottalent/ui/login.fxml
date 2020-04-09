@@ -53,7 +53,7 @@
                   <DropShadow color="#0000009c" offsetY="1.0" />
                </effect>
             </Button>
-            <Button fx:id="login" layoutX="803.0" layoutY="553.0" mnemonicParsing="false" onAction="#login" prefHeight="53.0" prefWidth="118.0" styleClass="login" stylesheets="@login.css" text="Login">
+            <Button fx:id="login" layoutX="781.0" layoutY="527.0" mnemonicParsing="false" onAction="#login" prefHeight="53.0" prefWidth="118.0" styleClass="login" stylesheets="@login.css" text="Login">
                <font>
                   <Font name="Roboto Bold" size="22.0" />
                </font>
@@ -76,6 +76,7 @@
                   <Image url="@img/logo.png" />
                </image>
             </ImageView>
+            <Label layoutX="749.0" layoutY="628.0" onMouseClicked="#forgotPassword" text="Forgot your password? Click here !" />
          </children>
       </AnchorPane>
    </children>
