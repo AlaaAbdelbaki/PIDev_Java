@@ -9,7 +9,7 @@ import tunisiagottalent.util.DataSource;
 import tunisiagottalentEntities.Complaint;
 import tunisiagottalentServices.ComplaintService;
 import tunisiagottalentServices.ReviewService;
-
+import tunisiagottalentEntities.Review;
 /**
  *
  * @author alaa
@@ -27,7 +27,7 @@ public class TunisiaGotTalent {
         Complaint c= new Complaint("connexion","lente");
     ComplaintService cs= new ComplaintService();
     //cs.insertComplaintPST(c);
-    //Review rev= new Review(3,"events","coronna");
+    Review rev= new Review();
     ReviewService rs= new ReviewService();
     //rs.insertReviewPST(rev);
     //cs.getAll().forEach(System.out::println);
@@ -40,7 +40,7 @@ public class TunisiaGotTalent {
      //cs.getAll().forEach(System.out::println);
    rs.getAll().forEach(System.out::println);
       System.out.println("-------------------");
-     rs.EditReview(28,"orders",4,"perfect");
+     rs.EditReview(rev);
     //rs.deleteReview(23);
     rs.getAll().forEach(System.out::println);
     // rs.SearchRating(3);

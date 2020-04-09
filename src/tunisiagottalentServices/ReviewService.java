@@ -86,6 +86,7 @@ public class ReviewService {
              pst.setString(1, r.getCategory());
              pst.setString(2, r.getContent());
              pst.setInt(3, r.getRating());
+             pst.setInt(4, r.getId());
              pst.executeUpdate();
              System.out.println("update done!");
          } catch (SQLException ex) {

@@ -94,6 +94,7 @@ public class ComplaintService {
              pst=connexion.prepareStatement(req,PreparedStatement.RETURN_GENERATED_KEYS);
              pst.setString(1, c.getSubject());
              pst.setString(2, c.getContent());
+             pst.setInt(3, c.getId());
              pst.execute();
              System.out.println("update done!");
          } catch (SQLException ex) {

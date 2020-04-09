@@ -86,7 +86,7 @@ ObservableList<String> options=FXCollections.observableArrayList("Event","Orders
         }else {
            
              rv.setContent(contenu.getText());
-             //rv.setRating(rating.getValue());
+             rv.setRating((int) rating.getValue());
              rv.setCategory(category.getValue());
              ReviewService es = new ReviewService();
              try{
