@@ -5,17 +5,26 @@
  */
 package entities;
 
+import javafx.scene.control.Button;
+import views.AddTicketController;
+
 /**
  *
  * @author hela
  */
 public class Ticket {
+
     public int id;
     public float price;
     public int event_id;
+   
+    
+    
 
     public Ticket() {
     }
+
+  
 
     public Ticket(int id, float price, int event_id) {
         this.id = id;
@@ -52,9 +61,8 @@ public class Ticket {
         this.event_id = event_id;
     }
 
-   public String getInfo()
-    {
+    public String getInfo() {
         return this.price + ", " + this.event_id;
     }
-    
+
 }

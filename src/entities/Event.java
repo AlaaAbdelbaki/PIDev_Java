@@ -6,6 +6,7 @@
 package entities;
 
 import java.util.Date;
+import javafx.scene.control.Button;
 
 /**
  *
@@ -21,6 +22,7 @@ public class Event {
     public int nb_places;
     public String description;
     public String type;
+   
 
     public Event() {
     }

@@ -35,6 +35,13 @@ public class TunisiaGotTalent {
         EventService es = new EventService();
         TicketService ts = new TicketService();
         Event_ParticipantService eps = new Event_ParticipantService();
+        
+        
+        
+        System.out.println(es.castingType());
+        System.out.println(es.concertType());
+        System.out.println(es.offreType());
+        System.out.println(es.auditionType());
 
         /////////////////////////// to test add methode /////////////////////////// 
         /*
@@ -113,7 +120,7 @@ public class TunisiaGotTalent {
         
          /* eps.cancelEvent_Participation(2);*/
          
-         es.findEvent(11); 
+       
         
     }
 
