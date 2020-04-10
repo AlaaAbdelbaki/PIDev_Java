@@ -7,6 +7,7 @@ package UI;
 
 import Entity.Product;
 import com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -40,6 +41,8 @@ import services.OrderServices;
 import services.ProductServices;
 import java.util.function.Predicate;
 import javafx.collections.transformation.SortedList;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
 
 /**
  * FXML Controller class
@@ -76,7 +79,7 @@ public class ShopController implements Initializable {
     private AnchorPane rootPane;
     @FXML
     private Button home_shop;
-    
+
     
     
     public void afficherProductsTableView() {
@@ -230,10 +233,12 @@ public class ShopController implements Initializable {
             AnchorPane pane=FXMLLoader.load(getClass().getResource("/UI/ShopView.fxml"));
             rootPane.getChildren().setAll(pane);
     }
+   
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         afficherProductsTableView();
+        
     }    
     
 }

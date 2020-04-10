@@ -8,6 +8,8 @@ package UI;
 import Entity.Product;
 import Entity.ShoppingCart;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -25,6 +27,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -41,8 +44,10 @@ public class ShopViewController implements Initializable {
     private Button shopping_cart_button;
     @FXML
     AnchorPane rootPane;
+
     
     public void loadproductsforuser(){
+        //product_image.setImage(new Image("file:/C:/Users/paspo/Desktop/PIDev_java/PIDev_Java/src/img/e3d8643342d3e46eee47b91f9acf331e.jpeg"));
         ProductServices ps= new ProductServices();
         List<Product> products;
         ShoppingCart sc=new ShoppingCart();
@@ -53,10 +58,21 @@ public class ShopViewController implements Initializable {
         products.forEach((p)->{
             Label title = new Label();
             title.setText(p.getProduct_name());
-
+            
+            /*Image image;
+            try {
+                ImageView product_image = new ImageView();
+                image = new Image(new FileInputStream(p.getImg()));
+                product_image.setImage(image);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(ShopViewController.class.getName()).log(Level.SEVERE, null, ex);
+            }*/
+            
+            //product_image.setImage(new Image("file:/C:/Users/paspo/Desktop/PIDev_java/PIDev_Java/src/img/e3d8643342d3e46eee47b91f9acf331e.jpeg"));
             ImageView product_image= new ImageView("/img/t-shirt.jpg");
             product_image.setFitHeight(200);
             product_image.setFitWidth(200);
+            
             HBox hbox = new HBox();
             hbox.setSpacing(10);
             Button viewitembutton = new Button("View Item");
@@ -86,7 +102,6 @@ public class ShopViewController implements Initializable {
                 
                 Product pa = p;
                 sc.addItem(p);
-                System.out.println(sc.getItems());
                 
             });
             hbox.getChildren().addAll(viewitembutton,addtocartbutton);
@@ -115,6 +130,11 @@ public class ShopViewController implements Initializable {
                 Logger.getLogger(ShopViewController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
+    }
+    
+        public void gotoorderlist() throws IOException{
+            AnchorPane pane=FXMLLoader.load(getClass().getResource("/UI/Shop.fxml"));
+            rootPane.getChildren().setAll(pane);
     }
     
     

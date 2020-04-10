@@ -6,15 +6,25 @@
 package UI;
 
 import Entity.Product;
+import java.awt.event.KeyAdapter;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
 import services.ProductServices;
-
+import javafx.scene.input.KeyEvent;
+import javax.imageio.ImageIO;
 /**
  * FXML Controller class
  *
@@ -35,7 +45,40 @@ public class AddProductController implements Initializable {
     @FXML
     private Label newproductlabel;
     
+    private String imgp;
+    
     public void addproductbutton(){
+        
+        
+        
+        try{
+            Integer i = Integer.parseInt(newproductstock.getText());
+        }
+        catch(NumberFormatException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("Enter a valide stock");
+            alert.showAndWait();
+        }
+        try{
+            Double d = Double.parseDouble(newproductprice.getText());
+        }
+        catch(NumberFormatException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("Enter a valide price");
+            alert.showAndWait();
+        }
+        
+        
+        if(newproductname.getText().trim().isEmpty() || newproductimage.getText().trim().isEmpty() || newproductprice.getText().trim().isEmpty() || newproductstock.getText().trim().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("Please fill all fields");
+            alert.showAndWait();
+        }
+        else{
+ 
         String pn=newproductname.getText();
         String img=newproductimage.getText();
         int stk=Integer.parseInt(newproductstock.getText());
@@ -44,10 +87,27 @@ public class AddProductController implements Initializable {
         ProductServices ps=new ProductServices();
         ps.addProduct(p);
         newproductlabel.setText("Product has been added !!");
+        }
+    }
+    
+    public void uploadimage(ActionEvent event){
+        FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter("Image Files","*.jpg","*png");
+        
+        final FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(imageFilter);
+        Window stage = null;
+        File file = fileChooser.showOpenDialog(stage);
+         if (file != null) {
+               
+                imgp=file.toURI().toString();
+                
+                newproductimage.setText(imgp);
+            }
+
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        newproductimage.setDisable(true);
     }    
     
 }

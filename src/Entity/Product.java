@@ -17,6 +17,9 @@ public class Product {
     private String img;
     private int stock;
     private double price;
+
+
+    
     
     public Product(int id,String product_name,String img,int stock,double price){
         this.id=id;
@@ -31,6 +34,7 @@ public class Product {
         this.stock=stock;
         this.price=price;
     }
+
     
     public int getId() {
         return id;
@@ -51,6 +55,7 @@ public class Product {
     public double getPrice() {
         return price;
     }
+
 
     public void setId(int id) {
         this.id = id;
@@ -76,4 +81,7 @@ public class Product {
     public String toString() {
         return "Product{" + "id=" + id + ", product_name=" + product_name + ", img=" + img + ", stock=" + stock + ", price=" + price + '}';
     }
+    
+
+    
 }

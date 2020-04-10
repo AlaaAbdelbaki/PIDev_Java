@@ -29,6 +29,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import services.OrderServices;
@@ -58,7 +59,8 @@ public class OrderController implements Initializable {
     @FXML
     private TextField search_order;
     private ObservableList<Order> order_list;
-    
+    @FXML
+    AnchorPane rootPane;
     
         public void afficherOrdersTableView() {
         
@@ -188,7 +190,14 @@ public class OrderController implements Initializable {
     
     
     
-    
+        public void gotoproductlist() throws IOException{
+            AnchorPane pane=FXMLLoader.load(getClass().getResource("/UI/Shop.fxml"));
+            rootPane.getChildren().setAll(pane);
+    }
+            public void gotoshopview() throws IOException{
+            AnchorPane pane=FXMLLoader.load(getClass().getResource("/UI/ShopView.fxml"));
+            rootPane.getChildren().setAll(pane);
+    }
     
     
     

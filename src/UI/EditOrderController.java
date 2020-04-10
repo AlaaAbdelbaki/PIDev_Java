@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -53,22 +54,42 @@ public class EditOrderController implements Initializable {
     }
     
     public void confirmmodifybutton(){
-        LocalDate localorderdate=neworderdate.getValue();
-        Date date=java.sql.Date.valueOf(localorderdate);
-        double total=Double.parseDouble(newordertotal.getText());
-        String address=neworderaddress.getText();
-        int id=Integer.parseInt(neworderid.getText());
-        Order o =new Order((java.sql.Date) date,total,address);
-        OrderServices os= new OrderServices();
-        os.modifyOrder(o, id);
-        labelsuccess.setText("Product has been modified !!");
+        try{
+            Double d = Double.parseDouble(newordertotal.getText());
+        }
+        catch(NumberFormatException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("Enter a valide total");
+            alert.showAndWait();
+        }
+        
+        
+        if(neworderdate.getValue().equals(null) || newordertotal.getText().trim().isEmpty() || neworderaddress.getText().trim().isEmpty() ){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("Please fill all fields");
+            alert.showAndWait();
+        }
+        else{
+            LocalDate localorderdate=neworderdate.getValue();
+            Date date=java.sql.Date.valueOf(localorderdate);
+            double total=Double.parseDouble(newordertotal.getText());
+            String address=neworderaddress.getText();
+            int id=Integer.parseInt(neworderid.getText());
+            Order o =new Order((java.sql.Date) date,total,address);
+            OrderServices os= new OrderServices();
+            os.modifyOrder(o, id);
+            labelsuccess.setText("Product has been modified !!");
+        }
+        
     }
     
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        neworderdate.getEditor().setDisable(true);
     }    
     
 }

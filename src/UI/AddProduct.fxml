@@ -43,5 +43,6 @@
       </Label>
       <Button fx:id="confirmeditbutton" layoutX="231.0" layoutY="328.0" mnemonicParsing="false" onAction="#addproductbutton" text="Add Product" />
       <Label fx:id="newproductlabel" layoutX="177.0" layoutY="381.0" prefHeight="31.0" prefWidth="228.0" textFill="LIMEGREEN" />
+      <Button layoutX="386.0" layoutY="184.0" mnemonicParsing="false" onAction="#uploadimage" text="Upload" />
    </children>
 </AnchorPane>
