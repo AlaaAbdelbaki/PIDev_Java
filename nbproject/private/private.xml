@@ -5,7 +5,10 @@
         <group>
             <file>file:/C:/Users/EZZEDINE/Desktop/PIDev_Java/src/tunisiagottalent/ui/UpdatesController.java</file>
             <file>file:/C:/Users/EZZEDINE/Desktop/PIDev_Java/src/tunisiagottalent/ui/ArticleListController.java</file>
+            <file>file:/C:/Users/EZZEDINE/Desktop/PIDev_Java/src/tunisiagottalent/services/ServiceArticle.java</file>
+            <file>file:/C:/Users/EZZEDINE/Desktop/PIDev_Java/src/tunisiagottalent/ui/ArticleController.java</file>
             <file>file:/C:/Users/EZZEDINE/Desktop/PIDev_Java/src/tunisiagottalent/TunisiaGotTalent.java</file>
+            <file>file:/C:/Users/EZZEDINE/Desktop/PIDev_Java/src/tunisiagottalent/services/ServiceUpdates.java</file>
         </group>
     </open-files>
 </project-private>

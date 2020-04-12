@@ -14,7 +14,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import tunisiagottalent.entity.Article;
+import javafx.geometry.Pos;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
+import tunisiagottalent.entity.Updates;
 
 /**
  *
@@ -31,10 +36,17 @@ public class ServiceUpdates implements IService<Updates>{
             Statement stm = cnx.createStatement();
             String query = "INSERT INTO updates (id,title,img,content,category,publish_date) VALUES (NULL, '"+a.getTitle()+"', '"+a.getImg()+"', '"+a.getContent()+"','"+a.getCategory()+"','"+a.getPublish_date()+"')";
             stm.executeUpdate(query);
-            System.out.println("updates ajouté !");
+           // System.out.println("updates ajouté !");
+
+            Image img = new Image("img/vrai.jpg", 50, 50, false, false);
+			Notifications notificationBuilder;
+            notificationBuilder = Notifications.create().title("download completed").text("saved")
+                    .graphic(new ImageView(img)).hideAfter(Duration.seconds(5)).position(Pos.BOTTOM_RIGHT);
+			notificationBuilder.show();
 
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
+        
         }
         
     }

@@ -47,6 +47,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.Event;
+import javafx.scene.Node;
+import javafx.scene.control.Pagination;
 
 
 //import javafx.util.Duration:
@@ -92,6 +94,9 @@ public class ArticleListController implements Initializable {
     private TextField search;
     @FXML
     private ImageView img;
+    @FXML
+    private Pagination pagination;
+    private final static int rowsPerPage = 3;
     
     public void views() throws SQLException {  
       
@@ -112,6 +117,7 @@ public class ArticleListController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
            views();
+           pagination.setPageFactory(this::createPage);
         
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -222,6 +228,13 @@ public class ArticleListController implements Initializable {
             ListArticle.setItems(list);
                         
     }
+     private Node createPage(int pageIndex) {
+		int fromIndex = pageIndex * rowsPerPage;
+		int toIndex = Math.min(fromIndex + rowsPerPage, list.size());
+		ListArticle.setItems(FXCollections.observableArrayList(list.subList(fromIndex, toIndex)));
+
+		return ListArticle;
+	}
 }
 
     

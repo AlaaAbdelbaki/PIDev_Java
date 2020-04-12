@@ -12,8 +12,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.geometry.Pos;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import org.controlsfx.control.Notifications;
+
 
 /**
  *
@@ -30,11 +36,18 @@ public class ServiceArticle implements IService<Article>{
             Statement stm = cnx.createStatement();
             String query = "INSERT INTO article (id,title,img,content) VALUES (NULL, '"+a.getTitle()+"', '"+a.getImg()+"', '"+a.getContent()+"')";
             stm.executeUpdate(query);
-            System.out.println("article ajouté !");
+            
+            //System.out.println("article ajouté !");
+            Image img = new Image("img/vrai.jpg", 50, 50, false, false);
+			Notifications notificationBuilder;
+            notificationBuilder = Notifications.create().title("download completed").text("saved")
+                    .graphic(new ImageView(img)).hideAfter(Duration.seconds(5)).position(Pos.BOTTOM_RIGHT);
+			notificationBuilder.show();
 
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
+        
         
     }
 

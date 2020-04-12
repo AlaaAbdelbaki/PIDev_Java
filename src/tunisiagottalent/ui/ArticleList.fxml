@@ -24,7 +24,7 @@
         </columns>
       </TableView>
       <Button fx:id="RetourAction" layoutX="14.0" layoutY="668.0" mnemonicParsing="false" onAction="#btnRetourAction" prefHeight="31.0" prefWidth="89.0" text="Retour" />
-      <Button fx:id="supprimer" layoutX="38.0" layoutY="314.0" mnemonicParsing="false" onAction="#btnSuppAction" prefHeight="31.0" prefWidth="284.0" text="Selectionner l'article à Supprimer" />
+      <Button fx:id="supprimer" layoutX="38.0" layoutY="372.0" mnemonicParsing="false" onAction="#btnSuppAction" prefHeight="31.0" prefWidth="284.0" text="Selectionner l'article à Supprimer" />
       <Button fx:id="modifier" layoutX="947.0" layoutY="483.0" mnemonicParsing="false" onAction="#btnModifAction" text="modifer" />
       <TextField fx:id="UpTitle" layoutX="890.0" layoutY="184.0" />
       <TextField fx:id="UpImg" layoutX="897.0" layoutY="260.0" />
@@ -35,5 +35,6 @@
       <TextField fx:id="search" layoutX="27.0" layoutY="74.0" prefHeight="25.0" prefWidth="305.0" promptText="search" />
       <Line endX="100.0" layoutX="720.0" layoutY="287.0" rotate="90.0" scaleX="2.0" scaleY="2.0" scaleZ="2.0" startX="-100.0" />
       <ImageView fx:id="img" fitHeight="229.0" fitWidth="340.0" layoutX="345.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true" />
+      <Pagination fx:id="pagination" layoutX="8.0" layoutY="99.0" prefHeight="270.0" prefWidth="391.0" />
    </children>
 </AnchorPane>
