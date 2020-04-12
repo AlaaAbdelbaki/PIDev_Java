@@ -27,7 +27,7 @@
         </columns>
       </TableView>
       <Button fx:id="RetourAction" layoutX="361.0" layoutY="664.0" mnemonicParsing="false" onAction="#btnRetourAction" prefHeight="31.0" prefWidth="130.0" text="Retour" />
-      <Button fx:id="SupprimerAction" layoutX="138.0" layoutY="308.0" mnemonicParsing="false" onAction="#btnSuppAction" prefHeight="31.0" prefWidth="576.0" text="Selectionner le champs à Supprimer" />
+      <Button fx:id="SupprimerAction" layoutX="138.0" layoutY="390.0" mnemonicParsing="false" onAction="#btnSuppAction" prefHeight="31.0" prefWidth="576.0" text="Selectionner le champs à Supprimer" />
       <Line endX="-43.0" endY="264.0" layoutX="843.0" layoutY="250.0" startX="-43.0" startY="-135.0" />
       <TextField fx:id="UpTitle" layoutX="958.0" layoutY="196.0" />
       <TextField fx:id="UpImg" layoutX="954.0" layoutY="262.0" prefHeight="31.0" prefWidth="196.0" />
@@ -38,8 +38,11 @@
       <Text layoutX="834.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New image" wrappingWidth="130.0" />
       <Text layoutX="830.0" layoutY="336.0" strokeType="OUTSIDE" strokeWidth="0.0" text="new Category" wrappingWidth="110.22314453125" />
       <Text layoutX="852.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" text="new date" wrappingWidth="91.673828125" />
-      <Text layoutX="839.0" layoutY="456.0" strokeType="OUTSIDE" strokeWidth="0.0" text="new content" wrappingWidth="116.9873046875" />
-      <Button fx:id="modifer" layoutX="1020.0" layoutY="526.0" mnemonicParsing="false" onAction="#btnModifAction" text="Modifier" />
+      <Button fx:id="modifer" layoutX="1020.0" layoutY="526.0" mnemonicParsing="false" onAction="#btnModifAction" text="Modifier">
+         <graphic>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="new content" wrappingWidth="116.9873046875" />
+         </graphic></Button>
       <ImageView fx:id="img" fitHeight="294.0" fitWidth="619.0" layoutX="120.0" layoutY="360.0" pickOnBounds="true" preserveRatio="true" />
+      <Pagination fx:id="pagination" layoutX="92.0" layoutY="23.0" prefHeight="309.0" prefWidth="675.0" />
    </children>
 </AnchorPane>

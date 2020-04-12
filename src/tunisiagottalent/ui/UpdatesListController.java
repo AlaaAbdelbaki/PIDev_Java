@@ -33,7 +33,9 @@ import tunisiagottalent.entity.Updates;
 import tunisiagottalent.services.ServiceUpdates;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -64,6 +66,7 @@ public class UpdatesListController implements Initializable {
     @FXML
     private Button RetourAction;
     
+    
     List listp = new ArrayList();
     Updates u = new Updates();
     ServiceUpdates sp = new ServiceUpdates();
@@ -90,6 +93,10 @@ public class UpdatesListController implements Initializable {
     private Button modifer;
     @FXML
     private ImageView img;
+    @FXML
+   // private Pagination paginatio;
+    private Pagination pagination;
+    private final static int rowsPerPage = 3;
     
 
 
@@ -115,10 +122,11 @@ public class UpdatesListController implements Initializable {
       
         try {
            views();
+         pagination.setPageFactory(this::createPage);
         
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
-        } 
+        }
         
         //Modifier Starts Here
          ListUp.setOnKeyReleased((KeyEvent e) -> {
@@ -229,7 +237,13 @@ public class UpdatesListController implements Initializable {
     return localDate;
 }
 
+ private Node createPage(int pageIndex) {
+		int fromIndex = pageIndex * rowsPerPage;
+		int toIndex = Math.min(fromIndex + rowsPerPage, list.size());
+		ListUp.setItems(FXCollections.observableArrayList(list.subList(fromIndex, toIndex)));
 
+		return ListUp;
+	}
     }
     
 

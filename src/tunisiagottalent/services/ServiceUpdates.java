@@ -19,7 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
-import tunisiagottalent.entity.Updates;
+
 
 /**
  *
