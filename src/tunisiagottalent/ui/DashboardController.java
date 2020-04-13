@@ -30,6 +30,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import tunisiagottalent.services.UserServices;
+import tunisiagottalent.util.UserSession;
 
 /**
  * FXML Controller class
@@ -132,33 +134,23 @@ public class DashboardController {
         ft.play();
     }
 
-    void loadInfo() {
+        void loadInfo() {
+        UserSession s = UserSession.instance;
+        UserServices us = new UserServices();
+
+
 
 //        Image img=new Image("D:/Programming/Web/htdocs/annee_2019_2020/PIDev/web/assets/img/pics/unknown.jpg"); 
         Image img = new Image("tunisiagottalent/ui/img/unknown.jpg");
         profilePicture.setImage(img);
-        try {
-
-            File f = new File("info.dat");
-            Scanner s = new Scanner(f);
-            while (s.hasNextLine()) {
-                String data = s.nextLine();
-//                System.out.println(data);
-                String user = data.substring(0, data.indexOf(":"));
-                username.setText(user);
-
-            }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        username.setText(s.getU().getUsername());
+        
     }
 
     @FXML
     void disconnect(MouseEvent event) {
         try {
-            FileWriter f = new FileWriter("info.dat");
-            f.write("");
-            f.close();
+            UserSession.instance.cleanUserSession();
             fadeTransition("login");
         } catch (IOException ex) {
             Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);

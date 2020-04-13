@@ -28,6 +28,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import tunisiagottalent.services.UserServices;
+import tunisiagottalent.util.UserSession;
 
 /**
  * FXML Controller class
@@ -47,12 +48,10 @@ public class UpdatePasswordController {
 
     @FXML
     void changePassword(ActionEvent event) throws Exception {
-        File f = new File("info.dat");
-        Scanner s = new Scanner(f);
-        String username = s.nextLine();
+        UserSession s = UserSession.instance;
         UserServices us = new UserServices();
         if (password.getText().equals(passwordRetype.getText())) {
-            if (us.upadtePassword(username, password.getText())) {
+            if (us.upadtePassword(s.getU().getUsername(), password.getText())) {
                 fadeTransition("login");
             }
         }

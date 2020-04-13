@@ -29,6 +29,7 @@
             <Label fx:id="bio" alignment="TOP_LEFT" layoutX="244.0" layoutY="96.0" prefHeight="54.0" prefWidth="622.0" styleClass="bio" text="Bio" wrapText="true" />
             <Button layoutX="244.0" layoutY="172.0" mnemonicParsing="false" onAction="#editProfile" text="Edit Profile" />
             <ScrollPane fx:id="videos_Container" layoutY="219.0" prefHeight="501.0" prefWidth="880.0" />
+            <Button layoutX="343.0" layoutY="172.0" mnemonicParsing="false" onAction="#addVideo" text="Add Video" />
          </children>
       </AnchorPane>
       <Rectangle fx:id="navbar" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="720.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="navbar" width="400.0">

@@ -28,6 +28,13 @@ public class Video {
         this.userId = userId;
     }
 
+    public Video(String url, String title, Date date, int userId) {
+        this.url = url;
+        this.title = title;
+        this.date = date;
+        this.userId = userId;
+    }
+
     public int getId() {
         return id;
     }

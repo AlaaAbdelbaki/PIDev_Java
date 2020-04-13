@@ -135,10 +135,12 @@ public class LoginController {
 
                 case 1: {
                     UserServices us = new UserServices();
-                    FileWriter f = new FileWriter("info.dat");
-                    String role = us.getRole(user);
-                    f.write(user + "::" + role);
-                    f.close();
+                    UserSession session = UserSession.getInstance(us.getUser(user));
+//                    System.out.println(session);
+//                    FileWriter f = new FileWriter("info.dat");
+//                    String role = us.getRole(user);
+//                    f.write(user + "::" + role);
+//                    f.close();
                     fadeTransition("homepage");
                     //Sessions using usersessions class
                     //UserSession.getInstace(user,roles.add(us.getRole(user))));

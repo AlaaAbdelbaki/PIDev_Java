@@ -1,4 +1,4 @@
- package tunisiagottalent.ui;
+package tunisiagottalent.ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -36,6 +36,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import tunisiagottalent.entity.User;
 import tunisiagottalent.services.UserServices;
+import tunisiagottalent.util.UserSession;
 
 public class EditProfileController {
 
@@ -161,69 +162,53 @@ public class EditProfileController {
     }
 
     void loadInfo() {
+        UserServices us = new UserServices();
+        UserSession s = UserSession.instance;
         dashboard_icon.setVisible(false);
         dashboard_label.setVisible(false);
-
+        username.setText(s.getU().getUsername());
+        if (us.getRole(s.getU().getUsername()).contains("ROLE_ADMIN")) {
+            dashboard_icon.setVisible(true);
+            dashboard_label.setVisible(true);
+        }
 //        Image img=new Image("D:/Programming/Web/htdocs/annee_2019_2020/PIDev/web/assets/img/pics/unknown.jpg"); 
         Image img = new Image("tunisiagottalent/ui/img/unknown.jpg");
         profilePicture.setImage(img);
-        try {
-
-            File f = new File("info.dat");
-            Scanner s = new Scanner(f);
-            while (s.hasNextLine()) {
-                String data = s.nextLine();
-//                System.out.println(data);
-                String user = data.substring(0, data.indexOf(":"));
-                username.setText(user);
-                usernameInput.setText(user);
-//                System.out.println(user.length());
-                String previlege = data.substring(data.indexOf(":") + 4, data.indexOf(":") + 5);
-//                System.out.println(previlege);
-                if (previlege.equals("1")) {
-                    dashboard_icon.setVisible(true);
-                    dashboard_label.setVisible(true);
-                }
-                UserServices us = new UserServices();
-                if (us.getUser(user).getName() != null) {
-                    firstNameInput.setText(us.getUser(user).getName());
-                }
-                if (us.getUser(user).getLastName() != null) {
-                    lastNameInput.setText(us.getUser(user).getLastName());
-                }
-                if (us.getUser(user).getPhone_number() != null) {
-                    phoneNumberInput.setText(us.getUser(user).getPhone_number());
-                }
-                if (us.getUser(user).getGender() != null) {
-                    //System.out.println(us.getUser(user).getGender());
-                    genderInput.setValue(us.getUser(user).getGender().substring(0, 1).toUpperCase() + us.getUser(user).getGender().substring(1));
-                }
-                if (us.getUser(user).getBio() != null) {
-
-                    bioInput.setText(us.getUser(user).getBio());
-                }
-                if (us.getUser(user).getEmail() != null) {
-                    emailInput.setText(us.getUser(user).getEmail());
-                }
-                if (us.getUser(user).getAddress() != null) {
-                    addressInput.setText(us.getUser(user).getAddress());
-                }
-                if (us.getUser(user).getBirthday() != null) {
-                    birthdayInput.setValue(us.getUser(user).getBirthday().toLocalDate());
-                }
-
-            }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
+        usernameInput.setText(s.getU().getUsername());
+//        System.out.println(s.getU());
+        if (us.getUser(s.getU().getUsername()).getName() != null) {
+            firstNameInput.setText(us.getUser(s.getU().getUsername()).getName());
         }
+        if (us.getUser(s.getU().getUsername()).getLastName() != null) {
+            lastNameInput.setText(us.getUser(s.getU().getUsername()).getLastName());
+        }
+        if (us.getUser(s.getU().getUsername()).getPhone_number() != null) {
+            phoneNumberInput.setText(us.getUser(s.getU().getUsername()).getPhone_number());
+        }
+        if (us.getUser(s.getU().getUsername()).getGender() != null) {
+            //System.out.println(us.getUser(user).getGender());
+            genderInput.setValue(us.getUser(s.getU().getUsername()).getGender().substring(0, 1).toUpperCase() + us.getUser(s.getU().getUsername()).getGender().substring(1));
+        }
+        if (us.getUser(s.getU().getUsername()).getBio() != null) {
+
+            bioInput.setText(us.getUser(s.getU().getUsername()).getBio());
+        }
+        if (us.getUser(s.getU().getUsername()).getEmail() != null) {
+            emailInput.setText(us.getUser(s.getU().getUsername()).getEmail());
+        }
+        if (us.getUser(s.getU().getUsername()).getAddress() != null) {
+            addressInput.setText(us.getUser(s.getU().getUsername()).getAddress());
+        }
+        if (us.getUser(s.getU().getUsername()).getBirthday() != null) {
+            birthdayInput.setValue(us.getUser(s.getU().getUsername()).getBirthday().toLocalDate());
+        }
+
     }
 
     @FXML
     void disconnect(MouseEvent event) {
         try {
-            FileWriter f = new FileWriter("info.dat");
-            f.write("");
-            f.close();
+            UserSession.instance.cleanUserSession();
             fadeTransition("login");
         } catch (IOException ex) {
             Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
@@ -254,6 +239,7 @@ public class EditProfileController {
         String username = usernameInput.getText();
         String email = emailInput.getText();
         String password = passwordInput.getText();
+
         System.out.println(password);
         String gender;
         if (genderInput.getValue() != null) {
@@ -264,7 +250,20 @@ public class EditProfileController {
         String name = firstNameInput.getText();
         String lastName = lastNameInput.getText();
         String bio = bioInput.getText();
-        String phone_number = phoneNumberInput.getText();
+        String phone_number = "";
+        if (phoneNumberInput.getText().matches("[0-9]+")) {
+            phone_number = phoneNumberInput.getText();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText(null);
+            alert.setContentText("Password field contains characters !");
+            Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(new Image("/tunisiagottalent/ui/img/icon.png"));
+
+            alert.showAndWait();
+            return;
+        }
 //        System.out.println(phone_number);
         Date birthday;
         if (birthdayInput.getValue() != null) {

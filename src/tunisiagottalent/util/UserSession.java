@@ -1,53 +1,43 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tunisiagottalent.util;
 
-import java.util.HashSet;
-import java.util.Set;
+import tunisiagottalent.entity.User;
 
-/**
- *
- * @author alaa
- */
-public class UserSession {
-    private static UserSession instance;
+public final class UserSession {
 
-    private String userName;
-    private Set<String> privileges;
+    public static UserSession instance;
 
-    private UserSession(String userName, Set<String> privileges) {
-        this.userName = userName;
-        this.privileges = privileges;
+    private User u;
+
+    public User getU() {
+        return u;
     }
 
-    public static UserSession getInstace(String userName, Set<String> privileges) {
-        if(instance == null) {
-            instance = new UserSession(userName, privileges);
-        }
-        return instance;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public Set<String> getPrivileges() {
-        return privileges;
-    }
-
-    public void cleanUserSession() {
-        userName = "";// or null
-        privileges = new HashSet<>();// or null
-    }
+   
 
     @Override
     public String toString() {
         return "UserSession{" +
-                "userName='" + userName + '\'' +
-                ", privileges=" + privileges +
+                "u=" + u +
                 '}';
     }
-}
+
+    public UserSession(User u) {
+        this.u = u;
+
+    }
+
+    public static UserSession getInstance(User u) {
+        if(instance == null) {
+            instance = new UserSession(u);
+        }
+        return instance;
+    }
+
+    
+
+    public void cleanUserSession() {
+        instance=null;
+    }
+
+
+    }

@@ -25,9 +25,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import tunisiagottalent.services.UserServices;
+import tunisiagottalent.util.UserSession;
 
 public class HomepageController {
-
 
     @FXML
     private AnchorPane rootPane;
@@ -101,7 +102,6 @@ public class HomepageController {
     @FXML
     void initialize() {
 
-        
         rootPane.setOpacity(0);
         fadein();
         loadInfo();
@@ -119,41 +119,26 @@ public class HomepageController {
     }
 
     void loadInfo() {
+        UserSession s = UserSession.instance;
+        UserServices us = new UserServices();
+
         dashboard_icon.setVisible(false);
         dashboard_label.setVisible(false);
 
 //        Image img=new Image("D:/Programming/Web/htdocs/annee_2019_2020/PIDev/web/assets/img/pics/unknown.jpg"); 
         Image img = new Image("tunisiagottalent/ui/img/unknown.jpg");
         profilePicture.setImage(img);
-        try {
-
-            File f = new File("info.dat");
-            Scanner s = new Scanner(f);
-            while (s.hasNextLine()) {
-                String data = s.nextLine();
-//                System.out.println(data);
-                String user = data.substring(0, data.indexOf(":"));
-                username.setText(user);
-//                System.out.println(user.length());
-                String previlege = data.substring(data.indexOf(":") + 4, data.indexOf(":") + 5);
-//                System.out.println(previlege);
-                if (previlege.equals("1")) {
-                    dashboard_icon.setVisible(true);
-                    dashboard_label.setVisible(true);
-                }
-
-            }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
+        username.setText(s.getU().getUsername());
+        if (us.getRole(s.getU().getUsername()).contains("ROLE_ADMIN")) {
+            dashboard_icon.setVisible(true);
+            dashboard_label.setVisible(true);
         }
     }
 
     @FXML
     void disconnect(MouseEvent event) {
         try {
-            FileWriter f = new FileWriter("info.dat");
-            f.write("");
-            f.close();
+            UserSession.instance.cleanUserSession();
             fadeTransition("login");
         } catch (IOException ex) {
             Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
@@ -171,14 +156,14 @@ public class HomepageController {
     }
 
     @FXML
-    void dashboard(MouseEvent event){
+    void dashboard(MouseEvent event) {
         try {
             fadeTransition("dashboard");
         } catch (IOException ex) {
             Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-            
+
     void fadeTransition(String scene) throws IOException {
 
         FadeTransition ft = new FadeTransition();
@@ -199,7 +184,7 @@ public class HomepageController {
                     Scene s = new Scene(second);
                     Stage current = (Stage) rootPane.getScene().getWindow();
                     current.setScene(s);
-                    
+
                 } catch (IOException ex) {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -209,6 +194,5 @@ public class HomepageController {
         ft.play();
 
     }
-    
 
 }

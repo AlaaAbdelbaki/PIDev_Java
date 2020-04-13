@@ -40,6 +40,7 @@ import tunisiagottalent.entity.User;
 import tunisiagottalent.entity.Video;
 import tunisiagottalent.services.UserServices;
 import tunisiagottalent.services.VideoServices;
+import tunisiagottalent.util.UserSession;
 import tunisiagottalent.util.sendEmailSMTP;
 
 /**
@@ -170,45 +171,29 @@ public class ProfileController {
 //        Image img=new Image("D:/Programming/Web/htdocs/annee_2019_2020/PIDev/web/assets/img/pics/unknown.jpg"); 
         Image img = new Image("tunisiagottalent/ui/img/unknown.jpg");
         profilePicture.setImage(img);
-        try {
-
-            File f = new File("info.dat");
-            Scanner s = new Scanner(f);
-            while (s.hasNextLine()) {
-                String data = s.nextLine();
-//                System.out.println(data);
-                String user = data.substring(0, data.indexOf(":"));
-                username.setText(user);
-//                System.out.println(user.length());
-                String previlege = data.substring(data.indexOf(":") + 4, data.indexOf(":") + 5);
-//                System.out.println(previlege);
-                if (previlege.equals("1")) {
-                    dashboard_icon.setVisible(true);
-                    dashboard_label.setVisible(true);
-                }
-                UserServices us = new UserServices();
-                
-                username_profile.setText(user);
-                profilePic.setImage(img);
-                if (us.getUser(user).getName() == null || us.getUser(user).getLastName() == null) {
-                    nameLastName.setText("Complete your profile !!");
-                } else {
-                    nameLastName.setText(us.getUser(user).getName() + " " + us.getUser(user).getLastName());
-                }
-                bio.setText(us.getUser(user).getBio());
-
-            }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
+        UserServices us = new UserServices();
+        UserSession s = UserSession.instance;
+        username.setText(s.getU().getUsername());
+        if(us.getRole(s.getU().getUsername()).contains("ROLE_ADMIN")){
+            dashboard_icon.setVisible(true);
+            dashboard_label.setVisible(true);
         }
+        User user = s.getU();
+//        System.out.println(user);
+        username_profile.setText(user.getUsername());
+        profilePic.setImage(img);
+        if(us.getUser(user.getUsername()).getName() == null || us.getUser(user.getUsername()).getLastName() == null){
+            nameLastName.setText("Complete your profile !!");
+        }else{
+            nameLastName.setText(us.getUser(user.getUsername()).getName() + " " + us.getUser(user.getUsername()).getLastName());
+        }
+        bio.setText(us.getUser(user.getUsername()).getBio());
     }
 
     @FXML
     void disconnect(MouseEvent event){
         try {
-            FileWriter f = new FileWriter("info.dat");
-            f.write("");
-            f.close();
+            UserSession.instance.cleanUserSession();
             fadeTransition("login");
         } catch (IOException ex) {
             Logger.getLogger(HomepageController.class.getName()).log(Level.SEVERE, null, ex);
@@ -242,6 +227,14 @@ public class ProfileController {
         } 
     }
             
+    @FXML
+            void addVideo(ActionEvent event){
+        try {
+            fadeTransition("addVideo");
+        } catch (IOException ex) {
+            Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            }
     
     
     void loadVideos(){

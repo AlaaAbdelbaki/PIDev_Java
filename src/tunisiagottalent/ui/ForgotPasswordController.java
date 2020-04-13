@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import tunisiagottalent.entity.User;
 import tunisiagottalent.services.UserServices;
+import tunisiagottalent.util.UserSession;
 import tunisiagottalent.util.sendEmailSMTP;
 
 /**
@@ -46,9 +47,7 @@ public class ForgotPasswordController {
         String token = us.tokenGenerator();
         us.updateToken(user.getUsername(), token);
         sendEmailSMTP.sendMail(user.getUsername(), user.getEmail(), token);
-        FileWriter f = new FileWriter("info.dat");
-        f.write(usernameInput.getText());
-        f.close();
+        UserSession s = UserSession.getInstance(us.getUser(usernameInput.getText()));
         fadeTransition("checkToken");
     }
 

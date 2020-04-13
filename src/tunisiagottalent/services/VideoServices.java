@@ -65,4 +65,36 @@ public class VideoServices {
         return list;
     }
 
+    public boolean AddVideo(Video v){
+        String url="";
+        String find="select url from video where url = '"+v.getUrl()+"'";
+        
+        
+        try {
+            ste = cnx.createStatement();
+            rs = ste.executeQuery(find);
+            while(rs.next()){
+                url = rs.getString("url");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(VideoServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if(v.getUrl().equals(url)){
+            System.out.println("Video exitst !");
+            return false;
+        }else{
+            String sql = "insert into video(url,title,publish_date,owner) values('"+v.getUrl()+"','"+v.getTitle()+"','"+v.getDate()+"','"+v.getUserId()+"')";
+            try {
+                ste = cnx.createStatement();
+                ste.executeUpdate(sql);
+                
+                return true;
+            } catch (SQLException ex) {
+                Logger.getLogger(VideoServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return false;
+    }
 }

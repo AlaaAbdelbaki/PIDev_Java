@@ -119,7 +119,7 @@ public class UserServices {
             pwd = "$2y" + pwd;
             u.setPassword(pwd);
             //System.out.println(pwd);
-            String req = "insert into user(username,password,username_canonical,email,email_canonical,enabled,roles) values('" + u.getUsername() + "','" + u.getPassword() + "','" + u.getUsername() + "','" + u.getEmail() + "','" + u.getEmail() + "',1,'a:0:{}')";
+            String req = "insert into user(username,password,username_canonical,email,email_canonical,enabled,roles,passwordToken) values('" + u.getUsername() + "','" + u.getPassword() + "','" + u.getUsername() + "','" + u.getEmail() + "','" + u.getEmail() + "',1,'a:0:{}','')";
             try {
                 ste = cnx.createStatement();
                 ste.executeUpdate(req);
@@ -137,10 +137,16 @@ public class UserServices {
     //Delete user
     public boolean delete(String username) {
 
+        UserServices us = new UserServices();
+        User u = us.getUser(username);
+        String deleteVideos="delete from video where owner = "+u.getId();
         String req = "delete from user where username='" + username + "'";
 
         try {
+            cnx.createStatement().executeUpdate(deleteVideos);
+            System.out.println("Videos of user '"+username+"' successfully deleted !");
             cnx.createStatement().executeUpdate(req);
+            System.out.println("User '"+username+"' successfully deleted !");
 
             return true;
         } catch (SQLException ex) {
@@ -376,7 +382,7 @@ public class UserServices {
         for (int i = 0; i < 5; i++) {
             token += alphanumeric.charAt(rnd.nextInt(alphanumeric.length()));
         }
-        System.out.println(token);
+//        System.out.println(token);
         return token;
     }
 }
