@@ -46,7 +46,7 @@ public class AddReviewController implements Initializable {
     private Slider rating;
     @FXML
     private TextField title;
-     ObservableList<String> options=FXCollections.observableArrayList("Event","Orders","Competitions","Blog");
+     ObservableList<String> options=FXCollections.observableArrayList("Event","Orders","Competition","Blog");
     @FXML
     private TextField rate;
 
@@ -68,20 +68,33 @@ public class AddReviewController implements Initializable {
 
         });
     }    
+public Boolean ValidateFields() {
+        if (category.getValue()==null | contenu.getText().isEmpty() | rate.getText().isEmpty() ) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Validate fields");
+            alert.setHeaderText(null);
+            alert.setContentText("Please Enter Into The Fields");
+            alert.showAndWait();
+            return false;
+        }
 
+        return true;
+
+    }
     @FXML
     private void AddReview(ActionEvent event) throws IOException {
-      String t= title.getText();
+      if( ValidateFields()==false){String t= title.getText();
          String con= contenu.getText();
          String cat= category.getValue().toString();
         String note= rate.getText();
         int n= Integer.parseInt(note);
          ReviewService rs = new ReviewService();
          Review r = new Review(cat,n,con);
-         rs.insertReviewPST(r);        
+         rs.insertReviewPST(r);}        
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Notification");
-        alert.setHeaderText("Complaint added with succes");
+        alert.setHeaderText("Review added with succes");
+        alert.showAndWait();
         javafx.scene.Parent tableview = FXMLLoader.load(getClass().getResource("DashboardReview.fxml"));
         Scene sceneview = new Scene(tableview);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -92,7 +105,7 @@ public class AddReviewController implements Initializable {
 
     @FXML
     private void cancelButton(ActionEvent event) throws IOException {
-       javafx.scene.Parent tableview = FXMLLoader.load(getClass().getResource("DashboardComplaint.fxml"));
+       javafx.scene.Parent tableview = FXMLLoader.load(getClass().getResource("home.fxml"));
         Scene sceneview = new Scene(tableview);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(sceneview);

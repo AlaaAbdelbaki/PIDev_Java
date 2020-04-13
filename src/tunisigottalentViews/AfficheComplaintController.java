@@ -38,13 +38,11 @@ public class AfficheComplaintController implements Initializable {
     @FXML
     private Button remove;
     @FXML
-    private Button modifier;
-    @FXML
     private Button afficher;
     @FXML
-    private TableColumn<?, ?> colsub;
+    private TableColumn<Complaint,String> colsub;
     @FXML
-    private TableColumn<?, ?> colcontent;
+    private TableColumn<Complaint, String> colcontent;
 
     /**
      * Initializes the controller class.
@@ -79,8 +77,7 @@ public class AfficheComplaintController implements Initializable {
         
         tabrec.setItems(oc);
     }
-
-    @FXML
+//if you need to add edit
     private void modify(ActionEvent event) {
      Complaint c = tabrec.getSelectionModel().getSelectedItem();
          
@@ -129,7 +126,7 @@ if(c==null){
         }
      
           
-    }
+    } 
 
     
 }

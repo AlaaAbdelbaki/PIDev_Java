@@ -37,8 +37,6 @@ public class DashboardReviewController implements Initializable {
     @FXML
     private TableColumn<Review, Integer> id;
     @FXML
-    private TableColumn<Review, String> username;
-    @FXML
     private TableColumn<Review,String > category;
     @FXML
     private TableColumn<Review, String> title;
@@ -51,7 +49,8 @@ public class DashboardReviewController implements Initializable {
     @FXML
     private Button delete;
     @FXML
-    private Button modifier;
+    private Button cancel;
+  
     
 
     /**
@@ -59,6 +58,7 @@ public class DashboardReviewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Actualiser();
         // TODO
     }    
    
@@ -67,7 +67,17 @@ public class DashboardReviewController implements Initializable {
          ReviewService rs = new ReviewService();
         ObservableList<Review> or = FXCollections.observableArrayList(rs.getAll());
        id.setCellValueFactory(new PropertyValueFactory<>("id"));
-        username.setCellValueFactory(new PropertyValueFactory<>("username"));
+         category.setCellValueFactory(new PropertyValueFactory<>("category"));
+        rating.setCellValueFactory(new PropertyValueFactory<>("rating"));
+         title.setCellValueFactory(new PropertyValueFactory<>("title"));
+        content.setCellValueFactory(new PropertyValueFactory<>("content"));
+        tabrev.setItems(or);
+    }
+    private void Actualiser() {
+         ReviewService rs = new ReviewService();
+        ObservableList<Review> or = FXCollections.observableArrayList(rs.getAll());
+       id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        
          category.setCellValueFactory(new PropertyValueFactory<>("category"));
         rating.setCellValueFactory(new PropertyValueFactory<>("rating"));
          title.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -81,8 +91,7 @@ public class DashboardReviewController implements Initializable {
         Review r = (Review) tabrev.getSelectionModel().getSelectedItem();
         cs.deleteReview(r);
     }
-
-    @FXML
+//if you need to add edit
     private void modifier(ActionEvent event) {
         Review r = tabrev.getSelectionModel().getSelectedItem();
          
@@ -132,6 +141,15 @@ if(r==null){
      
           
     
+    }
+
+    @FXML
+    private void retour(ActionEvent event) throws IOException {
+         javafx.scene.Parent tableview = FXMLLoader.load(getClass().getResource("home.fxml"));
+        Scene sceneview = new Scene(tableview);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(sceneview);
+        window.show();
     }
     
 }

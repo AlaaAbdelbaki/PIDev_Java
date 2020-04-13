@@ -26,6 +26,7 @@
                             <TableColumn fx:id="colid" prefWidth="66.0" text="ID" />
                               <TableColumn fx:id="colsubj" prefWidth="142.0" text="Subject" />
                               <TableColumn fx:id="colcont" prefWidth="182.0" text="Content" />
+                              <TableColumn fx:id="usernamec" prefWidth="109.0" text="Username" />
                           </columns>
                         </TableView>
                         <Button fx:id="delete" layoutX="310.0" layoutY="253.0" mnemonicParsing="false" onAction="#Remove" text="Delete" />
@@ -44,7 +45,7 @@
                         <TableView fx:id="tabrec" layoutX="42.0" layoutY="79.0" prefHeight="153.0" prefWidth="435.0">
                            <columns>
                               <TableColumn fx:id="id" prefWidth="66.0" text="ID" />
-                              <TableColumn fx:id="username" prefWidth="72.0" text="Username" />
+                              <TableColumn fx:id="username" prefWidth="72.0" text="ID_user" />
                               <TableColumn fx:id="colcat" prefWidth="83.0" text="Category" />
                               <TableColumn fx:id="rate" prefWidth="66.0" text="Rating" />
                               <TableColumn fx:id="coltitre" prefWidth="75.0" text="Title" />

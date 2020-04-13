@@ -21,9 +21,8 @@
       
          </columnResizePolicy>
       </TableView>
-      <Button fx:id="modifier" layoutX="412.0" layoutY="313.0" mnemonicParsing="false" onAction="#modify" text="Modify" />
-      <Button fx:id="remove" layoutX="184.0" layoutY="313.0" mnemonicParsing="false" onAction="#Delete" text="Delete" />
+      <Button fx:id="remove" layoutX="369.0" layoutY="313.0" mnemonicParsing="false" onAction="#Delete" text="Delete" />
       <Label contentDisplay="CENTER" layoutX="256.0" layoutY="43.0" prefHeight="38.0" prefWidth="138.0" text="Your complaint's list" textAlignment="CENTER" />
-      <Button fx:id="afficher" layoutX="299.0" layoutY="313.0" mnemonicParsing="false" onAction="#Show" text="Refrech" />
+      <Button fx:id="afficher" layoutX="477.0" layoutY="313.0" mnemonicParsing="false" onAction="#Show" text="Refrech" />
    </children>
 </AnchorPane>

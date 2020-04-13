@@ -5,6 +5,7 @@
  */
 package tunisigottalentViews;
 
+import static com.sun.javafx.animation.TickCalculation.sub;
 import java.awt.Desktop;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -59,14 +60,31 @@ public class AddComplaintController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
+public Boolean ValidateFields() {
+        if (subject.getText().isEmpty() | content.getText().isEmpty() ) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Validate fields");
+            alert.setHeaderText(null);
+            alert.setContentText("Please Enter Into The Fields");
+            alert.showAndWait();
+            return false;
+        }
 
+        return true;
+
+    }
     @FXML
     private void AddComplaint(ActionEvent event) throws IOException {
+        if(ValidateFields()==false ){ 
         String sub= subject.getText();
-         String con= content.getText();
+         String con= content.getText(); 
          ComplaintService sc = new ComplaintService();
          Complaint c = new Complaint(sub,con);
-         sc.insertComplaintPST(c);        
+           sc.insertComplaintPST(c);       }
+         Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Notification");
+        alert.setHeaderText("Complaint added with succes");
+        alert.showAndWait();
         javafx.scene.Parent tableview = FXMLLoader.load(getClass().getResource("AfficheComplaint.fxml"));
         Scene sceneview = new Scene(tableview);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -77,7 +95,7 @@ public class AddComplaintController implements Initializable {
 
     @FXML
     private void retour(ActionEvent event) throws IOException {
-           javafx.scene.Parent tableview = FXMLLoader.load(getClass().getResource("DashboardReview.fxml"));
+           javafx.scene.Parent tableview = FXMLLoader.load(getClass().getResource("home.fxml"));
         Scene sceneview = new Scene(tableview);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(sceneview);

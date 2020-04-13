@@ -105,14 +105,15 @@ public class ComplaintService {
              
              
     public   List<Complaint>  getAll(){
-      String req= "select * from complaint " ;
+      String req= "select * from complaint  INNER JOIN user where complaint.user_id = user.id ";
      List<Complaint> list= new ArrayList<>();
         
          try {
              ste=connexion.createStatement();
              rs= ste.executeQuery(req);
              while(rs.next()){
-                list.add(new Complaint(rs.getInt("id"),rs.getString(2),rs.getString("content")));
+                 list.add(new Complaint(rs.getInt("id"),rs.getString("subject"),rs.getString("content"),rs.getInt("user_id")));
+               
              }
          } catch (SQLException ex) {
              Logger.getLogger(ComplaintService.class.getName()).log(Level.SEVERE, null, ex);

@@ -108,6 +108,8 @@ public class AdminDashboardController implements Initializable {
     private TableColumn<Review, Integer> id;
     @FXML
     private TableColumn<Review, String> username;
+    @FXML
+    private TableColumn<Complaint,Integer> usernamec;
 
 
     @Override
@@ -119,7 +121,7 @@ public class AdminDashboardController implements Initializable {
     public void afficher(){
          ComplaintService cs = new ComplaintService();
         ObservableList<Complaint> oc = FXCollections.observableArrayList(cs.getAll());
-        //username.setCellValueFactory(new PropertyValueFactory<>("user_id"));
+        username.setCellValueFactory(new PropertyValueFactory<>("user_id"));
         colid.setCellValueFactory(new PropertyValueFactory<>("id"));
        colsubj.setCellValueFactory(new PropertyValueFactory<>("Subject"));
         colcont.setCellValueFactory(new PropertyValueFactory<>("content"));
@@ -132,7 +134,7 @@ public class AdminDashboardController implements Initializable {
         ObservableList<Review> or = FXCollections.observableArrayList(rs.getAll());
 
             id.setCellValueFactory(new PropertyValueFactory<>("id"));
-         username.setCellValueFactory(new PropertyValueFactory<>("username"));
+         username.setCellValueFactory(new PropertyValueFactory<>("user_id"));
         colcat.setCellValueFactory(new PropertyValueFactory<>("category"));
          coltitre.setCellValueFactory(new PropertyValueFactory<>("title"));
         rate.setCellValueFactory(new PropertyValueFactory<>("rating"));
@@ -153,7 +155,7 @@ public class AdminDashboardController implements Initializable {
     private void actualiser(ActionEvent event)  {
           ComplaintService cs = new ComplaintService();
         ObservableList<Complaint> oc = FXCollections.observableArrayList(cs.getAll());
-       //coluser.setCellValueFactory(new PropertyValueFactory<>("user_id"));
+       usernamec.setCellValueFactory(new PropertyValueFactory<>("user_id"));
         colid.setCellValueFactory(new PropertyValueFactory<>("id"));
        colsubj.setCellValueFactory(new PropertyValueFactory<>("Subject"));
         colcont.setCellValueFactory(new PropertyValueFactory<>("content"));
@@ -202,9 +204,9 @@ public class AdminDashboardController implements Initializable {
             else if(Complaint.getSubject().toLowerCase().indexOf(lowerCaseFilter) != -1){
                 return true;
             }
-            else if(String.valueOf(Complaint.getId()).indexOf(lowerCaseFilter) != -1){
-                    return true;
-            }
+            //else if(String.valueOf(Complaint.getId()).indexOf(lowerCaseFilter) != -1){
+           //      return true;
+           // }
             else if (Complaint.getContent().toLowerCase().indexOf(lowerCaseFilter) != -1){
                     return true;
             }

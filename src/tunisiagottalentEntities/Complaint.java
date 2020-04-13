@@ -15,8 +15,16 @@ public class Complaint {
     private int id;
     private String subject;
     private String content;
+    private int user_id;
 
  public Complaint() {
+    }
+
+    public Complaint(int id, String subject, String content, int user_id) {
+        this.id = id;
+        this.subject = subject;
+        this.content = content;
+        this.user_id = user_id;
     }
 
     public Complaint(int id, String subject, String content) {
@@ -44,6 +52,14 @@ public class Complaint {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public String getSubject() {

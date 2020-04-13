@@ -127,13 +127,15 @@ public class ReviewService {
  return liste;
  }
 public   List<Review>  getAll(){
-      String req= "select * from review " ;
+      String req= "select *from review  INNER JOIN user where review.user_id = user.id";
+      
      List<Review> list= new ArrayList<>();
          try {
              ste=connexion.createStatement();
               rs= ste.executeQuery(req);
              while(rs.next()){
-                list.add(new Review(rs.getInt("id"),rs.getString(2),rs.getInt(3),rs.getString("content")));
+              list.add(new Review(rs.getInt("id"),rs.getInt("user_id"),rs.getString("category"),rs.getInt("rating"),rs.getString("content")));
+                
              }
          } catch (SQLException ex) {
              Logger.getLogger(ReviewService.class.getName()).log(Level.SEVERE, null, ex);
