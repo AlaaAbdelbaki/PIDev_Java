@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -44,5 +45,6 @@
       <Button fx:id="confirmeditbutton" layoutX="231.0" layoutY="328.0" mnemonicParsing="false" onAction="#addproductbutton" text="Add Product" />
       <Label fx:id="newproductlabel" layoutX="177.0" layoutY="381.0" prefHeight="31.0" prefWidth="228.0" textFill="LIMEGREEN" />
       <Button layoutX="386.0" layoutY="184.0" mnemonicParsing="false" onAction="#uploadimage" text="Upload" />
+      <ImageView fx:id="product_imageview" fitHeight="124.0" fitWidth="98.0" layoutX="467.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

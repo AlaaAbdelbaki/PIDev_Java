@@ -10,7 +10,6 @@ import Entity.Product;
 import Entity.ShoppingCart;
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
-import static com.itextpdf.text.Chunk.COLOR;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
@@ -19,20 +18,13 @@ import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.pdf.PdfAnnotation;
 import com.itextpdf.text.pdf.PdfContentByte;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import java.awt.Color;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Optional;
@@ -41,12 +33,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -57,11 +45,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 import services.OrderServices;
 import util.DataSource;
@@ -74,18 +59,14 @@ import util.DataSource;
 public class ShoppingCartController implements Initializable {
     private Connection cnx;
     private Statement ste;
-    private PreparedStatement pset;
-    private ResultSet rez;
-    @FXML
-    private AnchorPane anchorpane;
+
     @FXML
     private TableView<Product> tableProduct;
     @FXML
-    private TableColumn<Product, Integer> table_id;
+    private TableColumn table_id;
     @FXML
     private TableColumn<Product, String> table_productname;
-    @FXML
-    private TableColumn<Product, String> table_image;
+
     @FXML
     private TableColumn<Product, Integer> table_stock;
     @FXML
@@ -100,8 +81,7 @@ public class ShoppingCartController implements Initializable {
     private Rectangle rectange;
     @FXML
     private Button gotoorder;
-    @FXML
-    private Button button_shopping_cart_test;
+
     @FXML
     private Label shipping_address;
     @FXML
@@ -138,9 +118,8 @@ public class ShoppingCartController implements Initializable {
             list.add(new Product(ppp.getId(),ppp.getProduct_name(),ppp.getImg(),ppp.getStock(),ppp.getPrice(),ppp.getQuantity()));
         }
             System.out.println(list);
-                table_id.setCellValueFactory(new PropertyValueFactory<>("Id"));
+                //table_id.setCellValueFactory(new PropertyValueFactory<>("Id"));
                 table_productname.setCellValueFactory(new PropertyValueFactory<>("Product_name"));
-                table_image.setCellValueFactory(new PropertyValueFactory<>("Img"));
                 table_stock.setCellValueFactory(new PropertyValueFactory<>("Stock"));
                 table_price.setCellValueFactory(new PropertyValueFactory<>("Price"));
                 table_quantity.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
@@ -227,14 +206,41 @@ public class ShoppingCartController implements Initializable {
                return cell;         
         };
                 
+            Callback<TableColumn<Product, String>, TableCell<Product, String>> cellFactory2 = (param) -> {
+            final TableCell<Product, String> cell = new TableCell<Product, String>() {
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+                    } else {
+                            Product pa = getTableView().getItems().get(getIndex());
+                          Label lb = new Label();
+                          ImageView product_image_view = new ImageView();
+                          product_image_view.setImage(new javafx.scene.image.Image(pa.getImg()));
+                          product_image_view.setFitHeight(80);
+                          product_image_view.setFitWidth(80);
+                          lb.setGraphic(product_image_view);
+                           setGraphic(lb);
+                           setText(null);
+                    }
+                    
+                };
+                
+            };
+            
+            return cell;
+        };       
                 
                 
                 
                 
-                
-                
+                table_id.setCellFactory(cellFactory2);
                 table_delete.setCellFactory(cellFactory);
                 table_adddel.setCellFactory(cellFactory1);
+                
                 tableProduct.setItems(list);
                 shipping_address.setVisible(true);
                 address.setVisible(true);
@@ -338,6 +344,7 @@ public class ShoppingCartController implements Initializable {
         Paragraph blank4 = new Paragraph("                              ");
         Paragraph blank5 = new Paragraph("                              ");
         Paragraph blank6 = new Paragraph("                              ");
+        Paragraph lign = new Paragraph("_______________________________________________________");
         Font sys=new Font(FontFamily.HELVETICA, 23,Font.NORMAL);
         sys.setColor(BaseColor.RED);
         Paragraph thankyouforyourorder = new Paragraph("Thank You For Your Order",sys);
@@ -364,15 +371,24 @@ public class ShoppingCartController implements Initializable {
         document.add(blank2);
         document.add(blank1);
         document.add(blank2);
+        document.add(lign);
+        double totale=0;
         for(Product p : list){
-            Paragraph product_name_par = new Paragraph(p.getProduct_name()+" : "+p.getPrice());
+            Paragraph product_name_par = new Paragraph(p.getProduct_name()+" : "+p.getPrice()+"$                                           Quantity : "+p.getQuantity());
             Image product_img_par = Image.getInstance(p.getImg());
             product_img_par.scaleAbsolute(100, 100);
+            Paragraph ligne = new Paragraph("_______________________________________________________");
             document.add(product_name_par);
             document.add(new Image(product_img_par) {});
-            
+            document.add(blank1);
+            document.add(blank2);
+            document.add(ligne);
+            totale = totale+(p.getPrice()*p.getQuantity());
         }
-        
+        Paragraph total = new Paragraph("Total : "+Double.toString(totale)+"$");
+        document.add(blank1);
+        document.add(blank2);
+        document.add(total);
         document.close();
     }
    

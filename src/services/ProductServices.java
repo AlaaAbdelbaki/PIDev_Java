@@ -11,12 +11,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
-import static javafx.collections.FXCollections.observableArrayList;
 import javafx.collections.ObservableList;
 import util.DataSource;
 
@@ -45,7 +42,6 @@ public class ProductServices {
             
             while(rez.next()){
                 list.add(new Product(rez.getInt("id"),rez.getString("product_name"),rez.getString("img"),rez.getInt("stock"),rez.getDouble("price")));
-                
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProductServices.class.getName()).log(Level.SEVERE, null, ex);

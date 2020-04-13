@@ -6,7 +6,6 @@
 package UI;
 
 import Entity.Order;
-import Entity.Product;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -33,7 +32,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import services.OrderServices;
-import services.ProductServices;
 
 /**
  * FXML Controller class

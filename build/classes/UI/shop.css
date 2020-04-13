@@ -72,6 +72,10 @@
     -fx-padding: 1; /* 0.083333em; */
 }
 
+.table-view .table-cell{
+    -fx-alignment: CENTER;
+}
+
 .tree-table-row-cell > .disclosure-node > .arrow {
     -fx-background-color: -fx-text-fill;
     -fx-padding: 0.333333em 0.229em 0.333333em 0.229em; /* 4 */

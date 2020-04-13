@@ -80,6 +80,9 @@
 .tree-table-row-cell .jfx-text-field{
     -fx-focus-color: rgba(240,40,40);
 }
+.table-view .table-cell{
+    -fx-alignment: CENTER;
+}
 .button-add{
     -fx-background-color: #32CD32;
     -fx-text-fill: #FFFFFF;

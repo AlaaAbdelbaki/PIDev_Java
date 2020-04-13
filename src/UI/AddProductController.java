@@ -6,10 +6,7 @@
 package UI;
 
 import Entity.Product;
-import java.awt.event.KeyAdapter;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -20,11 +17,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 import services.ProductServices;
-import javafx.scene.input.KeyEvent;
-import javax.imageio.ImageIO;
 /**
  * FXML Controller class
  *
@@ -41,9 +37,9 @@ public class AddProductController implements Initializable {
     @FXML
     private TextField newproductprice;
     @FXML
-    private Button confirmeditbutton;
-    @FXML
     private Label newproductlabel;
+    @FXML
+    private ImageView product_imageview;
     
     private String imgp;
     
@@ -102,6 +98,7 @@ public class AddProductController implements Initializable {
                 imgp=file.toURI().toString();
                 
                 newproductimage.setText(imgp);
+                product_imageview.setImage(new Image(imgp));
             }
 
     }

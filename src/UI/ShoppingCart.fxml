@@ -13,14 +13,13 @@
    <children>
       <TableView fx:id="tableProduct" layoutX="14.0" layoutY="97.0" prefHeight="516.0" prefWidth="852.0" stylesheets="@shoppingcart.css">
          <columns>
-            <TableColumn fx:id="table_id" prefWidth="58.999969482421875" text="id" />
-            <TableColumn fx:id="table_productname" prefWidth="191.0" text="Product Name" />
-            <TableColumn fx:id="table_image" prefWidth="100.0" text="Image" />
-            <TableColumn fx:id="table_stock" minWidth="0.0" prefWidth="86.0" text="Stock" />
-            <TableColumn fx:id="table_price" minWidth="0.0" prefWidth="127.0" text="Price" />
-            <TableColumn fx:id="table_quantity" prefWidth="91.0" text="Quantity" />
-            <TableColumn fx:id="table_adddel" prefWidth="126.0" />
-            <TableColumn fx:id="table_delete" prefWidth="146.0" text="Delete" />
+            <TableColumn fx:id="table_id" prefWidth="149.99996948242188" text="Product Image" />
+            <TableColumn fx:id="table_productname" prefWidth="186.0" text="Product Name" />
+            <TableColumn fx:id="table_stock" minWidth="0.0" prefWidth="88.0" text="Stock" />
+            <TableColumn fx:id="table_price" minWidth="0.0" prefWidth="90.0" text="Price" />
+            <TableColumn fx:id="table_quantity" prefWidth="129.0" text="Quantity" />
+            <TableColumn fx:id="table_adddel" prefWidth="85.0" />
+            <TableColumn fx:id="table_delete" prefWidth="123.0" text="Delete" />
          </columns>
       </TableView>
       <Label fx:id="product_label" layoutX="322.0" layoutY="14.0" prefHeight="64.0" prefWidth="237.0" text="Shopping Cart" textAlignment="CENTER" textFill="#55b3f3">

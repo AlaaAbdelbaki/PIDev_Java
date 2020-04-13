@@ -16,6 +16,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 import services.ProductServices;
@@ -36,12 +38,12 @@ public class EditProductController implements Initializable {
     @FXML
     private TextField newproductprice;
     @FXML
-    private Button confirmeditbutton;
-    @FXML
     private Label newproductid;
     @FXML
     private Label labelsuccess;
     private String imgp;
+    @FXML
+    private ImageView product_imageview;
     
     public void modifiyproductbutton(Product p){
         newproductname.setText(p.getProduct_name());
@@ -49,7 +51,7 @@ public class EditProductController implements Initializable {
         newproductstock.setText(Integer.toString(p.getStock()));
         newproductprice.setText(Double.toString(p.getPrice()));
         newproductid.setText(Integer.toString(p.getId()));
-
+        product_imageview.setImage(new Image(p.getImg()));
         
     }
     
@@ -106,6 +108,7 @@ public class EditProductController implements Initializable {
                 imgp=file.toURI().toString();
                 
                 newproductimage.setText(imgp);
+                product_imageview.setImage(new Image(imgp));
             }
 
     }

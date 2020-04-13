@@ -17,15 +17,15 @@
             <DropShadow />
          </effect>
       </Rectangle>
-      <TableView fx:id="tableProduct" layoutX="451.0" layoutY="122.0" prefHeight="529.0" prefWidth="813.0" stylesheets="@shop.css">
+      <TableView fx:id="tableProduct" layoutX="400.0" layoutY="122.0" prefHeight="529.0" prefWidth="880.0" stylesheets="@shop.css">
         <columns>
-          <TableColumn fx:id="table_id" prefWidth="42.0" text="id" />
-          <TableColumn fx:id="table_productname" prefWidth="208.0" text="Product Name" />
-            <TableColumn fx:id="table_image" prefWidth="254.0" text="Image" />
-            <TableColumn fx:id="table_stock" prefWidth="59.0" text="Stock" />
-            <TableColumn fx:id="table_price" prefWidth="58.0" text="Price" />
-            <TableColumn fx:id="table_edit" prefWidth="92.0" text="Edit" />
-            <TableColumn fx:id="table_delete" prefWidth="95.0" text="Delete" />
+          <TableColumn fx:id="table_id" prefWidth="72.0" text="id" />
+          <TableColumn fx:id="table_productname" prefWidth="202.0" text="Product Name" />
+            <TableColumn fx:id="table_stock" prefWidth="92.0" text="Stock" />
+            <TableColumn fx:id="table_price" prefWidth="78.0" text="Price" />
+            <TableColumn fx:id="table_imageview" prefWidth="194.0" text="Product Image" />
+            <TableColumn fx:id="table_edit" prefWidth="122.0" text="Edit" />
+            <TableColumn fx:id="table_delete" prefWidth="119.0" text="Delete" />
         </columns>
       </TableView>
       <Label fx:id="product_label" layoutX="90.0" layoutY="23.0" prefHeight="64.0" prefWidth="221.0" text="Products List" textAlignment="CENTER" textFill="#55b3f3">

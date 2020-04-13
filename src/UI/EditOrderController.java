@@ -6,12 +6,8 @@
 package UI;
 
 import Entity.Order;
-import Entity.Product;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.Month;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -37,8 +33,6 @@ public class EditOrderController implements Initializable {
     @FXML
     private TextField neworderaddress;
     
-    @FXML
-    private Button confirmeditbutton;
     @FXML
     private Label neworderid;
     @FXML

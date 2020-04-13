@@ -7,18 +7,12 @@ package UI;
 
 import Entity.Product;
 import Entity.ShoppingCart;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -46,12 +40,12 @@ public class ShopViewController implements Initializable {
     private Button shopping_cart_button;
     @FXML
     AnchorPane rootPane;
-
+    @FXML
+    private ImageView product_image;
     
     int test = 0 ;
     
     public void loadproductsforuser(){
-        //product_image.setImage(new Image("file:/C:/Users/paspo/Desktop/PIDev_java/PIDev_Java/src/img/e3d8643342d3e46eee47b91f9acf331e.jpeg"));
         ProductServices ps= new ProductServices();
         List<Product> products;
         ShoppingCart sc=new ShoppingCart();
@@ -67,27 +61,13 @@ public class ShopViewController implements Initializable {
             title.setFont(new Font("Bold",30));
             title.setTextFill(Color.web("#55b3f3"));
             Label stock = new Label();
-            if(p.getStock()>0){
-                stock.setText("In Stock");
-                stock.setTextFill(Color.GREEN);
-            }
-            else{
-                stock.setText("Out Of Stock");
-                stock.setTextFill(Color.RED);                
-            }
             
             
-            /*Image image;
-            try {
-                ImageView product_image = new ImageView();
-                image = new Image(new FileInputStream(p.getImg()));
-                product_image.setImage(image);
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(ShopViewController.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
             
-            //product_image.setImage(new Image("file:/C:/Users/paspo/Desktop/PIDev_java/PIDev_Java/src/img/e3d8643342d3e46eee47b91f9acf331e.jpeg"));
-            ImageView product_image= new ImageView("/img/t-shirt.jpg");
+            Image image;
+            ImageView product_image = new ImageView();
+
+            product_image.setImage(new Image(p.getImg()));
             product_image.setFitHeight(200);
             product_image.setFitWidth(200);
             
@@ -95,6 +75,16 @@ public class ShopViewController implements Initializable {
             hbox.setSpacing(10);
             Button viewitembutton = new Button("View Item");
             Button addtocartbutton = new Button("Add To Cart");
+            
+            if(p.getStock()>0){
+                stock.setText("    In Stock");
+                stock.setTextFill(Color.GREEN);
+            }
+            else{
+                stock.setText("    Out Of Stock");
+                stock.setTextFill(Color.RED);   
+                addtocartbutton.setDisable(true);
+            }
             
             viewitembutton.setOnAction(event -> {
                 Product pa = p;

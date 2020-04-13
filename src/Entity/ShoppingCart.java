@@ -6,11 +6,9 @@
 package Entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+
 /**
  *
  * @author paspo
