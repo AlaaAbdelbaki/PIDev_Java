@@ -26,7 +26,7 @@
       </ImageView>
       <VBox alignment="CENTER" layoutX="-1.0" layoutY="102.0" prefHeight="748.0" prefWidth="1600.0">
          <children>
-            <HBox fx:id="content" alignment="CENTER" prefHeight="691.0" prefWidth="1291.0" />
+            <HBox fx:id="content" alignment="CENTER" prefHeight="750.0" prefWidth="1600.0" />
          </children>
       </VBox>
       <JFXButton fx:id="btn_signup" buttonType="RAISED" layoutX="1423.0" layoutY="18.0" onAction="#popup_signup" prefHeight="44.0" prefWidth="125.0" ripplerFill="#3185d3" text="Sign Up" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">

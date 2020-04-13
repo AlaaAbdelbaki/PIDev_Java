@@ -3,6 +3,8 @@ package tunisiagottalent.UI.Competitions;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,12 +48,26 @@ public class User_CompetitionsController {
         CompetitionServices cs = new CompetitionServices();
 
         ObservableList<Competition> tab = cs.getAll();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
+        Label TDate=new Label("Starting Date");
+        TDate.setTextFill(javafx.scene.paint.Color.GREENYELLOW);
+        TDate.setFont(Font.font("Book Antiqua", 22));
+        Label TEndDate=new Label("End Date");
+        TEndDate.setTextFill(javafx.scene.paint.Color.GREENYELLOW);
+        TEndDate.setFont(Font.font("Book Antiqua", 22));
+        Label TTimeLeft=new Label("Time Left");
+        TTimeLeft.setTextFill(javafx.scene.paint.Color.GREENYELLOW);
+        TTimeLeft.setFont(Font.font("Book Antiqua", 22));
+        Label Tsubject=new Label("Subject");
+        Tsubject.setTextFill(javafx.scene.paint.Color.GREENYELLOW);
+        Tsubject.setFont(Font.font("Book Antiqua", 22));
+        competitions.addRow(0, TDate, TEndDate, TTimeLeft,Tsubject);
         tab.forEach((comp) -> {
 
-            Label start = new Label(comp.getCompetition_date().toString());
+            Label start = new Label(sdf.format(new Date(comp.getCompetition_date().getTime())));
             start.setTextFill(javafx.scene.paint.Color.WHITE);
             start.setFont(Font.font("Cambria", 20));
-            Label end = new Label(comp.getCompetition_end_date().toString());
+            Label end = new Label(sdf.format(new Date(comp.getCompetition_end_date().getTime())));
             end.setTextFill(javafx.scene.paint.Color.WHITE);
             end.setFont(Font.font("Cambria", 20));
             Label sub = new Label(comp.getSubject());
@@ -72,7 +88,7 @@ public class User_CompetitionsController {
             JFXButton v = new JFXButton("View");
             JFXButton p = new JFXButton("Participate");
             v.resize(175, 45);
-            v.setStyle("-fx-text-fill: white;-fx-font-size:20px;");
+            v.setStyle("-fx-text-fill: white;-fx-font-size:20px;-fx-background-color: #adff2f");
             v.setRipplerFill(javafx.scene.paint.Color.GREEN);
             p.setStyle("-fx-text-fill: white;-fx-font-size:20px; -fx-background-color:#F39C12");
             p.setRipplerFill(javafx.scene.paint.Color.BLUE);
@@ -123,9 +139,9 @@ public class User_CompetitionsController {
                 }
             });
             Label TimeleftLabel=new Label();
-            TimeleftLabel.setTextFill(javafx.scene.paint.Color.WHITE);
-            TimeleftLabel.setFont(Font.font("Cambria", 13));
-            if(comp.getCompetition_end_date().before(new Timestamp(System.currentTimeMillis()))){
+            TimeleftLabel.setTextFill(javafx.scene.paint.Color.GREENYELLOW);
+            TimeleftLabel.setFont(Font.font("Cambria", 18));
+            if(comp.getCompetition_end_date().after(new Timestamp(System.currentTimeMillis()))){
            Timeline timer = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
                 Timestamp t = new Timestamp(System.currentTimeMillis());
                 long counter = getDateDiff(t, comp.getCompetition_end_date(), TimeUnit.SECONDS);
@@ -151,17 +167,17 @@ public class User_CompetitionsController {
             UserSession s = UserSession.instance;
             ParticipationServices ps=new ParticipationServices();
             if (s.getU().getRole().contains("ROLE_TALENTED")) {
-                competitions.addRow(tab.indexOf(comp), start, end, sub, v, TalentLabel);
+                competitions.addRow(tab.indexOf(comp)+1, start, end, sub, v, TalentLabel);
             }
             else if (comp.getCompetition_end_date().before(new Timestamp(System.currentTimeMillis())))
             {
-                competitions.addRow(tab.indexOf(comp), start,TimeleftLabel, end, sub, v, OverLabel);
+                competitions.addRow(tab.indexOf(comp)+1, start,end,TimeleftLabel, sub, v, OverLabel);
             }
             else if(ps.findParticipation(comp, s.getU())){
-                competitions.addRow(tab.indexOf(comp), start, end, sub, v, ParticipatedlLabel);
+                competitions.addRow(tab.indexOf(comp)+1, start, end,TimeleftLabel, sub, v, ParticipatedlLabel);
             }
             else 
-            competitions.addRow(tab.indexOf(comp), start, end, sub, v, p);
+            competitions.addRow(tab.indexOf(comp)+1, start, end,TimeleftLabel, sub, v, p);
 
             RowConstraints row = new RowConstraints(90);
 

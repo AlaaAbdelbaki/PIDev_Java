@@ -201,7 +201,7 @@ public class View_CompetitionController {
                     alert.setContentText("You will lose all your votes !");
 
                     alert.showAndWait();
-
+                       ps.delete(vid);
                     video_grid.getChildren().removeAll(preview, details);
                     video_grid.getChildren().removeIf(node -> GridPane.getRowIndex(node) == tabs.indexOf(vid));
                 }
