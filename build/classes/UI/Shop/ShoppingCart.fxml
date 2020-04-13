@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="anchorpane" prefHeight="750.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.Shop.ShoppingCartController">
+   <children>
+      <TableView fx:id="tableProduct" layoutX="14.0" layoutY="97.0" prefHeight="516.0" prefWidth="852.0" stylesheets="@shoppingcart.css">
+         <columns>
+            <TableColumn fx:id="table_id" prefWidth="149.99996948242188" text="Product Image" />
+            <TableColumn fx:id="table_productname" prefWidth="186.0" text="Product Name" />
+            <TableColumn fx:id="table_stock" minWidth="0.0" prefWidth="88.0" text="Stock" />
+            <TableColumn fx:id="table_price" minWidth="0.0" prefWidth="90.0" text="Price" />
+            <TableColumn fx:id="table_quantity" prefWidth="129.0" text="Quantity" />
+            <TableColumn fx:id="table_adddel" prefWidth="85.0" />
+            <TableColumn fx:id="table_delete" prefWidth="123.0" text="Delete" />
+         </columns>
+      </TableView>
+      <Label fx:id="product_label" layoutX="322.0" layoutY="14.0" prefHeight="64.0" prefWidth="237.0" text="Shopping Cart" textAlignment="CENTER" textFill="#55b3f3">
+         <font>
+            <Font name="System Bold" size="34.0" />
+         </font>
+      </Label>
+      <Button fx:id="gotoorder" layoutX="322.0" layoutY="649.0" mnemonicParsing="false" text="Show Shopping Cart" />
+      <Rectangle fx:id="rectange" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="751.0" layoutX="969.0" stroke="BLACK" strokeType="INSIDE" width="371.0" />
+      <TextField fx:id="address" layoutX="1061.0" layoutY="183.0" promptText="Address" />
+      <TextField fx:id="city" layoutX="1061.0" layoutY="243.0" promptText="City" />
+      <TextField fx:id="country" layoutX="1061.0" layoutY="310.0" promptText="Country" />
+      <TextField fx:id="postal_code" layoutX="1061.0" layoutY="376.0" promptText="Postal Code" />
+      <Label fx:id="shipping_address" layoutX="1031.0" layoutY="46.0" text="Shipping Address" textFill="#55b3f3">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font></Label>
+      <Button fx:id="commander" layoutX="1108.0" layoutY="461.0" mnemonicParsing="false" text="Order Now" />
+   </children>
+</AnchorPane>
