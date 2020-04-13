@@ -1,9 +1,24 @@
 package tunisiagottalent.Entity;
+
+import java.sql.Date;
+
 public class User {
     int id;
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setProfilePic(String ProfilePic) {
+        this.ProfilePic = ProfilePic;
+    }
+
+    public String getProfilePic() {
+        return ProfilePic;
     }
     String username;
     String email;
@@ -15,6 +30,16 @@ public class User {
     String bio;
     String phone_number;
     String Role;
+    Date Birthday;
+    String ProfilePic;
+
+    public Date getBirthday() {
+        return Birthday;
+    }
+
+    public void setBirthday(Date Birthday) {
+        this.Birthday = Birthday;
+    }
 
     public String getRole() {
         return Role;
@@ -30,8 +55,10 @@ public class User {
         this.password = password;
        
     }
-
-    public User(int id,String username, String email, String gender, String address, String name, String lastName, String phone_number,String Role) {
+ public User() {
+        
+    }
+    public User(int id,String username, String email,String password, String gender, String address, String name, String lastName, String phone_number,String Role,Date Birthday,String ProfilePic) {
         this.username = username;
         this.email = email;
         this.gender = gender;
@@ -41,6 +68,9 @@ public class User {
         this.phone_number = phone_number;
         this.Role=Role;
         this.id=id;
+        this.Birthday=Birthday;
+        this.password=password;
+        this.ProfilePic=ProfilePic;
     }
 
     @Override

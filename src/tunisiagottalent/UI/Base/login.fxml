@@ -8,21 +8,19 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane fx:id="login_anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragExited="#close" prefHeight="429.0" prefWidth="394.0" style="-fx-background-color: black;" styleClass="main" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.Base.Login">
    <children>
       <JFXTextField fx:id="username" focusColor="#ee0707" layoutX="114.0" layoutY="100.0" prefHeight="39.0" prefWidth="244.0" style="-fx-text-inner-color: white;" unFocusColor="#fffdfd" />
       <JFXPasswordField fx:id="password" focusColor="#f80606" layoutX="121.0" layoutY="207.0" prefHeight="39.0" prefWidth="244.0" style="-fx-text-inner-color: white;" unFocusColor="WHITE" />
       <Text fill="WHITE" layoutX="14.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="112.80419921875" />
       <Text fill="#fcfcfc" layoutX="14.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="86.6708984375" />
-      <JFXButton fx:id="login" buttonType="RAISED" layoutX="204.0" layoutY="278.0" onAction="#login" prefHeight="39.0" prefWidth="170.0" ripplerFill="#e40c0c" text="Login" textFill="#f8f8f8" />
+      <JFXButton fx:id="login" buttonType="RAISED" layoutX="112.0" layoutY="274.0" onAction="#login" prefHeight="39.0" prefWidth="170.0" ripplerFill="#e40c0c" text="Login" textFill="#f8f8f8" />
       <Label layoutX="139.0" layoutY="29.0" prefHeight="39.0" prefWidth="130.0" text="Login" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Bauhaus 93" size="39.0" />
          </font>
       </Label>
-      <Text fill="#f5f5f5" layoutX="57.0" layoutY="397.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Don't have an Account ? " wrappingWidth="183.2490234375" />
-      <JFXButton layoutX="269.0" layoutY="376.0" ripplerFill="#07f720" text="Sign Up" textFill="#f8f8f8" underline="true" />
+      <JFXButton layoutX="126.0" layoutY="374.0" onAction="#forgotPass" ripplerFill="#07f720" text="Forgot Password ?" textFill="#f8f8f8" underline="true" />
       <JFXButton fx:id="btn_close" layoutX="346.0" layoutY="14.0" onAction="#close" text="[X]" textFill="WHITE" />
    </children>
 </AnchorPane>

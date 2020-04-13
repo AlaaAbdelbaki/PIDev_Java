@@ -60,7 +60,7 @@
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets></JFXButton>
-                  <JFXButton layoutX="10.0" layoutY="100.0" prefHeight="52.0" prefWidth="254.0" styleClass="drawer_buttons" text=" User Profiles" textFill="#f8f8f8">
+                  <JFXButton layoutX="10.0" layoutY="100.0" onAction="#Profiles" prefHeight="52.0" prefWidth="254.0" styleClass="drawer_buttons" text=" User Profiles" textFill="#f8f8f8">
                      <VBox.margin>
                         <Insets bottom="20.0" />
                      </VBox.margin>

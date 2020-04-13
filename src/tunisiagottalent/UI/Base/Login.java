@@ -8,9 +8,12 @@ import java.io.IOException;
 import java.net.URL;
 
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -85,7 +88,7 @@ public class Login {
                 case 1: {
 
                     UserServices us = new UserServices();
-                    UserSession z = UserSession.getInstance(us.getByUsername(user));
+                    UserSession z = UserSession.getInstance(us.getUser(user));
 
                     Stage stage = (Stage) login_anchor.getScene().getWindow();
 
@@ -144,7 +147,17 @@ public class Login {
         }
 
     }
-
+    @FXML
+    void forgotPass(ActionEvent event) {
+    try {
+            AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/User/forgotPassword.fxml"));
+            login_anchor.getChildren().setAll(p);
+          
+            
+        } catch (IOException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     @FXML
     void initialize() {
 

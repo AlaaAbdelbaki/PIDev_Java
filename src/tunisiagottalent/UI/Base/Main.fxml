@@ -72,35 +72,43 @@
                   <JFXButton prefHeight="57.0" prefWidth="247.0" text="Home" textFill="#fcfcfc">
                      <graphic>
                         <FontAwesomeIcon fill="#f2f2f2" glyphName="HOME" />
-                     </graphic></JFXButton>
-                  <JFXButton layoutX="10.0" layoutY="120.0" prefHeight="61.0" prefWidth="256.0" text="Profile" textFill="#fcfcfc">
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton layoutX="10.0" layoutY="120.0" onAction="#Profile" prefHeight="61.0" prefWidth="256.0" text="Profile" textFill="#fcfcfc">
                      <graphic>
                         <FontAwesomeIcon fill="WHITE" glyphName="USER" />
-                     </graphic></JFXButton>
+                     </graphic>
+                  </JFXButton>
                   <JFXButton layoutX="10.0" layoutY="120.0" prefHeight="61.0" prefWidth="256.0" text="Shop" textFill="#fcfcfc">
                      <graphic>
                         <FontAwesomeIcon fill="#f5f4f4" glyphName="SHOPPING_CART" />
-                     </graphic></JFXButton>
+                     </graphic>
+                  </JFXButton>
                   <JFXButton layoutX="10.0" layoutY="120.0" prefHeight="61.0" prefWidth="256.0" text="Events" textFill="#fcfcfc">
                      <graphic>
                         <FontAwesomeIcon fill="#ebebeb" glyphName="USERS" />
-                     </graphic></JFXButton>
+                     </graphic>
+                  </JFXButton>
                   <JFXButton fx:id="btn_competitions" layoutX="10.0" layoutY="120.0" onAction="#competitions" prefHeight="61.0" prefWidth="256.0" text="Competitions" textFill="#fcfcfc">
                      <graphic>
                         <FontAwesomeIcon fill="#f8f4f4" glyphName="CERTIFICATE" />
-                     </graphic></JFXButton>
+                     </graphic>
+                  </JFXButton>
                   <JFXButton layoutX="10.0" layoutY="242.0" prefHeight="61.0" prefWidth="256.0" text="News" textFill="#fcfcfc">
                      <graphic>
                         <FontAwesomeIcon fill="#f5f5f5" glyphName="NEWSPAPER_ALT" />
-                     </graphic></JFXButton>
+                     </graphic>
+                  </JFXButton>
                   <JFXButton layoutX="10.0" layoutY="303.0" prefHeight="61.0" prefWidth="256.0" text="Blog" textFill="#fcfcfc">
                      <graphic>
                         <FontAwesomeIcon fill="#fcfcfc" glyphName="COMMENTS" />
-                     </graphic></JFXButton>
+                     </graphic>
+                  </JFXButton>
                   <JFXButton layoutX="10.0" layoutY="364.0" prefHeight="61.0" prefWidth="256.0" text="Rate Us" textFill="#fcfcfc">
                      <graphic>
                         <FontAwesomeIcon fill="#eeeeee" glyphName="THUMBS_ALT_UP" />
-                     </graphic></JFXButton>
+                     </graphic>
+                  </JFXButton>
                </children>
             </VBox>
          </children>

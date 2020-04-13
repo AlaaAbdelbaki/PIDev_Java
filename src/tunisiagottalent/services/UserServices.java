@@ -17,7 +17,9 @@
         import tunisiagottalent.util.DataSource;
         import tunisiagottalent.Entity.User;
         import java.util.List;
+import java.util.Random;
         import org.mindrot.jbcrypt.BCrypt;
+import tunisiagottalent.util.UserSession;
 
 
 /**
@@ -31,6 +33,7 @@ public class UserServices {
     private ResultSet rs;
 
     public UserServices() {
+        cnx = DataSource.getInstance().getCnx();
     }
 
     //Verify entered password with the hashed password inside the database
@@ -122,11 +125,95 @@ public class UserServices {
 
         return false;
     }
+ public User getUser(String username) {
+        User u = new User();
 
-    public boolean delete(User u){
-        return false;
+        String req = "select * from user where username='" + username + "'";
+        try {
+            ste = cnx.createStatement();
+            rs = ste.executeQuery(req);
+
+            while (rs.next()) {
+                u.setId(rs.getInt("id"));
+                u.setUsername(rs.getString("username"));
+                u.setName(rs.getString("first_name"));
+                u.setLastName(rs.getString("name"));
+                u.setBio(rs.getString("bio"));
+                u.setAddress(rs.getString("adresse"));
+                u.setGender(rs.getString("sexe"));
+                u.setEmail(rs.getString("email"));
+                u.setPhone_number(rs.getString("telephone_number"));
+                u.setName(rs.getString("first_name"));
+                u.setLastName(rs.getString("name"));
+                u.setBirthday(rs.getDate("Birthday"));
+                u.setPassword(rs.getString("password"));
+                u.setRole(rs.getString("roles"));
+
+                return u;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return u;
     }
+   public boolean delete(User u) {
 
+        UserServices us = new UserServices();
+        
+        String deleteVideos="delete from video where owner = "+u.getId();
+        String req = "delete from user where username='" + u.getUsername() + "'";
+
+        try {
+            cnx.createStatement().executeUpdate(deleteVideos);
+            System.out.println("Videos of user '"+u.getUsername()+"' successfully deleted !");
+            cnx.createStatement().executeUpdate(req);
+            System.out.println("User '"+u.getUsername()+"' successfully deleted !");
+
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+
+    }
+public List<User> getAll(String q) {
+
+        String req;
+        if (q.equals("")) {
+            req = "select * from user ";
+        } else {
+
+            req = "select * from user where username like '" + q + "%'";
+        }
+
+        List<User> list = new ArrayList<>();
+
+        try {
+            ste = cnx.createStatement();
+            rs = ste.executeQuery(req);
+            while (rs.next()) {
+            list.add(new User(rs.getInt("id"),
+              rs.getString("username"),
+              rs.getString("email"),
+              rs.getString("password"),
+              rs.getString("sexe"),
+              rs.getString("adresse"),
+              rs.getString("name"),
+              rs.getString("first_name"),
+              rs.getString("telephone_number"),
+              rs.getString("roles"),
+              rs.getDate("birthday"),
+              rs.getString("profile_pic")));
+           }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return list;
+    }
     public List<User> getAll(){
         String req = "select * from user";
         List<User> list = new ArrayList<>();
@@ -135,8 +222,18 @@ public class UserServices {
             ste = cnx.createStatement();
             rs = ste.executeQuery(req);
             while(rs.next()){
-                list.add(new User(rs.getInt("id"),rs.getString("username"),rs.getString("email"),rs.getString("sexe"),rs.getString("adresse"),rs.getString("name"),rs.getString("first_name"),rs.getString("telephone_number"),rs.getString("roles")));
-            }
+               list.add(new User(rs.getInt("id"),
+              rs.getString("username"),
+              rs.getString("email"),
+              rs.getString("password"),
+              rs.getString("sexe"),
+              rs.getString("adresse"),
+              rs.getString("name"),
+              rs.getString("first_name"),
+              rs.getString("telephone_number"),
+              rs.getString("roles"),
+              rs.getDate("birthday"),
+              rs.getString("profile_pic"))); }
 
         } catch (SQLException ex) {
             Logger.getLogger(UserServices.class.getName()).log(Level.SEVERE, null, ex);
@@ -169,13 +266,158 @@ public class UserServices {
             ste = cnx.createStatement();
             rs = ste.executeQuery(req);
             while(rs.next()){
-                u=new User(rs.getInt("id"),rs.getString("username"),rs.getString("email"),rs.getString("sexe"),rs.getString("adresse"),rs.getString("name"),rs.getString("first_name"),rs.getString("telephone_number"),rs.getString("roles"));
-            }
+              u=(new User(rs.getInt("id"),
+              rs.getString("username"),
+              rs.getString("email"),
+              rs.getString("password"),
+              rs.getString("sexe"),
+              rs.getString("adresse"),
+              rs.getString("name"),
+              rs.getString("first_name"),
+              rs.getString("telephone_number"),
+              rs.getString("roles"),
+              rs.getDate("birthday"),
+              rs.getString("profile_pic"))); }
         } catch (SQLException ex) {
             Logger.getLogger(UserServices.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return u;
+    }
+    public String tokenGenerator() {
+        Random rnd = new Random();
+        String alphanumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        String token = "";
+        for (int i = 0; i < 5; i++) {
+            token += alphanumeric.charAt(rnd.nextInt(alphanumeric.length()));
+        }
+//        System.out.println(token);
+        return token;
+    }
+    public void updateToken(String username, String token) {
+        String req = "update user set passwordToken =? where username =?";
+        try {
+            pst = cnx.prepareStatement(req);
+            pst.setString(1, token);
+            pst.setString(2, username);
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+public String encryptPassword(String pwd) {
+        String pwd2 = BCrypt.hashpw(pwd, BCrypt.gensalt(13));
+        pwd2 = pwd2.substring(3);
+        pwd2 = "$2y" + pwd2;
+//        System.out.println(pwd2);
+        return pwd2;
+    }
+    public String getToken(String username) {
+        String sql = "select passwordToken from user where username = '" + username + "'";
+        String token = "";
+        try {
+            ste = cnx.createStatement();
+            rs = ste.executeQuery(sql);
+            while(rs.next()){
+                token = rs.getString("passwordToken");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return token;
+    }
+    
+    public boolean upadtePassword(String username,String pwd){
+        String req = "update user set password=? where username =?";
+        try {
+            pst = cnx.prepareStatement(req);
+            pst.setString(1,encryptPassword(pwd));
+            pst.setString(2,username);
+            pst.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
+    }
+
+    
+    public boolean updateUser(User u) {
+        String req = "update user set email=? , email_canonical=? , password=? , Birthday=? , sexe=? , telephone_number=? , adresse=? , name=? , first_name=? , bio=? where username='" + u.getUsername() + "'";
+        try {
+            UserServices us = new UserServices();
+                UserSession s=UserSession.instance;
+            pst = cnx.prepareStatement(req);
+            //if email field is empty is null
+            if (u.getEmail() == null) {
+                //use value stored in database
+                pst.setString(1, s.getU().getEmail());
+                pst.setString(2, s.getU().getEmail());
+            } else {
+                //use new value
+                pst.setString(1, u.getEmail());
+                pst.setString(2, u.getEmail());
+            }
+            if (u.getPassword().equals("")) {
+                pst.setString(3, s.getU().getPassword());
+            } else {
+                pst.setString(3, encryptPassword(u.getPassword()));
+            }
+            if (u.getBirthday() == null) {
+                pst.setDate(4, s.getU().getBirthday());
+            } else {
+                pst.setDate(4, u.getBirthday());
+            }
+            if (u.getGender() == null) {
+                if (s.getU().getGender() == null) {
+                    pst.setString(5, null);
+                } else {
+
+                    pst.setString(5, s.getU().getGender().substring(0, 1).toLowerCase() + s.getU().getGender().substring(1));
+                }
+            } else {
+                pst.setString(5, u.getGender().substring(0, 1).toLowerCase() + u.getGender().substring(1));
+            }
+            if (u.getPhone_number().equals("")) {
+                pst.setString(6, s.getU().getPhone_number());
+            } else {
+                pst.setString(6, u.getPhone_number());
+            }
+            if (u.getAddress().equals("")) {
+                pst.setString(7, s.getU().getAddress());
+            } else {
+                pst.setString(7, u.getAddress());
+            }
+            if (u.getLastName().equals("")) {
+                pst.setString(8,s.getU().getLastName());
+            } else {
+                pst.setString(8, u.getLastName());
+            }
+            if (u.getName().equals("")) {
+                pst.setString(9, s.getU().getName());
+            } else {
+                pst.setString(9, u.getName());
+            }
+            if (u.getBio().equals("")) {
+                pst.setString(10, s.getU().getBio());
+            } else {
+                pst.setString(10, u.getBio());
+            }
+            if (u.getUsername().equals("")) {
+                System.out.println("User not found !");
+                return false;
+            } else {
+
+                pst.executeUpdate();
+            }
+
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
     }
 }
 

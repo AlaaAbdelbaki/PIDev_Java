@@ -97,8 +97,18 @@ public class ParticipationServices {
             while(rs.next()){
                 
                 list.add(new video(rs.getInt("id"),rs.getString("url"),rs.getString("title"),rs.getTimestamp("publish_date"),  
-                        new User(rs.getInt("user.id"),rs.getString("username"),rs.getString("email"), rs.getString("adresse"),rs.getString("sexe"), rs.getString("name"), rs.getString("first_name"),rs.getString("telephone_number"),rs.getString("roles"))));
-            }
+                       new User(rs.getInt("id"),
+              rs.getString("username"),
+              rs.getString("email"),
+              rs.getString("password"),
+              rs.getString("sexe"),
+              rs.getString("adresse"),
+              rs.getString("name"),
+              rs.getString("first_name"),
+              rs.getString("telephone_number"),
+              rs.getString("roles"),
+              rs.getDate("birthday"),
+              rs.getString("profile_pic")))); }
     
         } catch (SQLException e) {
             e.printStackTrace();
@@ -121,12 +131,34 @@ public class ParticipationServices {
             
             if(rs.next()){
                 
-                cp= (new competition_participant(new Competition(rs.getInt("competition.id"),rs.getString("subject"), rs.getTimestamp("competition_date"), rs.getTimestamp("competition_end_date"))
+                cp= new competition_participant(new Competition(rs.getInt("competition.id"),rs.getString("subject"), rs.getTimestamp("competition_date"), rs.getTimestamp("competition_end_date"))
                         , 
-                         new User(rs.getInt("user.id"),rs.getString("username"),rs.getString("email"), rs.getString("adresse"),rs.getString("sexe"), rs.getString("name"), rs.getString("first_name"),rs.getString("telephone_number"),rs.getString("roles"))
-                        , rs.getTimestamp("participation_date"), 
-                        new video(rs.getInt("id"),rs.getString("url"),rs.getString("title"),rs.getTimestamp("publish_date"),new User(rs.getInt("user.id"),rs.getString("username"),rs.getString("email"), rs.getString("adresse"),rs.getString("sexe"), rs.getString("name"), rs.getString("first_name"),rs.getString("telephone_number"),rs.getString("roles")))));
-                        
+                         new User(rs.getInt("id"),
+              rs.getString("username"),
+              rs.getString("email"),
+              rs.getString("password"),
+              rs.getString("sexe"),
+              rs.getString("adresse"),
+              rs.getString("name"),
+              rs.getString("first_name"),
+              rs.getString("telephone_number"),
+              rs.getString("roles"),
+              rs.getDate("birthday"),
+              rs.getString("profile_pic"))
+                , rs.getTimestamp("participation_date"), 
+                        new video(rs.getInt("id"),rs.getString("url"),rs.getString("title"),rs.getTimestamp("publish_date"),
+                              new User(rs.getInt("id"),
+              rs.getString("username"),
+              rs.getString("email"),
+              rs.getString("password"),
+              rs.getString("sexe"),
+              rs.getString("adresse"),
+              rs.getString("name"),
+              rs.getString("first_name"),
+              rs.getString("telephone_number"),
+              rs.getString("roles"),
+              rs.getDate("birthday"),
+              rs.getString("profile_pic"))));
             }
     
         } catch (SQLException e) {
@@ -161,8 +193,18 @@ public class ParticipationServices {
             while(rs.next()){
                 
                 list.add(new video(rs.getInt("id"),rs.getString("url"),rs.getString("title"),rs.getTimestamp("publish_date"),  
-                        new User(rs.getInt("user.id"),rs.getString("username"),rs.getString("email"), rs.getString("adresse"),rs.getString("sexe"), rs.getString("name"), rs.getString("first_name"),rs.getString("telephone_number"),rs.getString("roles"))));
-            }
+                        new User(rs.getInt("id"),
+              rs.getString("username"),
+              rs.getString("email"),
+              rs.getString("password"),
+              rs.getString("sexe"),
+              rs.getString("adresse"),
+              rs.getString("name"),
+              rs.getString("first_name"),
+              rs.getString("telephone_number"),
+              rs.getString("roles"),
+              rs.getDate("birthday"),
+              rs.getString("profile_pic"))));  }
     
         } catch (SQLException e) {
             e.printStackTrace();

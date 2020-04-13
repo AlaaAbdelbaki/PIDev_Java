@@ -1,0 +1,75 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+
+.navbar{
+    -fx-fill:#6356e5 ;
+}
+.bg{
+    -fx-fill:#f3f6f6 ;
+}
+
+.sections{
+    -fx-text-fill:#f3f6f6;
+    -fx-font-size:32px;
+    -fx-font-family: "Roboto Bold";
+    -fx-cursor:hand;
+}
+
+.welcome{
+    -fx-text-fill:#f3f6f6;
+}
+
+.pp{
+    -fx-pref-height:200px;
+    -fx-pref-width:200px;
+    -fx-cursor:hand;
+}
+
+.logout{
+    -fx-cursor:hand;
+}
+
+.userinfo{
+    /*-fx-text-fill:#6356e5;*/
+    -fx-text-fill:black;
+    -fx-font-size:24px;
+    -fx-font-family: "Roboto Bold";
+}
+
+.bio{
+    /*-fx-text-fill:#6356e5;*/
+    -fx-text-fill:black;
+    -fx-font-size:12px;
+    -fx-font-family: "Roboto Bold";
+}
+
+.button{
+    -fx-font-family: "Roboto Bold";
+    -fx-background-color: #6356e5;
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-cursor:hand;
+}
+
+.button:pressed{
+    -fx-font-family: "Roboto Bold";
+    -fx-background-color: #4d43b5;
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-cursor:hand;
+}
+
+.video_title{
+    -fx-text-fill:black;
+    -fx-font-size:24px;
+    -fx-font-family: "Roboto Bold";
+}
+
+

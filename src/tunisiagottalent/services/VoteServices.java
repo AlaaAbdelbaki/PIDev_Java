@@ -11,15 +11,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
 import tunisiagottalent.Entity.Competition;
 import tunisiagottalent.Entity.User;
 import tunisiagottalent.Entity.video;
-import tunisiagottalent.Entity.votes;
+
 import tunisiagottalent.util.DataSource;
 
 /**
@@ -117,8 +113,18 @@ public class VoteServices {
             rs = pst.executeQuery();
             while (rs.next()) {
                 l.put(new video(rs.getInt("id"), rs.getString("url"), rs.getString("title"), rs.getTimestamp("publish_date"),
-                        new User(rs.getInt("user.id"), rs.getString("username"), rs.getString("email"), rs.getString("adresse"), rs.getString("sexe"), rs.getString("name"), rs.getString("first_name"), rs.getString("telephone_number"), rs.getString("roles"))),
-                        rs.getInt(1));
+                   new User(rs.getInt("id"),
+              rs.getString("username"),
+              rs.getString("email"),
+              rs.getString("password"),
+              rs.getString("sexe"),
+              rs.getString("adresse"),
+              rs.getString("name"),
+              rs.getString("first_name"),
+              rs.getString("telephone_number"),
+              rs.getString("roles"),
+              rs.getDate("birthday"),
+              rs.getString("profile_pic"))),  rs.getInt(1));
             }
 
         } catch (SQLException e) {
