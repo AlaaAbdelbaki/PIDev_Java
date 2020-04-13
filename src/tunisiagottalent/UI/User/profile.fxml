@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -9,12 +12,26 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.ui.HomepageController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="750.0" prefWidth="1600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.ui.ProfileController">
     <stylesheets>
-        <URL value="@homepage.css" />
+        <URL value="@profile.css" />
     </stylesheets>
    <children>
       <Rectangle fx:id="navbar1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="720.0" layoutX="400.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="bg" width="880.0" />
+      <AnchorPane fx:id="profile_container" layoutX="400.0" prefHeight="720.0" prefWidth="880.0">
+         <children>
+            <ImageView fx:id="profilePic" fitHeight="194.0" fitWidth="194.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/unknown.jpg" />
+               </image></ImageView>
+            <Label fx:id="username_profile" layoutX="244.0" layoutY="29.0" prefHeight="29.0" prefWidth="622.0" styleClass="userinfo" text="username" />
+            <Label fx:id="nameLastName" layoutX="244.0" layoutY="58.0" prefHeight="29.0" prefWidth="622.0" styleClass="userinfo" text="firstLastName" />
+            <Label fx:id="bio" alignment="TOP_LEFT" layoutX="244.0" layoutY="96.0" prefHeight="54.0" prefWidth="622.0" styleClass="bio" text="Bio" wrapText="true" />
+            <Button layoutX="244.0" layoutY="172.0" mnemonicParsing="false" onAction="#editProfile" text="Edit Profile" />
+            <ScrollPane fx:id="videos_Container" layoutY="219.0" prefHeight="501.0" prefWidth="880.0" />
+            <Button layoutX="343.0" layoutY="172.0" mnemonicParsing="false" onAction="#addVideo" text="Add Video" />
+         </children>
+      </AnchorPane>
       <Rectangle fx:id="navbar" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="720.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="navbar" width="400.0">
          <effect>
             <DropShadow />
@@ -65,12 +82,12 @@
             <Label fx:id="blog_label" layoutX="90.0" layoutY="401.0" styleClass="sections" text="Blog" />
             <Label fx:id="news_label" layoutX="90.0" layoutY="467.0" styleClass="sections" text="News" />
             <Label fx:id="rate_label" layoutX="90.0" layoutY="534.0" styleClass="sections" text="Rate us" />
-            <ImageView fx:id="logout_icon" fitHeight="24.0" fitWidth="24.0" layoutX="68.0" layoutY="86.0" onMouseClicked="#disconnect" pickOnBounds="true" preserveRatio="true" styleClass="logout">
+            <ImageView fx:id="logout_icon" fitHeight="24.0" fitWidth="24.0" layoutX="67.0" layoutY="86.0" onMouseClicked="#disconnect" pickOnBounds="true" preserveRatio="true" styleClass="logout">
                <image>
                   <Image url="@img/logout%20(1).png" />
                </image>
             </ImageView>
-            <Label fx:id="logout_label" layoutX="105.0" layoutY="89.0" onMouseClicked="#disconnect" styleClass="logout" text="Log out" textFill="#f3f6f6">
+            <Label fx:id="logout_label" layoutX="104.0" layoutY="89.0" onMouseClicked="#disconnect" styleClass="logout" text="Log out" textFill="#f3f6f6">
                <font>
                   <Font name="Roboto Bold" size="14.0" />
                </font>
@@ -84,6 +101,9 @@
                <font>
                   <Font name="Roboto Bold" size="21.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Label>
          </children>
       </AnchorPane>

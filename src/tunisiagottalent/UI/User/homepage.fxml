@@ -2,9 +2,6 @@
 
 <?import java.net.URL?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -12,9 +9,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.ui.DashboardUsersController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="750.0" prefWidth="1600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.ui.HomepageController">
     <stylesheets>
-        <URL value="@dashboardusers.css" />
+        <URL value="@homepage.css" />
     </stylesheets>
    <children>
       <Rectangle fx:id="navbar1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="720.0" layoutX="400.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="bg" width="880.0" />
@@ -26,7 +23,7 @@
       <AnchorPane prefHeight="720.0" prefWidth="312.0">
          <children>
             <ImageView fx:id="profilePicture" fitHeight="48.0" fitWidth="48.0" layoutX="7.0" layoutY="22.0" onMouseClicked="#profile" pickOnBounds="true" preserveRatio="true" styleClass="pp" />
-            <ImageView fx:id="dashboard_icon" fitHeight="48.0" fitWidth="48.0" layoutX="7.0" layoutY="143.0" onContextMenuRequested="#dashboard" pickOnBounds="true" preserveRatio="true" styleClass="pp">
+            <ImageView fx:id="dashboard_icon" fitHeight="48.0" fitWidth="48.0" layoutX="7.0" layoutY="143.0" onMouseClicked="#dashboard" pickOnBounds="true" preserveRatio="true" styleClass="pp">
                <image>
                   <Image url="@img/dashboard.png" />
                </image>
@@ -67,7 +64,7 @@
             <Label fx:id="shop_label" layoutX="90.0" layoutY="336.0" styleClass="sections" text="Shop" />
             <Label fx:id="blog_label" layoutX="90.0" layoutY="401.0" styleClass="sections" text="Blog" />
             <Label fx:id="news_label" layoutX="90.0" layoutY="467.0" styleClass="sections" text="News" />
-            <Label fx:id="rate_label" layoutX="90.0" layoutY="534.0" styleClass="sections" text="Ratings" />
+            <Label fx:id="rate_label" layoutX="90.0" layoutY="534.0" styleClass="sections" text="Rate us" />
             <ImageView fx:id="logout_icon" fitHeight="24.0" fitWidth="24.0" layoutX="68.0" layoutY="86.0" onMouseClicked="#disconnect" pickOnBounds="true" preserveRatio="true" styleClass="logout">
                <image>
                   <Image url="@img/logout%20(1).png" />
@@ -88,40 +85,6 @@
                   <Font name="Roboto Bold" size="21.0" />
                </font>
             </Label>
-            <ImageView fx:id="home_icon" fitHeight="48.0" fitWidth="48.0" layoutX="7.0" layoutY="594.0" onMouseClicked="#home" pickOnBounds="true" preserveRatio="true" styleClass="pp">
-               <image>
-                  <Image url="@img/home-run.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="home_label" layoutX="86.0" layoutY="599.0" onMouseClicked="#home" styleClass="sections" text="Homepage" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="400.0" prefHeight="720.0" prefWidth="880.0">
-         <children>
-            <TextField fx:id="usernameInput" layoutX="204.0" layoutY="96.0" onKeyReleased="#searchUser" prefHeight="42.0" prefWidth="475.0" promptText="Username">
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </TextField>
-            <Label layoutX="318.0" layoutY="49.0" text="Search for a user">
-               <font>
-                  <Font name="Roboto Bold" size="32.0" />
-               </font>
-            </Label>
-            <TableView fx:id="usersInfo" layoutX="1.0" layoutY="170.0" prefHeight="550.0" prefWidth="880.0">
-              <columns>
-                <TableColumn fx:id="userId" prefWidth="36.0" text="ID" />
-                <TableColumn fx:id="userUsername" prefWidth="75.0" text="Username" />
-                  <TableColumn fx:id="userLastName" prefWidth="75.0" text="Last name" />
-                  <TableColumn fx:id="userFirstName" prefWidth="75.0" text="First Name" />
-                  <TableColumn fx:id="userBirthday" prefWidth="103.0" text="Birthday" />
-                  <TableColumn fx:id="userEmail" prefWidth="146.0" text="Email" />
-                  <TableColumn fx:id="userPhoneNumber" prefWidth="104.0" text="Phone number" />
-                  <TableColumn fx:id="userGender" prefWidth="66.0" text="Gender" />
-                  <TableColumn fx:id="videos" minWidth="0.0" prefWidth="99.0" text="Videos" />
-                  <TableColumn fx:id="delete" prefWidth="100.0" text="Delete" />
-              </columns>
-            </TableView>
          </children>
       </AnchorPane>
    </children>
