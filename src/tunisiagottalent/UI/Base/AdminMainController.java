@@ -116,6 +116,7 @@ public class AdminMainController implements Initializable {
 
     @FXML
     private void quit(MouseEvent event) {
+        System.exit(0);
     }
 
 }
