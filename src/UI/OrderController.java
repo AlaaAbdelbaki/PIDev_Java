@@ -89,7 +89,7 @@ public class OrderController implements Initializable {
                             Order o = getTableView().getItems().get(getIndex());
                             OrderServices os = new OrderServices();
                             order_list.remove(o);
-                            os.deleteOrder(o.getId());
+                            os.deleteOrder(o.getId(),o.getId());
                         });
 
                         

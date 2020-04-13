@@ -17,8 +17,28 @@ public class Product {
     private String img;
     private int stock;
     private double price;
+    
+    private int quantity=1;
 
-
+    
+    public Product(int id,String product_name,String img,int stock,double price,int quantity){
+        this.id=id;
+        this.product_name=product_name;
+        this.img=img;
+        this.stock=stock;
+        this.price=price;
+        this.quantity=quantity;
+    }
+    
+    
+    
+    public Product(String product_name,String img,int stock,double price,int quantity){
+        this.product_name=product_name;
+        this.img=img;
+        this.stock=stock;
+        this.price=price;
+        this.quantity=quantity;
+    }
     
     
     public Product(int id,String product_name,String img,int stock,double price){
@@ -33,6 +53,10 @@ public class Product {
         this.img=img;
         this.stock=stock;
         this.price=price;
+    }
+
+    public Product(Product cart) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     
@@ -77,10 +101,21 @@ public class Product {
         this.price = price;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     @Override
     public String toString() {
-        return "Product{" + "id=" + id + ", product_name=" + product_name + ", img=" + img + ", stock=" + stock + ", price=" + price + '}';
+        return "Product{" + "id=" + id + ", product_name=" + product_name + ", img=" + img + ", stock=" + stock + ", price=" + price + ", quantity=" + quantity + '}';
     }
+    
+
+
     
 
     

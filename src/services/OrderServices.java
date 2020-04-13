@@ -76,7 +76,7 @@ public class OrderServices {
             rez.next();
             int oid = rez.getInt("a");
 
-            int quantity = list.size();
+            //int quantity = list.size();
 
             for (Product i : list) {
                 pset = cnx.prepareStatement("SET FOREIGN_KEY_CHECKS=0;");
@@ -84,7 +84,7 @@ public class OrderServices {
                 pset = cnx.prepareStatement(req3);
                 pset.setInt(1, i.getId());
                 pset.setInt(2, oid);
-                pset.setDouble(3, quantity);
+                pset.setDouble(3, i.getQuantity());
 
                 pset.executeUpdate();
             }
@@ -94,14 +94,18 @@ public class OrderServices {
         }
     }
 
-    public void deleteOrder(int id) {
-        String req = "delete from orders where id='" + id + "' ;";
-
+    public void deleteOrder(int idorder,int idorderline) {
+        String req = "delete from orders where id='" + idorder + "' ;";
+        String req2 = "delete from order_line where orders_id='" + idorderline + "' ;";
         try {
             pset = cnx.prepareStatement("SET FOREIGN_KEY_CHECKS=0;");
             pset.executeQuery();
             ste = cnx.createStatement();
             ste.executeUpdate(req);
+            
+            ste = cnx.createStatement();
+            ste.executeUpdate(req2);
+            
         } catch (SQLException ex) {
             Logger.getLogger(OrderServices.class.getName()).log(Level.SEVERE, null, ex);
         }

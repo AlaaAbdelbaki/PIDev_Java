@@ -33,12 +33,15 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -56,10 +59,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import services.OrderServices;
+import util.DataSource;
 
 /**
  * FXML Controller class
@@ -67,9 +72,9 @@ import services.OrderServices;
  * @author paspo
  */
 public class ShoppingCartController implements Initializable {
-
-    private PreparedStatement pset;
     private Connection cnx;
+    private Statement ste;
+    private PreparedStatement pset;
     private ResultSet rez;
     @FXML
     private AnchorPane anchorpane;
@@ -85,6 +90,10 @@ public class ShoppingCartController implements Initializable {
     private TableColumn<Product, Integer> table_stock;
     @FXML
     private TableColumn<Product, Double> table_price;
+    @FXML
+    private TableColumn<Product, Integer> table_quantity;
+    @FXML
+    private TableColumn table_adddel;
     @FXML
     private TableColumn table_delete;
     @FXML
@@ -126,7 +135,7 @@ public class ShoppingCartController implements Initializable {
  
             
             for(Product ppp : testsc){
-            list.add(new Product(ppp.getId(),ppp.getProduct_name(),ppp.getImg(),ppp.getStock(),ppp.getPrice()));
+            list.add(new Product(ppp.getId(),ppp.getProduct_name(),ppp.getImg(),ppp.getStock(),ppp.getPrice(),ppp.getQuantity()));
         }
             System.out.println(list);
                 table_id.setCellValueFactory(new PropertyValueFactory<>("Id"));
@@ -134,6 +143,7 @@ public class ShoppingCartController implements Initializable {
                 table_image.setCellValueFactory(new PropertyValueFactory<>("Img"));
                 table_stock.setCellValueFactory(new PropertyValueFactory<>("Stock"));
                 table_price.setCellValueFactory(new PropertyValueFactory<>("Price"));
+                table_quantity.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
                 
                 Callback<TableColumn<Product, String>, TableCell<Product, String>> cellFactory = (param) -> {
                 final TableCell<Product, String> cell = new TableCell<Product, String>() {
@@ -165,7 +175,66 @@ public class ShoppingCartController implements Initializable {
             };
                return cell;         
         };
+        Callback<TableColumn<Product, String>, TableCell<Product, String>> cellFactory1 = (param) -> {
+                final TableCell<Product, String> cell = new TableCell<Product, String>() {
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+                    } else {
+                        final HBox hbox = new HBox();
+                        final Button addquantity = new Button("+");
+                        final Button deletequantity = new Button("-");
+                        hbox.getChildren().addAll(addquantity,deletequantity);
+
+                        addquantity.setOnAction(event -> {
+                            Product p = getTableView().getItems().get(getIndex());
+
+                            if(p.getQuantity()>=p.getStock()){
+                               addquantity.setDisable(true);
+                            }
+                            else{
+                            int quantity = p.getQuantity()+1;
+                            p.setQuantity(quantity);
+                            tableProduct.refresh();
+                            }
+                        });
+                        
+                        deletequantity.setOnAction(event -> {
+                            Product p = getTableView().getItems().get(getIndex());  
+
+                            if(p.getQuantity()<=1){
+                                deletequantity.setDisable(true);
+                                //tableProduct.refresh();
+                            }
+                            else{
+                            int quantity = p.getQuantity()-1;
+                            p.setQuantity(quantity);
+                            tableProduct.refresh();
+                            }
+                        });
+                        setGraphic(hbox);
+                        setText(null);
+                        
+                    }
+                    
+                };
+                
+            };
+               return cell;         
+        };
+                
+                
+                
+                
+                
+                
+                
                 table_delete.setCellFactory(cellFactory);
+                table_adddel.setCellFactory(cellFactory1);
                 tableProduct.setItems(list);
                 shipping_address.setVisible(true);
                 address.setVisible(true);
@@ -199,12 +268,26 @@ public class ShoppingCartController implements Initializable {
                 else{
                     double total = 0;
                 for(Product product : tableProduct.getItems()){
-                    total = total + product.getPrice();
+                    total = total + (product.getPrice()*product.getQuantity());
                 }
                 String adr = address.getText()+" "+city.getText()+" "+country.getText()+" "+postal_code.getText();
                 Order o = new Order(total,adr);
                 OrderServices os = new OrderServices();
+                cnx = DataSource.getInstance().getCnx();
                 os.addOrder(o, list);
+                for (Product pro : tableProduct.getItems()){
+                    int new_stock = pro.getStock() - pro.getQuantity();
+                    String req = "update product set stock='"+new_stock+"' where id='"+pro.getId()+"' ;";
+                        try {
+                            ste=cnx.createStatement();
+                            ste.executeUpdate(req);
+                            pro.setStock(new_stock);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(ShoppingCartController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                }
+                tableProduct.refresh();
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Order Palced !");
                 alert.setContentText(" Do you want to make a pdf copy ??");
@@ -223,6 +306,7 @@ public class ShoppingCartController implements Initializable {
                             Logger.getLogger(ShoppingCartController.class.getName()).log(Level.SEVERE, null, ex);
                         }
                 }
+                
                 }
                 
                 

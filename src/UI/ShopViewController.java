@@ -32,6 +32,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import services.ProductServices;
 
@@ -46,6 +48,8 @@ public class ShopViewController implements Initializable {
     AnchorPane rootPane;
 
     
+    int test = 0 ;
+    
     public void loadproductsforuser(){
         //product_image.setImage(new Image("file:/C:/Users/paspo/Desktop/PIDev_java/PIDev_Java/src/img/e3d8643342d3e46eee47b91f9acf331e.jpeg"));
         ProductServices ps= new ProductServices();
@@ -56,8 +60,22 @@ public class ShopViewController implements Initializable {
         VBox vbox = new VBox();
         
         products.forEach((p)->{
+            
+            HBox hboxstock = new HBox();
             Label title = new Label();
-            title.setText(p.getProduct_name());
+            title.setText(p.getProduct_name()+" ");
+            title.setFont(new Font("Bold",30));
+            title.setTextFill(Color.web("#55b3f3"));
+            Label stock = new Label();
+            if(p.getStock()>0){
+                stock.setText("In Stock");
+                stock.setTextFill(Color.GREEN);
+            }
+            else{
+                stock.setText("Out Of Stock");
+                stock.setTextFill(Color.RED);                
+            }
+            
             
             /*Image image;
             try {
@@ -99,13 +117,23 @@ public class ShopViewController implements Initializable {
             });
             
             addtocartbutton.setOnAction(event -> {
+                    test = 0;
+                sc.getItems().forEach( cart -> {
+                    if(cart.getId()==p.getId()){
+                        test = 1;
+                        int quantity=cart.getQuantity()+1;
+                        cart.setQuantity(quantity);
+                    }
+
+                });
                 
-                Product pa = p;
-                sc.addItem(p);
-                
+                if(test == 0){
+                        sc.addItem(p);
+                }
             });
+            hboxstock.getChildren().addAll(title,stock);
             hbox.getChildren().addAll(viewitembutton,addtocartbutton);
-            vbox.getChildren().addAll(title,product_image,hbox);
+            vbox.getChildren().addAll(hboxstock,product_image,hbox);
             products_view.setContent(vbox);
         });
         
@@ -136,7 +164,7 @@ public class ShopViewController implements Initializable {
             AnchorPane pane=FXMLLoader.load(getClass().getResource("/UI/Shop.fxml"));
             rootPane.getChildren().setAll(pane);
     }
-    
+
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
