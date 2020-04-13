@@ -25,6 +25,10 @@ public class competition_participant {
         this.video_id = video_id;
     }
 
+    public competition_participant() {
+        
+    }
+
     public int getId() {
         return id;
     }
@@ -33,16 +37,16 @@ public class competition_participant {
         this.id = id;
     }
 
-    public Competition getCompetition_id() {
-        return competition_id;
+    public Integer getCompetition_id() {
+        return competition_id.getId();
     }
 
     public void setCompetition_id(Competition competition_id) {
         this.competition_id = competition_id;
     }
 
-    public User getUser_id() {
-        return user_id;
+    public String getUser_id() {
+        return user_id.getUsername();
     }
 
     public void setUser_id(User user_id) {

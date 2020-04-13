@@ -1,23 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" fx:id="video_list" prefHeight="720.0" prefWidth="1280.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="tunisiagottalent.UI.Competitions.View_CompetitionController">
+<AnchorPane id="AnchorPane" fx:id="video_list" prefHeight="704.0" prefWidth="1248.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.Competitions.View_CompetitionController">
    <children>
-      <GridPane fx:id="video_grid" gridLinesVisible="true" layoutX="263.0" layoutY="150.0" prefHeight="536.0" prefWidth="821.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="480.0" minWidth="10.0" prefWidth="458.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="364.0" minWidth="10.0" prefWidth="280.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="195.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="155.0" minHeight="10.0" prefHeight="126.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-      </GridPane>
+      <VBox layoutX="-1.0" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: transparent;">
+         <children>
+            <HBox prefHeight="212.0" prefWidth="1287.0">
+               <children>
+                  <Label alignment="BOTTOM_LEFT" contentDisplay="CENTER" prefHeight="122.0" prefWidth="290.0" text="Share Your Talent !" textFill="#0a0a0a">
+                     <font>
+                        <Font name="French Script MT" size="39.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="TOP_CENTER" contentDisplay="RIGHT" prefHeight="93.0" prefWidth="472.0" text="Competition" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font name="Haettenschweiler" size="92.0" />
+                     </font>
+                  </Label>
+                  <VBox prefHeight="212.0" prefWidth="519.0">
+                     <children>
+                        <Label fx:id="comp" prefHeight="126.0" prefWidth="519.0" textFill="WHITE">
+                           <font>
+                              <Font name="Bernard MT Condensed" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="time" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="139.0" prefWidth="516.0" textFill="#2dcf34">
+                           <font>
+                              <Font name="Bernard MT Condensed" size="57.0" />
+                           </font>
+                           <effect>
+                              <Glow />
+                           </effect>
+                        </Label>
+                        <JFXComboBox fx:id="orderCombo" focusColor="#f5f5f5" labelFloat="true" prefHeight="31.0" prefWidth="151.0" promptText="Order By" style="-fx-background-color: white;" unFocusColor="WHITE" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="509.0" prefWidth="1280.0">
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="513.0" prefWidth="411.0">
+                     <children>
+                        <Label alignment="TOP_CENTER" prefHeight="103.0" prefWidth="412.0" text="Ranking :" textFill="#f8f7f7">
+                           <font>
+                              <Font name="Freestyle Script" size="51.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="116.0" fitWidth="250.0" opacity="0.49" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/crown.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="ranks" alignment="CENTER" prefHeight="193.0" prefWidth="399.0" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="Bodoni MT Condensed" size="26.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <ScrollPane fx:id="scroll" prefHeight="455.0" prefWidth="873.0" stylesheets="@scroll.css">
+                     <content>
+                        <GridPane fx:id="video_grid" alignment="CENTER" prefHeight="196.0" prefWidth="867.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="480.0" minWidth="10.0" prefWidth="459.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="388.0" minWidth="10.0" prefWidth="385.0" />
+                          </columnConstraints>
+                        </GridPane>
+                     </content>
+                     <styleClass>
+                        <String fx:value="scroll-pane" />
+                        <String fx:value="viewport" />
+                     </styleClass>
+                  </ScrollPane>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

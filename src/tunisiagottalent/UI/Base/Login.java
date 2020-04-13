@@ -90,15 +90,18 @@ public class Login {
                     Stage stage = (Stage) login_anchor.getScene().getWindow();
 
                     Scene s = stage.getOwner().getScene();
-                    System.out.println(s);
+                    
                     JFXButton l = (JFXButton) s.lookup("#btn_login");
                     JFXButton b = (JFXButton) s.lookup("#btn_signup");
                     JFXButton b2 = (JFXButton) s.lookup("#btn_logout");
                     JFXButton d = (JFXButton) s.lookup("#btn_dashboard");
                     JFXHamburger j = (JFXHamburger) s.lookup("#hamburger");
                     JFXDrawer e = (JFXDrawer) s.lookup("#drawer");
+                    AnchorPane p=(AnchorPane) stage.getOwner().getScene().getRoot();
+                   
+                    p.setStyle("-fx-background-image: url('/tunisiagottalent/UI/Base/img/bg-3.jpg')");
                     e.open();
-
+                     
                     j.setDisable(false);
 
                     b.setVisible(false);

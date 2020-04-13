@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import tunisiagottalent.Entity.Competition;
 import tunisiagottalent.services.CompetitionServices;
 
@@ -43,46 +44,45 @@ public class Add_COmpetitionController {
 
     @FXML
     private Button btn_add;
-      @FXML
+    @FXML
     private AnchorPane add_comp_anchor;
-void initialize() {
-
-}
 @FXML
-    void Cancel(ActionEvent event) {
-try {
-                AnchorPane p = FXMLLoader.load(getClass().getResource("Admin_Competitions.fxml"));
-                this.add_comp_anchor.getChildren().setAll(p);
+    void initialize() {
+        startTime.setValue(LocalTime.now());
+        startDate.setValue(LocalDate.now());
+        startDate.setOpacity(1);
+        startTime.setOpacity(1);
 
-            } catch (IOException ex) {
-                Logger.getLogger(Add_COmpetitionController.class.getName()).log(Level.SEVERE, null, ex);
-            }
     }
+
+    @FXML
+    void Cancel(ActionEvent event) {
+        Stage stage = (Stage) add_comp_anchor.getScene().getWindow();
+        stage.close();
+    }
+
     @FXML
     void Add(ActionEvent event) {
-        try { String sub=subject.getText();
-            LocalDate s=startDate.getValue();
-            LocalTime t=startTime.getValue();
-            LocalDateTime dt= LocalDateTime.of(s, t);
-            Timestamp f= Timestamp.valueOf(dt);
-            LocalDate s2=endDate.getValue();
-            LocalTime t2=endTime.getValue();
-            LocalDateTime dt2= LocalDateTime.of(s2, t2);
-            Timestamp f2= Timestamp.valueOf(dt2);
-            CompetitionServices cs =new CompetitionServices();
-            Competition c1=new Competition(sub, f, f2);
-            cs.create(c1);
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Competition");
-            alert.setHeaderText("Competition Added Succesfully");
-            alert.setContentText("Go Back To The List");
+        String sub = subject.getText();
+        LocalDate s = startDate.getValue();
+        LocalTime t = startTime.getValue();
+        LocalDateTime dt = LocalDateTime.of(s, t);
+        Timestamp f = Timestamp.valueOf(dt);
+        LocalDate s2 = endDate.getValue();
+        LocalTime t2 = endTime.getValue();
+        LocalDateTime dt2 = LocalDateTime.of(s2, t2);
+        Timestamp f2 = Timestamp.valueOf(dt2);
+        CompetitionServices cs = new CompetitionServices();
+        Competition c1 = new Competition(sub, f, f2);
+        cs.create(c1);
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Competition");
+        alert.setHeaderText("Competition Added Succesfully");
+        alert.setContentText("Go Back To The List");
 
-            alert.showAndWait();
-                AnchorPane p = FXMLLoader.load(getClass().getResource("Admin_Competitions.fxml"));
-                this.add_comp_anchor.getChildren().setAll(p);
+        alert.showAndWait();
+        Stage stage = (Stage) add_comp_anchor.getScene().getWindow();
+        stage.close();
 
-            } catch (IOException ex) {
-                Logger.getLogger(Add_COmpetitionController.class.getName()).log(Level.SEVERE, null, ex);
-            }
     }
 }

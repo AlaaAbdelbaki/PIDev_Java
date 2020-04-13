@@ -3,7 +3,9 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -12,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="mainAnchor" prefHeight="719.0" prefWidth="1251.0" styleClass="mainAnchor" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.Base.MainController">
+<AnchorPane id="AnchorPane" fx:id="mainAnchor" prefHeight="850.0" prefWidth="1600.0" styleClass="mainAnchor" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.Base.MainController">
    <children>
       <ImageView fitHeight="370.0" fitWidth="899.0" layoutX="401.0" layoutY="242.0" opacity="0.19" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -22,47 +24,91 @@
             <GaussianBlur radius="13.94" />
          </effect>
       </ImageView>
-      <VBox alignment="CENTER" layoutY="88.0" prefHeight="644.0" prefWidth="1287.0">
+      <VBox alignment="CENTER" layoutX="-1.0" layoutY="102.0" prefHeight="748.0" prefWidth="1600.0">
          <children>
-            <HBox fx:id="content" alignment="CENTER" prefHeight="671.0" prefWidth="1191.0" />
+            <HBox fx:id="content" alignment="CENTER" prefHeight="691.0" prefWidth="1291.0" />
          </children>
       </VBox>
-      <JFXButton fx:id="btn_signup" buttonType="RAISED" layoutX="1120.0" layoutY="18.0" onAction="#popup_signup" prefHeight="44.0" prefWidth="125.0" ripplerFill="#3185d3" text="Sign Up" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
+      <JFXButton fx:id="btn_signup" buttonType="RAISED" layoutX="1423.0" layoutY="18.0" onAction="#popup_signup" prefHeight="44.0" prefWidth="125.0" ripplerFill="#3185d3" text="Sign Up" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
          <font>
             <Font name="Candara Italic" size="18.0" />
          </font>
+         <graphic>
+            <FontAwesomeIcon fill="#fcfcfc" glyphName="USER_PLUS" />
+         </graphic>
       </JFXButton>
-      <JFXButton fx:id="btn_login" layoutX="995.0" layoutY="18.0" onAction="#popup_login" prefHeight="44.0" prefWidth="125.0" ripplerFill="#d13c32" text="LOG IN" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
+      <JFXButton fx:id="btn_login" layoutX="1287.0" layoutY="18.0" onAction="#popup_login" prefHeight="44.0" prefWidth="125.0" ripplerFill="#d13c32" text="LOG IN" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
          <font>
             <Font name="Candara Italic" size="18.0" />
          </font>
+         <graphic>
+            <FontAwesomeIcon fill="WHITE" glyphName="SIGN_IN" />
+         </graphic>
       </JFXButton>
-      <JFXButton fx:id="btn_logout" layoutX="1149.0" layoutY="25.0" onAction="#logout" ripplerFill="#eb0c0c" text="Logout" textFill="#fcfcfc" visible="false" />
-      <JFXButton fx:id="btn_dashboard" layoutX="1003.0" layoutY="25.0" onAction="#dash" ripplerFill="#299757" text="DashBoard" textFill="WHITE" visible="false" />
-      <JFXHamburger fx:id="hamburger" layoutX="934.0" layoutY="25.0" prefHeight="31.0" prefWidth="52.0" style="-fx-background-color: white;" />
-      <JFXDrawer fx:id="drawer" defaultDrawerSize="325.0" opacity="0.5" prefHeight="738.0" prefWidth="287.0" style="-fx-background-color: transparent;">
+      <JFXButton fx:id="btn_logout" layoutX="1443.0" layoutY="25.0" onAction="#logout" ripplerFill="#eb0c0c" text="Logout" textFill="#fcfcfc" visible="false">
+         <graphic>
+            <FontAwesomeIcon fill="#ebeaea" glyphName="SIGN_OUT" />
+         </graphic></JFXButton>
+      <JFXButton fx:id="btn_dashboard" layoutX="1294.0" layoutY="25.0" onAction="#dash" ripplerFill="#299757" text="DashBoard" textFill="WHITE" visible="false">
+         <graphic>
+            <FontAwesomeIcon fill="WHITE" glyphName="DASHBOARD" />
+         </graphic></JFXButton>
+      <JFXHamburger fx:id="hamburger" layoutX="1218.0" layoutY="25.0" prefHeight="31.0" prefWidth="52.0" style="-fx-background-color: transparent; -fx-: white;" />
+      <JFXDrawer fx:id="drawer" defaultDrawerSize="325.0" opacity="0.5" prefHeight="850.0" prefWidth="296.0" style="-fx-background-color: transparent;">
          <children>
             <VBox fx:id="vbox" alignment="TOP_CENTER" opacity="0.99" prefHeight="749.0" prefWidth="296.0" style="-fx-background-color: black;">
                <children>
-                  <ImageView fitHeight="117.0" fitWidth="247.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="logo" fitHeight="117.0" fitWidth="247.0" onMouseClicked="#home" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/050b8e8c2f748fdd7584fc74ceae6e84.png" />
                      </image>
                      <VBox.margin>
                         <Insets bottom="40.0" />
                      </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
-                  <JFXButton prefHeight="57.0" prefWidth="247.0" text="Home" textFill="#fcfcfc" />
-                  <JFXButton layoutX="10.0" layoutY="120.0" prefHeight="61.0" prefWidth="256.0" text="Profile" textFill="#fcfcfc" />
-                  <JFXButton layoutX="10.0" layoutY="120.0" prefHeight="61.0" prefWidth="256.0" text="Shop" textFill="#fcfcfc" />
-                  <JFXButton layoutX="10.0" layoutY="120.0" prefHeight="61.0" prefWidth="256.0" text="Events" textFill="#fcfcfc" />
-                  <JFXButton fx:id="btn_competitions" layoutX="10.0" layoutY="120.0" onAction="#competitions" prefHeight="61.0" prefWidth="256.0" text="Competitions" textFill="#fcfcfc" />
-                  <JFXButton layoutX="10.0" layoutY="242.0" prefHeight="61.0" prefWidth="256.0" text="News" textFill="#fcfcfc" />
-                  <JFXButton layoutX="10.0" layoutY="303.0" prefHeight="61.0" prefWidth="256.0" text="Blog" textFill="#fcfcfc" />
-                  <JFXButton layoutX="10.0" layoutY="364.0" prefHeight="61.0" prefWidth="256.0" text="Rate Us" textFill="#fcfcfc" />
+                  <JFXButton prefHeight="57.0" prefWidth="247.0" text="Home" textFill="#fcfcfc">
+                     <graphic>
+                        <FontAwesomeIcon fill="#f2f2f2" glyphName="HOME" />
+                     </graphic></JFXButton>
+                  <JFXButton layoutX="10.0" layoutY="120.0" prefHeight="61.0" prefWidth="256.0" text="Profile" textFill="#fcfcfc">
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="USER" />
+                     </graphic></JFXButton>
+                  <JFXButton layoutX="10.0" layoutY="120.0" prefHeight="61.0" prefWidth="256.0" text="Shop" textFill="#fcfcfc">
+                     <graphic>
+                        <FontAwesomeIcon fill="#f5f4f4" glyphName="SHOPPING_CART" />
+                     </graphic></JFXButton>
+                  <JFXButton layoutX="10.0" layoutY="120.0" prefHeight="61.0" prefWidth="256.0" text="Events" textFill="#fcfcfc">
+                     <graphic>
+                        <FontAwesomeIcon fill="#ebebeb" glyphName="USERS" />
+                     </graphic></JFXButton>
+                  <JFXButton fx:id="btn_competitions" layoutX="10.0" layoutY="120.0" onAction="#competitions" prefHeight="61.0" prefWidth="256.0" text="Competitions" textFill="#fcfcfc">
+                     <graphic>
+                        <FontAwesomeIcon fill="#f8f4f4" glyphName="CERTIFICATE" />
+                     </graphic></JFXButton>
+                  <JFXButton layoutX="10.0" layoutY="242.0" prefHeight="61.0" prefWidth="256.0" text="News" textFill="#fcfcfc">
+                     <graphic>
+                        <FontAwesomeIcon fill="#f5f5f5" glyphName="NEWSPAPER_ALT" />
+                     </graphic></JFXButton>
+                  <JFXButton layoutX="10.0" layoutY="303.0" prefHeight="61.0" prefWidth="256.0" text="Blog" textFill="#fcfcfc">
+                     <graphic>
+                        <FontAwesomeIcon fill="#fcfcfc" glyphName="COMMENTS" />
+                     </graphic></JFXButton>
+                  <JFXButton layoutX="10.0" layoutY="364.0" prefHeight="61.0" prefWidth="256.0" text="Rate Us" textFill="#fcfcfc">
+                     <graphic>
+                        <FontAwesomeIcon fill="#eeeeee" glyphName="THUMBS_ALT_UP" />
+                     </graphic></JFXButton>
                </children>
             </VBox>
          </children>
       </JFXDrawer>
+      <FontAwesomeIcon fx:id="exitApp" fill="#f2eeee" glyphName="CLOSE" layoutX="1564.0" layoutY="30.0" onMouseClicked="#exitApp" wrappingWidth="14.785714149475098">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </FontAwesomeIcon>
    </children>
 </AnchorPane>

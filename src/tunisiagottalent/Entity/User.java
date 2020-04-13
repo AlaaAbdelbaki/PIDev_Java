@@ -31,7 +31,7 @@ public class User {
        
     }
 
-    public User(String username, String email, String gender, String address, String name, String lastName, String phone_number,String Role) {
+    public User(int id,String username, String email, String gender, String address, String name, String lastName, String phone_number,String Role) {
         this.username = username;
         this.email = email;
         this.gender = gender;
@@ -40,6 +40,7 @@ public class User {
         this.lastName = lastName;
         this.phone_number = phone_number;
         this.Role=Role;
+        this.id=id;
     }
 
     @Override

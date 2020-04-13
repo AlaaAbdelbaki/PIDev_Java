@@ -6,18 +6,14 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="add_comp_anchor" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #3C4858;;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.Competitions.Add_COmpetitionController">
+<AnchorPane fx:id="add_comp_anchor" prefHeight="451.0" prefWidth="795.0" styleClass="mainFxmlClass" stylesheets="@AddCompetition.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.Competitions.Add_COmpetitionController">
    <children>
-      <AnchorPane layoutX="438.0" layoutY="103.0" prefHeight="451.0" prefWidth="795.0">
-         <children>
-            <JFXDatePicker fx:id="startDate" layoutX="101.0" layoutY="41.0" />
-            <JFXDatePicker fx:id="endDate" layoutX="455.0" layoutY="41.0" />
-            <JFXTimePicker fx:id="startTime" layoutX="101.0" layoutY="99.0" />
-            <JFXTimePicker fx:id="endTime" layoutX="455.0" layoutY="99.0" />
-            <TextArea fx:id="subject" layoutX="101.0" layoutY="172.0" prefHeight="134.0" prefWidth="541.0" />
-            <Button fx:id="btn_cancel" layoutX="642.0" layoutY="372.0" mnemonicParsing="false" onAction="#Cancel" prefHeight="31.0" prefWidth="106.0" text="Cancel" />
-            <Button fx:id="btn_add" layoutX="496.0" layoutY="372.0" mnemonicParsing="false" onAction="#Add" prefHeight="31.0" prefWidth="106.0" text="Add" />
-         </children>
-      </AnchorPane>
+      <JFXDatePicker fx:id="startDate" defaultColor="BLACK" disable="true" editable="false" layoutX="101.0" layoutY="41.0" overLay="true" />
+      <JFXDatePicker fx:id="endDate" defaultColor="#0a0a0a" layoutX="455.0" layoutY="41.0" />
+      <JFXTimePicker fx:id="startTime" defaultColor="BLACK" disable="true" layoutX="101.0" layoutY="99.0" overLay="true" />
+      <JFXTimePicker fx:id="endTime" defaultColor="BLACK" layoutX="455.0" layoutY="99.0" />
+      <TextArea fx:id="subject" layoutX="101.0" layoutY="172.0" prefHeight="134.0" prefWidth="541.0" styleClass="textfield" stylesheets="@AddCompetition.css" />
+      <Button fx:id="btn_cancel" layoutX="642.0" layoutY="372.0" mnemonicParsing="false" onAction="#Cancel" prefHeight="31.0" prefWidth="106.0" text="Cancel" />
+      <Button fx:id="btn_add" layoutX="496.0" layoutY="372.0" mnemonicParsing="false" onAction="#Add" prefHeight="31.0" prefWidth="106.0" text="Add" />
    </children>
 </AnchorPane>

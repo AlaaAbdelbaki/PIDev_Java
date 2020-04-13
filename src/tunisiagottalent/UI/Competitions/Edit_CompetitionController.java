@@ -13,10 +13,13 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import tunisiagottalent.Entity.Competition;
 import tunisiagottalent.services.CompetitionServices;
 
@@ -60,6 +63,8 @@ public class Edit_CompetitionController {
         startTime.setValue(s);
         endDate.setValue(d2);
         endTime.setValue(s2);
+        startDate.setOpacity(1);
+        startTime.setOpacity(1);
         subject.setText(c.getSubject());
 
     });
@@ -69,18 +74,13 @@ public class Edit_CompetitionController {
     }
     @FXML
     void Cancel(ActionEvent event) {
-try {
-                AnchorPane p = FXMLLoader.load(getClass().getResource("Admin_Competitions.fxml"));
-                this.edit_comp_anchor.getChildren().setAll(p);
-
-            } catch (IOException ex) {
-                Logger.getLogger(Add_COmpetitionController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            Stage stage = (Stage) edit_comp_anchor.getScene().getWindow();
+             stage.close();
     }
 
     @FXML
     void update(ActionEvent event) {
-         try { String sub=subject.getText();
+         String sub=subject.getText();
             LocalDate s=startDate.getValue();
             LocalTime t=startTime.getValue();
             LocalDateTime dt= LocalDateTime.of(s, t);
@@ -91,7 +91,6 @@ try {
             Timestamp f2= Timestamp.valueOf(dt2);
             CompetitionServices cs =new CompetitionServices();
             Competition c1=new Competition(this.c.getId(),sub, f, f2);
-             
             cs.update(c1);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Competition");
@@ -99,12 +98,15 @@ try {
             alert.setContentText("Go Back To The List");
 
             alert.showAndWait();
-                AnchorPane p = FXMLLoader.load(getClass().getResource("Admin_Competitions.fxml"));
-                this.edit_comp_anchor.getChildren().setAll(p);
+             Stage stage = (Stage) edit_comp_anchor.getScene().getWindow();
+             Scene s1 = stage.getOwner().getScene();
+             TableView tab=(TableView)s1.lookup("#competitions");
+             CompetitionServices cs1= new CompetitionServices();
+             tab.getItems().clear();
+             tab.setItems(cs1.getAll());
+                stage.close();
 
-            } catch (IOException ex) {
-                Logger.getLogger(Edit_CompetitionController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
 
     }
 public void setCompetition(Competition c) {

@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerNextArrowBasicTransition;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,6 +24,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import tunisiagottalent.util.UserSession;
@@ -48,6 +50,10 @@ public class AdminMainController implements Initializable {
     private AnchorPane AdminMainAnchor;
     @FXML
     private ImageView logo;
+    @FXML
+    private HBox content;
+    @FXML
+    private FontAwesomeIcon quit;
 
     /**
      * Initializes the controller class.
@@ -95,6 +101,21 @@ public class AdminMainController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(AdminMainController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+    private void competitions(ActionEvent event) {
+        try {
+            AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/Competitions/Admin_Competitions.fxml"));
+            content.getChildren().setAll(p);
+            drawer.close();
+        } catch (IOException ex) {
+            Logger.getLogger(AdminMainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void quit(MouseEvent event) {
     }
 
 }

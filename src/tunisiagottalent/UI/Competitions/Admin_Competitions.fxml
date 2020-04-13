@@ -1,24 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.Bloom?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="Competitions_list" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #3C4858;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.Competitions.AdminCompetitions">
+<AnchorPane fx:id="Competitions_list" prefHeight="737.0" prefWidth="1280.0" stylesheets="@AdminCompetitions.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.Competitions.AdminCompetitions">
    <children>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="29.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@img/050b8e8c2f748fdd7584fc74ceae6e84.png" />
-         </image>
-      </ImageView>
-      <Text fill="WHITE" layoutX="746.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Competition Dashboard" wrappingWidth="465.13671875">
+      <Text fill="WHITE" layoutX="459.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Competition Dashboard" wrappingWidth="465.13671875">
          <font>
             <Font name="Eras Light ITC" size="43.0" />
          </font>
@@ -26,22 +19,46 @@
             <Bloom />
          </effect>
       </Text>
-      <TableView fx:id="competitions" layoutX="229.0" layoutY="203.0" opacity="0.8" prefHeight="314.0" prefWidth="959.0" style="-fx-background-color: #3C4858; -fx-border-color: #ffff;">
+      <TableView fx:id="competitions" layoutX="100.0" layoutY="139.0" opacity="0.78" prefHeight="206.0" prefWidth="1088.0" stylesheets="@AdminCompetitions.css">
         <columns>
           <TableColumn fx:id="ID" prefWidth="67.0" text="ID" />
-          <TableColumn fx:id="Subject" prefWidth="237.0" text="Subject" />
-            <TableColumn fx:id="startDate" prefWidth="221.0" text="Start Date" />
-            <TableColumn fx:id="endDate" prefWidth="221.0" text="End Date" />
-            <TableColumn fx:id="Action" prefWidth="212.0" text="Actions" />
+          <TableColumn fx:id="Subject" prefWidth="252.0" text="Subject" />
+            <TableColumn fx:id="startDate" prefWidth="228.0" text="Start Date" />
+            <TableColumn fx:id="endDate" prefWidth="216.0" text="End Date" />
+            <TableColumn fx:id="Action" prefWidth="324.0" text="Actions" />
         </columns>
          <opaqueInsets>
-            <Insets />
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </opaqueInsets>
       </TableView>
-      <Button fx:id="btn_add" layoutX="979.0" layoutY="150.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="200.0" style="-fx-background-color: #288c6c;" text="Add new Competition" textAlignment="CENTER" textFill="WHITE">
+      <JFXButton fx:id="btn_add" buttonType="RAISED" layoutX="1000.0" layoutY="132.0" prefHeight="29.0" prefWidth="188.0" ripplerFill="#17c30b" text="Add Competition" textAlignment="CENTER" textFill="#f5f5f5">
          <font>
-            <Font name="Ebrima" size="13.0" />
+            <Font name="Copperplate Gothic Light" size="18.0" />
          </font>
-      </Button>
+      </JFXButton>
+      <TableView fx:id="winners" layoutX="100.0" layoutY="448.0" prefHeight="160.0" prefWidth="1088.0">
+        <columns>
+          <TableColumn fx:id="comp" prefWidth="114.0" text="Competition" />
+          <TableColumn fx:id="user" prefWidth="291.0" text="User" />
+            <TableColumn fx:id="vid" prefWidth="390.0" text="Video" />
+            <TableColumn fx:id="prom" prefWidth="293.0" text="Action" />
+        </columns>
+      </TableView>
+      <Text fill="WHITE" layoutX="120.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Competitions List" wrappingWidth="465.13671875">
+         <font>
+            <Font name="Eras Light ITC" size="43.0" />
+         </font>
+         <effect>
+            <Bloom />
+         </effect>
+      </Text>
+      <Text fill="WHITE" layoutX="120.0" layoutY="407.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Winners list" wrappingWidth="465.13671875">
+         <font>
+            <Font name="Eras Light ITC" size="43.0" />
+         </font>
+         <effect>
+            <Bloom />
+         </effect>
+      </Text>
    </children>
 </AnchorPane>

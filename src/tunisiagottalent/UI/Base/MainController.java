@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 
 import com.jfoenix.transitions.hamburger.HamburgerNextArrowBasicTransition;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -15,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -26,6 +28,7 @@ import javafx.stage.Modality;
 
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import tunisiagottalent.UI.Competitions.View_CompetitionController;
 
 import tunisiagottalent.util.UserSession;
 
@@ -51,9 +54,14 @@ public class MainController {
     public JFXButton btn_login;
     @FXML
     public VBox vbox;
-
     @FXML
-    void initialize() {
+    private ImageView logo;
+    @FXML
+    private JFXButton btn_competitions;
+    @FXML
+    private FontAwesomeIcon exitApp;
+    @FXML
+void initialize() {
         drawer.setSidePane(vbox);
         drawer.setStyle("-fx-background-color:transparent;");
 
@@ -94,6 +102,8 @@ public class MainController {
         drawer.close();
         hamburger.setDisable(true);
         System.out.println(UserSession.instance);
+       // View_CompetitionController.oneSecond.stop();
+        mainAnchor.setStyle("-fx-background-image: url('/tunisiagottalent/UI/Base/img/bg-2.jpg')");
     }
 
     @FXML
@@ -155,10 +165,26 @@ public class MainController {
         try {
             AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/Competitions/User_Competitions.fxml"));
             content.getChildren().setAll(p);
+            drawer.close();
+            mainAnchor.setStyle("-fx-background-image: url('/tunisiagottalent/UI/Competitions/img/bg-9.jpg')");
+            
         } catch (IOException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    @FXML
+    private void home(MouseEvent event) {
+        content.getChildren().clear();
+        mainAnchor.setStyle("-fx-background-image: url('/tunisiagottalent/UI/Base/img/bg-3.jpg')");
+        drawer.close();
+        
+    }
+
+    @FXML
+    private void exitApp(MouseEvent event) {
+        System.exit(0);
     }
 
 }

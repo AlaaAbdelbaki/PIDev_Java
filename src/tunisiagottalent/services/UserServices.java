@@ -135,7 +135,7 @@ public class UserServices {
             ste = cnx.createStatement();
             rs = ste.executeQuery(req);
             while(rs.next()){
-                list.add(new User(rs.getString("username"),rs.getString("email"),rs.getString("sexe"),rs.getString("adresse"),rs.getString("name"),rs.getString("first_name"),rs.getString("telephone_number"),rs.getString("roles")));
+                list.add(new User(rs.getInt("id"),rs.getString("username"),rs.getString("email"),rs.getString("sexe"),rs.getString("adresse"),rs.getString("name"),rs.getString("first_name"),rs.getString("telephone_number"),rs.getString("roles")));
             }
 
         } catch (SQLException ex) {
@@ -169,7 +169,7 @@ public class UserServices {
             ste = cnx.createStatement();
             rs = ste.executeQuery(req);
             while(rs.next()){
-                u=new User(rs.getString("username"),rs.getString("email"),rs.getString("sexe"),rs.getString("adresse"),rs.getString("name"),rs.getString("first_name"),rs.getString("telephone_number"),rs.getString("roles"));
+                u=new User(rs.getInt("id"),rs.getString("username"),rs.getString("email"),rs.getString("sexe"),rs.getString("adresse"),rs.getString("name"),rs.getString("first_name"),rs.getString("telephone_number"),rs.getString("roles"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserServices.class.getName()).log(Level.SEVERE, null, ex);

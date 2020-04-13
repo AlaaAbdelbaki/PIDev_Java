@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -32,8 +33,8 @@ public class TunisiaGotTalent extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/Base/Main.fxml"));
 
-        Scene scene = new Scene(root, 1280, 720);
-        //stage.initStyle(StageStyle.UNDECORATED);
+        Scene scene = new Scene(root, 1600, 850);
+        stage.initStyle(StageStyle.UNDECORATED);
 
         stage.setScene(scene);
         stage.setResizable(false);

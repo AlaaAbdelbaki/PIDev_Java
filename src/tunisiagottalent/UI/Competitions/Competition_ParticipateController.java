@@ -15,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.MediaView;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 import sun.security.pkcs11.wrapper.Functions;
 import tunisiagottalent.Entity.Competition;
 import tunisiagottalent.Entity.User;
@@ -51,7 +52,7 @@ public class Competition_ParticipateController {
     }
     @FXML
     void initialize() {
-        
+        participation.setStyle("-fx-background-image: url('/tunisiagottalent/UI/Competitions/img/mp2.jpg')");
         participation_date.setText(new Timestamp(System.currentTimeMillis()).toString());
         
     }
@@ -81,25 +82,17 @@ public class Competition_ParticipateController {
             alert.setContentText("Go Back To The Homepage");
 
             alert.showAndWait();
-              try{  AnchorPane p = FXMLLoader.load(getClass().getResource("User_Competitions.fxml"));
-                this.participation.getChildren().setAll(p);
-
-            } catch (IOException ex) {
-                Logger.getLogger(Competition_ParticipateController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            Stage stage = (Stage) participation.getScene().getWindow();
+             stage.close();
+             
        
 
     }
 
     @FXML
     void cancel(ActionEvent event) {
-        try {
-                AnchorPane p = FXMLLoader.load(getClass().getResource("User_Competitions.fxml"));
-                this.participation.getChildren().setAll(p);
-
-            } catch (IOException ex) {
-                Logger.getLogger(Competition_ParticipateController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        Stage stage = (Stage) participation.getScene().getWindow();
+        stage.close();
 
     }
    
