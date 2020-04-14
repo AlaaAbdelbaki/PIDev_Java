@@ -3,6 +3,7 @@ package tunisiagottalent.Entity;
 import java.sql.Date;
 
 public class User {
+
     int id;
 
     public int getId() {
@@ -53,12 +54,14 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
-       
+
     }
- public User() {
-        
+
+    public User() {
+
     }
-    public User(int id,String username, String email,String password, String gender, String address, String name, String lastName, String phone_number,String Role,Date Birthday,String ProfilePic) {
+
+    public User(int id, String username, String email, String password, String gender, String address, String name, String lastName, String phone_number,String bio, String Role, Date Birthday, String ProfilePic) {
         this.username = username;
         this.email = email;
         this.gender = gender;
@@ -66,19 +69,18 @@ public class User {
         this.name = name;
         this.lastName = lastName;
         this.phone_number = phone_number;
-        this.Role=Role;
-        this.id=id;
-        this.Birthday=Birthday;
-        this.password=password;
-        this.ProfilePic=ProfilePic;
+        this.Role = Role;
+        this.id = id;
+        this.bio = bio;
+        this.Birthday = Birthday;
+        this.password = password;
+        this.ProfilePic = ProfilePic;
     }
 
     @Override
     public String toString() {
         return "User{" + "id=" + id + ", username=" + username + ", email=" + email + ", password=" + password + ", gender=" + gender + ", address=" + address + ", name=" + name + ", lastName=" + lastName + ", bio=" + bio + ", phone_number=" + phone_number + ", Role=" + Role + '}';
     }
-
-    
 
     public String getUsername() {
         return username;
@@ -152,6 +154,4 @@ public class User {
         this.phone_number = phone_number;
     }
 
-
 }
-

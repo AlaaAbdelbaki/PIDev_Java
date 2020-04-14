@@ -124,7 +124,7 @@ public class Login {
                     alert.setHeaderText(null);
                     alert.setContentText("Username not found\nPlease verify your username.");
                     Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-                    stage.getIcons().add(new Image("/tunisiagottalent/UI/img/icon.png"));
+                    stage.getIcons().add(new Image("/tunisiagottalent/UI/Base/img/icon.png"));
 //                    stage.initStyle(StageStyle.UNDECORATED);
                     alert.showAndWait();
                     break;
@@ -136,7 +136,7 @@ public class Login {
                     alert.setHeaderText(null);
                     alert.setContentText("Password is incorrect\nPlease verify your password.");
                     Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-                    stage.getIcons().add(new Image("/tunisiagottalent/UI/img/icon.png"));
+                    stage.getIcons().add(new Image("/tunisiagottalent/UI/Base/img/icon.png"));
 
 //                    stage.initStyle(StageStyle.UNDECORATED);
                     alert.showAndWait();

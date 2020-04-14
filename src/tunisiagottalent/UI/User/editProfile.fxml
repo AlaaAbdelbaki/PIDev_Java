@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-
 <AnchorPane fx:id="rootpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.User.EditProfileController">
    <children>
       <HBox alignment="CENTER" prefHeight="750.0" prefWidth="1601.0">
@@ -40,6 +39,9 @@
                   <Label layoutX="101.0" layoutY="180.0" styleClass="credentials" text="Address" />
                   <TextField fx:id="addressInput" layoutX="300.0" layoutY="180.0" prefHeight="29.0" prefWidth="438.0" promptText="Address" />
                   <Button layoutX="300.0" layoutY="573.0" mnemonicParsing="false" onAction="#delete" prefHeight="39.0" prefWidth="438.0" styleClass="cancel" text="Delete Account" />
+                  <Label layoutX="101.0" layoutY="215.0" styleClass="credentials" text="Profile picture" />
+                  <Button layoutX="465.0" layoutY="220.0" mnemonicParsing="false" onAction="#uploadProfilePic" styleClass="submit" text="Choose an image" />
+                  <Label fx:id="imageName" layoutX="300.0" layoutY="215.0" prefHeight="35.0" prefWidth="162.0" styleClass="credentials" />
                </children>
             </AnchorPane>
          </children>

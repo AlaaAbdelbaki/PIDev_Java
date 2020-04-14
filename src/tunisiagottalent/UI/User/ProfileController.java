@@ -5,7 +5,6 @@
  */
 package tunisiagottalent.UI.User;
 
-
 import java.io.IOException;
 import java.net.URL;
 
@@ -55,79 +54,65 @@ public class ProfileController {
     @FXML
     private AnchorPane rootPane;
 
-    
     @FXML
     private ImageView profilePic;
-    
+
     @FXML
     private Label username_profile;
-    
+
     @FXML
     private Label nameLastName;
-    
+
     @FXML
     private Label bio;
-    
-    
+
     @FXML
     private ScrollPane videos_Container;
-    
-    
-    
-    
-  @FXML
+
+    @FXML
     void initialize() {
 
-  
         loadInfo();
         loadVideos();
         System.out.println("Profile loaded ! ");
 
     }
 
-  
-  @FXML
+    @FXML
     void loadInfo() {
-       
 
 //        Image img=new Image("D:/Programming/Web/htdocs/annee_2019_2020/PIDev/web/assets/img/pics/unknown.jpg"); 
         Image img = new Image("tunisiagottalent/UI/User/img/unknown.jpg");
-        
+
         UserServices us = new UserServices();
         UserSession s = UserSession.instance;
-       
-       
+
         User user = s.getU();
 //        System.out.println(user);
         username_profile.setText(user.getUsername());
         profilePic.setImage(img);
-        if(us.getUser(user.getUsername()).getName() == null || us.getUser(user.getUsername()).getLastName() == null){
+        if (us.getUser(user.getUsername()).getName() == null || us.getUser(user.getUsername()).getLastName() == null) {
             nameLastName.setText("Complete your profile !!");
-        }else{
+        } else {
             nameLastName.setText(us.getUser(user.getUsername()).getName() + " " + us.getUser(user.getUsername()).getLastName());
         }
         bio.setText(us.getUser(user.getUsername()).getBio());
     }
 
-    
-    
-    
     @FXML
-    void editProfile(ActionEvent event){
+    void editProfile(ActionEvent event) {
         try {
             AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/User/editProfile.fxml"));
             rootPane.getChildren().setAll(p);
-            
-            
-            
+
         } catch (IOException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+
     }
-            
+
     @FXML
-            void addVideo(ActionEvent event){
+    void addVideo(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/tunisiagottalent/UI/Video/addVideo.fxml"));
             Parent third = loader.load();
@@ -144,11 +129,11 @@ public class ProfileController {
         } catch (IOException ex) {
             Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }
-            }
-    
-      @FXML
-    void loadVideos(){
-        
+    }
+
+    @FXML
+    void loadVideos() {
+
         VideoServices vs = new VideoServices();
         UserServices us = new UserServices();
         List<video> videos;
@@ -157,7 +142,7 @@ public class ProfileController {
         videos = vs.getVideos(us.getUser(username_profile.getText()).getId());
 //        System.out.println(videos.size());
         VBox root = new VBox();
-        videos.forEach((v)->{
+        videos.forEach((v) -> {
 //            System.out.println(v);
             Label title = new Label();
             title.getStyleClass().add("video_title");
@@ -165,17 +150,11 @@ public class ProfileController {
             WebView video = new WebView();
             video.setPrefHeight(380);
             video.setPrefWidth(680);
-            video.getEngine().loadContent("<iframe width=\"640\" height=\"360\" src=\""+v.getUrl()+"\\ frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>");
-            
-            root.getChildren().addAll(title,video);
+            video.getEngine().loadContent("<iframe width=\"640\" height=\"360\" src=\"" + v.getUrl() + "\\ frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>");
+
+            root.getChildren().addAll(title, video);
             videos_Container.setContent(root);
         });
     }
-            
-            
-            
-   
 
-    
-       
 }

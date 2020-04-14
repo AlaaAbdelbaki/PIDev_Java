@@ -1,7 +1,8 @@
 package tunisiagottalent.UI.User;
 
-
+import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
 import java.sql.Date;
 import java.util.Optional;
@@ -30,7 +31,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.util.Duration;
 import tunisiagottalent.Entity.User;
 import tunisiagottalent.services.UserServices;
@@ -41,9 +44,7 @@ public class EditProfileController {
     @FXML
     private AnchorPane rootPane;
 
-
     private ImageView profilePicture;
-
 
     @FXML
     private TextField usernameInput;
@@ -53,6 +54,9 @@ public class EditProfileController {
 
     @FXML
     private TextField lastNameInput;
+
+    @FXML
+    private Label imageName;
 
     @FXML
     private TextField phoneNumberInput;
@@ -74,11 +78,13 @@ public class EditProfileController {
 
     @FXML
     private DatePicker birthdayInput;
-@FXML
+
+    private String imgp;
+    private URI imguriUri;
+
+    @FXML
     void initialize() {
 
-       
-       
         loadInfo();
         System.out.println("Edit Profile loaded ! ");
         genderInput.getItems().add("Male");
@@ -87,16 +93,13 @@ public class EditProfileController {
 
     }
 
-   
-
     void loadInfo() {
         UserServices us = new UserServices();
         UserSession s = UserSession.instance;
-        
-        
+
 //        Image img=new Image("D:/Programming/Web/htdocs/annee_2019_2020/PIDev/web/assets/img/pics/unknown.jpg"); 
         Image img = new Image("tunisiagottalent/UI/User/img/unknown.jpg");
-        
+
         usernameInput.setText(s.getU().getUsername());
         System.out.println(s.getU());
         if (s.getU().getName() != null) {
@@ -128,11 +131,6 @@ public class EditProfileController {
 
     }
 
-    
-
-    
-
-
     @FXML
     void submit(ActionEvent event) {
         String username = usernameInput.getText();
@@ -150,13 +148,14 @@ public class EditProfileController {
         String lastName = lastNameInput.getText();
         String bio = bioInput.getText();
         String phone_number = "";
+        String profilePic = imageName.getText();
         if (phoneNumberInput.getText().matches("[0-9]+")) {
             phone_number = phoneNumberInput.getText();
         } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Success");
             alert.setHeaderText(null);
-            alert.setContentText("Password field contains characters !");
+            alert.setContentText("Phone number field should only have numbers");
             Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
             stage.getIcons().add(new Image("/tunisiagottalent/UI/Base/img/icon.png"));
 
@@ -172,9 +171,9 @@ public class EditProfileController {
         }
 
         String address = addressInput.getText();
-          UserSession s= UserSession.instance;
-        User user =  new User(s.getU().getId(), username,  email, password,  gender,  address,  name,  lastName,  phone_number, s.getU().getRole(), birthday, s.getU().getProfilePic());
-
+        UserSession s = UserSession.instance;
+        User user = new User(s.getU().getId(), username, email, password, gender, address, name, lastName, phone_number, bio, s.getU().getRole(), birthday, profilePic);
+//        System.out.println(user);
         UserServices us = new UserServices();
 
         if (us.updateUser(user)) {
@@ -188,15 +187,13 @@ public class EditProfileController {
 //                    stage.initStyle(StageStyle.UNDECORATED);
             alert.showAndWait();
             try {
-            AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/User/profile.fxml"));
-            rootPane.getChildren().setAll(p);
-            
-            
-            
-        } catch (IOException ex) {
-            Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-           
+                AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/User/profile.fxml"));
+                rootPane.getChildren().setAll(p);
+
+            } catch (IOException ex) {
+                Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -207,15 +204,13 @@ public class EditProfileController {
             //                    stage.initStyle(StageStyle.UNDECORATED);
             alert.showAndWait();
             try {
-            AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/User/profile.fxml"));
-            rootPane.getChildren().setAll(p);
-            
-            
-            
-        } catch (IOException ex) {
-            Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-           
+                AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/User/profile.fxml"));
+                rootPane.getChildren().setAll(p);
+
+            } catch (IOException ex) {
+                Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
     }
 
@@ -224,17 +219,33 @@ public class EditProfileController {
         try {
             AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/User/profile.fxml"));
             rootPane.getChildren().setAll(p);
-            
-            
-            
+
         } catch (IOException ex) {
             Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @FXML
+    void uploadProfilePic(ActionEvent event) {
+        FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*png");
+
+        final FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(imageFilter);
+        Window stage = null;
+        File file = fileChooser.showOpenDialog(stage);
+        if (file != null) {
+
+            imgp = file.getName();
+            imguriUri = file.toURI();
+            imageName.setText(imgp);
+
+        }
+
+    }
+
+    @FXML
     void delete(ActionEvent event) {
-        UserSession s=UserSession.instance;
+        UserSession s = UserSession.instance;
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Warning");
         alert.setHeaderText(null);
@@ -253,17 +264,16 @@ public class EditProfileController {
                 Stage stage2 = (Stage) alert2.getDialogPane().getScene().getWindow();
                 stage2.getIcons().add(new Image("/tunisiagottalent/UI/Base/img/icon.png"));
                 alert2.showAndWait();
-               try {s.cleanUserSession();
-            AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/Base/main.fxml"));
-            
-            rootPane.getChildren().setAll(p);
-            
-            
-            
-        } catch (IOException ex) {
-            Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                
+                try {
+                    s.cleanUserSession();
+                    AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/Base/main.fxml"));
+
+                    rootPane.getChildren().setAll(p);
+
+                } catch (IOException ex) {
+                    Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
             } else {
                 Alert alert2 = new Alert(Alert.AlertType.ERROR);
                 alert2.setTitle("Error");
@@ -273,30 +283,25 @@ public class EditProfileController {
                 stage2.getIcons().add(new Image("/tunisiagottalent/UI/Base/img/icon.png"));
                 alert2.showAndWait();
                 try {
-            AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/User/profile.fxml"));
-            rootPane.getChildren().setAll(p);
-            
-            
-            
-        } catch (IOException ex) {
-            Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                
+                    AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/User/profile.fxml"));
+                    rootPane.getChildren().setAll(p);
+
+                } catch (IOException ex) {
+                    Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
             }
 
         } else {
             try {
-            AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/User/profile.fxml"));
-            rootPane.getChildren().setAll(p);
-            
-            
-            
-        } catch (IOException ex) {
-            Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/User/profile.fxml"));
+                rootPane.getChildren().setAll(p);
+
+            } catch (IOException ex) {
+                Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }
-
 
 }

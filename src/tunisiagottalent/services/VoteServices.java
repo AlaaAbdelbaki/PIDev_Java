@@ -97,7 +97,6 @@ public class VoteServices {
         }
         return list;
      }*/
-
     public HashMap<video, Integer> ranks(Competition c) {
         String req = "SELECT  COUNT(v.video_id) ,video.*,user.*  FROM votes v "
                 + "inner join video  on(video.id=v.video_id) "
@@ -113,24 +112,25 @@ public class VoteServices {
             rs = pst.executeQuery();
             while (rs.next()) {
                 l.put(new video(rs.getInt("id"), rs.getString("url"), rs.getString("title"), rs.getTimestamp("publish_date"),
-                   new User(rs.getInt("id"),
-              rs.getString("username"),
-              rs.getString("email"),
-              rs.getString("password"),
-              rs.getString("sexe"),
-              rs.getString("adresse"),
-              rs.getString("name"),
-              rs.getString("first_name"),
-              rs.getString("telephone_number"),
-              rs.getString("roles"),
-              rs.getDate("birthday"),
-              rs.getString("profile_pic"))),  rs.getInt(1));
+                        new User(rs.getInt("id"),
+                                rs.getString("username"),
+                                rs.getString("email"),
+                                rs.getString("password"),
+                                rs.getString("sexe"),
+                                rs.getString("adresse"),
+                                rs.getString("name"),
+                                rs.getString("first_name"),
+                                rs.getString("telephone_number"),
+                                rs.getString("bio"),
+                                rs.getString("roles"),
+                                rs.getDate("birthday"),
+                                rs.getString("profile_pic"))), rs.getInt(1));
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+
         return l;
     }
 
