@@ -20,16 +20,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 
 import javafx.scene.layout.AnchorPane;
 
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.web.WebView;
 import javafx.stage.Modality;
@@ -84,14 +88,29 @@ public class ProfileController {
         UserServices us = new UserServices();
         UserSession s = UserSession.instance;
 //        Image img=new Image("D:/Programming/Web/htdocs/annee_2019_2020/PIDev/web/assets/img/pics/unknown.jpg"); 
-        
+ Rectangle clip = new Rectangle(
+                profilePic.getFitWidth(), profilePic.getFitHeight()
+            );
+            clip.setArcWidth(200);
+            clip.setArcHeight(200);
+            profilePic.setClip(clip);
 
+            // snapshot the rounded image.
+            SnapshotParameters parameters = new SnapshotParameters();
+            parameters.setFill(Color.TRANSPARENT);
+            WritableImage image = profilePic.snapshot(parameters, null);
+
+            // remove the rounding clip so that our effect can show through.
+           // profilePic.setClip(null);
+
+            // apply a shadow effect.
+          //  profilePic.setEffect(new DropShadow(20, Color.BLACK));
 
         User user = s.getU();
 //        System.out.println(user);
         username_profile.setText(user.getUsername());
         System.out.println(us.getUser(s.getU().getUsername()).getProfilePic());
-        profilePic.setImage(new Image("http://localhost/annee_2019_2020/PiDev/web/assets/uploads/" + us.getUser(s.getU().getUsername()).getProfilePic()));
+        profilePic.setImage(new Image("http://127.0.0.1:8000/assets/uploads/" + us.getUser(s.getU().getUsername()).getProfilePic()));
         if (us.getUser(user.getUsername()).getName() == null || us.getUser(user.getUsername()).getLastName() == null) {
             nameLastName.setText("Complete your profile !!");
         } else {

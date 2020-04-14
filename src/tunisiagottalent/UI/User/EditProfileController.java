@@ -175,7 +175,7 @@ public class EditProfileController {
         String address = addressInput.getText();
         UserSession s = UserSession.instance;
         try {
-            Files.copy(Paths.get(imguriUri), Paths.get("D:\\Programming\\Web\\htdocs\\annee_2019_2020\\PIDev\\web\\assets\\uploads\\"+imgp));
+            Files.copy(Paths.get(imguriUri), Paths.get("D:\\Projects\\PIDev\\web\\assets\\uploads\\"+imgp));
         } catch (IOException ex) {
             Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }

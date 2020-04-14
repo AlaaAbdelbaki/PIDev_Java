@@ -84,7 +84,7 @@
                         <FontAwesomeIcon fill="#f5f4f4" glyphName="SHOPPING_CART" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton layoutX="10.0" layoutY="120.0" prefHeight="61.0" prefWidth="256.0" text="Events" textFill="#fcfcfc">
+                  <JFXButton layoutX="10.0" layoutY="120.0" onAction="#Events" prefHeight="61.0" prefWidth="256.0" text="Events" textFill="#fcfcfc">
                      <graphic>
                         <FontAwesomeIcon fill="#ebebeb" glyphName="USERS" />
                      </graphic>

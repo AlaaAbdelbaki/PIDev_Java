@@ -244,4 +244,20 @@ try {
         }
     }
      
+    @FXML
+    void Events(ActionEvent event) {
+try {
+            AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/Events/EventListView.fxml"));
+            content.getChildren().setAll(p);
+            drawer.close();
+            
+             
+             
+            //mainAnchor.setStyle("-fx-background-image: url('/tunisiagottalent/UI/Competitions/img/bg-9.jpg')");
+            
+        } catch (IOException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     
 }
