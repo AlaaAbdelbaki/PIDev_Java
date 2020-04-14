@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" fx:id="rootpane" prefHeight="750.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.Events.EventListViewController">
+    <children>
+      <AnchorPane prefHeight="37.0" prefWidth="702.0" style="-fx-background-color: purple;">
+         <children>
+            <ScrollPane fx:id="scrollPane" layoutX="1.0" layoutY="32.0" prefHeight="368.0" prefWidth="703.0" style="-fx-background-color: purple;">
+               <content>
+                  <GridPane fx:id="grid" layoutX="2.0" prefHeight="367.0" prefWidth="683.0" style="-fx-background-color: purple;" />
+               </content></ScrollPane>
+         </children>
+      </AnchorPane>
+      <MenuBar prefHeight="35.0" prefWidth="702.0" style="-fx-min-width: 100%; -fx-background-color: purple;" />
+      <Text fill="WHITE" layoutX="15.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-size: 15;" text="All Events" wrappingWidth="256.8037519454956" />
+    
+   </children>
+</AnchorPane>

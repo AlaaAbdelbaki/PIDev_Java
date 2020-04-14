@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import static javafx.application.Application.launch;
 import services.EventService;
 import services.Event_ParticipantService;
 import services.TicketService;
@@ -42,6 +43,7 @@ public class TunisiaGotTalent {
         System.out.println(es.concertType());
         System.out.println(es.offreType());
         System.out.println(es.auditionType());
+        System.out.println(java.time.LocalDate.now());
 
         /////////////////////////// to test add methode /////////////////////////// 
         /*
@@ -119,7 +121,6 @@ public class TunisiaGotTalent {
         ///////////////////////// to test delete methode ///////////////////////// 
         
          /* eps.cancelEvent_Participation(2);*/
-         
        
         
     }

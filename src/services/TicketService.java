@@ -35,6 +35,7 @@ public class TicketService {
     }
 
     public void addTicket(Ticket t) {
+        
         String req = "insert into ticket (price,event_id) values(" + t.getPrice() + "," + t.getEvent_id() + ")";
         try {
             ste = connexion.createStatement();
@@ -45,14 +46,14 @@ public class TicketService {
     }
 
     public List<Ticket> getAll() {
-        String req = "select * from ticket";
+        String req = "select * from ticket inner join event where ticket.event_id = event.id";
         List<Ticket> lt = new ArrayList<>();
         try {
             ste = connexion.createStatement();
             rs = ste.executeQuery(req);
             while (rs.next()) {
 
-                lt.add(new Ticket(rs.getFloat(1), rs.getInt(2)));
+                lt.add(new Ticket(rs.getInt("id"),rs.getFloat("price"),rs.getInt("event_id")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(TicketService.class.getName()).log(Level.SEVERE, null, ex);

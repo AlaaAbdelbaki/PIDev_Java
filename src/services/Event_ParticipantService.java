@@ -29,11 +29,17 @@ public class Event_ParticipantService {
 
     public Event_ParticipantService() {
         connexion=DataSource.getInstance().getCnx();
+        try {
+            ste=connexion.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Event_ParticipantService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
     }
     
     public void addEvent_Participant(Event_Participant ep) 
     {
-        String req ="insert into event_participant (event_id,user_id,participation_date	) values("+ep.getEvent_id()+","+ep.getUser_id()+",'"+ep.getParticipation_date()+"')";
+        String req ="insert into event_participant (event_id,1,java.time.LocalDate.now()) values("+ep.getEvent_id()+","+ep.getUser_id()+",'"+ep.getParticipation_date()+"')";
           try{  
             ste=connexion.createStatement();
             ste.executeUpdate(req);
@@ -44,7 +50,9 @@ public class Event_ParticipantService {
  
      public List<Event_Participant> getAll()
     {
-        String req="select * from event_participant";
+        String req="select * from event_participant ";
+               req+="inner join event where event.id=event_participant.event_id";
+               req+="inner join user where user.id = event_participant.user.id";
         
         List<Event_Participant> l_ep =new ArrayList<>();
         try {
