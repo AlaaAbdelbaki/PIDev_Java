@@ -3,10 +3,33 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/tunisigottalentViews/Reclam.java</file>
-            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/tunisigottalentViews/UserDashboard.java</file>
-            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/tunisigottalentViews/EditComplaint.java</file>
-            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/tunisigottalentViews/Avis.java</file>
+            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/UI/adminDashboard.fxml</file>
+            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/UI/DashboardReviewController.java</file>
+            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/UI/AddReview.fxml</file>
+            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/UI/EditComplaint.fxml</file>
+            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/tunisiagottalent/util/Mail.java</file>
+            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/tunisiagottalent/util/MailJava.java</file>
+            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/tunisiagottalent/util/DataSource.java</file>
+            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/tunisiagottalent/util/UserDashboard.java</file>
+            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/tunisiagottalent/util/stat_rate.java</file>
+            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/UI/DashboardReview.fxml</file>
+            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/UI/EditRev.fxml</file>
+            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/UI/AddComplaint.fxml</file>
+            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/UI/AddReviewController.java</file>
+            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/UI/AddComplaintController.java</file>
+            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/UI/EditRevController.java</file>
+            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/tunisiagottalent/util/Avis.java</file>
+            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/UI/stat_rating.fxml</file>
+            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/UI/AdminDashboardController.java</file>
+            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/UI/MailController.java</file>
+            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/UI/mail.fxml</file>
+            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/UI/EditComplaintController.java</file>
+            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/UI/AfficheComplaint.fxml</file>
+            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/UI/AfficheComplaintController.java</file>
+            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/UI/JavaMail.java</file>
+            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/UI/Stat_rateController.java</file>
+            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/tunisiagottalent/util/Reclam.java</file>
+            <file>file:/C:/Users/sarah/Documents/GitHub/PIDev_Java/src/tunisiagottalent/TunisiaGotTalent.java</file>
         </group>
     </open-files>
 </project-private>

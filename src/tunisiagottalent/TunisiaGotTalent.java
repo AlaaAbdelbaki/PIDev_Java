@@ -6,10 +6,10 @@
 package tunisiagottalent;
 
 import tunisiagottalent.util.DataSource;
-import tunisiagottalentEntities.Complaint;
-import tunisiagottalentServices.ComplaintService;
-import tunisiagottalentServices.ReviewService;
-import tunisiagottalentEntities.Review;
+import entity.Complaint;
+import services.ComplaintService;
+import services.ReviewService;
+import entity.Review;
 /**
  *
  * @author alaa
