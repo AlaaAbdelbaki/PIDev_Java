@@ -137,5 +137,43 @@ try {
     private void quit(MouseEvent event) {
         System.exit(0);
     }
-
+@FXML
+    void Articles(ActionEvent event) {
+try {
+            AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/Articles/ArticleList.fxml"));
+            content.getChildren().setAll(p);
+            drawer.close();
+            
+            //mainAnchor.setStyle("-fx-background-image: url('/tunisiagottalent/UI/Competitions/img/bg-9.jpg')");
+            
+        } catch (IOException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+      @FXML
+    void Updates(ActionEvent event) {
+try {
+            AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/Updates/UpdatesList.fxml"));
+            content.getChildren().setAll(p);
+            drawer.close();
+            
+            //mainAnchor.setStyle("-fx-background-image: url('/tunisiagottalent/UI/Competitions/img/bg-9.jpg')");
+            
+        } catch (IOException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+       @FXML
+    void Complaints(ActionEvent event) {
+try {
+            AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/Complaints/adminDashboard.fxml"));
+            content.getChildren().setAll(p);
+            drawer.close();
+            
+            //mainAnchor.setStyle("-fx-background-image: url('/tunisiagottalent/UI/Competitions/img/bg-9.jpg')");
+            
+        } catch (IOException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

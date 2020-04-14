@@ -104,7 +104,12 @@
                         <FontAwesomeIcon fill="#fcfcfc" glyphName="COMMENTS" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton layoutX="10.0" layoutY="364.0" prefHeight="61.0" prefWidth="256.0" text="Rate Us" textFill="#fcfcfc">
+                  <JFXButton layoutX="10.0" layoutY="364.0" onAction="#Rating" prefHeight="61.0" prefWidth="256.0" text="Rate Us" textFill="#fcfcfc">
+                     <graphic>
+                        <FontAwesomeIcon fill="#eeeeee" glyphName="THUMBS_ALT_UP" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton layoutX="30.0" layoutY="583.0" onAction="#Complaints" prefHeight="61.0" prefWidth="256.0" text="Contact Us" textFill="#fcfcfc">
                      <graphic>
                         <FontAwesomeIcon fill="#eeeeee" glyphName="THUMBS_ALT_UP" />
                      </graphic>
