@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="750.0" prefWidth="1600.0" styleClass="mainFxmlClass" stylesheets="@shop.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.Shop.ShopController">
+   <children>
+      <TableView fx:id="tableProduct" layoutX="257.0" layoutY="122.0" prefHeight="529.0" prefWidth="1291.0" stylesheets="@shop.css">
+        <columns>
+          <TableColumn fx:id="table_id" prefWidth="72.0" text="id" />
+          <TableColumn fx:id="table_productname" prefWidth="215.33331298828125" text="Product Name" />
+            <TableColumn fx:id="table_stock" prefWidth="104.66668701171875" text="Stock" />
+            <TableColumn fx:id="table_price" prefWidth="107.66668701171875" text="Price" />
+            <TableColumn fx:id="table_imageview" prefWidth="401.33331298828125" text="Product Image" />
+            <TableColumn fx:id="table_edit" prefWidth="212.6666259765625" text="Edit" />
+            <TableColumn fx:id="table_delete" prefWidth="179.3333740234375" text="Delete" />
+        </columns>
+      </TableView>
+      <Button layoutX="1155.0" layoutY="661.0" mnemonicParsing="false" onAction="#afficheraddproduct" prefHeight="47.0" prefWidth="171.0" styleClass="button-add" text="Add Product">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="gotoorder" layoutX="1411.0" layoutY="53.0" mnemonicParsing="false" onAction="#gotoorderlist" prefHeight="31.0" prefWidth="99.0" styleClass="button-add" text="Orders" />
+      <TextField fx:id="product_search" layoutX="734.0" layoutY="55.0" prefHeight="31.0" prefWidth="471.0" />
+      <Label layoutX="552.0" layoutY="60.0" text="Search in products list :" textFill="#ebebeb" />
+      <Label fx:id="order_label" layoutX="285.0" layoutY="36.0" prefHeight="64.0" prefWidth="221.0" text="Products List" textAlignment="CENTER" textFill="#55b3f3">
+         <font>
+            <Font name="System Bold" size="34.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="750.0" prefWidth="1600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.Shop.ShopViewController">
+    <stylesheets>
+        <URL value="@shopview.css" />
+    </stylesheets>
+   <children>
+      <Button fx:id="shopping_cart_button" layoutX="860.0" layoutY="67.0" mnemonicParsing="false" text="Open Shopping Cart" />
+      <ScrollPane fx:id="products_view" layoutX="537.0" layoutY="201.0" prefHeight="477.0" prefWidth="1062.0" stylesheets="@../Competitions/scroll.css" vbarPolicy="NEVER">
+         <content>
+            <HBox fx:id="productsHbox" alignment="CENTER" prefHeight="475.0" prefWidth="1060.0" />
+         </content></ScrollPane>
+   </children>
+</AnchorPane>

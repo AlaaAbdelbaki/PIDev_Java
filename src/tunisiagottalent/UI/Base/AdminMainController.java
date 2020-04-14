@@ -123,7 +123,16 @@ public class AdminMainController implements Initializable {
             Logger.getLogger(AdminMainController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+ @FXML
+    void Shop(ActionEvent event) {
+try {
+            AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/Shop/Shop.fxml"));
+            content.getChildren().setAll(p);
+            drawer.close();
+        } catch (IOException ex) {
+            Logger.getLogger(AdminMainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     @FXML
     private void quit(MouseEvent event) {
         System.exit(0);

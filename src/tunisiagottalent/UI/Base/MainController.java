@@ -10,6 +10,8 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,6 +30,8 @@ import javafx.stage.Modality;
 
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import tunisiagottalent.Entity.Cart;
+import tunisiagottalent.Entity.Product;
 import tunisiagottalent.UI.Competitions.View_CompetitionController;
 
 import tunisiagottalent.util.UserSession;
@@ -94,6 +98,7 @@ void initialize() {
     @FXML
     void logout(ActionEvent event) {
         UserSession.instance.cleanUserSession();
+        Cart.instance.cleanCartSession();
         btn_login.setVisible(true);
         btn_dashboard.setVisible(false);
         btn_logout.setVisible(false);
@@ -192,7 +197,23 @@ void initialize() {
             AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/User/profile.fxml"));
             content.getChildren().setAll(p);
             drawer.close();
-            mainAnchor.setStyle("-fx-background-image: url('/tunisiagottalent/UI/Competitions/img/bg-9.jpg')");
+           // mainAnchor.setStyle("-fx-background-image: url('/tunisiagottalent/UI/Competitions/img/bg-9.jpg')");
+            
+        } catch (IOException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    @FXML
+     void Shop(ActionEvent event) {
+ try {
+            AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/Shop/ShopView.fxml"));
+            content.getChildren().setAll(p);
+            drawer.close();
+            
+             
+             //System.out.println(Cart.instance);
+             
+            //mainAnchor.setStyle("-fx-background-image: url('/tunisiagottalent/UI/Competitions/img/bg-9.jpg')");
             
         } catch (IOException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);

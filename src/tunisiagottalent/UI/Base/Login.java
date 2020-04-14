@@ -25,6 +25,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import tunisiagottalent.Entity.Cart;
 
 import tunisiagottalent.services.UserServices;
 import tunisiagottalent.util.UserSession;
@@ -89,7 +90,7 @@ public class Login {
 
                     UserServices us = new UserServices();
                     UserSession z = UserSession.getInstance(us.getUser(user));
-
+                    Cart ca=Cart.getInstance();
                     Stage stage = (Stage) login_anchor.getScene().getWindow();
 
                     Scene s = stage.getOwner().getScene();
