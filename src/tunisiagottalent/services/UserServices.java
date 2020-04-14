@@ -144,6 +144,7 @@ public class UserServices {
                 u.setBirthday(rs.getDate("Birthday"));
                 u.setPassword(rs.getString("password"));
                 u.setRole(rs.getString("roles"));
+                u.setProfilePic(rs.getString("profile_pic"));
 
                 return u;
             }
@@ -205,6 +206,7 @@ public class UserServices {
                         rs.getString("roles"),
                         rs.getDate("birthday"),
                         rs.getString("profile_pic")));
+                
             }
 
         } catch (SQLException ex) {

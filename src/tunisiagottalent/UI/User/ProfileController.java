@@ -81,16 +81,17 @@ public class ProfileController {
     @FXML
     void loadInfo() {
 
-//        Image img=new Image("D:/Programming/Web/htdocs/annee_2019_2020/PIDev/web/assets/img/pics/unknown.jpg"); 
-        Image img = new Image("tunisiagottalent/UI/User/img/unknown.jpg");
-
         UserServices us = new UserServices();
         UserSession s = UserSession.instance;
+//        Image img=new Image("D:/Programming/Web/htdocs/annee_2019_2020/PIDev/web/assets/img/pics/unknown.jpg"); 
+        
+
 
         User user = s.getU();
 //        System.out.println(user);
         username_profile.setText(user.getUsername());
-        profilePic.setImage(img);
+        System.out.println(us.getUser(s.getU().getUsername()).getProfilePic());
+        profilePic.setImage(new Image("http://localhost/annee_2019_2020/PiDev/web/assets/uploads/" + us.getUser(s.getU().getUsername()).getProfilePic()));
         if (us.getUser(user.getUsername()).getName() == null || us.getUser(user.getUsername()).getLastName() == null) {
             nameLastName.setText("Complete your profile !!");
         } else {
