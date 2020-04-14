@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -172,6 +174,11 @@ public class EditProfileController {
 
         String address = addressInput.getText();
         UserSession s = UserSession.instance;
+        try {
+            Files.copy(Paths.get(imguriUri), Paths.get("D:\\Programming\\Web\\htdocs\\annee_2019_2020\\PIDev\\web\\assets\\uploads\\"+imgp));
+        } catch (IOException ex) {
+            Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         User user = new User(s.getU().getId(), username, email, password, gender, address, name, lastName, phone_number, bio, s.getU().getRole(), birthday, profilePic);
 //        System.out.println(user);
         UserServices us = new UserServices();

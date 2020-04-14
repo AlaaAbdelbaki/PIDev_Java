@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
@@ -13,11 +12,7 @@
         <URL value="@profile.css" />
     </stylesheets>
    <children>
-      <ImageView fx:id="profilePic" fitHeight="194.0" fitWidth="194.0" layoutX="146.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@img/unknown.jpg" />
-         </image>
-      </ImageView>
+      <ImageView fx:id="profilePic" fitHeight="194.0" fitWidth="194.0" layoutX="146.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="username_profile" layoutX="159.0" layoutY="312.0" prefHeight="27.0" prefWidth="445.0" styleClass="userinfo" text="username" />
       <Label fx:id="nameLastName" layoutX="143.0" layoutY="384.0" prefHeight="36.0" prefWidth="267.0" styleClass="userinfo" text="firstLastName" />
       <Label fx:id="bio" alignment="TOP_LEFT" layoutX="139.0" layoutY="487.0" prefHeight="118.0" prefWidth="162.0" styleClass="bio" text="Bio" wrapText="true" />
