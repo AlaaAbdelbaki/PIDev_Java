@@ -54,7 +54,11 @@ import tunisiagottalent.util.sendEmailSMTP;
  * @author alaa
  */
 public class ProfileController {
+@FXML
+    private Label talented;
 
+    @FXML
+    private Label admin;
     @FXML
     private AnchorPane rootPane;
 
@@ -87,7 +91,11 @@ public class ProfileController {
 
         UserServices us = new UserServices();
         UserSession s = UserSession.instance;
-//        Image img=new Image("D:/Programming/Web/htdocs/annee_2019_2020/PIDev/web/assets/img/pics/unknown.jpg"); 
+        if(s.getU().getRole().contains("ROLE_TALENTED"))
+        {talented.setVisible(true);}
+        else if(s.getU().getRole().contains("ROLE_ADMIN"))
+        {admin.setVisible(true);
+        }
  Rectangle clip = new Rectangle(
                 profilePic.getFitWidth(), profilePic.getFitHeight()
             );
@@ -165,7 +173,7 @@ public class ProfileController {
         videos.forEach((v) -> {
 //            System.out.println(v);
             Label title = new Label();
-            title.getStyleClass().add("video_title");
+            
             title.setText(v.getTitle());
             WebView video = new WebView();
             video.setPrefHeight(380);

@@ -15,6 +15,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,6 +31,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import tunisiagottalent.Entity.Cart;
 import tunisiagottalent.util.UserSession;
 
 /**
@@ -81,11 +87,22 @@ public class AdminMainController implements Initializable {
     @FXML
     private void logout(ActionEvent event) {
         UserSession.instance.cleanUserSession();
-         try {
-            Stage stage = (Stage) AdminMainAnchor.getScene().getWindow();
+        Cart.instance.cleanCartSession();
+         try {//Stage stage = (Stage) mainAnchor.getScene().getWindow();
             Parent p = FXMLLoader.load(getClass().getResource("Main.fxml"));
-
-            stage.setScene(new Scene(p));
+            Scene s=p.getScene();
+            p.translateYProperty().set(850);
+            AdminMainAnchor.getChildren().add(p);
+            //stage.setScene(s);
+            Timeline timeline =new Timeline();
+            KeyValue kv =new KeyValue(p.translateYProperty(),0,Interpolator.EASE_IN);
+            KeyFrame kf=new KeyFrame(Duration.seconds(1), kv);
+            timeline.getKeyFrames().add(kf);
+            timeline.setOnFinished((e)->{AdminMainAnchor.getChildren().removeAll(AdminMainAnchor);
+            });
+            timeline.play();
+          
+        
         } catch (IOException ex) {
             Logger.getLogger(AdminMainController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -93,11 +110,22 @@ public class AdminMainController implements Initializable {
 
     @FXML
     private void goToMain(MouseEvent event) {
-         try {
-            Stage stage = (Stage) AdminMainAnchor.getScene().getWindow();
+        try {//Stage stage = (Stage) mainAnchor.getScene().getWindow();
             Parent p = FXMLLoader.load(getClass().getResource("Main.fxml"));
-
-            stage.setScene(new Scene(p));
+            Scene s=p.getScene();
+            p.translateYProperty().set(850);
+            AdminMainAnchor.getChildren().add(p);
+            //stage.setScene(s);
+            Timeline timeline =new Timeline();
+            KeyValue kv =new KeyValue(p.translateYProperty(),0,Interpolator.EASE_IN);
+            KeyFrame kf=new KeyFrame(Duration.seconds(1), kv);
+            timeline.getKeyFrames().add(kf);
+            
+            timeline.setOnFinished((e)->{AdminMainAnchor.getChildren().removeAll(AdminMainAnchor);
+            });
+            timeline.play();
+          
+        
         } catch (IOException ex) {
             Logger.getLogger(AdminMainController.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -6,6 +6,7 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -94,12 +95,12 @@
                         <FontAwesomeIcon fill="#f8f4f4" glyphName="CERTIFICATE" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton layoutX="10.0" layoutY="242.0" prefHeight="61.0" prefWidth="256.0" text="News" textFill="#fcfcfc">
+                  <JFXButton layoutX="10.0" layoutY="242.0" onAction="#News" prefHeight="61.0" prefWidth="256.0" text="News" textFill="#fcfcfc">
                      <graphic>
                         <FontAwesomeIcon fill="#f5f5f5" glyphName="NEWSPAPER_ALT" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton layoutX="10.0" layoutY="303.0" prefHeight="61.0" prefWidth="256.0" text="Blog" textFill="#fcfcfc">
+                  <JFXButton layoutX="10.0" layoutY="303.0" onAction="#Articles" prefHeight="61.0" prefWidth="256.0" text="Blog" textFill="#fcfcfc">
                      <graphic>
                         <FontAwesomeIcon fill="#fcfcfc" glyphName="COMMENTS" />
                      </graphic>
@@ -123,5 +124,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </FontAwesomeIcon>
+      <Label fx:id="loggedin" layoutX="1014.0" layoutY="22.0" prefHeight="37.0" prefWidth="191.0" textFill="#f5f5f5">
+         <font>
+            <Font name="Candara Italic" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

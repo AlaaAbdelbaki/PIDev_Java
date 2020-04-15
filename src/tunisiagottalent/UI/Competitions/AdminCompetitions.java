@@ -1,18 +1,16 @@
 package tunisiagottalent.UI.Competitions;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTreeTableView;
+
 import java.io.IOException;
-import java.net.URL;
+
 import java.sql.Timestamp;
-import java.util.List;
-import java.util.ResourceBundle;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -29,11 +27,11 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javax.swing.text.html.CSS;
+
 import tunisiagottalent.Entity.Competition;
-import tunisiagottalent.Entity.User;
+
 import tunisiagottalent.Entity.competition_participant;
-import tunisiagottalent.Entity.video;
+
 import tunisiagottalent.services.CompetitionServices;
 import tunisiagottalent.services.ParticipationServices;
 import tunisiagottalent.services.VoteServices;
@@ -79,7 +77,7 @@ void initialize() {
             private JFXButton editButton = new JFXButton("Edit");
             private JFXButton deleteButton = new JFXButton("Delete");
 
-            private final HBox pane = new HBox(20, deleteButton, editButton);
+            private final HBox pane = new HBox(50, deleteButton, editButton);
 
             {
                 editButton.resize(100, 45);
@@ -167,7 +165,7 @@ void initialize() {
             prom.setCellFactory(param -> new TableCell<competition_participant,Void>() { 
              private JFXButton promote = new JFXButton("Promote to Talented");
             {   promote.resize(100, 45);
-                promote.setStyle("-fx-text-fill: white;-fx-font-size:20px;-fx-background-color:blue");
+                promote.setStyle("-fx-text-fill: white;-fx-font-size:20px;-fx-background-color:#0B4F6C");
                 promote.setRipplerFill(javafx.scene.paint.Color.ORANGE);
                 promote.setOnAction(event -> {
                     competition_participant cp=getTableView().getItems().get(getIndex());
@@ -188,12 +186,9 @@ void initialize() {
               vid.setCellFactory(param -> new TableCell<competition_participant,Void>() { 
              private JFXButton Viewvid = new JFXButton("View Video");
             {   Viewvid.resize(100, 45);
-                Viewvid.setStyle("-fx-text-fill: white;-fx-font-size:20px;-fx-background-color:red");
+                Viewvid.setStyle("-fx-text-fill: white;-fx-font-size:20px;-fx-background-color:#145C9E");
                 Viewvid.setRipplerFill(javafx.scene.paint.Color.GREENYELLOW);
                 Viewvid.setOnAction(event -> {
-                    //  getTableView().getItems().get(getIndex());
-                   // cs.delete(c);
-                  //  Viewvid.getItems().remove(c);
                   try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Vid_details.fxml"));
             Parent third = loader.load();
@@ -225,6 +220,7 @@ void initialize() {
             
 });
             winners.setItems(l);
+            winners.refresh();
                     }
 
 }

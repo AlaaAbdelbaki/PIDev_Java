@@ -20,6 +20,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -76,16 +77,15 @@ public class ShopViewController implements Initializable {
             Label stock = new Label();
             
             
-            
-            Image image;
             ImageView product_image = new ImageView();
 
             product_image.setImage(new Image("http://127.0.0.1:8000/assets/img/shop-img/"+p.getImg()));
             product_image.setFitHeight(200);
             product_image.setFitWidth(200);
             
-            HBox hbox = new HBox();
+            VBox hbox = new VBox();
             hbox.setSpacing(10);
+            hbox.setAlignment(Pos.CENTER);
             Button viewitembutton = new Button("View Item");
             Button addtocartbutton = new Button("Add To Cart");
             
@@ -145,7 +145,7 @@ public class ShopViewController implements Initializable {
             hboxstock.getChildren().addAll(title,stock);
             hbox.getChildren().addAll(viewitembutton,addtocartbutton);
             vbox.getChildren().addAll(hboxstock,product_image,hbox);
-            
+            vbox.setSpacing(20);
             productsHbox.setSpacing(20);
             productsHbox.getChildren().addAll(vbox);
         });
@@ -158,6 +158,7 @@ public class ShopViewController implements Initializable {
                 
                 
             Scene s = new Scene(third);
+            s.setFill(Color.TRANSPARENT);
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.TRANSPARENT);

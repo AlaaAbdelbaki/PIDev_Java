@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1600.0" stylesheets="@../Shop/scrollbarFancy.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.Updates.User_UpdatesController">
+   <children>
+      <ScrollPane hbarPolicy="NEVER" layoutX="151.0" layoutY="118.0" nodeOrientation="LEFT_TO_RIGHT" pannable="true" prefHeight="615.0" prefWidth="1450.0" styleClass="scroll-bar" stylesheets="@../Shop/scrollbarFancy.css">
+         <content>
+            <VBox fx:id="vbox" alignment="CENTER" prefHeight="633.0" prefWidth="1213.0" />
+         </content>
+      </ScrollPane>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="488.0" layoutY="5.0" opacity="0.9" prefHeight="98.0" prefWidth="609.0" text="News" textAlignment="CENTER" textFill="#b92222" underline="true">
+         <font>
+            <Font name="Berlin Sans FB Demi Bold" size="77.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -167,7 +167,7 @@ public class User_CompetitionsController {
             UserSession s = UserSession.instance;
             ParticipationServices ps=new ParticipationServices();
             if (s.getU().getRole().contains("ROLE_TALENTED")) {
-                competitions.addRow(tab.indexOf(comp)+1, start, end, sub, v, TalentLabel);
+                competitions.addRow(tab.indexOf(comp)+1, start, end,TimeleftLabel, sub, v, TalentLabel);
             }
             else if (comp.getCompetition_end_date().before(new Timestamp(System.currentTimeMillis())))
             {

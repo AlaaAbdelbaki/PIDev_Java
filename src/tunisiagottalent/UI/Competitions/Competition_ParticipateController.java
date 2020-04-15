@@ -60,6 +60,7 @@ public class Competition_ParticipateController {
         @FXML
     void previewVideo(MouseEvent event) {
        preview.getEngine().load(url.getText());
+       preview.setVisible(true);
         
             
     }

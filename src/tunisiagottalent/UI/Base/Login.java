@@ -18,6 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -102,7 +103,8 @@ public class Login {
                     JFXHamburger j = (JFXHamburger) s.lookup("#hamburger");
                     JFXDrawer e = (JFXDrawer) s.lookup("#drawer");
                     AnchorPane p=(AnchorPane) stage.getOwner().getScene().getRoot();
-                   
+                    Label log=(Label)s.lookup("#loggedin");
+                    log.setText("Logged In As: "+ UserSession.instance.getU().getUsername());
                     p.setStyle("-fx-background-image: url('/tunisiagottalent/UI/Base/img/bg-3.jpg')");
                     e.open();
                      
