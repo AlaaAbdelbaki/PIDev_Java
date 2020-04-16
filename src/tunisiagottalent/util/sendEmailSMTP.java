@@ -16,7 +16,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import tunisiagottalent.services.UserServices;
 
 /**
  *
@@ -24,49 +23,44 @@ import tunisiagottalent.services.UserServices;
  */
 public class sendEmailSMTP {
 
-    public static void sendMail(String username,String recepient,String token) throws Exception {
+    public static Properties config() {
         System.out.println("Preparing !!");
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
+        properties.put("email", "tunisiagottalents2020@gmail.com");
+        properties.put("pwd", "esprit2020");
 
-        String email = "tunisiagottalents2020@gmail.com";
-        String pwd = "esprit2020";
+        return properties;
+    }
 
-        Session session = Session.getInstance(properties, new Authenticator() {
+    public static void changePasswordEmail(String username, String recepient, String token) throws MessagingException {
+
+        Session session = Session.getInstance(config(), new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(email, pwd);
+                return new PasswordAuthentication(config().getProperty("email"), config().getProperty("pwd"));
             }
 
         });
-        
-        
-        
-        Message message = prepareMessage(username,session,email,recepient,token);
-        
-        Transport.send(message);
-        
-        System.out.println("Success !!");
-    }
 
-    private static Message prepareMessage(String username,Session session, String accountEmail,String recepient,String token) {
+        Message message = new MimeMessage(session);
         try {
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(accountEmail));
+
+            message.setFrom(new InternetAddress(config().getProperty("email")));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
             message.setSubject("Password update");
-            message.setText("Welcome "+username+"\nYou have asked for a password reset. Please user this code in the reset password window: "+token);
-            return message;
+            message.setText("Welcome " + username + "\nYou have asked for a password reset. Please user this code in the reset password window: " + token);
+
         } catch (MessagingException ex) {
             Logger.getLogger(sendEmailSMTP.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+
+        Transport.send(message);
+
+        System.out.println("Success !!");
     }
-    
-    public String tokenGenerator(){
-        return null;
-    }
+
 }

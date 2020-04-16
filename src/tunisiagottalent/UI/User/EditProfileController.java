@@ -174,10 +174,12 @@ public class EditProfileController {
 
         String address = addressInput.getText();
         UserSession s = UserSession.instance;
-        try {
-            Files.copy(Paths.get(imguriUri), Paths.get("D:\\Projects\\PIDev\\web\\assets\\uploads\\"+imgp));
-        } catch (IOException ex) {
-            Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+        if (imgp!=null) {
+            try {
+                Files.copy(Paths.get(imguriUri), Paths.get("D:\\Projects\\PIDev\\web\\assets\\uploads\\" + imgp));
+            } catch (IOException ex) {
+                Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         User user = new User(s.getU().getId(), username, email, password, gender, address, name, lastName, phone_number, bio, s.getU().getRole(), birthday, profilePic);
 //        System.out.println(user);

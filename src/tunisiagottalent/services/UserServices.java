@@ -19,6 +19,7 @@ import tunisiagottalent.Entity.User;
 import java.util.List;
 import java.util.Random;
 import org.mindrot.jbcrypt.BCrypt;
+import tunisiagottalent.Entity.Subscription;
 import tunisiagottalent.util.UserSession;
 
 /**
@@ -434,4 +435,6 @@ public class UserServices {
 
         return false;
     }
+    
+    
 }

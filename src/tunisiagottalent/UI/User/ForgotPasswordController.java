@@ -46,7 +46,7 @@ public class ForgotPasswordController {
         User user = us.getUser(usernameInput.getText());
         String token = us.tokenGenerator();
        
-        sendEmailSMTP.sendMail(user.getUsername(), user.getEmail(), token);
+        sendEmailSMTP.changePasswordEmail(user.getUsername(), user.getEmail(), token);
         UserSession s = UserSession.getInstance(us.getUser(usernameInput.getText()));
          try {
               FXMLLoader loader = new FXMLLoader(getClass().getResource("/tunisiagottalent/UI/User/checkToken.fxml"));

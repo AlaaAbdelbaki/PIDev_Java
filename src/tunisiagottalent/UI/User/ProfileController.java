@@ -7,6 +7,7 @@ package tunisiagottalent.UI.User;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 
 import java.util.List;
 import java.util.ResourceBundle;
@@ -40,9 +41,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import tunisiagottalent.Entity.Subscription;
 import tunisiagottalent.Entity.User;
 import tunisiagottalent.Entity.video;
 import tunisiagottalent.UI.Base.MainController;
+import tunisiagottalent.services.SubscriptionServices;
 import tunisiagottalent.services.UserServices;
 import tunisiagottalent.services.VideoServices;
 import tunisiagottalent.util.UserSession;
@@ -54,11 +57,13 @@ import tunisiagottalent.util.sendEmailSMTP;
  * @author alaa
  */
 public class ProfileController {
-@FXML
+
+    @FXML
     private Label talented;
 
     @FXML
     private Label admin;
+    
     @FXML
     private AnchorPane rootPane;
 
@@ -78,6 +83,12 @@ public class ProfileController {
     private ScrollPane videos_Container;
 
     @FXML
+    private Button subscribeButton;
+
+    @FXML
+    private Button unsubscribeButton;
+
+    @FXML
     void initialize() {
 
         loadInfo();
@@ -88,32 +99,33 @@ public class ProfileController {
 
     @FXML
     void loadInfo() {
-
+        subscribeButton.setVisible(false);
+        unsubscribeButton.setVisible(false);
         UserServices us = new UserServices();
+        SubscriptionServices ss = new SubscriptionServices();
         UserSession s = UserSession.instance;
-        if(s.getU().getRole().contains("ROLE_TALENTED"))
-        {talented.setVisible(true);}
-        else if(s.getU().getRole().contains("ROLE_ADMIN"))
-        {admin.setVisible(true);
+
+        if (s.getU().getRole().contains("ROLE_TALENTED")) {
+            talented.setVisible(true);
+        } else if (s.getU().getRole().contains("ROLE_ADMIN")) {
+            admin.setVisible(true);
         }
- Rectangle clip = new Rectangle(
+        Rectangle clip = new Rectangle(
                 profilePic.getFitWidth(), profilePic.getFitHeight()
-            );
-            clip.setArcWidth(200);
-            clip.setArcHeight(200);
-            profilePic.setClip(clip);
+        );
+        clip.setArcWidth(200);
+        clip.setArcHeight(200);
+        profilePic.setClip(clip);
 
-            // snapshot the rounded image.
-            SnapshotParameters parameters = new SnapshotParameters();
-            parameters.setFill(Color.TRANSPARENT);
-            WritableImage image = profilePic.snapshot(parameters, null);
+        // snapshot the rounded image.
+        SnapshotParameters parameters = new SnapshotParameters();
+        parameters.setFill(Color.TRANSPARENT);
+        WritableImage image = profilePic.snapshot(parameters, null);
 
-            // remove the rounding clip so that our effect can show through.
-           // profilePic.setClip(null);
-
-            // apply a shadow effect.
-          //  profilePic.setEffect(new DropShadow(20, Color.BLACK));
-
+        // remove the rounding clip so that our effect can show through.
+        // profilePic.setClip(null);
+        // apply a shadow effect.
+        //  profilePic.setEffect(new DropShadow(20, Color.BLACK));
         User user = s.getU();
 //        System.out.println(user);
         username_profile.setText(user.getUsername());
@@ -125,6 +137,13 @@ public class ProfileController {
             nameLastName.setText(us.getUser(user.getUsername()).getName() + " " + us.getUser(user.getUsername()).getLastName());
         }
         bio.setText(us.getUser(user.getUsername()).getBio());
+        if (!s.getU().getUsername().equals(username_profile.getText())) {
+            if (ss.exists(us.getUser(username_profile.getText()).getId(), s.getU().getId()) != null) {
+                unsubscribeButton.setVisible(true);
+            } else {
+                subscribeButton.setVisible(true);
+            }
+        }
     }
 
     @FXML
@@ -173,7 +192,7 @@ public class ProfileController {
         videos.forEach((v) -> {
 //            System.out.println(v);
             Label title = new Label();
-            
+
             title.setText(v.getTitle());
             WebView video = new WebView();
             video.setPrefHeight(380);
@@ -185,4 +204,35 @@ public class ProfileController {
         });
     }
 
+    @FXML
+    void subsbribe(ActionEvent event) {
+        UserServices us = new UserServices();
+        SubscriptionServices ss = new SubscriptionServices();
+        UserSession s = UserSession.instance;
+        Subscription sub = new Subscription();
+        sub.setId(s.getU().getId());
+        sub.setSubetto_id(us.getUser(username_profile.getText()).getId());
+        java.time.LocalDate current = java.time.LocalDateTime.now().toLocalDate();
+        sub.setSubscription_date(Date.valueOf(current));
+        if (ss.subscribe(sub)) {
+            subscribeButton.setVisible(false);
+            unsubscribeButton.setVisible(true);
+        }
+    }
+
+    @FXML
+    void unsubscribe(ActionEvent event) {
+        UserServices us = new UserServices();
+        SubscriptionServices ss = new SubscriptionServices();
+        UserSession s = UserSession.instance;
+        Subscription sub = new Subscription();
+        sub.setId(s.getU().getId());
+        sub.setSubetto_id(us.getUser(username_profile.getText()).getId());
+        java.time.LocalDate current = java.time.LocalDateTime.now().toLocalDate();
+        sub.setSubscription_date(Date.valueOf(current));
+        if (ss.unsubscribe(sub)) {
+            subscribeButton.setVisible(true);
+            unsubscribeButton.setVisible(false);
+        }
+    }
 }
