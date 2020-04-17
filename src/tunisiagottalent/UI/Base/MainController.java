@@ -79,7 +79,7 @@ public class MainController {
     private JFXButton btn_dashboard;
     @FXML
     private JFXButton btn_signup;
- @FXML
+    @FXML
     private FontAwesomeIcon searchicon;
     @FXML
     public HBox content;
@@ -96,7 +96,7 @@ public class MainController {
 
     @FXML
     void initialize() {
-        
+
         drawer.setSidePane(vbox);
         drawer.setStyle("-fx-background-color:transparent;");
         searchbar.setStyle("-fx-prompt-text-fill: white;-fx-text-inner-color: white");
@@ -123,6 +123,15 @@ public class MainController {
             btn_signup.setVisible(false);
             hboxsearch.setVisible(true);
             loggedin.setText("Logged In As: " + UserSession.instance.getU().getUsername());
+
+            try {
+                AnchorPane p = FXMLLoader.load(getClass().getResource("Homepage.fxml"));
+                content.getChildren().setAll(p);
+
+            } catch (IOException ex) {
+                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         } else {
             hamburger.setDisable(true);
         }
@@ -142,7 +151,8 @@ public class MainController {
         hamburger.setDisable(true);
         loggedin.setText("");
         hboxsearch.setVisible(false);
-        System.out.println(UserSession.instance);
+         content.getChildren().clear();
+      
         // View_CompetitionController.oneSecond.stop();
         mainAnchor.setStyle("-fx-background-image: url('/tunisiagottalent/UI/Base/img/bg-2.jpg')");
     }
@@ -154,10 +164,10 @@ public class MainController {
             Parent p = FXMLLoader.load(getClass().getResource("AdminMain.fxml"));
             Scene s = p.getScene();
             p.translateXProperty().set(1700);
-            
+
             mainAnchor.getScene().setRoot(p);
-            
-           // mainAnchor.getChildren().add(p);
+
+            // mainAnchor.getChildren().add(p);
             //stage.setScene(s);
             Timeline timeline = new Timeline();
             KeyValue kv = new KeyValue(p.translateXProperty(), 0, Interpolator.EASE_IN);
@@ -259,10 +269,10 @@ public class MainController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/tunisiagottalent/UI/User/profile.fxml"));
             Parent root = loader.load();
-            
-             ProfileController controller = loader.<ProfileController>getController();
-                    controller.setUser(UserSession.instance.getU());
-           root.translateYProperty().set(750);
+
+            ProfileController controller = loader.<ProfileController>getController();
+            controller.setUser(UserSession.instance.getU());
+            root.translateYProperty().set(750);
             Timeline timeline = new Timeline();
             KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
             KeyFrame kf = new KeyFrame(Duration.seconds(1), kv);
@@ -271,7 +281,7 @@ public class MainController {
             });
             timeline.getKeyFrames().add(kf);
 
-            content.getChildren().setAll((AnchorPane)root);
+            content.getChildren().setAll((AnchorPane) root);
             drawer.close();
             timeline.play();
             mainAnchor.setStyle("-fx-background-image: url('/tunisiagottalent/UI/Base/img/bg-11.jpg')");
@@ -422,7 +432,7 @@ public class MainController {
 
     @FXML
     void show_search(MouseEvent event) {
-        
+
         ListView<String> Searched = new ListView<>();
         UserServices us = new UserServices();
         searchbar.setOnKeyPressed((e) -> {
@@ -456,21 +466,25 @@ public class MainController {
 
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-               if(newValue == null || newValue.isEmpty()){searchbar.setPromptText("No Result");
-               }else{
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/tunisiagottalent/UI/User/profile.fxml"));
-                    Parent root = loader.load();
-                    ProfileController controller = loader.<ProfileController>getController();
-                    controller.setUser(us.getUser(newValue));
-                    vboxsearch.setVisible(false);
-                    content.getChildren().setAll((AnchorPane)root);
-                   if(drawer.isShown())drawer.close();
-                    mainAnchor.setStyle("-fx-background-image: url('/tunisiagottalent/UI/Base/img/bg-4.jpg')");
-                } catch (IOException ex) {
-                    Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+                if (newValue == null || newValue.isEmpty()) {
+                    searchbar.setPromptText("No Result");
+                } else {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/tunisiagottalent/UI/User/profile.fxml"));
+                        Parent root = loader.load();
+                        ProfileController controller = loader.<ProfileController>getController();
+                        controller.setUser(us.getUser(newValue));
+                        vboxsearch.setVisible(false);
+                        content.getChildren().setAll((AnchorPane) root);
+                        if (drawer.isShown()) {
+                            drawer.close();
+                        }
+                        mainAnchor.setStyle("-fx-background-image: url('/tunisiagottalent/UI/Base/img/bg-4.jpg')");
+                    } catch (IOException ex) {
+                        Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-            }}
+            }
         });
     }
 
@@ -478,7 +492,6 @@ public class MainController {
     void hide_search(MouseEvent event) {
         vboxsearch.getScene().setOnMouseClicked((e) -> {
             vboxsearch.setVisible(false);
-            
 
         });
 

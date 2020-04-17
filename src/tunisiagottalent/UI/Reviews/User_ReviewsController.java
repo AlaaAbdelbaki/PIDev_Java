@@ -9,32 +9,44 @@ import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableCell;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.Pagination;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.controlsfx.control.Rating;
+import tunisiagottalent.Entity.Cart;
+import tunisiagottalent.Entity.Product;
 import tunisiagottalent.Entity.Review;
-import tunisiagottalent.UI.Base.MainController;
-import tunisiagottalent.UI.Competitions.AdminCompetitions;
+import tunisiagottalent.UI.Shop.ShopController;
+import tunisiagottalent.UI.Shop.ViewItemDetailsController;
 import tunisiagottalent.services.ReviewService;
-import tunisiagottalent.services.UserServices;
 import tunisiagottalent.util.UserSession;
 
 /**
@@ -44,46 +56,75 @@ import tunisiagottalent.util.UserSession;
  */
 public class User_ReviewsController implements Initializable {
 
-   @FXML
-    private TableView<Review> tabrev;
-    @FXML
-    private TableColumn<Review, Integer> id;
-    ObservableList<Review> or;
-    @FXML
-    private TableColumn<Review, String> category;
-    @FXML
-    private TableColumn<Review, String> title;
-    @FXML
-    private TableColumn<Review, String> content;
-    @FXML
-    private TableColumn<Review, Integer> rating;
     @FXML
     private JFXButton delete;
     @FXML
     private AnchorPane root;
+    ReviewService rs = new ReviewService();
+    ObservableList<Review> or = FXCollections.observableArrayList(rs.getbyUser(UserSession.instance.getU()));
+    @FXML
+    private VBox vboxratings;
+    @FXML
+    private Pagination pagination;
+    private final static int rowsPerPage = 4;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-          ReviewService rs = new ReviewService();
-          
-         or = FXCollections.observableArrayList(rs.getbyUser(UserSession.instance.getU()));
-       id.setCellValueFactory(new PropertyValueFactory<>("id"));
-         category.setCellValueFactory(new PropertyValueFactory<>("category"));
-        rating.setCellValueFactory(new PropertyValueFactory<>("rating"));
-         title.setCellValueFactory(new PropertyValueFactory<>("title"));
-        content.setCellValueFactory(new PropertyValueFactory<>("content"));
-        tabrev.setItems(or);
-    }    
 
-    @FXML
-    private void Supprimer(ActionEvent event) {
-          ReviewService rs = new ReviewService();
-      Review  r = (Review) tabrev.getSelectionModel().getSelectedItem();
-       or.remove(r);
-        rs.deleteReview(r);
+        pagination.setPageFactory(this::loadReviewsforuser);
+    }
+
+    public Node loadReviewsforuser(int pageIndex) {
+        
+        int fromIndex = pageIndex * rowsPerPage;
+        int toIndex = Math.min(fromIndex + rowsPerPage, or.size());
+        if (fromIndex >= toIndex) {
+            return null;
+        }
+        ObservableList<Review> rev = FXCollections.observableArrayList(or.subList(fromIndex, toIndex));
+
+        vboxratings.getChildren().clear();
+        rev.forEach((p) -> {
+
+            HBox hbox = new HBox();
+            CheckBox checkBox1 = new CheckBox("");
+            Label tLabel = new Label();
+            tLabel.setText(p.getTitle());
+            tLabel.setFont(new Font("Bold", 30));
+            tLabel.setTextFill(Color.web("#55b3f3"));
+            Label CategoryLabel = new Label();
+            CategoryLabel.setText(p.getTitle());
+            CategoryLabel.setFont(new Font("Bold", 30));
+            CategoryLabel.setTextFill(Color.GREENYELLOW);
+            Label ContentLabel = new Label();
+            ContentLabel.setText(p.getTitle());
+            ContentLabel.setFont(new Font("Bold", 30));
+            ContentLabel.setTextFill(Color.BLACK);
+
+            Rating rate = new Rating(5, p.getRating());
+            rate.setMouseTransparent(true);
+            rate.setOpacity(1);
+            hbox.setSpacing(10);
+
+            checkBox1.selectedProperty().addListener(new ChangeListener<Boolean>() {
+                @Override
+                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                    delete.setOnAction((e) -> {
+
+                        hbox.getChildren().clear();
+                        rs.deleteReview(p);
+                        or.remove(p);
+                    });
+                }
+            });
+
+            hbox.getChildren().addAll(checkBox1, tLabel, CategoryLabel, ContentLabel, rate);
+
+            vboxratings.getChildren().add(hbox);
+            vboxratings.setSpacing(30);
+        });
+
+        return vboxratings;
     }
 
     @FXML
@@ -96,5 +137,5 @@ public class User_ReviewsController implements Initializable {
             Logger.getLogger(User_ReviewsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }

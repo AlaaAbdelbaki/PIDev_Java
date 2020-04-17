@@ -107,6 +107,7 @@ public class Login {
                     JFXDrawer e = (JFXDrawer) s.lookup("#drawer");
                     HBox search=(HBox)s.lookup("#hboxsearch");
                     AnchorPane p=(AnchorPane) stage.getOwner().getScene().getRoot();
+                    HBox content=(HBox)s.lookup("#content");
                     Label log=(Label)s.lookup("#loggedin");
                     log.setText("Logged In As: "+ UserSession.instance.getU().getUsername());
                     p.setStyle("-fx-background-image: url('/tunisiagottalent/UI/Base/img/bg-3.jpg')");
@@ -120,6 +121,13 @@ public class Login {
                         d.setVisible(true);
                     }
                     stage.close();
+                    try {
+                AnchorPane p1 = FXMLLoader.load(getClass().getResource("Homepage.fxml"));
+                content.getChildren().setAll(p1);
+
+            } catch (IOException ex) {
+                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+            }
                     break;
                 }
                 //Username not found

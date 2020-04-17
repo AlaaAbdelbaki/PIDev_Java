@@ -3,13 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/UI/Base/Homepage.fxml</file>
+            <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/services/VideoServices.java</file>
+            <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/UI/Competitions/View_CompetitionController.java</file>
             <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/UI/Base/MainController.java</file>
             <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/UI/Base/Login.java</file>
-            <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/util/sendEmailSMTP.java</file>
-            <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/UI/Competitions/AdminCompetitions.java</file>
-            <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/services/UserServices.java</file>
-            <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/UI/Complaints/User_ComplaintsController.java</file>
-            <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/UI/Complaints/User_Complaints.fxml</file>
+            <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/UI/Reviews/User_ReviewsController.java</file>
+            <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/UI/User/ProfileController.java</file>
+            <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/UI/Base/HomepageController.java</file>
+            <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/UI/Shop/ShopViewController.java</file>
         </group>
     </open-files>
 </project-private>

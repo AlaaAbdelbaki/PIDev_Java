@@ -109,7 +109,7 @@ public class UpdatesListController implements Initializable {
         colcategory.setCellValueFactory(new PropertyValueFactory<>("category"));
         coldate.setCellValueFactory(new PropertyValueFactory<>("publish_date"));
         colContent.setCellValueFactory(new PropertyValueFactory<>("content"));
-        System.out.println("Perfect Saw !");
+        
         ListUp.setEditable(true);
         ListUp.setItems(l);
   }

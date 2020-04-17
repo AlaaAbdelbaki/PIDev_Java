@@ -9,6 +9,7 @@ import tunisiagottalent.Entity.Product;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -21,10 +22,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Pagination;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -42,7 +45,9 @@ import tunisiagottalent.util.UserSession;
 
 
 public class ShopViewController implements Initializable {
-
+ @FXML
+    private Pagination pagination;
+  private final static int rowsPerPage = 4;
     @FXML
     private ScrollPane products_view;
     @FXML
@@ -55,18 +60,27 @@ public class ShopViewController implements Initializable {
     private HBox productsHbox;
     
     int test = 0 ;
-    
-    
-    
-    public void loadproductsforuser(){
+     ProductServices ps= new ProductServices();
+    List<Product> ListUp=ps.getAll();;
+        
        
-        ProductServices ps= new ProductServices();
-        List<Product> products;
+     @Override
+    public void initialize(URL url, ResourceBundle rb) {
         
-        products=ps.getAll();
+        pagination.setPageFactory(this::loadproductsforuser);
+        
+    }    
+   
+    public Node loadproductsforuser(int pageIndex){
+        System.out.println(pageIndex);
+        int fromIndex = pageIndex * rowsPerPage;
+	int toIndex = Math.min(fromIndex + rowsPerPage, ListUp.size());
+         if(fromIndex>=toIndex) return null;
+	ObservableList<Product> products=FXCollections.observableArrayList(ListUp.subList(fromIndex, toIndex));
+       
         
         
-        
+        productsHbox.getChildren().clear();
         products.forEach((p)->{
             VBox vbox = new VBox();
             HBox hboxstock = new HBox();
@@ -147,7 +161,8 @@ public class ShopViewController implements Initializable {
             vbox.getChildren().addAll(hboxstock,product_image,hbox);
             vbox.setSpacing(20);
             productsHbox.setSpacing(20);
-            productsHbox.getChildren().addAll(vbox);
+            
+            productsHbox.getChildren().add(vbox);
         });
         
         shopping_cart_button.setOnAction(event -> {
@@ -173,6 +188,7 @@ public class ShopViewController implements Initializable {
         }
             
         });
+        return productsHbox;
     }
     
         public void gotoorderlist() throws IOException{
@@ -181,10 +197,5 @@ public class ShopViewController implements Initializable {
     }
 
     
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        
-        loadproductsforuser();
-    }    
-    
+  
 }

@@ -34,7 +34,7 @@ public class VideoServices {
     }
 
     public List<video> getAll() {
-        String req = "select * from video";
+        String req = "select * from video inner join user on(video.owner=user.id) ";
         List<video> list = new ArrayList<>();
         try {
             ste = cnx.createStatement();
