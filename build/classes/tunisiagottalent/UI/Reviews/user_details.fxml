@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="600.0" prefWidth="1400.0" style="-fx-background-color: green;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="tunisiagottalent.UI.Reviews.User_detailsController">
+   <children>
+      <ScrollPane layoutY="40.0" prefHeight="560.0" prefWidth="1399.0">
+        <content>
+          <AnchorPane fx:id="content" minHeight="0.0" minWidth="0.0" prefHeight="561.0" prefWidth="1397.0" style="-fx-background-color: black;" />
+        </content>
+      </ScrollPane>
+      <JFXButton layoutX="1344.0" layoutY="-3.0" onAction="#close" text="[x]">
+         <font>
+            <Font name="System Bold Italic" size="17.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

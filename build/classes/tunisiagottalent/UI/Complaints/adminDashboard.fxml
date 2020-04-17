@@ -16,7 +16,7 @@
         <URL value="@admindashboard.css" />
     </stylesheets>
    <children>
-      <TabPane fx:id="tab1" layoutX="350.0" layoutY="12.0" prefHeight="720.0" prefWidth="1181.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tab1" layoutX="390.0" layoutY="21.0" prefHeight="711.0" prefWidth="1158.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="ComplaintList">
             <content>
@@ -42,7 +42,7 @@
           </Tab>
           <Tab text="ReviewList">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="314.0" prefWidth="525.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="681.0" prefWidth="1289.0">
                      <children>
                         <TableView fx:id="tabrec" layoutX="42.0" layoutY="79.0" prefHeight="246.0" prefWidth="1080.0">
                            <columns>

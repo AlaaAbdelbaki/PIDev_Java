@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.Reviews.Admin_ReviewsController">
+   <children>
+      <TableView fx:id="tabrec" layoutX="348.0" layoutY="152.0" prefHeight="336.0" prefWidth="1048.0">
+        <columns>
+          <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="username" prefWidth="200.0" text="User" />
+            <TableColumn fx:id="colcat" prefWidth="142.0" text="Category" />
+            <TableColumn fx:id="coltitre" prefWidth="132.0" text="Title" />
+            <TableColumn fx:id="con" prefWidth="231.0" text="Content" />
+            <TableColumn fx:id="rate" prefWidth="267.00006103515625" text="Rating" />
+        </columns>
+      </TableView>
+      <JFXButton fx:id="stat" layoutX="1358.0" layoutY="53.0" onAction="#stat" prefHeight="44.0" prefWidth="186.0" ripplerFill="#23d936" style="-fx-border-color: green;" text="Statistics" textFill="#f8f7f7">
+         <font>
+            <Font name="System Bold Italic" size="20.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIcon fill="#24ee35" glyphName="SIGNAL" />
+         </graphic>
+      </JFXButton>
+      <JFXTextField fx:id="rech" focusColor="#40a849" layoutX="659.0" layoutY="82.0" prefHeight="31.0" prefWidth="474.0" promptText="Search" unFocusColor="#c32222" />
+      <JFXButton fx:id="deleteR" layoutX="1320.0" layoutY="560.0" onAction="#RemoveReview" prefHeight="47.0" prefWidth="163.0" ripplerFill="#da1717" style="-fx-border-color: red;" text="Delete" textFill="WHITE">
+         <font>
+            <Font size="21.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIcon fill="#d30d0d" glyphName="EXCLAMATION_TRIANGLE" />
+         </graphic>
+      </JFXButton>
+      <Label layoutX="134.0" layoutY="26.0" prefHeight="69.0" prefWidth="355.0" text="Reviews" textFill="#f5f5f5">
+         <font>
+            <Font name="Century" size="54.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

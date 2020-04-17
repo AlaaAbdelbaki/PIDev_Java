@@ -3,16 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Programming/Java/Projects/Final/PiDev_Java/src/tunisiagottalent/UI/Base/Login.java</file>
-            <file>file:/D:/Programming/Java/Projects/Final/PiDev_Java/src/tunisiagottalent/util/DataSource.java</file>
-            <file>file:/D:/Programming/Java/Projects/Final/PiDev_Java/src/tunisiagottalent/util/sendEmailSMTP.java</file>
-            <file>file:/D:/Programming/Java/Projects/Final/PiDev_Java/src/tunisiagottalent/UI/Base/AdminMainController.java</file>
-            <file>file:/D:/Programming/Java/Projects/Final/PiDev_Java/src/tunisiagottalent/UI/Shop/EditProductController.java</file>
-            <file>file:/D:/Programming/Java/Projects/Final/PiDev_Java/src/tunisiagottalent/services/UserServices.java</file>
-            <file>file:/D:/Programming/Java/Projects/Final/PiDev_Java/src/tunisiagottalent/UI/Complaints/AdminDashboardController.java</file>
-            <file>file:/D:/Programming/Java/Projects/Final/PiDev_Java/src/tunisiagottalent/UI/User/ProfileController.java</file>
-            <file>file:/D:/Programming/Java/Projects/Final/PiDev_Java/src/tunisiagottalent/UI/User/EditProfileController.java</file>
-            <file>file:/D:/Programming/Java/Projects/Final/PiDev_Java/src/tunisiagottalent/services/ServiceArticle.java</file>
+            <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/UI/Base/MainController.java</file>
+            <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/UI/Base/Login.java</file>
+            <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/util/sendEmailSMTP.java</file>
+            <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/UI/Competitions/AdminCompetitions.java</file>
+            <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/services/UserServices.java</file>
+            <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/UI/Complaints/User_ComplaintsController.java</file>
+            <file>file:/D:/Projects/PIDev_Java/src/tunisiagottalent/UI/Complaints/User_Complaints.fxml</file>
         </group>
     </open-files>
 </project-private>

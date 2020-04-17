@@ -109,7 +109,7 @@
                      <graphic>
                         <FontAwesomeIcon fill="WHITE" glyphName="LIST_ALT" styleClass="text" />
                      </graphic></JFXButton>
-                  <JFXButton layoutX="10.0" layoutY="464.0" prefHeight="52.0" prefWidth="254.0" styleClass="drawer_buttons" text="Ratings" textFill="#f8f8f8">
+                  <JFXButton layoutX="10.0" layoutY="464.0" onAction="#Ratings" prefHeight="52.0" prefWidth="254.0" styleClass="drawer_buttons" text="Ratings" textFill="#f8f8f8">
                      <VBox.margin>
                         <Insets bottom="20.0" />
                      </VBox.margin>
