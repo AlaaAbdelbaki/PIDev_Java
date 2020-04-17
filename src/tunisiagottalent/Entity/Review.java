@@ -11,16 +11,42 @@ package tunisiagottalent.Entity;
  */
 public class Review {
       private int id;
-      private int user_id;
+      private User user_id;
      private String category;
     private int rating;
     private String content;
+    private String title;
+
+    public Review(int id, User user_id, String category, int rating, String content, String title) {
+        this.id = id;
+        this.user_id = user_id;
+        this.category = category;
+        this.rating = rating;
+        this.content = content;
+        this.title = title;
+    }
+     public Review( User user_id, String category, int rating, String content, String title) {
+        
+        this.user_id = user_id;
+        this.category = category;
+        this.rating = rating;
+        this.content = content;
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public Review() {
     }
     
    
-    public Review(int id, int user_id, String category, int rating, String content) {
+    public Review(int id, User user_id, String category, int rating, String content) {
         this.id = id;
         this.user_id = user_id;
         this.category = category;
@@ -46,11 +72,11 @@ public class Review {
         
     }
 
-    public int getUser_id() {
+    public User getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
+    public void setUser_id(User user_id) {
         this.user_id = user_id;
     }
 

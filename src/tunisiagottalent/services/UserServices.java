@@ -19,7 +19,6 @@ import tunisiagottalent.Entity.User;
 import java.util.List;
 import java.util.Random;
 import org.mindrot.jbcrypt.BCrypt;
-import tunisiagottalent.Entity.Subscription;
 import tunisiagottalent.util.UserSession;
 
 /**
@@ -246,6 +245,23 @@ public class UserServices {
 
         return list;
     }
+     public List<String> getUsernames() {
+        String req = "select username from user";
+        List<String> list = new ArrayList<>();
+
+        try {
+            ste = cnx.createStatement();
+            rs = ste.executeQuery(req);
+            while (rs.next()) {
+                list.add(rs.getString("username"));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return list;
+    }
 
     public String getRole(String username) {
         cnx = DataSource.getInstance().getCnx();
@@ -436,5 +452,19 @@ public class UserServices {
         return false;
     }
     
-    
+     public boolean Promote(String  username) {
+        String req = "update user set  roles='a:1:{i:0;s:13:\"ROLE_TALENTED\";}' where username=?";
+        try {
+            
+            pst = cnx.prepareStatement(req);
+            pst.setString(1, username);
+            pst.executeUpdate();
+            return true;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
 }

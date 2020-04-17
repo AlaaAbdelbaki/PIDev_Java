@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tunisiagottalent.UI.Complaints;
+package tunisiagottalent.UI.Reviews;
 
 import com.mysql.jdbc.Connection;
 import java.io.IOException;
@@ -26,6 +26,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import tunisiagottalent.util.DataSource;
 import tunisiagottalent.Entity.Review;
@@ -37,6 +38,9 @@ import tunisiagottalent.services.ReviewService;
  * @author sarah
  */
 public class Stat_rateController implements Initializable {
+    
+    @FXML
+    private AnchorPane root;
     private Connection  connexion =(Connection) DataSource.getInstance().getCnx();
     @FXML
     private BarChart<String, Integer> barchart;
@@ -74,11 +78,8 @@ public class Stat_rateController implements Initializable {
 
     @FXML
     private void Retour(ActionEvent event) throws IOException {
-           javafx.scene.Parent tableview = FXMLLoader.load(getClass().getResource("AdminDashboard.fxml"));
-        Scene sceneview = new Scene(tableview);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(sceneview);
-        window.show();
+          Stage stage = (Stage) root.getScene().getWindow();
+        stage.close();
     }
     
     

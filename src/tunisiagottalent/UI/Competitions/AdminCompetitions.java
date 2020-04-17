@@ -27,6 +27,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javax.mail.MessagingException;
 
 import tunisiagottalent.Entity.Competition;
 
@@ -34,7 +35,9 @@ import tunisiagottalent.Entity.competition_participant;
 
 import tunisiagottalent.services.CompetitionServices;
 import tunisiagottalent.services.ParticipationServices;
+import tunisiagottalent.services.UserServices;
 import tunisiagottalent.services.VoteServices;
+import tunisiagottalent.util.sendEmailSMTP;
 
 public class AdminCompetitions {
 
@@ -168,9 +171,17 @@ void initialize() {
                 promote.setStyle("-fx-text-fill: white;-fx-font-size:20px;-fx-background-color:#0B4F6C");
                 promote.setRipplerFill(javafx.scene.paint.Color.ORANGE);
                 promote.setOnAction(event -> {
+                    UserServices us=new UserServices();
+                    
                     competition_participant cp=getTableView().getItems().get(getIndex());
-                    //  getTableView().getItems().get(getIndex());
-                   // cs.delete(c);
+                    
+                    us.Promote(cp.getUser_id());
+                try {
+                    sendEmailSMTP.PromoteUser(cp.getUser_id(), us.getUser(cp.getUser_id()).getEmail());
+                } catch (MessagingException ex) {
+                    Logger.getLogger(AdminCompetitions.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                     
                     winners.getItems().remove(cp);
                 });
  

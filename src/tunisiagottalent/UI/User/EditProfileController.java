@@ -83,7 +83,7 @@ public class EditProfileController {
 
     private String imgp;
     private URI imguriUri;
-
+UserSession s = UserSession.instance;
     @FXML
     void initialize() {
 
@@ -173,7 +173,7 @@ public class EditProfileController {
         }
 
         String address = addressInput.getText();
-        UserSession s = UserSession.instance;
+        
         if (imgp!=null) {
             try {
                 Files.copy(Paths.get(imguriUri), Paths.get("D:\\Projects\\PIDev\\web\\assets\\uploads\\" + imgp));
@@ -196,8 +196,11 @@ public class EditProfileController {
 //                    stage.initStyle(StageStyle.UNDECORATED);
             alert.showAndWait();
             try {
-                AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/User/profile.fxml"));
-                rootPane.getChildren().setAll(p);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/tunisiagottalent/UI/User/profile.fxml"));
+                    Parent root = loader.load();
+                    ProfileController controller = loader.<ProfileController>getController();
+                    controller.setUser(user);
+                    rootPane.getChildren().setAll((AnchorPane)root);
 
             } catch (IOException ex) {
                 Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
@@ -213,8 +216,11 @@ public class EditProfileController {
             //                    stage.initStyle(StageStyle.UNDECORATED);
             alert.showAndWait();
             try {
-                AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/User/profile.fxml"));
-                rootPane.getChildren().setAll(p);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/tunisiagottalent/UI/User/profile.fxml"));
+                    Parent root = loader.load();
+                    ProfileController controller = loader.<ProfileController>getController();
+                    controller.setUser(s.getU());
+                    rootPane.getChildren().setAll((AnchorPane)root);
 
             } catch (IOException ex) {
                 Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
@@ -226,8 +232,11 @@ public class EditProfileController {
     @FXML
     void cancel(ActionEvent event) {
         try {
-            AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/User/profile.fxml"));
-            rootPane.getChildren().setAll(p);
+           FXMLLoader loader = new FXMLLoader(getClass().getResource("/tunisiagottalent/UI/User/profile.fxml"));
+                    Parent root = loader.load();
+                    ProfileController controller = loader.<ProfileController>getController();
+                    controller.setUser(s.getU());
+                    rootPane.getChildren().setAll((AnchorPane)root);
 
         } catch (IOException ex) {
             Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);

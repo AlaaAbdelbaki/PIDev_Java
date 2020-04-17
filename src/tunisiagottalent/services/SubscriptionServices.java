@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import tunisiagottalent.Entity.Subscription;
+import tunisiagottalent.Entity.User;
 import tunisiagottalent.util.DataSource;
 
 /**
@@ -30,27 +31,24 @@ public class SubscriptionServices {
     }
 
     
-    public Subscription exists(int subedto,int sub){
-            String sql="select * from subscribtion where subetto_id = "+subedto+" and  sub_id="+sub;
-            
+    public Boolean exists(int subedto ,int sub ){
+            String sql="select * from subscription where subetto_id = "+subedto+" and  sub_id="+sub;
+            System.out.println(sql);
             Subscription subInfo = new Subscription();
         try {
             ste = cnx.createStatement();
             rs = ste.executeQuery(sql);
             if(rs.next()){
-                subInfo.setId(rs.getInt("id"));
-                subInfo.setSubscription_date(rs.getDate("subscription_date"));
-                subInfo.setSubetto_id(rs.getInt("subetto_id"));
-                subInfo.setSub_id(rs.getInt("sub_id"));
+                return true;
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserServices.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return subInfo;
+        return false;
     }
     
     public boolean subscribe(Subscription s){
-        String sql = "insert into subscription(subscription_date,subetto_id,sub_id) values("+s.getSubscription_date()+","+s.getSubetto_id()+","+s.getSub_id()+")";
+        String sql = "insert into subscription(subscription_date,subetto_id,sub_id) values('"+s.getSubscription_date()+"',"+s.getSubetto_id()+","+s.getSub_id()+")";
         
         try {
             ste = cnx.createStatement();
@@ -73,5 +71,19 @@ public class SubscriptionServices {
             Logger.getLogger(UserServices.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+    public int getsubs(User u)
+    {
+        String sql="select COUNT(id) from subscription where subetto_id="+u.getId();
+        try {
+            ste = cnx.createStatement();
+            rs = ste.executeQuery(sql);
+            if(rs.next()){
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
     }
 }

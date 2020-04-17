@@ -62,5 +62,32 @@ public class sendEmailSMTP {
 
         System.out.println("Success !!");
     }
+    
+    public static void PromoteUser(String username, String recepient) throws MessagingException {
+
+        Session session = Session.getInstance(config(), new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(config().getProperty("email"), config().getProperty("pwd"));
+            }
+
+        });
+
+        Message message = new MimeMessage(session);
+        try {
+
+            message.setFrom(new InternetAddress(config().getProperty("email")));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
+            message.setSubject("Promoted To Talented");
+            message.setText("Congrats " + username + " You Have Won a Competition And Became An Elite User on our Platform");
+
+        } catch (MessagingException ex) {
+            Logger.getLogger(sendEmailSMTP.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        Transport.send(message);
+
+        System.out.println("Success !!");
+    }
 
 }

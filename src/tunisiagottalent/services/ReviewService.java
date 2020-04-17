@@ -16,6 +16,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import tunisiagottalent.util.DataSource;
 import tunisiagottalent.Entity.Review;
+import tunisiagottalent.Entity.User;
+import tunisiagottalent.util.UserSession;
 
 /**
  *
@@ -41,13 +43,15 @@ public class ReviewService {
          }   
 }
  public void insertReviewPST(Review r ){
-         String req="insert into review(category,rating,content) values(?,?,?)";
+         String req="insert into review(rating,title,content,user_id,category) values(?,?,?,?,?)";
         
          try {
              pst=connexion.prepareStatement(req);
-             pst.setString(1,r.getCategory());
-             pst.setInt(2,r.getRating());
+             pst.setString(5,r.getCategory());
+             pst.setInt(1,r.getRating());
+             pst.setObject(4,r.getUser_id().getId());
              pst.setString(3,r.getContent());
+             pst.setString(2,r.getTitle());
              pst.executeUpdate();
          } catch (SQLException ex) {
              Logger.getLogger(ReviewService.class.getName()).log(Level.SEVERE, null, ex);
@@ -80,7 +84,7 @@ public class ReviewService {
          }
           }
  public void EditReview(Review r){
- String req = "UPDATE   review SET category=?,rating=?,content=? WHERE id=? ";
+ String req = "UPDATE review SET category=?,rating=?,content=? WHERE id=? ";
          try {
              pst=connexion.prepareStatement(req,PreparedStatement.RETURN_GENERATED_KEYS);
              pst.setString(1, r.getCategory());
@@ -127,14 +131,47 @@ public class ReviewService {
  return liste;
  }
 public   List<Review>  getAll(){
-      String req= "select *from review  INNER JOIN user where review.user_id = user.id";
+      String req= "select * from review  INNER JOIN user where review.user_id = user.id";
       
      List<Review> list= new ArrayList<>();
          try {
              ste=connexion.createStatement();
               rs= ste.executeQuery(req);
              while(rs.next()){
-              list.add(new Review(rs.getInt("id"),rs.getInt("user_id"),rs.getString("category"),rs.getInt("rating"),rs.getString("content")));
+              list.add(new Review(rs.getInt("id"),
+                      new User(rs.getInt("id"),
+                                rs.getString("username"),
+                                rs.getString("email"),
+                                rs.getString("password"),
+                                rs.getString("sexe"),
+                                rs.getString("adresse"),
+                                rs.getString("name"),
+                                rs.getString("first_name"),
+                                rs.getString("telephone_number"),
+                                rs.getString("bio"),
+                                rs.getString("roles"),
+                                rs.getDate("birthday"),
+                                rs.getString("profile_pic")),
+                      rs.getString("category"),rs.getInt("rating"),rs.getString("content"),rs.getString("title")));
+                
+             }
+         } catch (SQLException ex) {
+             Logger.getLogger(ReviewService.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        
+return list;
+ }
+public   List<Review>  getbyUser(User u){
+      String req= "select * from review where review.user_id = "+u.getId();
+      
+     List<Review> list= new ArrayList<>();
+         try {
+             ste=connexion.createStatement();
+              rs= ste.executeQuery(req);
+             while(rs.next()){
+              list.add(new Review(rs.getInt("id"),UserSession.instance.getU(),
+                      
+                      rs.getString("category"),rs.getInt("rating"),rs.getString("content"),rs.getString("title")));
                 
              }
          } catch (SQLException ex) {

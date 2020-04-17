@@ -88,21 +88,22 @@ public class AdminMainController implements Initializable {
     private void logout(ActionEvent event) {
         UserSession.instance.cleanUserSession();
         Cart.instance.cleanCartSession();
-         try {//Stage stage = (Stage) mainAnchor.getScene().getWindow();
+        try {//Stage stage = (Stage) mainAnchor.getScene().getWindow();
             Parent p = FXMLLoader.load(getClass().getResource("Main.fxml"));
-            Scene s=p.getScene();
+            Scene s = p.getScene();
+            AdminMainAnchor.getScene().setRoot(p);
             p.translateYProperty().set(850);
-            AdminMainAnchor.getChildren().add(p);
+           // AdminMainAnchor.getChildren().add(p);
             //stage.setScene(s);
-            Timeline timeline =new Timeline();
-            KeyValue kv =new KeyValue(p.translateYProperty(),0,Interpolator.EASE_IN);
-            KeyFrame kf=new KeyFrame(Duration.seconds(1), kv);
+            Timeline timeline = new Timeline();
+            KeyValue kv = new KeyValue(p.translateYProperty(), 0, Interpolator.EASE_IN);
+            KeyFrame kf = new KeyFrame(Duration.seconds(1), kv);
             timeline.getKeyFrames().add(kf);
-            timeline.setOnFinished((e)->{AdminMainAnchor.getChildren().removeAll(AdminMainAnchor);
+            timeline.setOnFinished((e) -> {
+                AdminMainAnchor.getChildren().removeAll(AdminMainAnchor);
             });
             timeline.play();
-          
-        
+
         } catch (IOException ex) {
             Logger.getLogger(AdminMainController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -112,20 +113,22 @@ public class AdminMainController implements Initializable {
     private void goToMain(MouseEvent event) {
         try {//Stage stage = (Stage) mainAnchor.getScene().getWindow();
             Parent p = FXMLLoader.load(getClass().getResource("Main.fxml"));
-            Scene s=p.getScene();
+            Scene s = p.getScene();
+            AdminMainAnchor.getScene().setRoot(p);
             p.translateYProperty().set(850);
-            AdminMainAnchor.getChildren().add(p);
+           // AdminMainAnchor.getChildren().removeAll(AdminMainAnchor);
+           // AdminMainAnchor.getChildren().add(p);
             //stage.setScene(s);
-            Timeline timeline =new Timeline();
-            KeyValue kv =new KeyValue(p.translateYProperty(),0,Interpolator.EASE_IN);
-            KeyFrame kf=new KeyFrame(Duration.seconds(1), kv);
+            Timeline timeline = new Timeline();
+            KeyValue kv = new KeyValue(p.translateYProperty(), 0, Interpolator.EASE_IN);
+            KeyFrame kf = new KeyFrame(Duration.seconds(1), kv);
             timeline.getKeyFrames().add(kf);
-            
-            timeline.setOnFinished((e)->{AdminMainAnchor.getChildren().removeAll(AdminMainAnchor);
+
+            timeline.setOnFinished((e) -> {
+                 AdminMainAnchor.getChildren().removeAll(AdminMainAnchor);
             });
             timeline.play();
-          
-        
+
         } catch (IOException ex) {
             Logger.getLogger(AdminMainController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -141,9 +144,10 @@ public class AdminMainController implements Initializable {
             Logger.getLogger(AdminMainController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-       @FXML
+
+    @FXML
     void Profiles(ActionEvent event) {
- try {
+        try {
             AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/User/DashboardUsers.fxml"));
             content.getChildren().setAll(p);
             drawer.close();
@@ -151,9 +155,10 @@ public class AdminMainController implements Initializable {
             Logger.getLogger(AdminMainController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
- @FXML
+
+    @FXML
     void Shop(ActionEvent event) {
-try {
+        try {
             AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/Shop/Shop.fxml"));
             content.getChildren().setAll(p);
             drawer.close();
@@ -161,58 +166,71 @@ try {
             Logger.getLogger(AdminMainController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     @FXML
     private void quit(MouseEvent event) {
         System.exit(0);
     }
-@FXML
+
+    @FXML
     void Articles(ActionEvent event) {
-try {
+        try {
             AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/Articles/ArticleList.fxml"));
             content.getChildren().setAll(p);
             drawer.close();
-            
+
             //mainAnchor.setStyle("-fx-background-image: url('/tunisiagottalent/UI/Competitions/img/bg-9.jpg')");
-            
         } catch (IOException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-      @FXML
+
+    @FXML
     void Updates(ActionEvent event) {
-try {
+        try {
             AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/Updates/UpdatesList.fxml"));
             content.getChildren().setAll(p);
             drawer.close();
-            
+
             //mainAnchor.setStyle("-fx-background-image: url('/tunisiagottalent/UI/Competitions/img/bg-9.jpg')");
-            
         } catch (IOException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-       @FXML
+
+    @FXML
     void Complaints(ActionEvent event) {
-try {
+        try {
             AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/Complaints/adminDashboard.fxml"));
             content.getChildren().setAll(p);
             drawer.close();
-            
+
             //mainAnchor.setStyle("-fx-background-image: url('/tunisiagottalent/UI/Competitions/img/bg-9.jpg')");
-            
         } catch (IOException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-        @FXML
+
+    @FXML
     void Events(ActionEvent event) {
-try {
+        try {
             AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/Events/AddEvent.fxml"));
             content.getChildren().setAll(p);
             drawer.close();
-            
+
             //mainAnchor.setStyle("-fx-background-image: url('/tunisiagottalent/UI/Competitions/img/bg-9.jpg')");
-            
+        } catch (IOException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    void Ratings(ActionEvent event) {
+        try {
+            AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/Reviews/Admin_Reviews.fxml"));
+            content.getChildren().setAll(p);
+            drawer.close();
+
         } catch (IOException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }

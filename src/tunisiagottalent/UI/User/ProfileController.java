@@ -5,42 +5,65 @@
  */
 package tunisiagottalent.UI.User;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.time.LocalDate;
 
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.animation.FadeTransition;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.control.Alert;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.RowConstraints;
 
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Callback;
 import javafx.util.Duration;
+import tunisiagottalent.Entity.Product;
 import tunisiagottalent.Entity.Subscription;
 import tunisiagottalent.Entity.User;
 import tunisiagottalent.Entity.video;
@@ -48,6 +71,7 @@ import tunisiagottalent.UI.Base.MainController;
 import tunisiagottalent.services.SubscriptionServices;
 import tunisiagottalent.services.UserServices;
 import tunisiagottalent.services.VideoServices;
+import tunisiagottalent.services.VoteServices;
 import tunisiagottalent.util.UserSession;
 import tunisiagottalent.util.sendEmailSMTP;
 
@@ -63,7 +87,7 @@ public class ProfileController {
 
     @FXML
     private Label admin;
-    
+
     @FXML
     private AnchorPane rootPane;
 
@@ -84,30 +108,47 @@ public class ProfileController {
 
     @FXML
     private Button subscribeButton;
-
+    @FXML
+    private Button btn_add_vid;
+    
+    @FXML
+    private Button btn_edit;
+    @FXML
+    private VBox vboxvids;
     @FXML
     private Button unsubscribeButton;
+    private User user;
+    SubscriptionServices ss = new SubscriptionServices();
+    VideoServices vs = new VideoServices();
+    @FXML
+    private Label subs;
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @FXML
     void initialize() {
-
-        loadInfo();
-        loadVideos();
-        System.out.println("Profile loaded ! ");
+        Platform.runLater(() -> {
+            loadInfo();
+            loadVideos();
+            subs.setText(String.valueOf(ss.getsubs(user)));
+        });
 
     }
 
     @FXML
     void loadInfo() {
+
         subscribeButton.setVisible(false);
         unsubscribeButton.setVisible(false);
         UserServices us = new UserServices();
         SubscriptionServices ss = new SubscriptionServices();
         UserSession s = UserSession.instance;
 
-        if (s.getU().getRole().contains("ROLE_TALENTED")) {
+        if (user.getRole().contains("ROLE_TALENTED")) {
             talented.setVisible(true);
-        } else if (s.getU().getRole().contains("ROLE_ADMIN")) {
+        } else if (user.getRole().contains("ROLE_ADMIN")) {
             admin.setVisible(true);
         }
         Rectangle clip = new Rectangle(
@@ -126,11 +167,10 @@ public class ProfileController {
         // profilePic.setClip(null);
         // apply a shadow effect.
         //  profilePic.setEffect(new DropShadow(20, Color.BLACK));
-        User user = s.getU();
 //        System.out.println(user);
         username_profile.setText(user.getUsername());
-        System.out.println(us.getUser(s.getU().getUsername()).getProfilePic());
-        profilePic.setImage(new Image("http://127.0.0.1:8000/assets/uploads/" + us.getUser(s.getU().getUsername()).getProfilePic()));
+        
+        profilePic.setImage(new Image("http://127.0.0.1:8000/assets/uploads/" + user.getProfilePic()));
         if (us.getUser(user.getUsername()).getName() == null || us.getUser(user.getUsername()).getLastName() == null) {
             nameLastName.setText("Complete your profile !!");
         } else {
@@ -138,7 +178,9 @@ public class ProfileController {
         }
         bio.setText(us.getUser(user.getUsername()).getBio());
         if (!s.getU().getUsername().equals(username_profile.getText())) {
-            if (ss.exists(us.getUser(username_profile.getText()).getId(), s.getU().getId()) != null) {
+            btn_add_vid.setVisible(false);
+            btn_edit.setVisible(false);
+            if (ss.exists(user.getId(), s.getU().getId())) {
                 unsubscribeButton.setVisible(true);
             } else {
                 subscribeButton.setVisible(true);
@@ -181,39 +223,129 @@ public class ProfileController {
     @FXML
     void loadVideos() {
 
-        VideoServices vs = new VideoServices();
-        UserServices us = new UserServices();
-        List<video> videos;
-        System.out.println("entered here");
-//        System.out.println(us.getUser(username_profile.getText()).getId());
-        videos = vs.getVideos(us.getUser(username_profile.getText()).getId());
-//        System.out.println(videos.size());
-        VBox root = new VBox();
-        videos.forEach((v) -> {
-//            System.out.println(v);
-            Label title = new Label();
+        List<video> tabs = vs.getVideos(user.getId());
+        VoteServices votesserv = new VoteServices();
+        tabs.forEach((vid) -> {
+                HBox video_grid=new HBox();
+                
+            GridPane details = new GridPane();
 
-            title.setText(v.getTitle());
-            WebView video = new WebView();
-            video.setPrefHeight(380);
-            video.setPrefWidth(680);
-            video.getEngine().loadContent("<iframe width=\"640\" height=\"360\" src=\"" + v.getUrl() + "\\ frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>");
+            Label Title = new Label(vid.getTitle());
+            Title.setTextFill(javafx.scene.paint.Color.WHITE);
+            Title.setFont(Font.font("Cambria", 22));
 
-            root.getChildren().addAll(title, video);
-            videos_Container.setContent(root);
+            Label VoteNum = new Label(Integer.toString(votesserv.getVotes(vid)));
+            VoteNum.setTextFill(javafx.scene.paint.Color.WHITE);
+            VoteNum.setFont(Font.font("Cambria", 24));
+
+            Label pubDate = new Label(vid.getPublish_date().toString());
+            pubDate.setTextFill(javafx.scene.paint.Color.WHITE);
+            pubDate.setFont(Font.font("Cambria", 16));
+
+            JFXButton Delete = new JFXButton("Delete");
+            JFXButton Vote = new JFXButton("Vote");
+            JFXButton Unvote = new JFXButton("Unvote");
+
+            Delete.resize(150, 250);
+            Vote.resize(150, 250);
+            Unvote.resize(150, 250);
+
+            Delete.setStyle("-fx-text-fill: white;-fx-font-size:18px;-fx-background-color:#49111C");
+            Vote.setStyle("-fx-text-fill: white;-fx-font-size:18px;-fx-background-color:#ACEB98");
+            Unvote.setStyle("-fx-text-fill: white;-fx-font-size:18px;-fx-background-color:#92140C");
+
+            WebView preview = new WebView();
+            
+            preview.getEngine().load(vid.getUrl());
+
+            UserSession s = UserSession.instance;
+            if (s.getU().getUsername().equals(vid.getOwner().getUsername())) {
+
+                details.add(Delete, 0, 10);
+                
+            }
+            if (votesserv.find(vid, s.getU())) {
+                Unvote.setVisible(true);
+                Vote.setVisible(false);
+            } else {
+                Unvote.setVisible(false);
+                Vote.setVisible(true);
+            }
+            Vote.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    votesserv.Add(s.getU(), vid);
+                    Unvote.setVisible(true);
+                    Vote.setVisible(false);
+                    VoteNum.setText(Integer.toString(Integer.parseInt(VoteNum.getText()) + 1));
+
+                }
+            });
+            Unvote.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    votesserv.delete(vid, s.getU());
+                    Unvote.setVisible(false);
+                    Vote.setVisible(true);
+                    VoteNum.setText(Integer.toString(Integer.parseInt(VoteNum.getText()) - 1));
+
+                }
+            });
+            Delete.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Delete Video");
+                    alert.setHeaderText("Are you sure ?");
+                    alert.setContentText("You will lose all your votes !");
+
+                    alert.showAndWait();
+                    //  vs.delete(vid);
+                    video_grid.getChildren().removeAll(preview, details);
+                    video_grid.getChildren().removeIf(node -> GridPane.getRowIndex(node) == tabs.indexOf(vid));
+                    
+                }
+                
+            });
+            RowConstraints row = new RowConstraints(50);
+            details.addRow(0,Title);
+            details.getRowConstraints().add(row);
+            details.addRow(1,pubDate);
+            details.getRowConstraints().add(row);
+            details.add(Unvote, 0, 2);
+            details.getRowConstraints().add(row);
+            details.add(Vote, 0, 2);
+            details.getRowConstraints().add(row);
+            details.add(VoteNum, 1, 2);
+            details.getRowConstraints().add(row);
+            
+            details.setStyle("-fx-background-color: #0c0527");
+            details.setPadding(new Insets(15, 15, 15, 15));
+            
+
+            
+            
+            video_grid.getChildren().addAll(  preview,details);
+            video_grid.setPrefHeight(350);
+             vboxvids.getChildren().addAll(video_grid);
+             vboxvids.setSpacing(25);
+             
+             
+             
         });
+        
     }
 
     @FXML
     void subsbribe(ActionEvent event) {
-        UserServices us = new UserServices();
-        SubscriptionServices ss = new SubscriptionServices();
+
         UserSession s = UserSession.instance;
         Subscription sub = new Subscription();
-        sub.setId(s.getU().getId());
-        sub.setSubetto_id(us.getUser(username_profile.getText()).getId());
-        java.time.LocalDate current = java.time.LocalDateTime.now().toLocalDate();
+        sub.setSub_id(s.getU().getId());
+        sub.setSubetto_id(user.getId());
+        LocalDate current = LocalDate.now();
         sub.setSubscription_date(Date.valueOf(current));
+        subs.setText((Integer.toString(Integer.parseInt(subs.getText()) + 1)));
         if (ss.subscribe(sub)) {
             subscribeButton.setVisible(false);
             unsubscribeButton.setVisible(true);
@@ -222,17 +354,19 @@ public class ProfileController {
 
     @FXML
     void unsubscribe(ActionEvent event) {
+
         UserServices us = new UserServices();
-        SubscriptionServices ss = new SubscriptionServices();
+
         UserSession s = UserSession.instance;
+
         Subscription sub = new Subscription();
-        sub.setId(s.getU().getId());
-        sub.setSubetto_id(us.getUser(username_profile.getText()).getId());
-        java.time.LocalDate current = java.time.LocalDateTime.now().toLocalDate();
-        sub.setSubscription_date(Date.valueOf(current));
+        sub.setSub_id(s.getU().getId());
+        sub.setSubetto_id(user.getId());
+        subs.setText((Integer.toString(Integer.parseInt(subs.getText()) - 1)));
         if (ss.unsubscribe(sub)) {
             subscribeButton.setVisible(true);
             unsubscribeButton.setVisible(false);
         }
     }
+
 }

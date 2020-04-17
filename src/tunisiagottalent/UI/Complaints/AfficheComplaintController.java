@@ -100,7 +100,7 @@ if(c==null){
         Scene scene=new Scene(loader.load());
         
 
-       EditComplaintController ec= loader.getController();
+      
         Stage stageAff=new Stage();
         stageAff.setScene(scene);
         stageAff.show();
@@ -112,10 +112,10 @@ if(c==null){
         
        
         
-        ec.setData(tabrec.getSelectionModel().getSelectedItem().getId(),
+       /* ec.setData(tabrec.getSelectionModel().getSelectedItem().getId(),
                 tabrec.getSelectionModel().getSelectedItem().getSubject(),
                  tabrec.getSelectionModel().getSelectedItem().getContent()
-                 );
+                 );*/
                  
                  
        

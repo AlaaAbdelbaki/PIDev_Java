@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
-<?import java.net.URL?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.ImageView?>
@@ -11,48 +10,67 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="750.0" prefWidth="1600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.User.ProfileController">
-    <stylesheets>
-        <URL value="@profile.css" />
-    </stylesheets>
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="750.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.User.ProfileController">
    <children>
-      <ImageView fx:id="profilePic" fitHeight="250.0" fitWidth="250.0" layoutX="47.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="username_profile" contentDisplay="CENTER" layoutX="40.0" layoutY="281.0" prefHeight="56.0" prefWidth="278.0" text="username" textAlignment="CENTER" textFill="#a86e6e">
+      <ImageView fx:id="profilePic" fitHeight="250.0" fitWidth="250.0" layoutX="33.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="username_profile" contentDisplay="CENTER" layoutX="33.0" layoutY="330.0" prefHeight="90.0" prefWidth="278.0" textAlignment="CENTER" textFill="#78e38f">
          <font>
-            <Font name="Bauhaus 93" size="15.0" />
+            <Font name="Book Antiqua" size="15.0" />
          </font></Label>
-      <Label fx:id="nameLastName" layoutX="411.0" layoutY="139.0" prefHeight="55.0" prefWidth="248.0" text="firstLastName" textFill="WHITE">
+      <Label fx:id="nameLastName" layoutX="368.0" layoutY="120.0" prefHeight="55.0" prefWidth="465.0" text="firstLastName" textFill="WHITE">
          <font>
             <Font name="Bell MT Italic" size="30.0" />
          </font></Label>
-      <Label fx:id="bio" alignment="CENTER" layoutX="16.0" layoutY="340.0" prefHeight="292.0" prefWidth="314.0" stylesheets="@profile.css" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <Label fx:id="bio" alignment="CENTER" layoutX="15.0" layoutY="413.0" prefHeight="292.0" prefWidth="314.0" stylesheets="@profile.css" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
-            <Font name="Berlin Sans FB Bold" size="23.0" />
+            <Font name="Berlin Sans FB Bold" size="16.0" />
          </font></Label>
-      <ScrollPane fx:id="videos_Container" layoutX="456.0" layoutY="219.0" prefHeight="483.0" prefWidth="1144.0" stylesheets="@../Competitions/scroll.css">
+      <ScrollPane layoutX="358.0" layoutY="219.0" prefHeight="512.0" prefWidth="1242.0" stylesheets="@../Competitions/scroll.css">
          <content>
-            <VBox alignment="CENTER" prefHeight="483.0" prefWidth="1123.0" />
+            <VBox fx:id="vboxvids" />
          </content></ScrollPane>
-      <Button layoutX="907.0" layoutY="49.0" mnemonicParsing="false" onAction="#addVideo" prefHeight="38.0" prefWidth="105.0" text="Add Video" />
-      <Button layoutX="1048.0" layoutY="48.0" mnemonicParsing="false" onAction="#editProfile" prefHeight="42.0" prefWidth="108.0" text="Edit Profile" />
-      <Line endX="-100.0" endY="504.33331298828125" layoutX="439.0" layoutY="225.0" startX="-100.0" startY="43.0" stroke="WHITE" />
-      <Label fx:id="talented" layoutX="745.0" layoutY="112.0" prefHeight="51.0" prefWidth="208.0" text="Talented Account" textFill="#18ae2a" visible="false">
+      <Line endX="-100.0" endY="504.33331298828125" layoutX="439.0" layoutY="225.0" startX="-100.0" startY="8.0" stroke="WHITE" />
+      <Label fx:id="talented" layoutX="33.0" layoutY="305.0" prefHeight="51.0" prefWidth="208.0" text="Talented Account" textFill="#18ae2a" visible="false">
          <graphic>
-            <FontAwesomeIcon fill="#2a6836" glyphName="CHECK_CIRCLE" size="3em" />
+            <FontAwesomeIcon fill="#2a6836" glyphName="CHECK_CIRCLE" size="2em" />
          </graphic>
          <font>
             <Font name="System Bold Italic" size="17.0" />
          </font>
       </Label>
-      <Label fx:id="admin" layoutX="755.0" layoutY="122.0" prefHeight="51.0" prefWidth="208.0" text="   Admin" textFill="#d71515" visible="false">
+      <Label fx:id="admin" layoutX="33.0" layoutY="305.0" prefHeight="51.0" prefWidth="208.0" text="   Admin" textFill="#c32121" visible="false">
          <graphic>
-            <FontAwesomeIcon fill="#e30909" glyphName="EYE" size="2em" />
+            <FontAwesomeIcon fill="#e30909" glyphName="EYE" size="1.5em" />
          </graphic>
          <font>
             <Font name="System Bold Italic" size="17.0" />
          </font>
       </Label>
-      <Button fx:id="subscribeButton" layoutX="772.0" layoutY="51.0" mnemonicParsing="false" onAction="#subsbribe" prefHeight="38.0" prefWidth="105.0" text="Subscribe" />
-      <Button fx:id="unsubscribeButton" layoutX="775.0" layoutY="50.0" mnemonicParsing="false" onAction="#unsubscribe" prefHeight="38.0" prefWidth="105.0" text="Unsubscribe" />
+      <JFXButton fx:id="subscribeButton" layoutX="356.0" layoutY="29.0" onAction="#subsbribe" prefHeight="38.0" prefWidth="128.0" ripplerFill="#36e522" text="Subscribe" textFill="#36e522">
+         <graphic>
+            <FontAwesomeIcon fill="#36e522" glyphName="HEART_ALT" />
+         </graphic>
+      </JFXButton>
+      <JFXButton fx:id="unsubscribeButton" layoutX="368.0" layoutY="33.0" onAction="#unsubscribe" text="UnSubscribe" textFill="#d30808">
+         <graphic>
+            <FontAwesomeIcon fill="#d30808" glyphName="HEART" />
+         </graphic>
+      </JFXButton>
+      <Label fx:id="subs" layoutX="385.0" layoutY="74.0" prefHeight="27.0" prefWidth="42.0" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <FontAwesomeIcon fill="WHITE" glyphName="GROUP" layoutX="357.0" layoutY="92.0" wrappingWidth="21.00000762939453" />
+      <JFXButton fx:id="btn_add_vid" layoutX="911.0" layoutY="33.0" onAction="#addVideo" prefHeight="31.0" prefWidth="122.0" ripplerFill="#202f52" text="Add Video" textFill="#fcfcfc" underline="true">
+         <graphic>
+            <FontAwesomeIcon fill="WHITE" glyphName="PLUS_CIRCLE" />
+         </graphic>
+      </JFXButton>
+      <JFXButton fx:id="btn_edit" layoutX="1078.0" layoutY="33.0" onAction="#editProfile" prefHeight="31.0" prefWidth="128.0" ripplerFill="#cdcd23" text="Edit Profile" textFill="WHITE" underline="true">
+         <graphic>
+            <FontAwesomeIcon fill="#e3e5e8" glyphName="EDIT" />
+         </graphic>
+      </JFXButton>
    </children>
 </AnchorPane>

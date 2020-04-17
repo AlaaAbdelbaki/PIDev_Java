@@ -3,6 +3,7 @@ package tunisiagottalent.UI.Base;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.JFXTextField;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import tunisiagottalent.Entity.Cart;
@@ -91,6 +93,7 @@ public class Login {
 
                     UserServices us = new UserServices();
                     UserSession z = UserSession.getInstance(us.getUser(user));
+                    
                     Cart ca=Cart.getInstance();
                     Stage stage = (Stage) login_anchor.getScene().getWindow();
 
@@ -102,14 +105,14 @@ public class Login {
                     JFXButton d = (JFXButton) s.lookup("#btn_dashboard");
                     JFXHamburger j = (JFXHamburger) s.lookup("#hamburger");
                     JFXDrawer e = (JFXDrawer) s.lookup("#drawer");
+                    HBox search=(HBox)s.lookup("#hboxsearch");
                     AnchorPane p=(AnchorPane) stage.getOwner().getScene().getRoot();
                     Label log=(Label)s.lookup("#loggedin");
                     log.setText("Logged In As: "+ UserSession.instance.getU().getUsername());
                     p.setStyle("-fx-background-image: url('/tunisiagottalent/UI/Base/img/bg-3.jpg')");
                     e.open();
-                     
                     j.setDisable(false);
-
+                    search.setVisible(true);
                     b.setVisible(false);
                     b2.setVisible(true);
                     l.setVisible(false);

@@ -42,7 +42,7 @@ import tunisiagottalent.services.ReviewService;
  *
  * @author sarah
  */
-public class AdminDashboardController implements Initializable {
+public class AdminDashboardController  {
 
       @FXML
     private TabPane tab1;
@@ -114,12 +114,12 @@ public class AdminDashboardController implements Initializable {
     private TextArea areaText;
 
 
-    @Override
+   /* @Override
     public void initialize(URL url, ResourceBundle rb) {
         afficher();
        actualiserRev();
         // TODO
-    }    
+    }  */  
     public void afficher(){
          ComplaintService cs = new ComplaintService();
         ObservableList<Complaint> oc = FXCollections.observableArrayList(cs.getAll());
@@ -130,7 +130,7 @@ public class AdminDashboardController implements Initializable {
         tab.setItems(oc);
        
     }
-    @FXML
+   /* @FXML
       public void actualiserRev() {
          ReviewService rs= new ReviewService();
         ObservableList<Review> or = FXCollections.observableArrayList(rs.getAll());
@@ -142,7 +142,7 @@ public class AdminDashboardController implements Initializable {
         con.setCellValueFactory(new PropertyValueFactory<>("content"));
         tabrec.setItems(or);
         
-    }
+    }*/
 
     @FXML
     private void Remove(ActionEvent event)  {
@@ -162,7 +162,7 @@ public class AdminDashboardController implements Initializable {
         colcont.setCellValueFactory(new PropertyValueFactory<>("content"));
         tab.setItems(oc);
                 }
-    public void actualiserRev(ActionEvent event)  {
+   /* public void actualiserRev(ActionEvent event)  {
          ReviewService rs= new ReviewService();
         ObservableList<Review> or = FXCollections.observableArrayList(rs.getAll());
            id.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -177,11 +177,9 @@ public class AdminDashboardController implements Initializable {
 
     @FXML
     private void RemoveReview(ActionEvent event) {
-       ReviewService rs = new ReviewService();
-      Review  r = (Review) tabrec.getSelectionModel().getSelectedItem();
-        rs.deleteReview(r);
+       
       
-    }
+    }*/
 
     @FXML
     private void SearchSubject(ActionEvent event)  {
@@ -220,57 +218,16 @@ public class AdminDashboardController implements Initializable {
         sortedComplaint.comparatorProperty().bind(tab.comparatorProperty());
         tab.setItems(sortedComplaint);
         }
-
+/*
     @FXML
     private void SearchRating(ActionEvent event)  {
-         ReviewService rs= new ReviewService();
-        ObservableList<Review> or = FXCollections.observableArrayList(rs.getAll());
-           id.setCellValueFactory(new PropertyValueFactory<>("id"));
-         username.setCellValueFactory(new PropertyValueFactory<>("username"));
-        colcat.setCellValueFactory(new PropertyValueFactory<>("category"));
-         coltitre.setCellValueFactory(new PropertyValueFactory<>("title"));
-        rate.setCellValueFactory(new PropertyValueFactory<>("rating"));
-        con.setCellValueFactory(new PropertyValueFactory<>("content"));
-        FilteredList<Review> filteredrech = new FilteredList<>(or,b->true);
-        rech.textProperty().addListener((observable,oldValue,newValue) -> {
-            filteredrech.setPredicate((Predicate<? super Review>) Review -> {
-            if(newValue == null || newValue.isEmpty()){
-                return true;
-            }
-            
-    String lowerCaseFilter = newValue.toLowerCase();
-            if(String.valueOf(Review.getId()).indexOf(lowerCaseFilter) != -1){
-                return true;
-            }
-            else if(Review.getCategory().toLowerCase().indexOf(lowerCaseFilter) != -1){
-                return true;
-            }
-            else if(String.valueOf(Review.getRating()).indexOf(lowerCaseFilter) != -1){
-                    return true;
-            }
-            else if (Review.getContent().toLowerCase().indexOf(lowerCaseFilter) != -1){
-                    return true;
-            }
-           
-            else{
-                    return false;
-            }
-            
-            });
-        });
-        SortedList<Review> sortedRev = new SortedList<>(filteredrech);
-        sortedRev.comparatorProperty().bind(tabrec.comparatorProperty());
-        tabrec.setItems(sortedRev);
+         
         }
 
     @FXML
     private void Stat(ActionEvent event) throws IOException{
-        javafx.scene.Parent tableview = FXMLLoader.load(getClass().getResource("stat_rating.fxml"));
-        Scene sceneview = new Scene(tableview);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(sceneview);
-        window.show();
-    }
+        
+    }*/
 public Boolean ValidateFields() {
         if (areaText.getText().isEmpty() ) {
             Alert alert = new Alert(Alert.AlertType.WARNING);

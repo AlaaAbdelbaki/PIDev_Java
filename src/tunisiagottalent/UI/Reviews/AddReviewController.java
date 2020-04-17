@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tunisiagottalent.UI.Complaints;
+package tunisiagottalent.UI.Reviews;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,21 +17,26 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.controlsfx.control.Rating;
 import tunisiagottalent.Entity.Review;
+import tunisiagottalent.UI.User.EditProfileController;
+import tunisiagottalent.UI.User.ProfileController;
 import tunisiagottalent.services.ReviewService;
+import tunisiagottalent.util.UserSession;
 
 /**
  * FXML Controller class
  *
- * @author sarah
+ * @author Anis
  */
 public class AddReviewController implements Initializable {
 
@@ -38,16 +45,16 @@ public class AddReviewController implements Initializable {
     @FXML
     private Button send;
     @FXML
-    private Button cancel;
-    @FXML
-    private ChoiceBox category;
-    @FXML
-    private Slider rating;
+    private ChoiceBox<String> category;
+   
+   
     @FXML
     private TextField title;
      ObservableList<String> options=FXCollections.observableArrayList("Event","Orders","Competition","Blog");
     @FXML
-    private TextField rate;
+    private Rating rating;
+    @FXML
+    private AnchorPane rootp;
 
     /**
      * Initializes the controller class.
@@ -59,16 +66,9 @@ public class AddReviewController implements Initializable {
         category.setItems(options);
       
   
-      
-          rating.valueProperty().addListener((observable, oldValue, newValue) -> {
-
-            rate.setText(Integer.toString(newValue.intValue()));
-
-
-        });
     }    
 public Boolean ValidateFields() {
-        if (category.getValue()==null | contenu.getText().isEmpty() | rate.getText().isEmpty() ) {
+        if (category.getValue()==null | contenu.getText().isEmpty() ) {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("Validate fields");
             alert.setHeaderText(null);
@@ -82,33 +82,31 @@ public Boolean ValidateFields() {
     }
     @FXML
     private void AddReview(ActionEvent event) throws IOException {
-      if( ValidateFields()==false){String t= title.getText();
+      if( ValidateFields()==true){
          String con= contenu.getText();
-         String cat= category.getValue().toString();
-        String note= rate.getText();
-        int n= Integer.parseInt(note);
+         String cat= category.getValue();
+         String tit=title.getText();
+        double note= rating.getRating();
+        int n= (int) note;
          ReviewService rs = new ReviewService();
-         Review r = new Review(cat,n,con);
+         Review r = new Review(UserSession.instance.getU(),cat,n,con,tit);
          rs.insertReviewPST(r);      
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Notification");
         alert.setHeaderText("Review added with succes");
         alert.showAndWait();
-        javafx.scene.Parent tableview = FXMLLoader.load(getClass().getResource("DashboardReview.fxml"));
-        Scene sceneview = new Scene(tableview);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(sceneview);
-        window.show();}
-       
-    }
+        try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/tunisiagottalent/UI/Reviews/User_Reviews.fxml"));
+                    Parent root = loader.load();
+                    
+                    rootp.getChildren().setAll((AnchorPane)root);
 
-    @FXML
-    private void cancelButton(ActionEvent event) throws IOException {
-       javafx.scene.Parent tableview = FXMLLoader.load(getClass().getResource("home.fxml"));
-        Scene sceneview = new Scene(tableview);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(sceneview);
-        window.show();
+            } catch (IOException ex) {
+                Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+      }
     }
+    
+  
     
 }
