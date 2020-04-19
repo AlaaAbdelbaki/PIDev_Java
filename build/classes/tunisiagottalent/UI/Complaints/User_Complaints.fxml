@@ -1,8 +1,126 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.lynden.gmapsfx.GoogleMapView?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="tunisiagottalent.UI.Complaints.User_ComplaintsController">
-    
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="750.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.Complaints.User_ComplaintsController">
+   <children>
+      <HBox layoutX="2.0" layoutY="2.0" prefHeight="746.0" prefWidth="1596.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="746.0" prefWidth="827.0">
+               <children>
+                  <GoogleMapView fx:id="googlemapview" prefHeight="409.0" prefWidth="827.0" style="-fx-border-color: white;">
+                     <VBox.margin>
+                        <Insets left="30.0" right="30.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </GoogleMapView>
+                  <Line endX="357.50421142578125" endY="817.014892578125" startX="1150.797119140625" startY="817.014892578125" stroke="#fffefe" strokeWidth="2.0">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Line>
+                  <VBox alignment="TOP_CENTER" prefHeight="233.0" prefWidth="827.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="74.0" prefWidth="828.0" text="Copyright ©2020 All rights reserved | This App is made  with &lt;3 by KingPins" textFill="#f2efef">
+                           <font>
+                              <Font name="Candara Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="131.0" fitWidth="298.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Base/img/Logo_ESPRIT_-_Tunisie.png" />
+                           </image>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </ImageView>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="746.0" prefWidth="769.0">
+               <children>
+                  <Label prefHeight="71.0" prefWidth="402.0" text="          Send  us Feedback" textFill="WHITE" underline="true">
+                     <font>
+                        <Font name="Bookshelf Symbol 7" size="32.0" />
+                     </font>
+                  </Label>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="417.0" prefWidth="769.0" spacing="20.0">
+                     <children>
+                        <JFXTextField fx:id="subject" focusColor="#40a842" prefHeight="43.0" prefWidth="769.0" promptText="Subject" style="-fx-text-inner-color:: red;" unFocusColor="WHITE">
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold Italic" size="24.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextArea fx:id="content" focusColor="#40a849" prefHeight="315.0" prefWidth="748.0" promptText="Content" unFocusColor="WHITE">
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </JFXTextArea>
+                     </children>
+                  </VBox>
+                  <JFXButton fx:id="send" onAction="#SendComplaint" prefHeight="66.0" prefWidth="268.0" ripplerFill="#33ae33" style="-fx-border-color: green;" text="Send" textFill="#fcfcfc">
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Britannic Bold" size="39.0" />
+                     </font>
+                  </JFXButton>
+                  <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="769.0" spacing="40.0">
+                     <children>
+                        <FontAwesomeIcon fill="#f2ebeb" glyphName="GLOBE" onMouseClicked="#website" size="2em" wrappingWidth="26.571428298950195">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </FontAwesomeIcon>
+                        <FontAwesomeIcon fill="#eee9e9" glyphName="FACEBOOK_SQUARE" onMouseClicked="#facebook" size="2em" wrappingWidth="26.571428298950195">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </FontAwesomeIcon>
+                        <FontAwesomeIcon fill="#e4e4e4" glyphName="GITHUB" layoutX="429.0" layoutY="36.0" onMouseClicked="#github" size="2em" wrappingWidth="26.571428298950195">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </FontAwesomeIcon>
+                        <FontAwesomeIcon fill="#fcfcfc" glyphName="LINKEDIN_SQUARE" layoutX="442.0" layoutY="36.0" onMouseClicked="#linkedin" size="2em" wrappingWidth="26.571428298950195">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </FontAwesomeIcon>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children></VBox>
+         </children>
+      </HBox>
+   </children>
 </AnchorPane>

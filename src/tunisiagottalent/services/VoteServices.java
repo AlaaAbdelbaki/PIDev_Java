@@ -10,7 +10,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import tunisiagottalent.Entity.Competition;
 import tunisiagottalent.Entity.User;
@@ -37,9 +41,7 @@ public class VoteServices {
 
         String req = "insert into votes values((select id from video where id=?),(select id from user where id=?))";
         try {
-            System.out.println(v.getId());
-            System.out.println(u.getId());
-            System.out.println(connection);
+            
             pst = connection.prepareStatement(req);
 
             pst.setInt(1, v.getId());
@@ -150,4 +152,73 @@ public class VoteServices {
         }
         return i;
     }
+    public List<video> OrderedByVotes() {
+        String req = "SELECT  video.* ,user.* FROM votes v "
+                + "inner join video  on(video.id=v.video_id) "
+                + "inner join user on(v.user_id=user.id)"
+                + " GROUP by v.video_id "
+                + "ORDER by count(v.video_id)"
+                + " DESC ";
+        List<video> l = new ArrayList<>();
+        try {
+           ste = connection.createStatement();
+            rs = ste.executeQuery(req);
+            while (rs.next()) {
+                l.add(new video(rs.getInt("id"), rs.getString("url"), rs.getString("title"), rs.getTimestamp("publish_date"),
+                        new User(rs.getInt("user.id"),
+                                rs.getString("username"),
+                                rs.getString("email"),
+                                rs.getString("password"),
+                                rs.getString("sexe"),
+                                rs.getString("adresse"),
+                                rs.getString("name"),
+                                rs.getString("first_name"),
+                                rs.getString("telephone_number"),
+                                rs.getString("bio"),
+                                rs.getString("roles"),
+                                rs.getDate("birthday"),
+                                rs.getString("profile_pic"))));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return l;
+    }
+    public List<video> OrderedByNewest() {
+        String req = "SELECT  * FROM video "
+                 
+                + "inner join user on(video.owner=user.id)"
+                
+                + "order by video.publish_date"
+                + " DESC ";
+        List<video> l = new ArrayList<>();
+        try {
+           ste = connection.createStatement();
+            rs = ste.executeQuery(req);
+            while (rs.next()) {
+                l.add(new video(rs.getInt("id"), rs.getString("url"), rs.getString("title"), rs.getTimestamp("publish_date"),
+                        new User(rs.getInt("user.id"),
+                                rs.getString("username"),
+                                rs.getString("email"),
+                                rs.getString("password"),
+                                rs.getString("sexe"),
+                                rs.getString("adresse"),
+                                rs.getString("name"),
+                                rs.getString("first_name"),
+                                rs.getString("telephone_number"),
+                                rs.getString("bio"),
+                                rs.getString("roles"),
+                                rs.getDate("birthday"),
+                                rs.getString("profile_pic"))));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return l;
+    }
+    
 }

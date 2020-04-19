@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: violet;" styleClass="mainFxmlClass" stylesheets="@../Base/popups.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="tunisiagottalent.UI.Events.QrController">
+   <children>
+      <JFXButton layoutX="564.0" layoutY="-1.0" onAction="#close" prefHeight="31.0" prefWidth="36.0" text="[x]" textFill="#f5f4f4" />
+      <VBox fx:id="vbox" alignment="TOP_CENTER" layoutX="-1.0" layoutY="29.0" prefHeight="354.0" prefWidth="600.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="46.0" prefWidth="607.0" text="An Email was sent to you containing your Ticket " textFill="#e4dada">
+               <font>
+                  <Font name="System Bold Italic" size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="602.0" text="Scan The QR Code To Visit our Website" textFill="#d03c3c">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="tunisiagottalent.UI.Complaints.Admin_ComplaintsController">
+   <children>
+      <TableView fx:id="tab" layoutX="179.0" layoutY="113.0" prefHeight="307.0" prefWidth="1396.0">
+         <columns>
+            <TableColumn fx:id="colid" prefWidth="66.0" text="ID" />
+            <TableColumn fx:id="colsubj" prefWidth="350.0" text="Subject" />
+            <TableColumn fx:id="colcont" prefWidth="574.0" text="Content" />
+            <TableColumn fx:id="usernamec" minWidth="0.0" prefWidth="405.0" text="User" />
+         </columns>
+      </TableView>
+      <JFXTextArea fx:id="areaText" focusColor="#40a844" layoutX="341.0" layoutY="446.0" promptText="Write your response" style="-fx-border-color: white;" unFocusColor="#bf1919" />
+      <JFXButton layoutX="957.0" layoutY="620.0" onAction="#respond" prefHeight="45.0" prefWidth="141.0" ripplerFill="#515931" style="-fx-border-color: green;" text="Respond" textFill="#44b54f">
+         <font>
+            <Font name="System Bold Italic" size="17.0" />
+         </font>
+      </JFXButton>
+      <Label layoutX="659.0" layoutY="35.0" prefHeight="39.0" prefWidth="95.0" text="Search" textFill="#fffbfb" />
+      <JFXButton fx:id="deleteR" layoutX="1330.0" layoutY="570.0" onAction="#removeComplaint" prefHeight="47.0" prefWidth="163.0" ripplerFill="#da1717" style="-fx-border-color: red;" text="Delete" textFill="WHITE">
+         <font>
+            <Font size="21.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIcon fill="#d30d0d" glyphName="EXCLAMATION_TRIANGLE" />
+         </graphic>
+      </JFXButton>
+      <JFXTextField fx:id="search" focusColor="#40a849" layoutX="754.0" layoutY="39.0" prefHeight="31.0" prefWidth="474.0" promptText="Search" unFocusColor="#c32222" />
+   </children>
+</AnchorPane>

@@ -74,7 +74,6 @@ public class Admin_ReviewsController implements Initializable {
         ReviewService rs= new ReviewService();
         or = FXCollections.observableArrayList(rs.getAll());
            id.setCellValueFactory(new PropertyValueFactory<>("id"));
-         
         colcat.setCellValueFactory(new PropertyValueFactory<>("category"));
          coltitre.setCellValueFactory(new PropertyValueFactory<>("title"));
         rate.setCellValueFactory(new PropertyValueFactory<>("rating"));

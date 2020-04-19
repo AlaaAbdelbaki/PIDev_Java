@@ -9,14 +9,13 @@ import tunisiagottalent.Entity.Product;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
+
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
-import static javafx.collections.FXCollections.observableArrayList;
-import static javafx.collections.FXCollections.observableList;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,21 +40,19 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import tunisiagottalent.Entity.Cart;
 import tunisiagottalent.services.ProductServices;
-import tunisiagottalent.util.UserSession;
+
 
 
 public class ShopViewController implements Initializable {
  @FXML
     private Pagination pagination;
   private final static int rowsPerPage = 4;
-    @FXML
-    private ScrollPane products_view;
+    
     @FXML
     private Button shopping_cart_button;
     @FXML
     AnchorPane rootPane;
-    @FXML
-    private ImageView product_image;
+   
         @FXML
     private HBox productsHbox;
     
@@ -72,7 +69,7 @@ public class ShopViewController implements Initializable {
     }    
    
     public Node loadproductsforuser(int pageIndex){
-        System.out.println(pageIndex);
+        
         int fromIndex = pageIndex * rowsPerPage;
 	int toIndex = Math.min(fromIndex + rowsPerPage, ListUp.size());
          if(fromIndex>=toIndex) return null;

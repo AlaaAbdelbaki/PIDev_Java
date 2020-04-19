@@ -47,7 +47,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <JFXButton prefHeight="52.0" prefWidth="254.0" styleClass="drawer_buttons" text="    Dashboard" textFill="#f8f8f8">
+                  <JFXButton onAction="#AdminDash" prefHeight="52.0" prefWidth="254.0" styleClass="drawer_buttons" text="    Dashboard" textFill="#f8f8f8">
                      <font>
                         <Font name="System Bold Italic" size="24.0" />
                      </font>

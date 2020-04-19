@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import tunisiagottalent.util.DataSource;
 import tunisiagottalent.Entity.Complaint;
+import tunisiagottalent.Entity.User;
 
 /**
  *
@@ -32,27 +33,14 @@ public class ComplaintService {
         connexion=DataSource.getInstance().getCnx();
     }
     
-    public void insertComplaint(Complaint cp){
-        String req="insert into complaints(subject,content) values("+cp.getSubject()+","+cp.getContent()+")";
-      
-         
-         try {
-             ste=connexion.createStatement();
-              ste.executeUpdate(req);
-         } catch (SQLException ex) {
-             Logger.getLogger(ComplaintService.class.getName()).log(Level.SEVERE, null, ex);
-         }
-                 
-         
-       
     
-    }
      public void insertComplaintPST(Complaint cp ){
-         String req="insert into complaint(subject,content) values(?,?)";
+         String req="insert into complaint(subject,content,user_id) values(?,?,?)";
         try {
             pst=connexion.prepareStatement(req);
             pst.setString(1, cp.getSubject());
             pst.setString(2,cp.getContent());
+            pst.setObject(3,cp.getUser_id().getId());
             pst.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ComplaintService.class.getName()).log(Level.SEVERE, null, ex);
@@ -112,7 +100,19 @@ public class ComplaintService {
              ste=connexion.createStatement();
              rs= ste.executeQuery(req);
              while(rs.next()){
-                 list.add(new Complaint(rs.getInt("id"),rs.getString("subject"),rs.getString("content"),rs.getInt("user_id")));
+                 list.add(new Complaint(rs.getInt("id"),rs.getString("subject"),rs.getString("content"),new User(rs.getInt("user.id"),
+                                rs.getString("username"),
+                                rs.getString("email"),
+                                rs.getString("password"),
+                                rs.getString("sexe"),
+                                rs.getString("adresse"),
+                                rs.getString("name"),
+                                rs.getString("first_name"),
+                                rs.getString("telephone_number"),
+                                rs.getString("bio"),
+                                rs.getString("roles"),
+                                rs.getDate("birthday"),
+                                rs.getString("profile_pic"))));
                
              }
          } catch (SQLException ex) {
@@ -120,7 +120,7 @@ public class ComplaintService {
          }
 return list;
  }
-       public List<Complaint> SearchSub(String subject) {
+      /* public List<Complaint> SearchSub(String subject) {
  String requete = "SELECT * FROM review where subject = '"+subject ;
  List<Complaint> liste= new ArrayList<>();
          try {
@@ -135,5 +135,5 @@ return list;
          }
  
  return liste;
- }
+ }*/
 }

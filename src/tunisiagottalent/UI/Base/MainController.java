@@ -19,7 +19,7 @@ import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 
@@ -38,8 +38,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.web.WebView;
 
 import javafx.stage.Modality;
 
@@ -47,8 +45,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import tunisiagottalent.Entity.Cart;
-import tunisiagottalent.Entity.Product;
-import tunisiagottalent.UI.Competitions.View_CompetitionController;
+
 import tunisiagottalent.UI.User.ProfileController;
 import tunisiagottalent.services.UserServices;
 
@@ -254,6 +251,14 @@ public class MainController {
     @FXML
     private void home(MouseEvent event) {
         content.getChildren().clear();
+        
+            try {
+                AnchorPane p = FXMLLoader.load(getClass().getResource("Homepage.fxml"));
+                content.getChildren().setAll(p);
+
+            } catch (IOException ex) {
+                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         mainAnchor.setStyle("-fx-background-image: url('/tunisiagottalent/UI/Base/img/bg-3.jpg')");
         drawer.close();
 

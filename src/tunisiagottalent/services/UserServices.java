@@ -18,6 +18,9 @@ import tunisiagottalent.util.DataSource;
 import tunisiagottalent.Entity.User;
 import java.util.List;
 import java.util.Random;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
 import org.mindrot.jbcrypt.BCrypt;
 import tunisiagottalent.util.UserSession;
 
@@ -467,4 +470,29 @@ public class UserServices {
 
         return false;
     }
+     public ObservableList<PieChart.Data> pieChartUsers(){
+         
+      String req = "select  COUNT(id) from user where roles='a:1:{i:0;s:13:\"ROLE_TALENTED\";}'";
+      String req2 = "select  COUNT(id) from user where roles='a:0:{}'";
+        ObservableList<PieChart.Data> list;
+        list = FXCollections.observableArrayList();
+        
+        try {
+            ste = cnx.createStatement();
+            rs = ste.executeQuery(req);
+            
+
+            while (rs.next()) {
+                list.add(new PieChart.Data("Talented",rs.getInt(1)));
+            }
+            rs = ste.executeQuery(req2);
+            while (rs.next()) {
+                list.add(new PieChart.Data("Normal Users",rs.getInt(1)));
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+     }
 }

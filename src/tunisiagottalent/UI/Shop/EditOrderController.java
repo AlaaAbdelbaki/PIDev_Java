@@ -5,7 +5,7 @@
  */
 package tunisiagottalent.UI.Shop;
 
-import Entity.Order;
+import tunisiagottalent.Entity.Order;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.Date;

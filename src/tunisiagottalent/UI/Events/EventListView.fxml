@@ -1,31 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Pagination?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.RowConstraints?>
 
 <AnchorPane id="AnchorPane" fx:id="rootpane" prefHeight="750.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.Events.EventListViewController">
     <children>
-      <HBox alignment="CENTER" prefHeight="751.0" prefWidth="1597.0">
-         <children>
-            <VBox alignment="CENTER" prefHeight="615.0" prefWidth="1602.0">
-               <children>
-                  <ScrollPane fx:id="scrollPane" prefHeight="746.0" prefWidth="1600.0" stylesheets="@../Competitions/scroll.css">
-                     <content>
-                        <GridPane fx:id="grid" alignment="CENTER" layoutX="2.0" prefHeight="653.0" prefWidth="1516.0">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </GridPane>
-                     </content>
-                  </ScrollPane>
-               </children>
-            </VBox>
-         </children>
-      </HBox>
+      <Pagination fx:id="pagination" layoutX="279.0" layoutY="158.0" prefHeight="529.0" prefWidth="1185.0" />
+      <GridPane fx:id="grid" alignment="CENTER" layoutX="390.0" layoutY="206.0" prefHeight="299.0" prefWidth="954.0">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+      </GridPane>
     
    </children>
 </AnchorPane>

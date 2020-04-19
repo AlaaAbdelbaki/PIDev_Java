@@ -179,6 +179,18 @@ public class EventService {
         }
 
     }
+    public void BuyTicket(Event E) throws SQLException {
+        E.setNb_places(E.getNb_places()-1);
+        String q = "update event set nb_places=" + E.getNb_places() + " where id =" + E.getId() ;
+        
+        try {
+            ste = cnx.createStatement();
+            ste.executeUpdate(q);
+        } catch (SQLException ex) {
+            Logger.getLogger(EventService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 
     public void cancelEvent(int id) throws SQLException {
         String Q = "DELETE FROM Event WHERE id=" + id;

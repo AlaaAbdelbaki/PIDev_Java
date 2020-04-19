@@ -1,25 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="tunisiagottalent.UI.Base.HomepageController">
+<AnchorPane id="AnchorPane" fx:id="rootpane" prefHeight="750.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.Base.HomepageController">
    <children>
       <Label layoutX="163.0" layoutY="26.0" prefHeight="53.0" prefWidth="233.0" text="Posts:" textFill="WHITE">
          <font>
             <Font name="Century Gothic" size="45.0" />
          </font>
       </Label>
-      <Pagination fx:id="pagination" layoutX="293.0" layoutY="122.0" prefHeight="628.0" prefWidth="1300.0" />
-      <ScrollPane fx:id="scrollvids" layoutX="383.0" layoutY="165.0" prefHeight="512.0" prefWidth="1183.0" stylesheets="@../Shop/scrollbarFancy.css">
+      <JFXComboBox fx:id="orderCombo" focusColor="#40a85a" labelFloat="true" layoutX="1206.0" layoutY="56.0" prefHeight="31.0" prefWidth="183.0" promptText="Order By" unFocusColor="#e4dede" />
+      <Label alignment="TOP_CENTER" layoutX="547.0" layoutY="50.0" prefHeight="86.0" prefWidth="518.0" text="Top 3:" textFill="#fffefe">
+         <font>
+            <Font name="Ebrima Bold" size="39.0" />
+         </font>
+      </Label>
+      <VBox alignment="TOP_RIGHT" layoutY="131.0" prefHeight="120.0" prefWidth="1598.0">
+         <children>
+            <HBox fx:id="vboxranks" alignment="TOP_CENTER" prefHeight="138.0" prefWidth="1598.0" spacing="50.0">
+               <VBox.margin>
+                  <Insets bottom="30.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="30.0" />
+         </padding>
+      </VBox>
+      <ScrollPane fx:id="scrollvids" hbarPolicy="NEVER" layoutX="338.0" layoutY="256.0" pannable="true" prefHeight="500.0" prefWidth="1262.0" stylesheets="@../Shop/scrollbarFancy.css">
          <content>
-            <VBox fx:id="vboxvids" prefHeight="497.0" prefWidth="1206.0" />
+            <VBox fx:id="vboxvids" alignment="CENTER" prefHeight="436.0" prefWidth="1244.0">
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
+            </VBox>
          </content>
       </ScrollPane>
+      <Pagination fx:id="pagination" layoutX="294.0" layoutY="232.0" prefHeight="528.0" prefWidth="1308.0" />
    </children>
 </AnchorPane>

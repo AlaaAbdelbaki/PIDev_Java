@@ -6,9 +6,10 @@
 package tunisiagottalent.services;
 
 
-import Entity.Order;
+import tunisiagottalent.Entity.Order;
 import tunisiagottalent.Entity.Product;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,6 +19,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Series;
 import tunisiagottalent.util.DataSource;
 
 /**
@@ -138,4 +141,23 @@ public class OrderServices {
         }
 
     }
+     public Series LineChartOrders() {
+        String req = "select  order_date,SUM(orders.total) from orders group by order_date order by order_date ;";
+        ObservableList<Order> list;
+        list = FXCollections.observableArrayList();
+        XYChart.Series series = new XYChart.Series();
+        try {
+            ste = cnx.createStatement();
+            rez = ste.executeQuery(req);
+
+            while (rez.next()) {
+                series.getData().add(new XYChart.Data(rez.getDate(1).toString(), rez.getDouble(2)));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return series;
+    }
+     
 }

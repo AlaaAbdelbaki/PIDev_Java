@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1600.0" stylesheets="@Charts.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="tunisiagottalent.UI.Base.AdminHomepageController">
+   <children>
+      <ScrollPane hbarPolicy="NEVER" layoutX="228.0" layoutY="22.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="749.0" prefWidth="1369.0" stylesheets="@../Shop/scrollbarFancy.css" vbarPolicy="ALWAYS">
+         <content>
+            <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="1512.0" prefWidth="1360.0" spacing="20.0">
+               <children>
+                  <HBox prefHeight="520.0" prefWidth="1348.0" styleClass="hbox">
+                     <children>
+                        <LineChart fx:id="lineChartOrders" prefHeight="495.0" prefWidth="734.0" titleSide="RIGHT">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                           <padding>
+                              <Insets right="20.0" top="20.0" />
+                           </padding>
+                        </LineChart>
+                        <VBox alignment="CENTER" prefHeight="479.0" prefWidth="520.0">
+                           <children>
+                              <Label fx:id="totalProfit" prefHeight="88.0" prefWidth="519.0" text="Total Profit:" textFill="#f2f2f2" underline="true">
+                                 <font>
+                                    <Font name="System Bold Italic" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="highestPurchase" layoutX="10.0" layoutY="10.0" prefHeight="88.0" prefWidth="519.0" text="Highest Purchase:" textFill="#f8f8f8" underline="true">
+                                 <font>
+                                    <Font name="System Bold Italic" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="monthlyIncome" layoutX="10.0" layoutY="98.0" prefHeight="88.0" prefWidth="519.0" text="Monthly income:" textFill="WHITE" underline="true">
+                                 <font>
+                                    <Font name="System Bold Italic" size="22.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="30.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="TOP_RIGHT" prefHeight="466.0" prefWidth="1358.0" styleClass="hbox">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="425.0" prefWidth="689.0">
+                           <children>
+                              <Label fx:id="totalUsers" prefHeight="88.0" prefWidth="519.0" text="Total Users:" textFill="#f2f2f2" underline="true">
+                                 <font>
+                                    <Font name="System Bold Italic" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="talentedUsers" layoutX="10.0" layoutY="10.0" prefHeight="88.0" prefWidth="519.0" text="Talented Users:" textFill="#f8f8f8" underline="true">
+                                 <font>
+                                    <Font name="System Bold Italic" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="normalUsers" layoutX="10.0" layoutY="98.0" prefHeight="88.0" prefWidth="519.0" text="Normal Users:" textFill="WHITE" underline="true">
+                                 <font>
+                                    <Font name="System Bold Italic" size="22.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <PieChart fx:id="pieChartUsers" prefHeight="236.0" prefWidth="562.0" titleSide="LEFT" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="370.0" prefWidth="1394.0" styleClass="hbox">
+                     <children>
+                        <BarChart fx:id="BarChartCompetitions" prefHeight="371.0" prefWidth="652.0" titleSide="RIGHT">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </BarChart>
+                        <VBox alignment="CENTER" prefHeight="329.0" prefWidth="602.0">
+                           <children>
+                              <Label fx:id="totalCompetitions" prefHeight="88.0" prefWidth="519.0" text="Total Participations:" textFill="#f2f2f2" underline="true">
+                                 <font>
+                                    <Font name="System Bold Italic" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="highestParticipation" layoutX="10.0" layoutY="10.0" prefHeight="88.0" prefWidth="519.0" text="Highest Participation:" textFill="#f8f8f8" underline="true">
+                                 <font>
+                                    <Font name="System Bold Italic" size="22.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="TOP_RIGHT" prefHeight="410.0" prefWidth="1260.0" styleClass="hbox">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="332.0" prefWidth="644.0" />
+                        <PieChart fx:id="pieChartEvents" prefHeight="332.0" prefWidth="1976.0" titleSide="LEFT" />
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets left="50.0" right="50.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

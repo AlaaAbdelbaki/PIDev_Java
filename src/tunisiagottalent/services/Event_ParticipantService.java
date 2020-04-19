@@ -5,7 +5,7 @@
  */
 package tunisiagottalent.services;
 
-import entities.Event_Participant;
+import tunisiagottalent.Entity.Event_Participant;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
 import tunisiagottalent.util.DataSource;
 
 /**
@@ -39,7 +42,7 @@ public class Event_ParticipantService {
     
     public void addEvent_Participant(Event_Participant ep) 
     {
-        String req ="insert into event_participant (event_id,1,java.time.LocalDate.now()) values("+ep.getEvent_id()+","+ep.getUser_id()+",'"+ep.getParticipation_date()+"')";
+        String req ="insert into event_participant (event_id,user_id,participation_date) values("+ep.getEvent_id()+","+ep.getUser_id()+",'"+ep.getParticipation_date()+"')";
           try{  
             ste=connexion.createStatement();
             ste.executeUpdate(req);
@@ -103,5 +106,26 @@ public class Event_ParticipantService {
             Logger.getLogger(EventService.class.getName()).log(Level.SEVERE, null, ex);
           }    
 }
-    
+    public ObservableList<PieChart.Data> pieChartEvent(){
+         
+      String req = "select  event.title ,COUNT(event_participant.id) from event_participant inner join event on (event.id=event_participant.event_id) group by event_id ";
+      
+        ObservableList<PieChart.Data> list;
+        list = FXCollections.observableArrayList();
+        
+        try {
+            ste = connexion.createStatement();
+            rs = ste.executeQuery(req);
+            
+
+            while (rs.next()) {
+                list.add(new PieChart.Data(rs.getString(1),rs.getInt(2)));
+            }
+           
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+     }
 }

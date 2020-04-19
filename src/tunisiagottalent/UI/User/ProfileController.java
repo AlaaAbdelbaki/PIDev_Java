@@ -6,53 +6,33 @@
 package tunisiagottalent.UI.User;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
-
 import java.util.List;
-import java.util.ResourceBundle;
-import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javafx.animation.FadeTransition;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Alert;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
-
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -61,9 +41,6 @@ import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Callback;
-import javafx.util.Duration;
-import tunisiagottalent.Entity.Product;
 import tunisiagottalent.Entity.Subscription;
 import tunisiagottalent.Entity.User;
 import tunisiagottalent.Entity.video;
@@ -73,7 +50,6 @@ import tunisiagottalent.services.UserServices;
 import tunisiagottalent.services.VideoServices;
 import tunisiagottalent.services.VoteServices;
 import tunisiagottalent.util.UserSession;
-import tunisiagottalent.util.sendEmailSMTP;
 
 /**
  * FXML Controller class
@@ -154,8 +130,9 @@ public class ProfileController {
         Rectangle clip = new Rectangle(
                 profilePic.getFitWidth(), profilePic.getFitHeight()
         );
-        clip.setArcWidth(200);
-        clip.setArcHeight(200);
+        clip.setArcWidth(300);
+        clip.setArcHeight(300);
+        profilePic.setEffect(new DropShadow(20, Color.BLACK));
         profilePic.setClip(clip);
 
         // snapshot the rounded image.
@@ -163,15 +140,15 @@ public class ProfileController {
         parameters.setFill(Color.TRANSPARENT);
         WritableImage image = profilePic.snapshot(parameters, null);
 
-        // remove the rounding clip so that our effect can show through.
-        // profilePic.setClip(null);
+         //remove the rounding clip so that our effect can show through.
+         //profilePic.setClip(null);
         // apply a shadow effect.
-        //  profilePic.setEffect(new DropShadow(20, Color.BLACK));
+          
 //        System.out.println(user);
         username_profile.setText(user.getUsername());
         
         profilePic.setImage(new Image("http://127.0.0.1:8000/assets/uploads/" + user.getProfilePic()));
-        if (us.getUser(user.getUsername()).getName() == null || us.getUser(user.getUsername()).getLastName() == null) {
+        if ((us.getUser(user.getUsername()).getName() == null || us.getUser(user.getUsername()).getLastName() == null) &&(s.getU().getUsername().equals(user.getUsername()))) {
             nameLastName.setText("Complete your profile !!");
         } else {
             nameLastName.setText(us.getUser(user.getUsername()).getName() + " " + us.getUser(user.getUsername()).getLastName());

@@ -5,7 +5,7 @@
  */
 package tunisiagottalent.UI.Shop;
 
-import Entity.Order;
+import tunisiagottalent.Entity.Order;
 import tunisiagottalent.Entity.Product;
 
 import com.itextpdf.text.BadElementException;
@@ -323,9 +323,7 @@ public class ShoppingCartController implements Initializable {
                 if(result.isPresent() && result.get() == ButtonType.OK){
                         try {
                             testpdf(Cart.instance.getC());    
-                        } catch (DocumentException ex) {
-                            Logger.getLogger(ShoppingCartController.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (IOException ex) {
+                        } catch (DocumentException | IOException ex) {
                             Logger.getLogger(ShoppingCartController.class.getName()).log(Level.SEVERE, null, ex);
                         }
                 }
@@ -385,7 +383,7 @@ public class ShoppingCartController implements Initializable {
         document.add(blank2);
         document.add(thankyouforyourorder);
         document.add(datailsthankyou);
-        document.add(new Image(img) {});;
+        document.add(new Image(img) {});
         document.add(blank1);
         document.add(blank2);
         document.add(blank1);

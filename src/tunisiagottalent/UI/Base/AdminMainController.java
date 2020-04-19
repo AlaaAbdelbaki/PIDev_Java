@@ -82,6 +82,14 @@ public class AdminMainController implements Initializable {
             }
 
         });
+        
+        try {
+            AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/Base/AdminHomepage.fxml"));
+            content.getChildren().setAll(p);
+            //drawer.close();
+        } catch (IOException ex) {
+            Logger.getLogger(AdminMainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
@@ -201,7 +209,7 @@ public class AdminMainController implements Initializable {
     @FXML
     void Complaints(ActionEvent event) {
         try {
-            AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/Complaints/adminDashboard.fxml"));
+            AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/Complaints/Admin_Complaints.fxml"));
             content.getChildren().setAll(p);
             drawer.close();
 
@@ -233,6 +241,17 @@ public class AdminMainController implements Initializable {
 
         } catch (IOException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void AdminDash(ActionEvent event) {
+        try {
+            AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/Base/AdminHomepage.fxml"));
+            content.getChildren().setAll(p);
+            //drawer.close();
+        } catch (IOException ex) {
+            Logger.getLogger(AdminMainController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

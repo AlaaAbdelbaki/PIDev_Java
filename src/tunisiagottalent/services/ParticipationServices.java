@@ -5,14 +5,21 @@ import tunisiagottalent.Entity.video;
 import tunisiagottalent.util.DataSource;
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import tunisiagottalent.Entity.Competition;
+import tunisiagottalent.Entity.Order;
 import tunisiagottalent.Entity.User;
 
 public class ParticipationServices {
-
-    private Connection connection;
+        int p=0;
+        int ma=0;
+        String s;
+    private final Connection connection;
     private Statement ste;
     private PreparedStatement pst;
     private ResultSet rs;
@@ -190,7 +197,7 @@ public class ParticipationServices {
     }
 
     public ObservableList<video> getAllOrdered(Competition c) {
-        String req = "select * from video inner join user on(video.owner=user.id) where video.id in(select video_id from competition_participant where competition_id=?) order by video.publish_date";
+        String req = "select * from video inner join user on(video.owner=user.id) where video.id in(select video_id from competition_participant where competition_id=?) order by video.publish_date DESC";
         ObservableList<video> list = FXCollections.observableArrayList();
         try {
             pst = connection.prepareStatement(req);
@@ -220,4 +227,34 @@ public class ParticipationServices {
         }
         return list;
     }
+    
+     public XYChart.Series LineChartComp() {
+        String req = "select  competition.subject ,COUNT(competition_participant.id) from competition_participant inner join competition on (competition_participant.competition_id=competition.id) group by competition_id  ;";
+        ObservableList<Order> list;
+        list = FXCollections.observableArrayList();
+        XYChart.Series series = new XYChart.Series();
+        try {
+            ste = connection.createStatement();
+            rs = ste.executeQuery(req);
+
+            while (rs.next()) {
+                series.getData().add(new XYChart.Data(rs.getString(1), rs.getInt(2)));
+                p=p+rs.getInt(2);
+                if(ma<rs.getInt(2)) s=rs.getString(1);
+                ma=Math.max(ma,rs.getInt(2));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return series;
+    }
+     public ObservableList<Object> getp(){
+     
+     ObservableList l =FXCollections.observableArrayList();
+     l.add(p);l.add(ma);l.add(s);
+     //this is the dumbest thing i've ever written //too lazy to look for a fix
+     return l;
+     }
+      
 }

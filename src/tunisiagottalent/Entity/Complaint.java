@@ -15,36 +15,27 @@ public class Complaint {
     private int id;
     private String subject;
     private String content;
-    private int user_id;
+    private User user_id;
 
  public Complaint() {
     }
 
-    public Complaint(int id, String subject, String content, int user_id) {
+    public Complaint(int id, String subject, String content, User user_id) {
         this.id = id;
         this.subject = subject;
         this.content = content;
         this.user_id = user_id;
     }
 
-    public Complaint(int id, String subject, String content) {
-        this.id = id;
+    
+
+    public Complaint(String subject, String content,User u) {
         this.subject = subject;
         this.content = content;
+        this.user_id = u;
     }
 
-    public Complaint(String subject, String content) {
-        this.subject = subject;
-        this.content = content;
-    }
-
-    public Complaint(ChoiceBox Subject, String Contentc) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public Complaint(int aInt, String string, int aInt0, String string0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+  
 
     public int getId() {
         return id;
@@ -54,11 +45,11 @@ public class Complaint {
         this.id = id;
     }
 
-    public int getUser_id() {
+    public User getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
+    public void setUser_id(User user_id) {
         this.user_id = user_id;
     }
 

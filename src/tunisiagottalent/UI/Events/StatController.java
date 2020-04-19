@@ -16,6 +16,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import tunisiagottalent.services.EventService;
@@ -56,5 +58,5 @@ public class StatController implements Initializable {
         Stage stage = (Stage) rootpane.getScene().getWindow();
         stage.close();
     }
-
+ 
 }

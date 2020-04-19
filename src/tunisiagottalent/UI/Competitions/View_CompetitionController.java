@@ -8,15 +8,11 @@ package tunisiagottalent.UI.Competitions;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.HashMap;
+
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.SortedMap;
-import java.util.TreeMap;
-import java.util.concurrent.ConcurrentSkipListMap;
+
 import java.util.concurrent.TimeUnit;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -34,11 +30,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
+
 import javafx.scene.web.WebView;
 import javafx.util.Duration;
 import tunisiagottalent.Entity.Competition;
-import tunisiagottalent.Entity.competition_participant;
+
 import tunisiagottalent.Entity.video;
 import tunisiagottalent.services.ParticipationServices;
 import tunisiagottalent.services.VoteServices;
@@ -76,7 +72,7 @@ public class View_CompetitionController {
 
     public void initialize() {
         Platform.runLater(() -> {
-           
+
             comp.setText(c.getSubject());
 
             ObservableList<video> tabs = ps.getAll(c);
@@ -86,23 +82,23 @@ public class View_CompetitionController {
                 time.setText("Competition is Over");
 
             } else {
-                 oneSecond = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
-                Timestamp t = new Timestamp(System.currentTimeMillis());
-                long counter = getDateDiff(t, c.getCompetition_end_date(), TimeUnit.SECONDS);
-                  
-                @Override
-                public void handle(ActionEvent event) {
+                oneSecond = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+                    Timestamp t = new Timestamp(System.currentTimeMillis());
+                    long counter = getDateDiff(t, c.getCompetition_end_date(), TimeUnit.SECONDS);
 
-                    long h = TimeUnit.SECONDS.toHours(counter);
-                    long m = TimeUnit.SECONDS.toMinutes(counter - h * 3600);
-                    long s = TimeUnit.SECONDS.toSeconds(counter - h * 3600 - m * 60);
-                    counter = counter - 1;
-                    time.setText(String.format("%02d:%02d:%02d", h,m,s));
+                    @Override
+                    public void handle(ActionEvent event) {
 
-                }
-            }));
-            oneSecond.setCycleCount(60);
-            oneSecond.play();
+                        long h = TimeUnit.SECONDS.toHours(counter);
+                        long m = TimeUnit.SECONDS.toMinutes(counter - h * 3600);
+                        long s = TimeUnit.SECONDS.toSeconds(counter - h * 3600 - m * 60);
+                        counter = counter - 1;
+                        time.setText(String.format("%02d:%02d:%02d", h, m, s));
+
+                    }
+                }));
+                oneSecond.setCycleCount(60);
+                oneSecond.play();
                 String order[]
                         = {"Votes", "Newest"};
                 orderCombo.setItems(FXCollections.observableArrayList(order));
@@ -201,7 +197,7 @@ public class View_CompetitionController {
                     alert.setContentText("You will lose all your votes !");
 
                     alert.showAndWait();
-                       ps.delete(vid);
+                    ps.delete(vid);
                     video_grid.getChildren().removeAll(preview, details);
                     video_grid.getChildren().removeIf(node -> GridPane.getRowIndex(node) == tabs.indexOf(vid));
                 }
@@ -255,10 +251,8 @@ public class View_CompetitionController {
                 video_grid.getChildren().clear();
                 NotOver(ordered);
 
-            }
-            else if(orderCombo.getValue().equals("Newest"))
-            {
-              video_grid.getChildren().clear();
+            } else if (orderCombo.getValue().equals("Newest")) {
+                video_grid.getChildren().clear();
                 NotOver(ps.getAllOrdered(c));
             }
         }

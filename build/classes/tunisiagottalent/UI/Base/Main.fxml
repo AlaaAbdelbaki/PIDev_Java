@@ -71,7 +71,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <JFXButton prefHeight="57.0" prefWidth="247.0" text="Home" textFill="#fcfcfc">
+                  <JFXButton onMouseClicked="#home" prefHeight="57.0" prefWidth="247.0" text="Home" textFill="#fcfcfc">
                      <graphic>
                         <FontAwesomeIcon fill="#f2f2f2" glyphName="HOME" />
                      </graphic>
