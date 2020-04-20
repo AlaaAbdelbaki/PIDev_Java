@@ -157,7 +157,6 @@ Task copyWorker;
                 }
             }
 
-            System.out.println("Success...");
 
         } catch (WriterException ex) {
             Logger.getLogger(SelectedEventViewController.class.getName()).log(Level.SEVERE, null, ex);
@@ -175,11 +174,17 @@ Task copyWorker;
         EventService es = new EventService();
         es.BuyTicket(E);
         TicketPDF(iTextImage);
-            copyWorker = createWorker();
-        progress.progressProperty().unbind();
-        progress.progressProperty().bind(copyWorker.progressProperty());
-        new Thread(copyWorker).start();
-         
+      
+          new Thread( ()->{
+                         try {
+            
+                sendEmailSMTP.SendTicket(UserSession.instance.getU().getUsername(), UserSession.instance.getU().getEmail());
+            } catch (MessagingException ex) {
+                Logger.getLogger(SelectedEventViewController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(SelectedEventViewController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                    }).start();
         
         
        
@@ -210,28 +215,7 @@ Task copyWorker;
     }
 
     
-     public Task createWorker() {
-        return new Task() {
-            @Override
-            protected Object call() throws Exception {
-                 for (int i = 0; i < 10; i++) {
-                    Thread.sleep(2000);
-                    updateMessage("2000 milliseconds");
-                    updateProgress(i + 1, 10);
-                }
-               
-                try {
-            
-                sendEmailSMTP.SendTicket(UserSession.instance.getU().getUsername(), UserSession.instance.getU().getEmail());
-            } catch (MessagingException ex) {
-                Logger.getLogger(SelectedEventViewController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(SelectedEventViewController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-                return true;
-            }
-        };
-    }
+   
     public void TicketPDF(com.itextpdf.text.Image qr) throws FileNotFoundException, DocumentException, BadElementException, IOException {
 
         Document document = new Document();

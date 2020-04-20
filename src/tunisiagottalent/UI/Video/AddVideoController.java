@@ -6,11 +6,16 @@
 package tunisiagottalent.UI.Video;
 
 
+import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import tunisiagottalent.Entity.video;
 import tunisiagottalent.services.UserServices;
@@ -49,7 +54,9 @@ public class AddVideoController {
         if (vs.AddVideo(v)) {
              Stage stage = (Stage) parentContainer.getScene().getWindow();
               stage.close();
-              parentContainer.getChildren().setAll(stage.getOwner().getScene().getRoot());
+              
+        
+        
             System.out.println("Video added successfully !");
           
         }

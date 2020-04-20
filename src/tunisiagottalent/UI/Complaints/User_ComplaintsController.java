@@ -60,8 +60,8 @@ public class User_ComplaintsController implements Initializable, MapComponentIni
     public void initialize(URL url, ResourceBundle rb) {
 
         googlemapview.addMapInializedListener((MapComponentInitializedListener) this);
-        subject.setStyle("-fx-text-fill: white;-fx-prompt-text-fill: white;");
-        content.setStyle("-fx-text-fill: white;-fx-prompt-text-fill: white;");
+        subject.setStyle("-fx-text-fill: white;-fx-prompt-text-fill: Green;");
+        content.setStyle("-fx-text-fill: white;-fx-prompt-text-fill: Black;");
     }
 
     
@@ -88,7 +88,7 @@ public class User_ComplaintsController implements Initializable, MapComponentIni
            sc.insertComplaintPST(c);       
          Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Notification");
-        alert.setHeaderText("Complaint added with succes .It will be processed and we will reply as soon as possible. ");
+        alert.setHeaderText("Complaint added with success .It will be processed and we will reply as soon as possible. ");
         alert.showAndWait();
         subject.setText(null);
         content.setText(null);

@@ -20,8 +20,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javax.mail.MessagingException;
 import tunisiagottalent.Entity.User;
 import tunisiagottalent.UI.Base.MainController;
 import tunisiagottalent.services.UserServices;
@@ -45,8 +47,14 @@ public class ForgotPasswordController {
         UserServices us = new UserServices();
         User user = us.getUser(usernameInput.getText());
         String token = us.tokenGenerator();
-       
-        sendEmailSMTP.changePasswordEmail(user.getUsername(), user.getEmail(), token);
+        new Thread( ()->{
+            try {
+                sendEmailSMTP.changePasswordEmail(user.getUsername(), user.getEmail(), token);
+            } catch (MessagingException ex) {
+                Logger.getLogger(ForgotPasswordController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                    }).start();
+        
         UserSession s = UserSession.getInstance(us.getUser(usernameInput.getText()));
          try {
               FXMLLoader loader = new FXMLLoader(getClass().getResource("/tunisiagottalent/UI/User/checkToken.fxml"));
@@ -54,7 +62,9 @@ public class ForgotPasswordController {
             
              CheckTokenController controller = loader.<CheckTokenController>getController();
                         controller.setToken(token);
-            parentContainer.getChildren().setAll(root);
+                        parentContainer.getScene().setFill(Color.TRANSPARENT);
+            parentContainer.getScene().setRoot(root);
+            
           
             
         } catch (IOException ex) {

@@ -7,6 +7,7 @@ package tunisiagottalent.UI.Competitions;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXToggleButton;
 import java.sql.Timestamp;
 
 import java.util.Iterator;
@@ -23,20 +24,28 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.Pagination;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import javafx.scene.web.WebView;
 import javafx.util.Duration;
+import org.controlsfx.glyphfont.FontAwesome;
 import tunisiagottalent.Entity.Competition;
 
 import tunisiagottalent.Entity.video;
 import tunisiagottalent.services.ParticipationServices;
+import tunisiagottalent.services.VideoServices;
 import tunisiagottalent.services.VoteServices;
 import tunisiagottalent.util.UserSession;
 
@@ -56,8 +65,7 @@ public class View_CompetitionController {
     private Competition c;
     @FXML
     private AnchorPane video_list;
-    @FXML
-    private GridPane video_grid;
+
     @FXML
     private Label comp;
     @FXML
@@ -66,49 +74,80 @@ public class View_CompetitionController {
     private Label ranks;
     @FXML
     private JFXComboBox<String> orderCombo;
-    ObservableList<video> ordered;
-    VoteServices vs = new VoteServices();
+
+
+    private final static int rowsPerPage = 3;
+    VoteServices voteServices = new VoteServices();
+    VideoServices videoServices = new VideoServices();
     ParticipationServices ps = new ParticipationServices();
+    @FXML
+    private VBox vboxvids;
+    @FXML
+    private Pagination pagination;
+    ObservableList<video> tabs ;
 
     public void initialize() {
+        
         Platform.runLater(() -> {
-
+            tabs = ps.getAll(c);
             comp.setText(c.getSubject());
 
-            ObservableList<video> tabs = ps.getAll(c);
-
-            updateRanks();
             if (c.getCompetition_end_date().before(new Timestamp(System.currentTimeMillis()))) {
                 time.setText("Competition is Over");
 
             } else {
-                oneSecond = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
-                    Timestamp t = new Timestamp(System.currentTimeMillis());
-                    long counter = getDateDiff(t, c.getCompetition_end_date(), TimeUnit.SECONDS);
+                updateRanks();
 
-                    @Override
-                    public void handle(ActionEvent event) {
-
-                        long h = TimeUnit.SECONDS.toHours(counter);
-                        long m = TimeUnit.SECONDS.toMinutes(counter - h * 3600);
-                        long s = TimeUnit.SECONDS.toSeconds(counter - h * 3600 - m * 60);
-                        counter = counter - 1;
-                        time.setText(String.format("%02d:%02d:%02d", h, m, s));
-
-                    }
-                }));
-                oneSecond.setCycleCount(60);
-                oneSecond.play();
+                timer();
                 String order[]
                         = {"Votes", "Newest"};
                 orderCombo.setItems(FXCollections.observableArrayList(order));
 
-                orderCombo.setOnAction(event);
-                NotOver(tabs);
+                orderCombo.setOnAction((e) -> {
+                    if (orderCombo.getValue().equals("Votes")) {
+
+                        ObservableList<video> ordered = FXCollections.observableArrayList(voteServices.ranks(c).keySet());
+                        ps.getAll(c).forEach((vid) -> {
+                            if (voteServices.getVotes(vid) == 0) {
+                                ordered.add(vid);
+                            }
+                        });
+                        vboxvids.getChildren().clear();
+                        tabs = ordered;
+                        pagination.setPageFactory(this::NotOver);
+
+                    } else if (orderCombo.getValue().equals("Newest")) {
+                        vboxvids.getChildren().clear();
+                        tabs =ps.getAllOrdered(c);
+                        pagination.setPageFactory(this::NotOver);
+                    }
+
+                });
+                pagination.setPageFactory(this::NotOver);
             }
 
         });
 
+    }
+
+    public void timer() {
+        oneSecond = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+            Timestamp t = new Timestamp(System.currentTimeMillis());
+            long counter = getDateDiff(t, c.getCompetition_end_date(), TimeUnit.SECONDS);
+
+            @Override
+            public void handle(ActionEvent event) {
+
+                long h = TimeUnit.SECONDS.toHours(counter);
+                long m = TimeUnit.SECONDS.toMinutes(counter - h * 3600);
+                long s = TimeUnit.SECONDS.toSeconds(counter - h * 3600 - m * 60);
+                counter = counter - 1;
+                time.setText(String.format("%02d:%02d:%02d", h, m, s));
+
+            }
+        }));
+        oneSecond.setCycleCount(60);
+        oneSecond.play();
     }
 
     public static long getDateDiff(Timestamp oldTs, Timestamp newTs, TimeUnit timeUnit) {
@@ -116,13 +155,18 @@ public class View_CompetitionController {
         return timeUnit.convert(diffInMS, TimeUnit.MILLISECONDS);
     }
 
-    public void NotOver(ObservableList<video> tabs) {
+    public Node NotOver(Integer pageIndex) {
+        int fromIndex = pageIndex * rowsPerPage;
+        int toIndex = Math.min(fromIndex + rowsPerPage, tabs.size());
+        if (fromIndex >= toIndex) {
+            return null;
+        }
+        ObservableList<video> min = FXCollections.observableArrayList(tabs.subList(fromIndex, toIndex));
 
-        ParticipationServices ps = new ParticipationServices();
-        VoteServices vs = new VoteServices();
-        tabs.forEach((vid) -> {
-
-            GridPane details = new GridPane();
+        vboxvids.getChildren().clear();
+        min.forEach((vid) -> {
+            HBox video_grid = new HBox();
+            VBox details = new VBox();
 
             Label Title = new Label(vid.getTitle());
             Title.setTextFill(javafx.scene.paint.Color.WHITE);
@@ -132,7 +176,7 @@ public class View_CompetitionController {
             user.setTextFill(javafx.scene.paint.Color.WHITE);
             user.setFont(Font.font("Cambria", 18));
 
-            Label VoteNum = new Label(Integer.toString(vs.getVotes(vid)));
+            Label VoteNum = new Label(Integer.toString(voteServices.getVotes(vid)));
             VoteNum.setTextFill(javafx.scene.paint.Color.WHITE);
             VoteNum.setFont(Font.font("Cambria", 24));
 
@@ -141,86 +185,90 @@ public class View_CompetitionController {
             pubDate.setFont(Font.font("Cambria", 16));
 
             JFXButton Delete = new JFXButton("Delete");
-            JFXButton Vote = new JFXButton("Vote");
-            JFXButton Unvote = new JFXButton("Unvote");
-
+            Delete.setVisible(false);
             Delete.resize(150, 250);
-            Vote.resize(150, 250);
-            Unvote.resize(150, 250);
-
             Delete.setStyle("-fx-text-fill: white;-fx-font-size:18px;-fx-background-color:#49111C");
-            Vote.setStyle("-fx-text-fill: white;-fx-font-size:18px;-fx-background-color:#ACEB98");
-            Unvote.setStyle("-fx-text-fill: white;-fx-font-size:18px;-fx-background-color:#92140C");
 
             WebView preview = new WebView();
             preview.getEngine().load(vid.getUrl());
+            Label labelheart = new Label();
+            Label labelunheart = new Label();
+            labelheart.setGraphic(new FontAwesome().create(FontAwesome.Glyph.HEART).color(Color.RED).size(20));
+            labelunheart.setGraphic(new FontAwesome().create(FontAwesome.Glyph.HEART).color(Color.WHITE).size(20));
+            VoteNum.setGraphic(new FontAwesome().create(FontAwesome.Glyph.THUMBS_UP).color(Color.GREEN).size(20));
+            VoteNum.setAlignment(Pos.CENTER);
+            JFXToggleButton Voting = new JFXToggleButton();
+            Voting.setToggleLineColor(Color.RED);
+            Voting.setToggleColor(Color.RED);
+            HBox hboxvoting = new HBox();
+
+            hboxvoting.setAlignment(Pos.CENTER);
 
             UserSession s = UserSession.instance;
             if (s.getU().getUsername().equals(vid.getOwner().getUsername())) {
 
-                details.add(Delete, 2, 3);
+                Delete.setVisible(true);
             }
-            if (vs.find(vid, s.getU())) {
-                Unvote.setVisible(true);
-                Vote.setVisible(false);
+            if (voteServices.find(vid, s.getU())) {
+                Voting.setSelected(true);
+                labelheart.setVisible(true);
+                labelunheart.setVisible(false);
             } else {
-                Unvote.setVisible(false);
-                Vote.setVisible(true);
+                Voting.setSelected(false);
+                labelunheart.setVisible(true);
+                labelheart.setVisible(false);
             }
-            Vote.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    vs.Add(s.getU(), vid);
-                    Unvote.setVisible(true);
-                    Vote.setVisible(false);
-                    VoteNum.setText(Integer.toString(Integer.parseInt(VoteNum.getText()) + 1));
-                    updateRanks();
 
-                }
-            });
-            Unvote.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    vs.delete(vid, s.getU());
-                    Unvote.setVisible(false);
-                    Vote.setVisible(true);
-                    VoteNum.setText(Integer.toString(Integer.parseInt(VoteNum.getText()) - 1));
-                    updateRanks();
-                }
-            });
-            Delete.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Delete Participation");
-                    alert.setHeaderText("Are you sure ?");
-                    alert.setContentText("You will lose all your votes !");
+            Voting.setOnAction((e) -> {
+                if (Voting.isSelected()) {
 
-                    alert.showAndWait();
-                    ps.delete(vid);
-                    video_grid.getChildren().removeAll(preview, details);
-                    video_grid.getChildren().removeIf(node -> GridPane.getRowIndex(node) == tabs.indexOf(vid));
+                    voteServices.Add(s.getU(), vid);
+
+                    Platform.runLater(() -> {
+                        VoteNum.setText(Integer.toString(Integer.parseInt(VoteNum.getText()) + 1));
+                        labelunheart.setVisible(false);
+                        labelheart.setVisible(true);
+                        updateRanks();
+                    });
+
+                } else {
+
+                    voteServices.delete(vid, s.getU());
+
+                    Platform.runLater(() -> {
+                        labelheart.setVisible(false);
+                        labelunheart.setVisible(true);
+                        VoteNum.setText(Integer.toString(Integer.parseInt(VoteNum.getText()) - 1));
+                        updateRanks();
+                    });
                 }
             });
-            details.add(Unvote, 3, 3);
-            details.add(VoteNum, 4, 4);
-            details.add(Vote, 3, 3);
-            details.add(Title, 1, 0);
-            details.add(user, 1, 1);
-            details.add(pubDate, 1, 2);
+            Delete.setOnAction((ActionEvent event1) -> {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Delete Participation");
+                alert.setHeaderText("Are you sure ?");
+                alert.setContentText("You will lose all your votes !");
+
+                alert.showAndWait();
+                ps.delete(vid);
+                video_grid.getChildren().removeAll(preview, details);
+                video_grid.getChildren().removeIf(node -> GridPane.getRowIndex(node) == tabs.indexOf(vid));
+            });
+
             details.setStyle("-fx-background-color: #0c0527");
             details.setPadding(new Insets(15, 15, 15, 15));
-            RowConstraints row = new RowConstraints(200);
-
-            video_grid.getRowConstraints().add(row);
-
-            video_grid.addRow(tabs.indexOf(vid), preview, details);
-
+            preview.setPrefHeight(300);
+            details.setSpacing(30);
+            details.setPrefWidth(250);
+            vboxvids.setSpacing(25);
+            hboxvoting.getChildren().addAll(labelunheart, Voting, labelheart);
+            details.getChildren().addAll(Title, pubDate, Delete, hboxvoting, VoteNum);
+            video_grid.getChildren().addAll(preview, details);
+            vboxvids.getChildren().addAll(video_grid);
+            scroll.setContent(vboxvids);
         });
-        video_grid.setPadding(new Insets(10, 10, 10, 10));
 
-        video_grid.setVgap(20);
-
+        return scroll;
     }
 
     public void updateRanks() {
@@ -237,26 +285,6 @@ public class View_CompetitionController {
         ranks.setText(rank);
 
     }
-    EventHandler<ActionEvent> event
-            = new EventHandler<ActionEvent>() {
-        public void handle(ActionEvent e) {
-            if (orderCombo.getValue().equals("Votes")) {
-
-                ordered = FXCollections.observableArrayList(vs.ranks(c).keySet());
-                ps.getAll(c).forEach((vid) -> {
-                    if (vs.getVotes(vid) == 0) {
-                        ordered.add(vid);
-                    }
-                });
-                video_grid.getChildren().clear();
-                NotOver(ordered);
-
-            } else if (orderCombo.getValue().equals("Newest")) {
-                video_grid.getChildren().clear();
-                NotOver(ps.getAllOrdered(c));
-            }
-        }
-    };
 
     public void setCompetition(Competition c) {
         this.c = c;

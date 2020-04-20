@@ -21,9 +21,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
@@ -63,7 +65,7 @@ public class ShopViewController implements Initializable {
        
      @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        shopping_cart_button.setCursor(Cursor.HAND);
         pagination.setPageFactory(this::loadproductsforuser);
         
     }    
@@ -99,6 +101,8 @@ public class ShopViewController implements Initializable {
             hbox.setAlignment(Pos.CENTER);
             Button viewitembutton = new Button("View Item");
             Button addtocartbutton = new Button("Add To Cart");
+            viewitembutton.setCursor(Cursor.HAND);
+            addtocartbutton.setCursor(Cursor.HAND);
             
             if(p.getStock()>0){
                 stock.setText("    In Stock");
@@ -152,6 +156,15 @@ public class ShopViewController implements Initializable {
                         //sc.addItem(p);
                         Cart.instance.AddProduct(p);
                 }
+                Alert alert=new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Shopping Cart");
+        alert.setHeaderText("Item Added Succesfully");
+        alert.setContentText("Go Back To The Shop");
+        ImageView icon=new ImageView("/tunisiagottalent/UI/Base/img/icon.png");
+        icon.setFitHeight(100);
+        icon.setFitWidth(100);
+        alert.setGraphic(icon);
+        alert.showAndWait();
             });
             hboxstock.getChildren().addAll(title,stock);
             hbox.getChildren().addAll(viewitembutton,addtocartbutton);

@@ -20,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import tunisiagottalent.UI.Base.MainController;
@@ -56,7 +57,9 @@ public class CheckTokenController {
 
            try {
             AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/User/updatePassword.fxml"));
-            parentContainer.getChildren().setAll(p);
+            parentContainer.getScene().setFill(Color.TRANSPARENT);
+            parentContainer.getScene().setRoot(p);
+           
           
             
         } catch (IOException ex) {

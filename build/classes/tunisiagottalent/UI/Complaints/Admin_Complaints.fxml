@@ -10,10 +10,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="tunisiagottalent.UI.Complaints.Admin_ComplaintsController">
+<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.Complaints.Admin_ComplaintsController">
    <children>
-      <TableView fx:id="tab" layoutX="179.0" layoutY="113.0" prefHeight="307.0" prefWidth="1396.0">
+      <TableView fx:id="tab" layoutX="179.0" layoutY="113.0" prefHeight="307.0" prefWidth="1396.0" stylesheets="@../Shop/shop.css">
          <columns>
             <TableColumn fx:id="colid" prefWidth="66.0" text="ID" />
             <TableColumn fx:id="colsubj" prefWidth="350.0" text="Subject" />

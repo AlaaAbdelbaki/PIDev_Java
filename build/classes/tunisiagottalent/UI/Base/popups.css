@@ -12,16 +12,30 @@ and open the template in the editor.
 .mainFxmlClass {
   
     -fx-background-radius: 25 25 25 25;
-    -fx-border-radius: 0 0 18 18;
-    -fx-background-color: black;
+    -fx-border-radius: 25 25 25 25;
+    -fx-border-color: white;
+    -fx-background-color:  #1a2035;
+    -fx-border-style:solid ;
+    -fx-border-width:2;
   
 }
 .textfield {
   
-    -fx-border-style:solid inside;
+    -fx-border-style:solid ;
     -fx-border-width:2;
     -fx-border-insets:2;
      -fx-background-color: white;
     
+  
+}
+.UsermainFxmlClass {
+  
+    -fx-background-radius: 25 25 25 25;
+    -fx-shape:"M0 13 C0 5 5 0 13 0 L86 0 C94 0 99 5 99 13 L99 86 C99 94 94 99 86 99 L13 99 C5 99 0 94 0 86Z";
+    -fx-border-radius: 25 25 25 25;
+    -fx-border-color: white;
+    -fx-background-image: url("img/bg-7.jpg");
+    -fx-border-style:solid ;
+    -fx-border-width:2;
   
 }

@@ -108,7 +108,7 @@ public class VideoServices {
             System.out.println("Video exitst !");
             return false;
         } else {
-            String sql = "insert into video(url,title,publish_date,owner) values('" + v.getUrl() + "','" + v.getTitle() + "','" + v.getPublish_date() + "','" + v.getOwner() + "')";
+            String sql = "insert into video(url,title,publish_date,owner) values('" + v.getUrl() + "','" + v.getTitle() + "','" + v.getPublish_date() + "','" + v.getOwner().getId() + "')";
             try {
                 ste = cnx.createStatement();
                 ste.executeUpdate(sql);
@@ -120,5 +120,17 @@ public class VideoServices {
         }
 
         return false;
+    }
+     public void delete(video c){
+        String req="delete from video where id=?";
+        try {
+            pst=cnx.prepareStatement(req);
+            pst.setInt(1,c.getId());
+
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }

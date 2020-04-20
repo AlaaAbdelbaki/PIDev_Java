@@ -62,12 +62,7 @@
          </font>
       </Label>
       <FontAwesomeIcon fill="WHITE" glyphName="GROUP" layoutX="357.0" layoutY="92.0" wrappingWidth="21.00000762939453" />
-      <JFXButton fx:id="btn_add_vid" layoutX="911.0" layoutY="33.0" onAction="#addVideo" prefHeight="31.0" prefWidth="122.0" ripplerFill="#202f52" text="Add Video" textFill="#fcfcfc" underline="true">
-         <graphic>
-            <FontAwesomeIcon fill="WHITE" glyphName="PLUS_CIRCLE" />
-         </graphic>
-      </JFXButton>
-      <JFXButton fx:id="btn_edit" layoutX="1078.0" layoutY="33.0" onAction="#editProfile" prefHeight="31.0" prefWidth="128.0" ripplerFill="#cdcd23" text="Edit Profile" textFill="WHITE" underline="true">
+      <JFXButton fx:id="btn_edit" layoutX="1078.0" layoutY="33.0" onAction="#editProfile" prefHeight="31.0" prefWidth="128.0" ripplerFill="#cdcd23" style="-fx-border-color: white;" text="Edit Profile" textFill="WHITE" underline="true">
          <graphic>
             <FontAwesomeIcon fill="#e3e5e8" glyphName="EDIT" />
          </graphic>

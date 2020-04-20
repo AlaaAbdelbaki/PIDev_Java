@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.ScrollPane?>
@@ -23,6 +25,11 @@
             <Font name="Ebrima Bold" size="39.0" />
          </font>
       </Label>
+      <JFXButton fx:id="PostVideo" buttonType="RAISED" layoutX="319.0" layoutY="40.0" onAction="#PostVideo" ripplerFill="#1f1f47" style="-fx-border-color: green;" text="Post a New Video!" textFill="#234f23" visible="false">
+         <font>
+            <Font name="Book Antiqua Bold Italic" size="19.0" />
+         </font>
+      </JFXButton>
       <VBox alignment="TOP_RIGHT" layoutY="131.0" prefHeight="120.0" prefWidth="1598.0">
          <children>
             <HBox fx:id="vboxranks" alignment="TOP_CENTER" prefHeight="138.0" prefWidth="1598.0" spacing="50.0">
@@ -35,15 +42,28 @@
             <Insets bottom="30.0" />
          </padding>
       </VBox>
-      <ScrollPane fx:id="scrollvids" hbarPolicy="NEVER" layoutX="338.0" layoutY="256.0" pannable="true" prefHeight="500.0" prefWidth="1262.0" stylesheets="@../Shop/scrollbarFancy.css">
+      <ScrollPane fx:id="scrollvids" hbarPolicy="NEVER" layoutX="368.0" layoutY="256.0" pannable="true" prefHeight="500.0" prefWidth="1232.0" stylesheets="@../Shop/scrollbarFancy.css" vbarPolicy="ALWAYS">
          <content>
-            <VBox fx:id="vboxvids" alignment="CENTER" prefHeight="436.0" prefWidth="1244.0">
+            <VBox fx:id="vboxvids">
                <padding>
                   <Insets top="20.0" />
                </padding>
             </VBox>
          </content>
       </ScrollPane>
-      <Pagination fx:id="pagination" layoutX="294.0" layoutY="232.0" prefHeight="528.0" prefWidth="1308.0" />
+      <Pagination fx:id="pagination" layoutX="328.0" layoutY="232.0" prefHeight="528.0" prefWidth="1274.0" />
+      <Label fx:id="Warning" layoutX="294.0" layoutY="49.0" prefHeight="23.0" prefWidth="408.0" text="You need to have a talented Account to Post a Video" textFill="#ae2626" visible="false">
+         <font>
+            <Font name="Book Antiqua Bold Italic" size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="Compete" layoutX="294.0" layoutY="81.0" onMouseClicked="#competeInCompetition" prefHeight="23.0" prefWidth="393.0" text="Compete in our competitions to Upgrade your Account" textFill="#f8f8f8" underline="true" visible="false">
+         <font>
+            <Font name="Book Antiqua Bold Italic" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
    </children>
 </AnchorPane>

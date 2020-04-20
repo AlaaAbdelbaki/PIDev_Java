@@ -28,6 +28,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -92,10 +93,11 @@ public class Admin_ReviewsController implements Initializable {
             User_detailsController controller = loader.<User_detailsController>getController();
             controller.setU(cp.getUser_id());
             Scene s = new Scene(third);
+            s.setFill(Color.TRANSPARENT);
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.TRANSPARENT);
-            stage.setOpacity(0.9);
+            stage.setOpacity(0.8);
             stage.setTitle("Details");
             
             stage.setScene(s);

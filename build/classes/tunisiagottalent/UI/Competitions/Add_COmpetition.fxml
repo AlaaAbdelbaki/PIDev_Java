@@ -6,12 +6,12 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="add_comp_anchor" prefHeight="451.0" prefWidth="795.0" styleClass="mainFxmlClass" stylesheets="@AddCompetition.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.Competitions.Add_COmpetitionController">
+<AnchorPane fx:id="add_comp_anchor" prefHeight="451.0" prefWidth="795.0" styleClass="mainFxmlClass" stylesheets="@../Base/popups.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.Competitions.Add_COmpetitionController">
    <children>
-      <JFXDatePicker fx:id="startDate" defaultColor="BLACK" disable="true" editable="false" layoutX="101.0" layoutY="41.0" overLay="true" />
-      <JFXDatePicker fx:id="endDate" defaultColor="#0a0a0a" layoutX="455.0" layoutY="41.0" />
-      <JFXTimePicker fx:id="startTime" defaultColor="BLACK" disable="true" layoutX="101.0" layoutY="99.0" overLay="true" />
-      <JFXTimePicker fx:id="endTime" defaultColor="BLACK" layoutX="455.0" layoutY="99.0" />
+      <JFXDatePicker fx:id="startDate" defaultColor="#fcfcfc" editable="false" layoutX="101.0" layoutY="41.0" overLay="true" />
+      <JFXDatePicker fx:id="endDate" defaultColor="WHITE" layoutX="455.0" layoutY="41.0" />
+      <JFXTimePicker fx:id="startTime" defaultColor="WHITE" layoutX="101.0" layoutY="99.0" overLay="true" />
+      <JFXTimePicker fx:id="endTime" defaultColor="WHITE" layoutX="455.0" layoutY="99.0" />
       <TextArea fx:id="subject" layoutX="101.0" layoutY="172.0" prefHeight="134.0" prefWidth="541.0" styleClass="textfield" stylesheets="@AddCompetition.css" />
       <Button fx:id="btn_cancel" layoutX="642.0" layoutY="372.0" mnemonicParsing="false" onAction="#Cancel" prefHeight="31.0" prefWidth="106.0" text="Cancel" />
       <Button fx:id="btn_add" layoutX="496.0" layoutY="372.0" mnemonicParsing="false" onAction="#Add" prefHeight="31.0" prefWidth="106.0" text="Add" />

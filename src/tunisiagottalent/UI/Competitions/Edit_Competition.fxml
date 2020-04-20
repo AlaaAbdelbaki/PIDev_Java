@@ -6,14 +6,14 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="edit_comp_anchor" prefHeight="451.0" prefWidth="795.0" style="-fx-background-color: #EF3E36;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.Competitions.Edit_CompetitionController">
+<AnchorPane fx:id="edit_comp_anchor" prefHeight="451.0" prefWidth="795.0" styleClass="mainFxmlClass" stylesheets="@../Base/popups.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.Competitions.Edit_CompetitionController">
    <children>
-      <JFXDatePicker fx:id="startDate" defaultColor="BLACK" disable="true" editable="false" layoutX="101.0" layoutY="41.0" />
-      <JFXDatePicker fx:id="endDate" defaultColor="#0d0d0d" layoutX="455.0" layoutY="41.0" />
-      <JFXTimePicker fx:id="startTime" defaultColor="BLACK" disable="true" layoutX="101.0" layoutY="99.0" />
-      <JFXTimePicker fx:id="endTime" defaultColor="BLACK" layoutX="455.0" layoutY="99.0" />
+      <JFXDatePicker fx:id="startDate" defaultColor="#f2f2f2" editable="false" layoutX="101.0" layoutY="41.0" />
+      <JFXDatePicker fx:id="endDate" defaultColor="WHITE" layoutX="455.0" layoutY="41.0" />
+      <JFXTimePicker fx:id="startTime" defaultColor="#f5f2f2" layoutX="101.0" layoutY="99.0" />
+      <JFXTimePicker fx:id="endTime" defaultColor="WHITE" layoutX="455.0" layoutY="99.0" />
       <TextArea fx:id="subject" layoutX="119.0" layoutY="201.0" prefHeight="134.0" prefWidth="541.0" />
       <Button fx:id="btn_cancel" layoutX="462.0" layoutY="379.0" mnemonicParsing="false" onAction="#Cancel" prefHeight="31.0" prefWidth="106.0" text="Cancel" />
-      <Button fx:id="btn_update" layoutX="204.0" layoutY="379.0" mnemonicParsing="false" onAction="#update" prefHeight="31.0" prefWidth="106.0" text="Update" />
+      <Button fx:id="btn_update" layoutX="204.0" layoutY="379.0" mnemonicParsing="false" onAction="#update" prefHeight="31.0" prefWidth="106.0" text="Update" textFill="#0f8022" />
    </children>
 </AnchorPane>

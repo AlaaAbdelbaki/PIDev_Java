@@ -23,6 +23,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -121,12 +122,13 @@ public class User_CompetitionsController {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("Competition_Participate.fxml"));
                         Parent root = loader.load();
                         Competition_ParticipateController controller = loader.<Competition_ParticipateController>getController();
-                        controller.setCompetition(c);
+                        controller.setC(c);
                         Scene s = new Scene(root);
+                        s.setFill(Color.TRANSPARENT);
                         Stage stage = new Stage();
                         stage.initModality(Modality.APPLICATION_MODAL);
                         stage.initStyle(StageStyle.TRANSPARENT);
-                        stage.setOpacity(0.8);
+                        stage.setOpacity(1);
                         stage.setTitle("Participate");
                         stage.initOwner(Competitions_list.getScene().getWindow());
                         stage.setScene(s);

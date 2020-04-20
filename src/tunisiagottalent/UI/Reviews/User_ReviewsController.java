@@ -21,31 +21,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import org.controlsfx.control.Rating;
-import tunisiagottalent.Entity.Cart;
-import tunisiagottalent.Entity.Product;
 import tunisiagottalent.Entity.Review;
-import tunisiagottalent.UI.Shop.ShopController;
-import tunisiagottalent.UI.Shop.ViewItemDetailsController;
 import tunisiagottalent.services.ReviewService;
 import tunisiagottalent.util.UserSession;
 
@@ -72,6 +57,7 @@ public class User_ReviewsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         pagination.setPageFactory(this::loadReviewsforuser);
+        
     }
 
     public Node loadReviewsforuser(int pageIndex) {
@@ -103,7 +89,8 @@ public class User_ReviewsController implements Initializable {
 
             Rating rate = new Rating(5, p.getRating());
             rate.setMouseTransparent(true);
-            rate.setOpacity(1);
+            
+            
             hbox.setSpacing(10);
 
             checkBox1.selectedProperty().addListener(new ChangeListener<Boolean>() {
@@ -118,7 +105,9 @@ public class User_ReviewsController implements Initializable {
                 }
             });
 
-            hbox.getChildren().addAll(checkBox1, tLabel, CategoryLabel, ContentLabel, rate);
+            hbox.getChildren().addAll(checkBox1,rate, tLabel, CategoryLabel, ContentLabel);
+            hbox.setFillHeight(false);
+            hbox.setAlignment(Pos.CENTER);
 
             vboxratings.getChildren().add(hbox);
             vboxratings.setSpacing(30);

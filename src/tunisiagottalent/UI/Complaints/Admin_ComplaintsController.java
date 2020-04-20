@@ -70,7 +70,7 @@ public class Admin_ComplaintsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        areaText.setStyle("-fx-text-fill:white;");
         colid.setCellValueFactory(new PropertyValueFactory<>("id"));
         colsubj.setCellValueFactory(new PropertyValueFactory<>("Subject"));
         colcont.setCellValueFactory(new PropertyValueFactory<>("content"));
@@ -175,13 +175,14 @@ public class Admin_ComplaintsController implements Initializable {
             if (ValidateFields()) {
                 String s = areaText.getText();
                 String text = c.getSubject();
-                Platform.runLater(()->{
-                    try {
+                new Thread( ()->{
+           try {
                         sendEmailSMTP.RespondToComplaint(c.getUser_id().getUsername(), c.getUser_id().getEmail(), text,s);
                     } catch (MessagingException ex) {
                         Logger.getLogger(Admin_ComplaintsController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-});
+                    }).start();
+              
                 
                 or.remove(c);
                 cs.deleteComplaint(c);

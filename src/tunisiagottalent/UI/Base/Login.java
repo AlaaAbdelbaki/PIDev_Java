@@ -27,6 +27,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import tunisiagottalent.Entity.Cart;
 
@@ -165,7 +166,8 @@ public class Login {
     void forgotPass(ActionEvent event) {
     try {
             AnchorPane p = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/User/forgotPassword.fxml"));
-            login_anchor.getChildren().setAll(p);
+            login_anchor.getScene().setFill(Color.TRANSPARENT);
+            login_anchor.getScene().setRoot(p);
           
             
         } catch (IOException ex) {

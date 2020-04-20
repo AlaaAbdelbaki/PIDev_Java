@@ -23,6 +23,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -41,9 +42,7 @@ import tunisiagottalent.util.UserSession;
 public class AddReviewController implements Initializable {
 
     @FXML
-    private TextField contenu;
-    @FXML
-    private Button send;
+    private TextArea contenu;
     @FXML
     private ChoiceBox<String> category;
    
@@ -72,7 +71,7 @@ public Boolean ValidateFields() {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("Validate fields");
             alert.setHeaderText(null);
-            alert.setContentText("Please Enter Into The Fields");
+            alert.setContentText("Please Enter Valid Information");
             alert.showAndWait();
             return false;
         }
@@ -93,7 +92,7 @@ public Boolean ValidateFields() {
          rs.insertReviewPST(r);      
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Notification");
-        alert.setHeaderText("Review added with succes");
+        alert.setHeaderText("Review added with success");
         alert.showAndWait();
         try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/tunisiagottalent/UI/Reviews/User_Reviews.fxml"));

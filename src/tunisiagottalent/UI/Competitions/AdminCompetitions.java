@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -103,10 +104,11 @@ void initialize() {
                         Edit_CompetitionController controller = loader.<Edit_CompetitionController>getController();
                         controller.setCompetition(c);
                         Scene s = new Scene(root);
+                        s.setFill(Color.TRANSPARENT);
                         Stage stage = new Stage();
                         stage.initModality(Modality.APPLICATION_MODAL);
                         stage.initStyle(StageStyle.TRANSPARENT);
-                        stage.setOpacity(0.8);
+                        stage.setOpacity(1);
                         stage.setTitle("Edit Competition");
                         stage.initOwner(Competitions_list.getScene().getWindow());
                         stage.setScene(s);
@@ -165,9 +167,10 @@ void initialize() {
         
             user.setCellValueFactory(new PropertyValueFactory<>("user_id"));
             comp.setCellValueFactory(new PropertyValueFactory<>("competition_id"));
-            prom.setCellFactory(param -> new TableCell<competition_participant,Void>() { 
-             private JFXButton promote = new JFXButton("Promote to Talented");
-            {   promote.resize(100, 45);
+            prom.setCellFactory(param -> {
+            return new TableCell<competition_participant,Void>() { 
+                private JFXButton promote = new JFXButton("Promote to Talented");
+                {   promote.resize(100, 45);
                 promote.setStyle("-fx-text-fill: white;-fx-font-size:20px;-fx-background-color:#0B4F6C");
                 promote.setRipplerFill(javafx.scene.paint.Color.ORANGE);
                 promote.setOnAction(event -> {
@@ -176,24 +179,27 @@ void initialize() {
                     competition_participant cp=getTableView().getItems().get(getIndex());
                     
                     us.Promote(cp.getUser_id());
-                try {
-                    sendEmailSMTP.PromoteUser(cp.getUser_id(), us.getUser(cp.getUser_id()).getEmail());
-                } catch (MessagingException ex) {
-                    Logger.getLogger(AdminCompetitions.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                     
+                    new Thread( ()->{
+                        try {
+                            sendEmailSMTP.PromoteUser(cp.getUser_id(), us.getUser(cp.getUser_id()).getEmail());
+                        } catch (MessagingException ex) {
+                            Logger.getLogger(AdminCompetitions.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }).start();
+                    
+                    
                     winners.getItems().remove(cp);
                 });
- 
-            }
-            @Override
-            protected void updateItem(Void item, boolean empty) {
-                super.updateItem(item, empty);
-
-                setGraphic(empty ? null : promote);
-            }
-            
-});
+                
+                }
+                @Override
+                protected void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+                    
+                    setGraphic(empty ? null : promote);
+                }
+                
+            };      });
               vid.setCellFactory(param -> new TableCell<competition_participant,Void>() { 
              private JFXButton Viewvid = new JFXButton("View Video");
             {   Viewvid.resize(100, 45);

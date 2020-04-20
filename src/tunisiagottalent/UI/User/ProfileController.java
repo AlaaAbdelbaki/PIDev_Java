@@ -6,6 +6,7 @@
 package tunisiagottalent.UI.User;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXToggleButton;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -18,6 +19,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
@@ -41,6 +43,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.controlsfx.glyphfont.FontAwesome;
 import tunisiagottalent.Entity.Subscription;
 import tunisiagottalent.Entity.User;
 import tunisiagottalent.Entity.video;
@@ -86,7 +89,7 @@ public class ProfileController {
     private Button subscribeButton;
     @FXML
     private Button btn_add_vid;
-    
+
     @FXML
     private Button btn_edit;
     @FXML
@@ -140,22 +143,21 @@ public class ProfileController {
         parameters.setFill(Color.TRANSPARENT);
         WritableImage image = profilePic.snapshot(parameters, null);
 
-         //remove the rounding clip so that our effect can show through.
-         //profilePic.setClip(null);
+        //remove the rounding clip so that our effect can show through.
+        //profilePic.setClip(null);
         // apply a shadow effect.
-          
 //        System.out.println(user);
         username_profile.setText(user.getUsername());
-        
+
         profilePic.setImage(new Image("http://127.0.0.1:8000/assets/uploads/" + user.getProfilePic()));
-        if ((us.getUser(user.getUsername()).getName() == null || us.getUser(user.getUsername()).getLastName() == null) &&(s.getU().getUsername().equals(user.getUsername()))) {
+        if ((us.getUser(user.getUsername()).getName() == null || us.getUser(user.getUsername()).getLastName() == null) && (s.getU().getUsername().equals(user.getUsername()))) {
             nameLastName.setText("Complete your profile !!");
         } else {
             nameLastName.setText(us.getUser(user.getUsername()).getName() + " " + us.getUser(user.getUsername()).getLastName());
         }
         bio.setText(us.getUser(user.getUsername()).getBio());
         if (!s.getU().getUsername().equals(username_profile.getText())) {
-            btn_add_vid.setVisible(false);
+
             btn_edit.setVisible(false);
             if (ss.exists(user.getId(), s.getU().getId())) {
                 unsubscribeButton.setVisible(true);
@@ -203,9 +205,8 @@ public class ProfileController {
         List<video> tabs = vs.getVideos(user.getId());
         VoteServices votesserv = new VoteServices();
         tabs.forEach((vid) -> {
-                HBox video_grid=new HBox();
-                
-            GridPane details = new GridPane();
+            HBox video_grid = new HBox();
+            VBox details = new VBox();
 
             Label Title = new Label(vid.getTitle());
             Title.setTextFill(javafx.scene.paint.Color.WHITE);
@@ -220,97 +221,91 @@ public class ProfileController {
             pubDate.setFont(Font.font("Cambria", 16));
 
             JFXButton Delete = new JFXButton("Delete");
-            JFXButton Vote = new JFXButton("Vote");
-            JFXButton Unvote = new JFXButton("Unvote");
-
+            Delete.setVisible(false);
             Delete.resize(150, 250);
-            Vote.resize(150, 250);
-            Unvote.resize(150, 250);
-
             Delete.setStyle("-fx-text-fill: white;-fx-font-size:18px;-fx-background-color:#49111C");
-            Vote.setStyle("-fx-text-fill: white;-fx-font-size:18px;-fx-background-color:#ACEB98");
-            Unvote.setStyle("-fx-text-fill: white;-fx-font-size:18px;-fx-background-color:#92140C");
 
             WebView preview = new WebView();
-            
             preview.getEngine().load(vid.getUrl());
+            
+            Label labelheart = new Label();
+            Label labelunheart = new Label();
+            labelheart.setGraphic(new FontAwesome().create(FontAwesome.Glyph.HEART).color(Color.RED).size(20));
+            labelunheart.setGraphic(new FontAwesome().create(FontAwesome.Glyph.HEART).color(Color.WHITE).size(20));
+            VoteNum.setGraphic(new FontAwesome().create(FontAwesome.Glyph.THUMBS_UP).color(Color.GREEN).size(20));
+            VoteNum.setAlignment(Pos.CENTER);
+            JFXToggleButton Voting = new JFXToggleButton();
+            Voting.setToggleLineColor(Color.RED);
+            Voting.setToggleColor(Color.RED);
+            HBox hboxvoting = new HBox();
 
+            hboxvoting.setAlignment(Pos.CENTER);
             UserSession s = UserSession.instance;
             if (s.getU().getUsername().equals(vid.getOwner().getUsername())) {
 
-                details.add(Delete, 0, 10);
-                
+                Delete.setVisible(true);
+
             }
             if (votesserv.find(vid, s.getU())) {
-                Unvote.setVisible(true);
-                Vote.setVisible(false);
+                Voting.setSelected(true);
+                labelheart.setVisible(true);
+                labelunheart.setVisible(false);
             } else {
-                Unvote.setVisible(false);
-                Vote.setVisible(true);
+                Voting.setSelected(false);
+                labelunheart.setVisible(true);
+                labelheart.setVisible(false);
             }
-            Vote.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
+            Voting.setOnAction((e) -> {
+                if (Voting.isSelected()) {
+
                     votesserv.Add(s.getU(), vid);
-                    Unvote.setVisible(true);
-                    Vote.setVisible(false);
-                    VoteNum.setText(Integer.toString(Integer.parseInt(VoteNum.getText()) + 1));
 
-                }
-            });
-            Unvote.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
+                    Platform.runLater(() -> {
+                        VoteNum.setText(Integer.toString(Integer.parseInt(VoteNum.getText()) + 1));
+                        labelunheart.setVisible(false);
+                        labelheart.setVisible(true);
+
+                    });
+
+                } else {
+
                     votesserv.delete(vid, s.getU());
-                    Unvote.setVisible(false);
-                    Vote.setVisible(true);
-                    VoteNum.setText(Integer.toString(Integer.parseInt(VoteNum.getText()) - 1));
 
+                    Platform.runLater(() -> {
+                        labelheart.setVisible(false);
+                        labelunheart.setVisible(true);
+                        VoteNum.setText(Integer.toString(Integer.parseInt(VoteNum.getText()) - 1));
+
+                    });
                 }
             });
-            Delete.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Delete Video");
-                    alert.setHeaderText("Are you sure ?");
-                    alert.setContentText("You will lose all your votes !");
 
-                    alert.showAndWait();
-                    //  vs.delete(vid);
-                    video_grid.getChildren().removeAll(preview, details);
-                    video_grid.getChildren().removeIf(node -> GridPane.getRowIndex(node) == tabs.indexOf(vid));
-                    
-                }
-                
+            Delete.setOnAction((ActionEvent event) -> {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Delete Video");
+                alert.setHeaderText("Are you sure ?");
+                alert.setContentText("You will lose all your votes !");
+                alert.showAndWait();
+                vs.delete(vid);
+                video_grid.getChildren().removeAll(preview, details);
+                video_grid.getChildren().removeIf(node -> GridPane.getRowIndex(node) == tabs.indexOf(vid));
             });
-            RowConstraints row = new RowConstraints(50);
-            details.addRow(0,Title);
-            details.getRowConstraints().add(row);
-            details.addRow(1,pubDate);
-            details.getRowConstraints().add(row);
-            details.add(Unvote, 0, 2);
-            details.getRowConstraints().add(row);
-            details.add(Vote, 0, 2);
-            details.getRowConstraints().add(row);
-            details.add(VoteNum, 1, 2);
-            details.getRowConstraints().add(row);
+
             
+
             details.setStyle("-fx-background-color: #0c0527");
             details.setPadding(new Insets(15, 15, 15, 15));
-            
+            preview.setPrefHeight(300);
+            details.setSpacing(30);
+            details.setPrefWidth(300);
+            vboxvids.setSpacing(25);
+            hboxvoting.getChildren().addAll(labelunheart, Voting, labelheart);
+            details.getChildren().addAll(Title, pubDate, Delete, hboxvoting, VoteNum);
+            video_grid.getChildren().addAll(preview, details);
+            vboxvids.getChildren().addAll(video_grid);
 
-            
-            
-            video_grid.getChildren().addAll(  preview,details);
-            video_grid.setPrefHeight(350);
-             vboxvids.getChildren().addAll(video_grid);
-             vboxvids.setSpacing(25);
-             
-             
-             
         });
-        
+
     }
 
     @FXML

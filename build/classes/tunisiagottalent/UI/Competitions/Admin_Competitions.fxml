@@ -29,13 +29,13 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="257.0" prefWidth="1125.0">
                <children>
-                  <TableView fx:id="competitions" layoutX="3.0" prefHeight="257.0" prefWidth="1130.0">
+                  <TableView fx:id="competitions" layoutX="3.0" prefHeight="257.0" prefWidth="1130.0" stylesheets="@../Shop/shop.css">
                     <columns>
                       <TableColumn fx:id="ID" prefWidth="67.0" text="ID" />
                       <TableColumn fx:id="Subject" prefWidth="252.0" text="Subject" />
                         <TableColumn fx:id="startDate" prefWidth="228.0" text="Start Date" />
-                        <TableColumn fx:id="endDate" prefWidth="216.0" text="End Date" />
-                        <TableColumn fx:id="Action" prefWidth="324.0" text="Actions" />
+                        <TableColumn fx:id="endDate" prefWidth="262.0" text="End Date" />
+                        <TableColumn fx:id="Action" prefWidth="313.0" text="Actions" />
                     </columns>
                      <opaqueInsets>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -61,14 +61,14 @@
             <Bloom />
          </effect>
       </Text>
-      <ScrollPane layoutX="313.0" layoutY="498.0" prefHeight="171.0" prefWidth="1096.0">
+      <ScrollPane layoutX="280.0" layoutY="498.0" prefHeight="171.0" prefWidth="1157.0">
          <content>
-            <TableView fx:id="winners" prefHeight="160.0" prefWidth="1088.0">
+            <TableView fx:id="winners" prefHeight="160.0" prefWidth="1156.0" stylesheets="@../Shop/shop.css">
               <columns>
                 <TableColumn fx:id="comp" prefWidth="114.0" text="Competition" />
                 <TableColumn fx:id="user" prefWidth="291.0" text="User" />
                   <TableColumn fx:id="vid" prefWidth="390.0" text="Video" />
-                  <TableColumn fx:id="prom" prefWidth="293.0" text="Action" />
+                  <TableColumn fx:id="prom" prefWidth="342.0" text="Action" />
               </columns>
             </TableView>
          </content>

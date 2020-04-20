@@ -23,7 +23,7 @@
             <Font name="Roboto Bold" size="32.0" />
          </font>
       </Label>
-      <TableView fx:id="usersInfo" layoutX="75.0" layoutY="131.0" prefHeight="550.0" prefWidth="1473.0">
+      <TableView fx:id="usersInfo" layoutX="75.0" layoutY="131.0" prefHeight="550.0" prefWidth="1473.0" stylesheets="@../Shop/shop.css">
         <columns>
           <TableColumn fx:id="userId" prefWidth="36.0" text="ID" />
           <TableColumn fx:id="userUsername" prefWidth="109.66665649414062" text="Username" />

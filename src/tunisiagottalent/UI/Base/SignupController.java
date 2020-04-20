@@ -77,8 +77,8 @@ public class SignupController implements Initializable {
                  alert.setTitle("Success");
                  alert.setHeaderText(null);
                  alert.setContentText("Account created successfully!\nProceed to the login tab.");
-                 Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-                 stage.getIcons().add(new Image("/tunisiagottalent/ui/img/icon.png"));
+                 Stage stage = (Stage) signup_anchor.getScene().getWindow();
+                 stage.getIcons().add(new Image("/tunisiagottalent/UI/Base/img/icon.png"));
 
                  alert.showAndWait();
                  stage.close();

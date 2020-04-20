@@ -4,13 +4,12 @@
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -75,23 +74,19 @@
                         </Label>
                      </children>
                   </VBox>
-                  <ScrollPane fx:id="scroll" prefHeight="548.0" prefWidth="1173.0" stylesheets="@scroll.css">
-                     <content>
-                        <GridPane fx:id="video_grid" alignment="CENTER" prefHeight="196.0" prefWidth="867.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="480.0" minWidth="10.0" prefWidth="459.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="388.0" minWidth="10.0" prefWidth="385.0" />
-                          </columnConstraints>
-                        </GridPane>
-                     </content>
+                  <ScrollPane fx:id="scroll" prefHeight="548.0" prefWidth="1139.0" stylesheets="@scroll.css">
                      <styleClass>
                         <String fx:value="scroll-pane" />
                         <String fx:value="viewport" />
                      </styleClass>
+                     <content>
+                        <VBox fx:id="vboxvids" />
+                     </content>
                   </ScrollPane>
                </children>
             </HBox>
          </children>
       </VBox>
+      <Pagination fx:id="pagination" layoutX="439.0" layoutY="216.0" prefHeight="538.0" prefWidth="1162.0" />
    </children>
 </AnchorPane>

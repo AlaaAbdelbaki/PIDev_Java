@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import tunisiagottalent.Entity.Competition;
 import tunisiagottalent.services.CompetitionServices;
@@ -50,8 +51,8 @@ public class Add_COmpetitionController {
     void initialize() {
         startTime.setValue(LocalTime.now());
         startDate.setValue(LocalDate.now());
-        startDate.setOpacity(1);
-        startTime.setOpacity(1);
+        startDate.setMouseTransparent(true);
+        startTime.setMouseTransparent(true);
 
     }
 
@@ -82,6 +83,18 @@ public class Add_COmpetitionController {
 
         alert.showAndWait();
         Stage stage = (Stage) add_comp_anchor.getScene().getWindow();
+       
+         try {
+            AnchorPane p = FXMLLoader.load(getClass().getResource("AdminCompetitions.fxml"));
+            
+             HBox h=(HBox) stage.getOwner().getScene().lookup("#content");
+             h.getChildren().clear();
+             h.getChildren().setAll(p);
+            
+
+        } catch (IOException ex) {
+            Logger.getLogger(Add_COmpetitionController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         stage.close();
 
     }

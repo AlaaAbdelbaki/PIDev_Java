@@ -54,9 +54,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javax.mail.MessagingException;
 import tunisiagottalent.Entity.Cart;
+import tunisiagottalent.UI.Events.SelectedEventViewController;
 import tunisiagottalent.services.OrderServices;
 import tunisiagottalent.util.DataSource;
+import tunisiagottalent.util.UserSession;
+import tunisiagottalent.util.sendEmailSMTP;
 
 /**
  * FXML Controller class
@@ -87,8 +91,6 @@ public class ShoppingCartController implements Initializable {
     private TableColumn table_delete;
     @FXML
     private Rectangle rectange;
-    @FXML
-    private Button gotoorder;
 
     @FXML
     private Label shipping_address;
@@ -106,6 +108,10 @@ public class ShoppingCartController implements Initializable {
     ObservableList<Product> testsc;
 
     public static ObservableList<Product> product_list;
+    @FXML
+    private Label product_label;
+    @FXML
+    private Label total;
 @FXML
     void cancel(ActionEvent event) {
          try {
@@ -120,7 +126,6 @@ public class ShoppingCartController implements Initializable {
             Logger.getLogger(ShoppingCartController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    @FXML
     public void affichershoppingcart() {
         shipping_address.setVisible(false);
         address.setVisible(false);
@@ -158,6 +163,7 @@ public class ShoppingCartController implements Initializable {
                             Product p = getTableView().getItems().get(getIndex());
                             p.setQuantity(1);
                             Cart.instance.RemoveProduct(p);
+                            total.setText(String.valueOf(Cart.instance.total()));
                         });
 
                         
@@ -195,6 +201,7 @@ public class ShoppingCartController implements Initializable {
                             else{
                             int quantity = p.getQuantity()+1;
                             p.setQuantity(quantity);
+                            total.setText(String.valueOf(Cart.instance.total()));
                             tableProduct.refresh();
                             }
                         });
@@ -204,11 +211,12 @@ public class ShoppingCartController implements Initializable {
 
                             if(p.getQuantity()<=1){
                                 deletequantity.setDisable(true);
-                                //tableProduct.refresh();
+                                tableProduct.refresh();
                             }
                             else{
                             int quantity = p.getQuantity()-1;
                             p.setQuantity(quantity);
+                            total.setText(String.valueOf(Cart.instance.total()));
                             tableProduct.refresh();
                             }
                         });
@@ -278,6 +286,7 @@ public class ShoppingCartController implements Initializable {
                     alert.setTitle("Error");
                     alert.setContentText("Enter a valide postal code");
                     alert.showAndWait();
+                    return;
         }
             
             
@@ -286,6 +295,7 @@ public class ShoppingCartController implements Initializable {
                     alert.setTitle("Error");
                     alert.setContentText("Please fill all fields");
                     alert.showAndWait();
+                    return;
                 }
                 
                 else{
@@ -313,7 +323,7 @@ public class ShoppingCartController implements Initializable {
                 tableProduct.refresh();
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Order Palced !");
-                alert.setContentText(" Do you want to make a pdf copy ??");
+                alert.setContentText(" An Email has been Sent to you containing your Order Details");
                 alert.setHeaderText("Your Order Has Been Successfully Placed !");
                 ImageView icon = new ImageView("/tunisiagottalent/UI/Shop/img/pdf.png");
                 icon.setFitHeight(100);
@@ -326,6 +336,18 @@ public class ShoppingCartController implements Initializable {
                         } catch (DocumentException | IOException ex) {
                             Logger.getLogger(ShoppingCartController.class.getName()).log(Level.SEVERE, null, ex);
                         }
+                          new Thread( ()->{
+                         try {
+            
+                sendEmailSMTP.SendOrder(UserSession.instance.getU().getUsername(), UserSession.instance.getU().getEmail());
+            } catch (MessagingException ex) {
+                Logger.getLogger(SelectedEventViewController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(SelectedEventViewController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                    }).start();
+                       ( (Stage)anchorpane.getScene().getWindow()).close();
+                       Cart.instance.RemoveAll();
                 }
                 
                 }
@@ -342,7 +364,7 @@ public class ShoppingCartController implements Initializable {
     public void testpdf(ObservableList<Product> list) throws FileNotFoundException, DocumentException, BadElementException, IOException{
         
         Document document = new Document();
-        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("testpdf.pdf"));
+        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("order.pdf"));
         document.open();
         
         
@@ -350,7 +372,8 @@ public class ShoppingCartController implements Initializable {
         
         
         
-        Image img = Image.getInstance("http://127.0.0.1:8000/assets/img/core-img/logo.png");
+        Image img = Image.getInstance("http://127.0.0.1:8000/assets/img/shop-img/logo.png");
+        
         img.scaleAbsolute(250, 80);
         img.setAbsolutePosition(0, PageSize.A4.getHeight() - img.getScaledHeight());
         Font bold=new Font(FontFamily.HELVETICA, 12, Font.BOLD);
@@ -417,6 +440,7 @@ public class ShoppingCartController implements Initializable {
         Platform.runLater(()->{
            
     affichershoppingcart();
+    total.setText(String.valueOf(Cart.instance.total()));
     });
         
     }

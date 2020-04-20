@@ -63,8 +63,8 @@ public class Edit_CompetitionController {
         startTime.setValue(s);
         endDate.setValue(d2);
         endTime.setValue(s2);
-        startDate.setOpacity(1);
-        startTime.setOpacity(1);
+        startDate.setMouseTransparent(true);
+        startTime.setMouseTransparent(true);
         subject.setText(c.getSubject());
 
     });

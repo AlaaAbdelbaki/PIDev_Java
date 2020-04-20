@@ -9,11 +9,12 @@
 <AnchorPane id="AnchorPane" fx:id="parentContainer" prefHeight="400.0" prefWidth="418.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.User.CheckTokenController">
     <stylesheets>
         <URL value="@checktoken.css" />
+      <URL value="@../Base/popups.css" />
     </stylesheets>
    <children>
       <Button layoutX="176.0" layoutY="264.0" mnemonicParsing="false" onAction="#checkToken" text="Confirm" />
       <TextField fx:id="tokenInput" layoutX="115.0" layoutY="185.0" />
-      <Label layoutX="132.0" layoutY="116.0" text="enter code in the email" />
+      <Label layoutX="132.0" layoutY="116.0" text="enter code in the email" textFill="#ebebeb" />
       <Button layoutX="176.0" layoutY="324.0" mnemonicParsing="false" onAction="#cancel" prefHeight="38.0" prefWidth="74.0" text="Cancel" />
    </children>
 </AnchorPane>

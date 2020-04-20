@@ -16,7 +16,7 @@
    <children>
       <VBox layoutX="47.0" layoutY="41.0" prefHeight="596.0" prefWidth="1056.0">
          <children>
-            <TableView fx:id="Table_event" onMouseClicked="#showDetails" prefHeight="555.0" prefWidth="1032.0">
+            <TableView fx:id="Table_event" onMouseClicked="#showDetails" prefHeight="555.0" prefWidth="1032.0" stylesheets="@../Shop/shop.css">
               <columns>
                 <TableColumn fx:id="col_id" maxWidth="50.0" prefWidth="39.333335876464844" text="ID" />
                 <TableColumn fx:id="col_title" maxWidth="83.66666412353516" prefWidth="83.66666412353516" text="Title" />

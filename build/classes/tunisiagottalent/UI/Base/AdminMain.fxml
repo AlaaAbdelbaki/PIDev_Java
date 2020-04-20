@@ -11,10 +11,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" fx:id="AdminMainAnchor" prefHeight="850.0" prefWidth="1600.0" style="-fx-background-color: #1a2035;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.Base.AdminMainController">
    <children>
+      <Line endX="714.0" endY="13.0" layoutX="886.0" layoutY="61.0" startX="-886.3333129882812" startY="13.0" stroke="#f5f5f5" />
       <JFXHamburger fx:id="hamburger" layoutX="1363.0" layoutY="25.0" opacity="0.54" prefHeight="35.0" prefWidth="44.0" style="-fx-background-color: transparent;" stylesheets="@AdminMain.css" />
       <JFXButton fx:id="btn_logout" buttonType="RAISED" layoutX="1445.0" layoutY="23.0" onAction="#logout" ripplerFill="#eb0505" text="Logout" textAlignment="CENTER" textFill="WHITE">
          <font>
@@ -29,7 +31,7 @@
       </JFXButton>
       <VBox layoutY="84.0" prefHeight="768.0" prefWidth="1600.0">
          <children>
-            <HBox fx:id="content" prefHeight="100.0" prefWidth="200.0" />
+            <HBox fx:id="content" prefHeight="767.0" prefWidth="1600.0" />
          </children>
       </VBox>
       <JFXDrawer fx:id="drawer" defaultDrawerSize="325.0" prefHeight="850.0" prefWidth="303.0">

@@ -37,6 +37,9 @@ public final class Cart {
             }
         }
     }
+    public void RemoveAll(){
+    this.c.clear();
+    }
 
     public ObservableList<Product> getC() {
         return c;
@@ -58,5 +61,12 @@ public final class Cart {
         return "Cart{"
                 + "c=" + c
                 + '}';
+    }
+    public double total(){
+        double total=0;
+     for(Product product : this.c){
+                    total = total + (product.getPrice()*product.getQuantity());
+                }
+    return total;
     }
 }

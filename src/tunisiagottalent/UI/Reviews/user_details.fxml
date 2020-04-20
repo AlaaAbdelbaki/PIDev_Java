@@ -1,19 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="600.0" prefWidth="1400.0" style="-fx-background-color: green;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="tunisiagottalent.UI.Reviews.User_detailsController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="691.0" prefWidth="816.0" style="-fx-background-color: #1a2035;" styleClass="mainFxmlClass" stylesheets="@../Base/popups.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.Reviews.User_detailsController">
    <children>
-      <ScrollPane layoutY="40.0" prefHeight="560.0" prefWidth="1399.0">
-        <content>
-          <AnchorPane fx:id="content" minHeight="0.0" minWidth="0.0" prefHeight="561.0" prefWidth="1397.0" style="-fx-background-color: black;" />
-        </content>
+      <ScrollPane layoutX="1.0" layoutY="46.0" prefHeight="929.0" prefWidth="818.0" stylesheets="@../Shop/scrollbarFancy.css">
+         <content>
+            <VBox alignment="TOP_CENTER" prefHeight="929.0" prefWidth="816.0">
+               <children>
+                  <ImageView fx:id="profilepic" fitHeight="301.0" fitWidth="444.0" pickOnBounds="true" preserveRatio="true" />
+                  <GridPane alignment="CENTER" prefHeight="405.0" prefWidth="816.0" VBox.vgrow="ALWAYS">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="109.0" prefWidth="405.0" text="Username:" textFill="#39ad2f">
+                           <font>
+                              <Font name="Bell MT" size="29.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="109.0" prefWidth="405.0" text="Account Type:" textFill="#39ad2f" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Bell MT" size="29.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="124.0" prefHeight="109.0" prefWidth="405.0" text="Email:" textFill="#39ad2f" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Bell MT" size="29.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="94.0" prefHeight="101.0" prefWidth="415.0" text="Bio:" textFill="#39ad2f" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="Bell MT" size="29.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="username" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="109.0" prefWidth="405.0" text="Username:" textFill="#f8f7f7" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="Bell MT" size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="mail" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="116.0" prefHeight="109.0" prefWidth="405.0" text="Email:" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Bell MT" size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="admin" alignment="CENTER" prefHeight="100.0" prefWidth="405.0" text="   Admin" textAlignment="CENTER" textFill="#c32121" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <graphic>
+                              <FontAwesomeIcon fill="#e30909" glyphName="EYE" size="1.5em" />
+                           </graphic>
+                           <font>
+                              <Font name="System Bold Italic" size="17.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="talented" alignment="CENTER" prefHeight="94.0" prefWidth="411.0" text="Talented Account" textFill="#18ae2a" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <graphic>
+                              <FontAwesomeIcon fill="#2a6836" glyphName="CHECK_CIRCLE" size="2em" />
+                           </graphic>
+                           <font>
+                              <Font name="System Bold Italic" size="17.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="normal" alignment="CENTER" layoutX="418.0" layoutY="228.0" prefHeight="94.0" prefWidth="411.0" text="Normal Account" textFill="#d2ed11" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold Italic" size="17.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </GridPane>
+                  <Label fx:id="bio" alignment="CENTER" contentDisplay="CENTER" prefHeight="312.0" prefWidth="596.0" text="Bio:" textFill="#eeeeee" wrapText="true">
+                     <font>
+                        <Font name="Bell MT" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </content>
       </ScrollPane>
-      <JFXButton layoutX="1344.0" layoutY="-3.0" onAction="#close" text="[x]">
+      <JFXButton layoutX="750.0" layoutY="5.0" onAction="#close" text="[x]" textFill="#f8f4f4">
          <font>
             <Font name="System Bold Italic" size="17.0" />
          </font>
