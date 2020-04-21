@@ -6,15 +6,18 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" fx:id="rootpane" prefHeight="750.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.Events.AddTicketController">
    <children>
-      <VBox layoutX="1308.0" prefHeight="779.0" prefWidth="293.0" style="-fx-background-color: purple;">
+      <VBox alignment="TOP_CENTER" layoutX="1127.0" layoutY="159.0" prefHeight="391.0" prefWidth="441.0" styleClass="mainFxmlClass" stylesheets="@../Base/popups.css">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="39.0" prefWidth="129.0" text="Ajout_Ticket" textAlignment="CENTER" textFill="WHITE" translateX="10.0">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="39.0" prefWidth="129.0" text="Tickets" textAlignment="CENTER" textFill="WHITE" translateX="10.0">
                <VBox.margin>
                   <Insets bottom="50.0" left="50.0" right="50.0" top="10.0" />
                </VBox.margin>
@@ -30,59 +33,46 @@
                   <Font name="Calibri Light" size="12.0" />
                </font>
             </TextField>
-            <TextField fx:id="tfevent_id" promptText="Event_id">
-               <font>
-                  <Font name="Calibri Light" size="12.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="50.0" right="50.0" />
-               </VBox.margin>
-            </TextField>
-            <Button mnemonicParsing="false" onAction="#AddTicket" prefHeight="32.0" prefWidth="73.0" style="-fx-background-color: #4cb842;" text="Add" textAlignment="CENTER" textFill="WHITE">
-               <VBox.margin>
-                  <Insets bottom="10.0" left="90.0" right="50.0" top="50.0" />
-               </VBox.margin>
-               <opaqueInsets>
-                  <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-               </opaqueInsets>
-               <padding>
-                  <Insets bottom="5.0" left="20.0" right="20.0" top="10.0" />
-               </padding>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#deleteTicket" style="-fx-background-color: #4cb842;" text="delete" textAlignment="CENTER" textFill="WHITE">
-               <opaqueInsets>
-                  <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-               </opaqueInsets>
-               <padding>
-                  <Insets bottom="5.0" left="20.0" right="20.0" top="10.0" />
-               </padding>
-               <VBox.margin>
-                  <Insets left="90.0" right="50.0" />
-               </VBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#UpdateTicket" style="-fx-background-color: #4cb842;" text="Update" textAlignment="CENTER" textFill="WHITE">
-               <opaqueInsets>
-                  <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-               </opaqueInsets>
-               <padding>
-                  <Insets bottom="5.0" left="20.0" right="15.0" top="10.0" />
-               </padding>
-               <VBox.margin>
-                  <Insets bottom="10.0" left="90.0" right="40.0" top="10.0" />
-               </VBox.margin>
-            </Button>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#UpdateTicket" style="-fx-background-color: #4cb842;" text="Update" textAlignment="CENTER" textFill="WHITE">
+                     <opaqueInsets>
+                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="5.0" left="20.0" right="15.0" top="10.0" />
+                     </padding>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#deleteTicket" style="-fx-background-color: red;" text="delete" textAlignment="CENTER" textFill="WHITE">
+                     <opaqueInsets>
+                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="5.0" left="20.0" right="20.0" top="10.0" />
+                     </padding>
+                  </Button>
+               </children>
+            </HBox>
          </children>
       </VBox>
-      <VBox layoutX="382.0" layoutY="82.0" prefHeight="696.0" prefWidth="874.0">
+      <VBox layoutX="184.0" layoutY="116.0" prefHeight="484.0" prefWidth="880.0">
          <children>
-            <TableView fx:id="textV" onMouseClicked="#show_details" prefHeight="555.0" prefWidth="678.0" stylesheets="@../Shop/shop.css">
+            <TableView fx:id="textV" onMouseClicked="#show_details" prefHeight="555.0" prefWidth="1046.0" stylesheets="@../Shop/shop.css">
               <columns>
-                <TableColumn fx:id="col_idT" prefWidth="207.66668701171875" text="Id_ticket" />
-                <TableColumn fx:id="col_priceT" prefWidth="235.33331298828125" text="Price" />
-                  <TableColumn fx:id="col_eventId" prefWidth="430.33331298828125" text="Event_Id" />
+                <TableColumn fx:id="col_idT" prefWidth="102.66668701171875" text="Id_ticket" />
+                <TableColumn fx:id="col_priceT" prefWidth="367.66668701171875" text="Price" />
+                  <TableColumn fx:id="col_eventId" prefWidth="406.33331298828125" text="Event" />
               </columns>
             </TableView>
          </children>
       </VBox>
+      <Text fill="WHITE" layoutX="184.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tickets Dashboard" wrappingWidth="465.13671875">
+         <font>
+            <Font name="Eras Light ITC" size="43.0" />
+         </font>
+         <effect>
+            <Bloom />
+         </effect>
+      </Text>
    </children>
 </AnchorPane>

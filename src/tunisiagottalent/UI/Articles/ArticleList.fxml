@@ -1,36 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="ContentPane" maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.Articles.ArticleListController">
+<AnchorPane id="AnchorPane" fx:id="ContentPane" prefHeight="750.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.Articles.ArticleListController">
    <children>
-      <TableView fx:id="ListArticle" layoutX="397.0" layoutY="183.0" prefHeight="200.0" prefWidth="305.0">
+      <TableView fx:id="ListArticle" layoutX="298.0" layoutY="235.0" prefHeight="430.0" prefWidth="1209.0" stylesheets="@../Shop/shop.css">
         <columns>
-          <TableColumn fx:id="colTitle" prefWidth="75.0" text="Title" />
-          <TableColumn fx:id="colimg" prefWidth="75.0" text="Image" />
-            <TableColumn fx:id="colContent" prefWidth="154.0" text="Content" />
+          <TableColumn fx:id="colTitle" prefWidth="242.0" text="Title" />
+          <TableColumn fx:id="colimg" prefWidth="434.0" text="Image" />
+            <TableColumn fx:id="Edit" prefWidth="213.0" text="Edit" />
+            <TableColumn fx:id="Delete" prefWidth="319.0" text="Delete" />
         </columns>
       </TableView>
-      <Button fx:id="RetourAction" layoutX="918.0" layoutY="74.0" mnemonicParsing="false" onAction="#btnRetourAction" prefHeight="43.0" prefWidth="220.0" text="Add Article" />
-      <Button fx:id="supprimer" layoutX="408.0" layoutY="538.0" mnemonicParsing="false" onAction="#btnSuppAction" prefHeight="31.0" prefWidth="284.0" text="Selectionner l'article à Supprimer" />
-      <Button fx:id="modifier" layoutX="1006.0" layoutY="524.0" mnemonicParsing="false" onAction="#btnModifAction" text="modifer" />
-      <TextField fx:id="UpTitle" layoutX="991.0" layoutY="259.0" />
-      <TextField fx:id="UpImg" layoutX="991.0" layoutY="339.0" />
-      <TextField fx:id="UpContent" layoutX="991.0" layoutY="412.0" />
-      <Text layoutX="886.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="new title" wrappingWidth="141.9869728088379" />
-      <Text layoutX="882.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New image" />
-      <Text layoutX="864.0" layoutY="428.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Content" wrappingWidth="110.66015625" />
-      <TextField fx:id="search" layoutX="398.0" layoutY="145.0" prefHeight="25.0" prefWidth="305.0" promptText="search" />
-      <Line endX="100.0" layoutX="779.0" layoutY="338.0" rotate="90.0" scaleX="2.0" scaleY="2.0" scaleZ="2.0" startX="-100.0" />
-      <ImageView fx:id="img" fitHeight="229.0" fitWidth="340.0" layoutX="371.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" />
-      <Pagination fx:id="pagination" layoutX="336.0" layoutY="164.0" prefHeight="270.0" prefWidth="391.0" />
+      <Pagination fx:id="pagination" layoutX="283.0" layoutY="222.0" prefHeight="509.0" prefWidth="1235.0" />
+      <JFXButton fx:id="PostBlog" buttonType="RAISED" layoutX="1270.0" layoutY="74.0" onAction="#AddPostPopup" prefHeight="43.0" prefWidth="227.0" ripplerFill="#216e2e" style="-fx-border-color: white;" text="Start A New Blog" textFill="WHITE" />
+      <JFXTextField fx:id="search" focusColor="#44a840" layoutX="780.0" layoutY="147.0" prefHeight="31.0" prefWidth="352.0" promptText="search" unFocusColor="#f2f2f2" />
+      <FontAwesomeIcon fill="WHITE" glyphName="SEARCH" layoutX="712.0" layoutY="174.0" />
+      <Text fill="WHITE" layoutX="621.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Blog Dashboard" wrappingWidth="465.13671875">
+         <font>
+            <Font name="Eras Light ITC" size="43.0" />
+         </font>
+         <effect>
+            <Bloom />
+         </effect>
+      </Text>
+      <Text fill="WHITE" layoutX="621.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Blog Dashboard" wrappingWidth="465.13671875">
+         <font>
+            <Font name="Eras Light ITC" size="43.0" />
+         </font>
+         <effect>
+            <Bloom />
+         </effect>
+      </Text>
    </children>
 </AnchorPane>

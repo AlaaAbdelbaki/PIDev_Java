@@ -150,8 +150,10 @@ public class ProfileController {
         username_profile.setText(user.getUsername());
 
         profilePic.setImage(new Image("http://127.0.0.1:8000/assets/uploads/" + user.getProfilePic()));
-        if ((us.getUser(user.getUsername()).getName() == null || us.getUser(user.getUsername()).getLastName() == null) && (s.getU().getUsername().equals(user.getUsername()))) {
+        if ((us.getUser(user.getUsername()).getName() == null || us.getUser(user.getUsername()).getLastName() == null) ) {
+           if((s.getU().getUsername().equals(user.getUsername())))
             nameLastName.setText("Complete your profile !!");
+           else nameLastName.setText("This user Has not Completed his profile");
         } else {
             nameLastName.setText(us.getUser(user.getUsername()).getName() + " " + us.getUser(user.getUsername()).getLastName());
         }

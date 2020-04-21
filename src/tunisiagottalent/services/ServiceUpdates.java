@@ -34,11 +34,16 @@ public class ServiceUpdates implements IService<Updates>{
         try {
            
             Statement stm = cnx.createStatement();
-            String query = "INSERT INTO updates (id,title,img,content,category,publish_date) VALUES (NULL, '"+a.getTitle()+"', '"+a.getImg()+"', '"+a.getContent()+"','"+a.getCategory()+"','"+a.getPublish_date()+"')";
-            stm.executeUpdate(query);
-           // System.out.println("updates ajouté !");
+            String query = "INSERT INTO updates (title,img,content,category,publish_date) VALUES (?,?,?,?,?)";
+            PreparedStatement pst = cnx.prepareStatement(query);
+            pst.setString(1,a.getTitle());
+            pst.setString(2,a.getImg());
+            pst.setString(3,a.getContent());
+            pst.setString(4,a.getCategory());
+            pst.setDate(5,a.getPublish_date());
+            pst.executeUpdate();
 
-            Image img = new Image("img/vrai.jpg", 50, 50, false, false);
+           Image img = new Image("http://127.0.0.1:8000/assets/img/shop-img/"+a.getImg(), 50, 50, false, false);
 			Notifications notificationBuilder;
             notificationBuilder = Notifications.create().title("download completed").text("saved")
                     .graphic(new ImageView(img)).hideAfter(Duration.seconds(5)).position(Pos.BOTTOM_RIGHT);

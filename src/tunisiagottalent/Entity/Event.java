@@ -5,7 +5,7 @@
  */
  package tunisiagottalent.Entity;
 
-import java.util.Date;
+import java.sql.Date;
 import javafx.scene.control.Button;
 
 /**

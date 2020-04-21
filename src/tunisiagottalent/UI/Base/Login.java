@@ -82,8 +82,8 @@ public class Login {
             alert.setHeaderText(null);
             alert.setContentText("Some fields are stille empty!\nPlease verify your credentials.");
             Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-            stage.getIcons().add(new Image("/tunisiagottalent/UI/img/icon.png"));
-//          stage.initStyle(StageStyle.UNDECORATED);
+            stage.getIcons().add(new Image("/tunisiagottalent/UI/Base/img/icon.png"));
+         
             alert.showAndWait();
         } else {
             UserServices u = new UserServices();

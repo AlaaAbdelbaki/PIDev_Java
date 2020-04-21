@@ -99,22 +99,22 @@ public class VoteServices {
         }
         return list;
      }*/
-    public HashMap<video, Integer> ranks(Competition c) {
-        String req = "SELECT  COUNT(v.video_id) ,video.*,user.*  FROM votes v "
+    public List<video> ranks(Competition c) {
+        String req = "SELECT  *   FROM votes v "
                 + "inner join video  on(video.id=v.video_id) "
                 + "inner join user on(video.owner=user.id)"
                 + " WHERE v.video_id IN ( SELECT video_id FROM competition_participant c WHERE c.competition_id = ? )"
                 + " GROUP by v.video_id "
                 + "ORDER by count(v.video_id)"
                 + " DESC ";
-        HashMap<video, Integer> l = new HashMap<>();
+        List<video> l = new ArrayList<>();
         try {
             pst = connection.prepareStatement(req);
             pst.setInt(1, c.getId());
             rs = pst.executeQuery();
             while (rs.next()) {
-                l.put(new video(rs.getInt("id"), rs.getString("url"), rs.getString("title"), rs.getTimestamp("publish_date"),
-                        new User(rs.getInt("id"),
+                l.add(new video(rs.getInt("video.id"), rs.getString("url"), rs.getString("title"), rs.getTimestamp("publish_date"),
+                        new User(rs.getInt("user.id"),
                                 rs.getString("username"),
                                 rs.getString("email"),
                                 rs.getString("password"),
@@ -126,7 +126,7 @@ public class VoteServices {
                                 rs.getString("bio"),
                                 rs.getString("roles"),
                                 rs.getDate("birthday"),
-                                rs.getString("profile_pic"))), rs.getInt(1));
+                                rs.getString("profile_pic"))));
             }
 
         } catch (SQLException e) {
@@ -153,9 +153,9 @@ public class VoteServices {
         return i;
     }
     public List<video> OrderedByVotes() {
-        String req = "SELECT  video.* ,user.* FROM votes v "
+        String req = "SELECT  * FROM votes v "
                 + "inner join video  on(video.id=v.video_id) "
-                + "inner join user on(v.user_id=user.id)"
+                + "inner join user on(video.owner=user.id)"
                 + " GROUP by v.video_id "
                 + "ORDER by count(v.video_id)"
                 + " DESC ";
@@ -164,7 +164,7 @@ public class VoteServices {
            ste = connection.createStatement();
             rs = ste.executeQuery(req);
             while (rs.next()) {
-                l.add(new video(rs.getInt("id"), rs.getString("url"), rs.getString("title"), rs.getTimestamp("publish_date"),
+                l.add(new video(rs.getInt("video.id"), rs.getString("url"), rs.getString("title"), rs.getTimestamp("publish_date"),
                         new User(rs.getInt("user.id"),
                                 rs.getString("username"),
                                 rs.getString("email"),

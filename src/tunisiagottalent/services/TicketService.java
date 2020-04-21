@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
+import tunisiagottalent.Entity.Event;
 import tunisiagottalent.util.DataSource;
 import tunisiagottalent.UI.Events.AddTicketController;
 
@@ -35,7 +36,7 @@ public class TicketService {
     }
 
     public void addTicket(Ticket t) {
-        
+
         String req = "insert into ticket (price,event_id) values(" + t.getPrice() + "," + t.getEvent_id() + ")";
         try {
             ste = connexion.createStatement();
@@ -53,7 +54,7 @@ public class TicketService {
             rs = ste.executeQuery(req);
             while (rs.next()) {
 
-                lt.add(new Ticket(rs.getInt("id"),rs.getFloat("price"),rs.getInt("event_id")));
+                lt.add(new Ticket(rs.getInt("id"), rs.getFloat("price"), rs.getInt("event_id")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(TicketService.class.getName()).log(Level.SEVERE, null, ex);
@@ -61,9 +62,9 @@ public class TicketService {
 
         return lt;
     }
-    
-    public ObservableList<Ticket> afficher(){
-       
+
+    public ObservableList<Ticket> afficher() {
+
         String req = "select * from ticket";
         ObservableList<Ticket> oblist = FXCollections.observableArrayList();
         try {
@@ -78,9 +79,6 @@ public class TicketService {
         }
         return oblist;
     }
-    
-    
-    
 
     public void updateTicket(Ticket t) {
 
@@ -106,4 +104,31 @@ public class TicketService {
         }
     }
 
+    public boolean find(Event e) {
+        String req = "select * from ticket where event_id=" + e.getId();
+
+        try {
+            ste = connexion.createStatement();
+            rs = ste.executeQuery(req);
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EventService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    public Event findEvent(Ticket t) throws SQLException{
+    
+    String req="select * from event where id="+t.getEvent_id();
+     Event e=null;
+    ste = connexion.createStatement();
+            rs = ste.executeQuery(req);
+            if (rs.next()) {
+        e=new Event(rs.getInt("id"), rs.getString("title"), rs.getDate("start_date"), rs.getDate("end_date"), rs.getString("img"), rs.getString("location"), rs.getInt("nb_places"), rs.getString("description"), rs.getString("type"));
+            }
+        
+    return e;
+        
+    }
 }

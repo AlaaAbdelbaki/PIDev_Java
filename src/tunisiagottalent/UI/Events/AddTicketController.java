@@ -20,17 +20,24 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.util.Callback;
+import tunisiagottalent.Entity.Event;
 import tunisiagottalent.services.TicketService;
 
 /**
@@ -50,7 +57,7 @@ public class AddTicketController implements Initializable {
     @FXML
     private TableColumn<Ticket, String> col_priceT;
     @FXML
-    private TableColumn<Ticket, String> col_eventId;
+    private TableColumn<Ticket, Void> col_eventId;
     @FXML
     private TableView<Ticket> textV;
 
@@ -64,8 +71,60 @@ public class AddTicketController implements Initializable {
         //set properties to tableview columns:
         col_idT.setCellValueFactory(new PropertyValueFactory<>("id"));
         col_priceT.setCellValueFactory(new PropertyValueFactory<>("price"));
-        col_eventId.setCellValueFactory(new PropertyValueFactory<>("event_id"));
-
+       
+        Callback<TableColumn<Ticket, Void>, TableCell<Ticket, Void>> cellFactory1 = (param) -> {
+            final TableCell<Ticket, Void> cell = new TableCell<Ticket, Void>() {
+                @Override
+                public void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+                    
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+                    } else {
+                        TicketService ts=new TicketService();
+                         Button ticketButton = new Button("Details");
+                         ticketButton.setStyle("-fx-background-color:orange;");
+                        Ticket pa = getTableView().getItems().get(getIndex());
+                        
+                        ticketButton.setOnAction(event ->{
+                            
+                            try {
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("EventDetails.fxml"));
+                                Parent second = loader.load();
+                                
+                                EventDetailsController secondcontroller = loader.getController();
+                                secondcontroller.setT(pa);
+                                
+                                Scene s = new Scene(second);
+                                s.setFill(Color.TRANSPARENT);
+                                Stage stageedit = new Stage();
+                                stageedit.initStyle(StageStyle.TRANSPARENT);
+                                stageedit.setOpacity(0.95);
+                                stageedit.setTitle("Event Details");
+                                stageedit.initOwner(rootpane.getScene().getWindow());
+                                stageedit.setScene(s);
+                                
+                                stageedit.show();
+                                
+                            } catch (IOException ex) {
+                                Logger.getLogger(AddEventController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                             
+                        });
+                        
+                        setGraphic(ticketButton);
+                       
+                        
+                    }
+                    
+                };
+                
+            };
+            
+            return cell;
+        };
+        col_eventId.setCellFactory(cellFactory1);
         //set data to tableview:
         textV.setItems(ts.afficher());
         //  edittableCols();
@@ -75,30 +134,6 @@ public class AddTicketController implements Initializable {
 
     }
 
-    @FXML
-    private void AddTicket(ActionEvent event) {
-
-        String price = tfprice.getText();
-        String event_id = tfevent_id.getText();
-
-        TicketService ts = new TicketService();
-        Float p = Float.parseFloat(price);
-        int id = Integer.parseInt(event_id);
-
-        Ticket t = new Ticket(p, id);
-        ts.addTicket(t);
-
-        javafx.scene.Parent tableview = null;
-        try {
-            tableview = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/Events/AddTicket.fxml"));
-        } catch (IOException ex) {
-            Logger.getLogger(AddTicketController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Scene sceneview = new Scene(tableview);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(sceneview);
-        window.show();
-    }
 
     @FXML
     private void deleteTicket(ActionEvent event) {
@@ -116,12 +151,11 @@ public class AddTicketController implements Initializable {
     private void UpdateTicket(ActionEvent event) {
         //recuperer
         String price = tfprice.getText();
-        String event_id = tfevent_id.getText();
+       
 
-        //creer instance
-        int e_id = Integer.parseInt(event_id);
+        
         float t_price = Float.valueOf(price);
-        Ticket t = new Ticket(t_price, e_id);
+        Ticket t = new Ticket(textV.getSelectionModel().getSelectedItem().getId(),t_price, textV.getSelectionModel().getSelectedItem().getEvent_id());
 
         //update event on the view:
         int l = textV.getSelectionModel().getSelectedIndex();
@@ -137,7 +171,7 @@ public class AddTicketController implements Initializable {
         Ticket t = textV.getSelectionModel().getSelectedItem();
 
         tfprice.setText(String.valueOf(t.getPrice()));
-        tfevent_id.setText(String.valueOf(t.getEvent_id()));
+       
 
     }
 

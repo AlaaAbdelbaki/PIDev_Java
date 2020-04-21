@@ -32,13 +32,15 @@ public class ServiceArticle implements IService<Article>{
         @Override
     public void ajouter(Article a) {
         try {
-           
-            Statement stm = cnx.createStatement();
-            String query = "INSERT INTO article (id,title,img,content) VALUES (NULL, '"+a.getTitle()+"', '"+a.getImg()+"', '"+a.getContent()+"')";
-            stm.executeUpdate(query);
+           String query = "INSERT INTO article (title,img,content) VALUES (?,?,?)";
+            PreparedStatement pst = cnx.prepareStatement(query);
+            pst.setString(1,a.getTitle());
+            pst.setString(2,a.getImg());
+            pst.setString(3,a.getContent());
+            pst.executeUpdate();
             
             //System.out.println("article ajouté !");
-            Image img = new Image("img/vrai.jpg", 50, 50, false, false);
+            Image img = new Image("http://127.0.0.1:8000/assets/img/shop-img/"+a.getImg(), 50, 50, false, false);
 			Notifications notificationBuilder;
             notificationBuilder = Notifications.create().title("download completed").text("saved")
                     .graphic(new ImageView(img)).hideAfter(Duration.seconds(5)).position(Pos.BOTTOM_RIGHT);

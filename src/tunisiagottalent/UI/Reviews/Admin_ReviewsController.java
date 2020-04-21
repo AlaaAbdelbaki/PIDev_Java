@@ -32,6 +32,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Callback;
+import org.controlsfx.control.Rating;
 import tunisiagottalent.Entity.Review;
 import tunisiagottalent.Entity.competition_participant;
 import tunisiagottalent.UI.Competitions.AdminCompetitions;
@@ -58,7 +60,7 @@ public class Admin_ReviewsController implements Initializable {
     @FXML
     private TableColumn<Review, String> con;
     @FXML
-    private TableColumn<Review, Integer> rate;
+    private TableColumn<Review, Void> rate;
     @FXML
     private JFXButton stat;
     @FXML
@@ -77,9 +79,35 @@ public class Admin_ReviewsController implements Initializable {
            id.setCellValueFactory(new PropertyValueFactory<>("id"));
         colcat.setCellValueFactory(new PropertyValueFactory<>("category"));
          coltitre.setCellValueFactory(new PropertyValueFactory<>("title"));
-        rate.setCellValueFactory(new PropertyValueFactory<>("rating"));
-        con.setCellValueFactory(new PropertyValueFactory<>("content"));
         
+        con.setCellValueFactory(new PropertyValueFactory<>("content"));
+         Callback<TableColumn<Review, Void>, TableCell<Review, Void>> cellFactory1 = (param) -> {
+            final TableCell<Review, Void> cell = new TableCell<Review, Void>() {
+                @Override
+                public void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+                    
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+                    } else {
+                        int rate=getTableView().getItems().get(getIndex()).getRating();
+                        Rating r=new Rating(5,rate);
+                        r.setMouseTransparent(true);
+                        
+                        
+                        setGraphic(r);
+                        setText(null);
+                        
+                    }
+                    
+                };
+                
+            };
+            
+            return cell;
+        };
+        rate.setCellFactory(cellFactory1);
            username.setCellFactory(param -> new TableCell<Review,Void>() { 
              private JFXButton Viewvid = new JFXButton("View User");
             {   Viewvid.resize(100, 45);

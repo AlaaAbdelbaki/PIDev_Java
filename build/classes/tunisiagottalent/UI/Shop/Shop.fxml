@@ -5,8 +5,10 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="750.0" prefWidth="1600.0" styleClass="mainFxmlClass" stylesheets="@shop.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.Shop.ShopController">
    <children>
@@ -29,10 +31,13 @@
       <Button fx:id="gotoorder" layoutX="1411.0" layoutY="53.0" mnemonicParsing="false" onAction="#gotoorderlist" prefHeight="31.0" prefWidth="99.0" styleClass="button-add" text="Orders" />
       <TextField fx:id="product_search" layoutX="734.0" layoutY="55.0" prefHeight="31.0" prefWidth="471.0" />
       <Label layoutX="552.0" layoutY="60.0" text="Search in products list :" textFill="#ebebeb" />
-      <Label fx:id="order_label" layoutX="285.0" layoutY="36.0" prefHeight="64.0" prefWidth="221.0" text="Products List" textAlignment="CENTER" textFill="#55b3f3">
+      <Text fill="WHITE" layoutX="181.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Products Dashboard" wrappingWidth="465.13671875">
          <font>
-            <Font name="System Bold" size="34.0" />
+            <Font name="Eras Light ITC" size="43.0" />
          </font>
-      </Label>
+         <effect>
+            <Bloom />
+         </effect>
+      </Text>
    </children>
 </AnchorPane>

@@ -5,18 +5,28 @@
  */
 package tunisiagottalent.UI.Shop;
 
+import com.jfoenix.controls.JFXButton;
+import java.io.IOException;
 import tunisiagottalent.Entity.Order;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import tunisiagottalent.services.OrderServices;
 
 /**
@@ -37,6 +47,10 @@ public class EditOrderController implements Initializable {
     private Label neworderid;
     @FXML
     private Label labelsuccess;
+    @FXML
+    private Button confirmeditbutton;
+    @FXML
+    private AnchorPane rootpane;
     
     
     public void modifyorderbutton(Order o){
@@ -47,6 +61,7 @@ public class EditOrderController implements Initializable {
         neworderid.setText(Integer.toString(o.getId()));
     }
     
+    @FXML
     public void confirmmodifybutton(){
         try{
             Double d = Double.parseDouble(newordertotal.getText());
@@ -74,7 +89,19 @@ public class EditOrderController implements Initializable {
             Order o =new Order((java.sql.Date) date,total,address);
             OrderServices os= new OrderServices();
             os.modifyOrder(o, id);
-            labelsuccess.setText("Product has been modified !!");
+            labelsuccess.setText("Order has been modified !!");
+            Stage stage = (Stage) rootpane.getScene().getWindow();
+             try {
+                Scene p1 = (Scene) stage.getOwner().getScene();
+                HBox cAnchorPane = (HBox) p1.lookup("#content");
+                AnchorPane p2 = FXMLLoader.load(getClass().getResource("/tunisiagottalent/UI/Shop/Order.fxml"));
+                cAnchorPane.getChildren().setAll(p2);
+
+            } catch (IOException ex) {
+                Logger.getLogger(EditOrderController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+             
+        stage.close();
         }
         
     }
@@ -85,5 +112,11 @@ public class EditOrderController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         neworderdate.getEditor().setDisable(true);
     }    
+
+    @FXML
+    private void close(ActionEvent event) {
+         Stage stage = (Stage) rootpane.getScene().getWindow();
+        stage.close();
+    }
     
 }

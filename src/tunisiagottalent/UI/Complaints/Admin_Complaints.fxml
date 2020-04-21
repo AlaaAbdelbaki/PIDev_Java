@@ -7,8 +7,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisiagottalent.UI.Complaints.Admin_ComplaintsController">
    <children>
@@ -36,5 +38,13 @@
          </graphic>
       </JFXButton>
       <JFXTextField fx:id="search" focusColor="#40a849" layoutX="754.0" layoutY="39.0" prefHeight="31.0" prefWidth="474.0" promptText="Search" unFocusColor="#c32222" />
+      <Text fill="WHITE" layoutX="136.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Complaints Dashboard" wrappingWidth="465.13671875">
+         <font>
+            <Font name="Eras Light ITC" size="43.0" />
+         </font>
+         <effect>
+            <Bloom />
+         </effect>
+      </Text>
    </children>
 </AnchorPane>

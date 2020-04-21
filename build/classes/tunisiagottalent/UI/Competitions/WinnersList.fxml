@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="520.0" prefWidth="1246.0" styleClass="mainFxmlClass" stylesheets="@../Base/popups.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="tunisiagottalent.UI.Competitions.WinnersListController">
+   <children>
+      <TableView fx:id="winners" layoutX="34.0" layoutY="42.0" prefHeight="443.0" prefWidth="1177.0" stylesheets="@../Shop/shop.css">
+         <columns>
+            <TableColumn fx:id="comp" prefWidth="114.0" text="Competition" />
+            <TableColumn fx:id="user" prefWidth="291.0" text="User" />
+            <TableColumn fx:id="vid" prefWidth="429.0" text="Video" />
+            <TableColumn fx:id="prom" prefWidth="341.0" text="Action" />
+         </columns>
+      </TableView>
+      <JFXButton layoutX="1193.0" layoutY="11.0" onAction="#close" text="[x]" textFill="WHITE" />
+   </children>
+</AnchorPane>

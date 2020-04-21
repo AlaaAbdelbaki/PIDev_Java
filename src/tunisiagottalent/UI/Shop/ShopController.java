@@ -34,6 +34,7 @@ import java.util.function.Predicate;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.StageStyle;
 import tunisiagottalent.UI.Base.MainController;
@@ -135,6 +136,7 @@ public class ShopController implements Initializable {
                                 secondcontroller.modifiyproductbutton(pa);
                                 
                                 Scene s = new Scene(second);
+                                s.setFill(Color.TRANSPARENT);
                                 Stage stageedit = new Stage();
                                 stageedit.initStyle(StageStyle.TRANSPARENT);
                                 stageedit.setOpacity(0.95);
@@ -236,6 +238,7 @@ public class ShopController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AddProduct.fxml"));
             Parent third = loader.load();
             Scene s = new Scene(third);
+            s.setFill(Color.TRANSPARENT);
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.TRANSPARENT);

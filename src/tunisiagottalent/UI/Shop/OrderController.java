@@ -29,7 +29,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import tunisiagottalent.services.OrderServices;
 
@@ -94,7 +96,11 @@ public class OrderController implements Initializable {
                                 secondcontroller.modifyorderbutton(oa);
                                 
                                 Scene s = new Scene(second);
+                                s.setFill(Color.TRANSPARENT);
                                 Stage stageedit = new Stage();
+                                stageedit.initStyle(StageStyle.TRANSPARENT);
+                                stageedit.initOwner(rootPane.getScene().getWindow());
+                                stageedit.setOpacity(0.95);
                                 stageedit.setTitle("Edit Order n° : "+oa.getId());
                                 stageedit.setScene(s);
                                 

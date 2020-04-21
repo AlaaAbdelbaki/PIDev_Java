@@ -2,7 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.Bloom?>
@@ -25,26 +25,18 @@
             <Font name="Copperplate Gothic Light" size="18.0" />
          </font>
       </JFXButton>
-      <ScrollPane layoutX="282.0" layoutY="151.0" prefHeight="255.0" prefWidth="1157.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="257.0" prefWidth="1125.0">
-               <children>
-                  <TableView fx:id="competitions" layoutX="3.0" prefHeight="257.0" prefWidth="1130.0" stylesheets="@../Shop/shop.css">
-                    <columns>
-                      <TableColumn fx:id="ID" prefWidth="67.0" text="ID" />
-                      <TableColumn fx:id="Subject" prefWidth="252.0" text="Subject" />
-                        <TableColumn fx:id="startDate" prefWidth="228.0" text="Start Date" />
-                        <TableColumn fx:id="endDate" prefWidth="262.0" text="End Date" />
-                        <TableColumn fx:id="Action" prefWidth="313.0" text="Actions" />
-                    </columns>
-                     <opaqueInsets>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </opaqueInsets>
-                  </TableView>
-               </children>
-            </AnchorPane>
-        </content>
-      </ScrollPane>
+      <TableView fx:id="competitions" layoutX="245.0" layoutY="145.0" prefHeight="257.0" prefWidth="1130.0" stylesheets="@../Shop/shop.css">
+        <columns>
+          <TableColumn fx:id="ID" prefWidth="67.0" text="ID" />
+          <TableColumn fx:id="Subject" prefWidth="252.0" text="Subject" />
+            <TableColumn fx:id="startDate" prefWidth="228.0" text="Start Date" />
+            <TableColumn fx:id="endDate" prefWidth="262.0" text="End Date" />
+            <TableColumn fx:id="Action" prefWidth="313.0" text="Actions" />
+        </columns>
+         <opaqueInsets>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </opaqueInsets>
+      </TableView>
       <Text fill="WHITE" layoutX="120.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Competitions List" wrappingWidth="465.13671875">
          <font>
             <Font name="Eras Light ITC" size="43.0" />
@@ -53,25 +45,16 @@
             <Bloom />
          </effect>
       </Text>
-      <Text fill="WHITE" layoutX="177.0" layoutY="462.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Winners list" wrappingWidth="465.13671875">
+      <Text fx:id="winners_list" fill="WHITE" layoutX="567.0" layoutY="600.0" onMouseClicked="#win_list" strokeType="OUTSIDE" strokeWidth="0.0" text="Winners list" wrappingWidth="465.13671875">
          <font>
             <Font name="Eras Light ITC" size="43.0" />
          </font>
          <effect>
             <Bloom />
          </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Text>
-      <ScrollPane layoutX="280.0" layoutY="498.0" prefHeight="171.0" prefWidth="1157.0">
-         <content>
-            <TableView fx:id="winners" prefHeight="160.0" prefWidth="1156.0" stylesheets="@../Shop/shop.css">
-              <columns>
-                <TableColumn fx:id="comp" prefWidth="114.0" text="Competition" />
-                <TableColumn fx:id="user" prefWidth="291.0" text="User" />
-                  <TableColumn fx:id="vid" prefWidth="390.0" text="Video" />
-                  <TableColumn fx:id="prom" prefWidth="342.0" text="Action" />
-              </columns>
-            </TableView>
-         </content>
-      </ScrollPane>
    </children>
 </AnchorPane>

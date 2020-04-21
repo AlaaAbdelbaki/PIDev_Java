@@ -85,7 +85,7 @@ public class Add_COmpetitionController {
         Stage stage = (Stage) add_comp_anchor.getScene().getWindow();
        
          try {
-            AnchorPane p = FXMLLoader.load(getClass().getResource("AdminCompetitions.fxml"));
+            AnchorPane p = FXMLLoader.load(getClass().getResource("Admin_Competitions.fxml"));
             
              HBox h=(HBox) stage.getOwner().getScene().lookup("#content");
              h.getChildren().clear();

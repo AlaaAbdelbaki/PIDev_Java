@@ -8,13 +8,18 @@ package tunisiagottalent.UI.Competitions;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXToggleButton;
+import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -23,19 +28,27 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
 import javafx.scene.web.WebView;
@@ -44,6 +57,8 @@ import org.controlsfx.glyphfont.FontAwesome;
 import tunisiagottalent.Entity.Competition;
 
 import tunisiagottalent.Entity.video;
+import tunisiagottalent.UI.Base.MainController;
+import tunisiagottalent.UI.User.ProfileController;
 import tunisiagottalent.services.ParticipationServices;
 import tunisiagottalent.services.VideoServices;
 import tunisiagottalent.services.VoteServices;
@@ -71,8 +86,6 @@ public class View_CompetitionController {
     @FXML
     private Label time;
     @FXML
-    private Label ranks;
-    @FXML
     private JFXComboBox<String> orderCombo;
 
 
@@ -85,6 +98,8 @@ public class View_CompetitionController {
     @FXML
     private Pagination pagination;
     ObservableList<video> tabs ;
+    @FXML
+    private VBox vboxranking;
 
     public void initialize() {
         
@@ -106,7 +121,7 @@ public class View_CompetitionController {
                 orderCombo.setOnAction((e) -> {
                     if (orderCombo.getValue().equals("Votes")) {
 
-                        ObservableList<video> ordered = FXCollections.observableArrayList(voteServices.ranks(c).keySet());
+                        ObservableList<video> ordered = FXCollections.observableArrayList(voteServices.ranks(c));
                         ps.getAll(c).forEach((vid) -> {
                             if (voteServices.getVotes(vid) == 0) {
                                 ordered.add(vid);
@@ -185,7 +200,7 @@ public class View_CompetitionController {
             pubDate.setFont(Font.font("Cambria", 16));
 
             JFXButton Delete = new JFXButton("Delete");
-            Delete.setVisible(false);
+           
             Delete.resize(150, 250);
             Delete.setStyle("-fx-text-fill: white;-fx-font-size:18px;-fx-background-color:#49111C");
 
@@ -205,9 +220,9 @@ public class View_CompetitionController {
             hboxvoting.setAlignment(Pos.CENTER);
 
             UserSession s = UserSession.instance;
-            if (s.getU().getUsername().equals(vid.getOwner().getUsername())) {
+            if (!(s.getU().getUsername().equals(vid.getOwner().getUsername()))) {
 
-                Delete.setVisible(true);
+                Delete.setVisible(false);
             }
             if (voteServices.find(vid, s.getU())) {
                 Voting.setSelected(true);
@@ -275,14 +290,35 @@ public class View_CompetitionController {
         VoteServices vs = new VoteServices();
         String rank = "";
         int i = 1;
-        Iterator<Entry<video, Integer>> it = vs.ranks(c).entrySet().iterator();
-        while (it.hasNext() && i < 4) {
-            Map.Entry<video, Integer> entry = (Map.Entry<video, Integer>) it.next();
-            rank = rank + "RANK " + i + ": \n" + entry.getKey().getOwner().getUsername() + " " + entry.getValue() + " Votes\n";
-            i++;
-        }
+        List<video> l=new ArrayList<>();
+        if (vs.ranks(c).size()>=3) {
+             l = vs.ranks(c).subList(0, 3);
+        }else  l = vs.ranks(c);
+        
+        vboxranking.getChildren().clear();
+        l.forEach((vid) -> {
+            ImageView profilePic = new ImageView();
+            profilePic.setFitHeight(100);
+            profilePic.setFitWidth(100);
+            Rectangle clip = new Rectangle(
+                    profilePic.getFitWidth(), profilePic.getFitHeight()
+            );
+            clip.setArcWidth(100);
+            clip.setArcHeight(100);
 
-        ranks.setText(rank);
+            profilePic.setEffect(new DropShadow(20, Color.BLACK));
+            profilePic.setClip(clip);
+            profilePic.setStyle("-fx-border-color:white;");
+            // snapshot the rounded image.
+            SnapshotParameters parameters = new SnapshotParameters();
+            parameters.setFill(Color.TRANSPARENT);
+
+            profilePic.setImage(new Image("http://127.0.0.1:8000/assets/uploads/" + vid.getOwner().getProfilePic()));
+           
+
+            vboxranking.getChildren().add(profilePic);
+
+        });
 
     }
 

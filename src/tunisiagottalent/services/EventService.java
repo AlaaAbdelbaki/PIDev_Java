@@ -170,7 +170,7 @@ public class EventService {
     public void updateEvent(Event E) throws SQLException {
 
         String q = "update event set title='" + E.getTitle() + "',start_date='" + E.getStart_date() + "',end_date ='" + E.getEnd_date() + "', img = '" + E.getImg() + "',location ='" + E.getLocation() + "',nb_places=" + E.getNb_places() + ",description ='" + E.getDescription() + "', type='" + E.getType() + "' where id =" + E.getId() + ";";
-
+        
         try {
             ste = cnx.createStatement();
             ste.executeUpdate(q);

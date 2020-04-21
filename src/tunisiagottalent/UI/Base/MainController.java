@@ -38,6 +38,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 import javafx.stage.Modality;
 
@@ -208,6 +209,7 @@ public class MainController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("signup.fxml"));
             Parent third = loader.load();
             Scene s = new Scene(third);
+            s.setFill(Color.TRANSPARENT);
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.TRANSPARENT);

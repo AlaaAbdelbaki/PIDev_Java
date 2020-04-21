@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import java.lang.String?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.ScrollPane?>
@@ -64,14 +63,7 @@
                               <Image url="@img/crown.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="ranks" alignment="CENTER" opacity="0.49" prefHeight="319.0" prefWidth="273.0" style="-fx-background-color: white; -fx-border-radius: 10px; -fx-background-radius: 30;" textAlignment="CENTER" textFill="#0d0d0d">
-                           <font>
-                              <Font name="Javanese Text" size="27.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </Label>
+                        <VBox fx:id="vboxranking" alignment="CENTER" prefHeight="359.0" prefWidth="424.0" spacing="20.0" />
                      </children>
                   </VBox>
                   <ScrollPane fx:id="scroll" prefHeight="548.0" prefWidth="1139.0" stylesheets="@scroll.css">
