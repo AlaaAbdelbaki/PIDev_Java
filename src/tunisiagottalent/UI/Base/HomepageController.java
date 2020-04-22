@@ -8,21 +8,20 @@ package tunisiagottalent.UI.Base;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXToggleButton;
-import de.jensd.fx.glyphs.GlyphIcon;
-import de.jensd.fx.glyphs.GlyphsBuilder;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -54,6 +53,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.controlsfx.glyphfont.FontAwesome;
+import tunisiagottalent.Entity.User;
 import tunisiagottalent.Entity.video;
 import tunisiagottalent.UI.User.ProfileController;
 import tunisiagottalent.services.VideoServices;
@@ -223,8 +223,10 @@ public class HomepageController implements Initializable {
     }
 
     public void updateRanks() {
-        ObservableList<video> l = FXCollections.observableArrayList(voteS.OrderedByVotes().subList(0, 3));
+       // ObservableList<video> l = FXCollections.observableArrayList(voteS.OrderedByVotes().subList(0, 3));
         vboxranks.getChildren().clear();
+        
+	List<User> l=voteS.OrderedByVotes().stream().map(video::getOwner).distinct().collect(Collectors.toList()).subList(0, 3);
         l.forEach((vid) -> {
             ImageView profilePic = new ImageView();
             profilePic.setFitHeight(100);
@@ -242,7 +244,7 @@ public class HomepageController implements Initializable {
             SnapshotParameters parameters = new SnapshotParameters();
             parameters.setFill(Color.TRANSPARENT);
 
-            profilePic.setImage(new Image("http://127.0.0.1:8000/assets/uploads/" + vid.getOwner().getProfilePic()));
+            profilePic.setImage(new Image("http://127.0.0.1:8000/assets/uploads/" + vid.getProfilePic()));
             profilePic.setCursor(Cursor.HAND);
             profilePic.setOnMouseClicked((e) -> {
 
@@ -250,8 +252,8 @@ public class HomepageController implements Initializable {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/tunisiagottalent/UI/User/profile.fxml"));
                     Parent root = loader.load();
                     ProfileController controller = loader.<ProfileController>getController();
-                    controller.setUser(vid.getOwner());
-                    System.out.println(vid.getOwner());
+                    controller.setUser(vid);
+                   
                     rootpane.getChildren().clear();
                     rootpane.getChildren().addAll(root);
 

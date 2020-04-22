@@ -60,8 +60,8 @@ public class User_ComplaintsController implements Initializable, MapComponentIni
     public void initialize(URL url, ResourceBundle rb) {
 
         googlemapview.addMapInializedListener((MapComponentInitializedListener) this);
-        subject.setStyle("-fx-text-fill: white;-fx-prompt-text-fill: Green;");
-        content.setStyle("-fx-text-fill: white;-fx-prompt-text-fill: Black;");
+        subject.setStyle("-fx-text-fill: Black;-fx-prompt-text-fill: Green;");
+        content.setStyle("-fx-text-fill: black;-fx-prompt-text-fill: Black;");
     }
 
     
